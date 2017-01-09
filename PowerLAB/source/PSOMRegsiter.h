@@ -1,0 +1,206 @@
+/*
+ * Copyright Nils Minor, c 2016
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * REGISTER START
+ *
+ * REGISTER WRITE BORDER
+ *
+ * REGISTER END
+ */
+
+
+#ifndef _PSOM_REGISTER_H_
+#define _PSOM_REGISTER_H_
+
+#define mset_bit(REG, BIT)      ((REG) |= (1 << BIT))
+#define mclear_bit(REG, BIT)     ((REG) &= ~(1 << BIT ))
+
+
+// Version 1.0.0
+#define PSOM_VERSION					1
+#define PSOM_SVERSION1				0
+#define PSOM_SVERSION2				0
+
+#define PSOM_SYNC_HEADER			0xAA
+
+typedef enum  {	PSOM_STATE_OK = 0,
+                PSOM_STATE_ERROR = 1,
+                PSOM_STATE_WRONG_VALUE = 2,
+                PSOM_STATE_SENSOR_NR = 3,
+                PSOM_STATE_HEADER_NOSYNC = 4,
+                PSOM_STATE_WRONG_CHECKSUM = 5,
+                PSOM_STATE_WRONG_REG_ADDR = 6,
+                PSOM_STATE_WRONG_CMD = 7
+                } PSOM_State;
+
+typedef enum  {	PSOM_READ_CMD = 0x01,
+                PSOM_WRITE_CMD = 0x10,
+                PSOM_GET_STATE_CMD = 0x20
+                } PSOM_COMMANDS;
+
+typedef enum  {	POS_SYNC_HEADER = 0,
+                POS_DATA_COUNT = 1,
+                POS_SUB_ID = 2,
+                POS_COMMAND = 3,
+                POS_REG_ADDR_MSB = 4,
+                POS_REG_ADDR_LSB = 5,
+                POS_DATA_START = 6
+                } PSOM_PACKET_STYLE;
+
+union PSOM_BigEndianMemory {
+    float       floatData;
+    uint32_t    uint32Data;
+    uint8_t     byteData[4];
+    char        charData[4];
+};
+
+#define PSOM_DIO_ALL_INPUTS     0xFFFFFFFF
+#define PSOM_DIO_ALL_OFF        0x00000000
+#define PSOM_DIO1               0
+#define PSOM_DIO2               1
+#define PSOM_DIO3               2
+#define PSOM_DIO4               3
+#define PSOM_DIO5               4
+#define PSOM_DIO6               5
+#define PSOM_DIO_INPUT          1
+#define PSOM_DIO_OUTPUT         0
+#define PSOM_DIO_HIGH           1
+#define PSOM_DIO_LOW            0
+
+/* ************ PSOM REGISTER SETUP ************* ************** **/
+#define PSOM_REG_START          	0x0000                  // uint32 -start address of the PSOM registers
+#define PSOM_REG_WRITE_BORDER			PSOM_SUB_ID   					// uint32 - start address of the read/write registers of the PSOM register
+#define PSOM_REG_QUANTITY       	(L3_ENERGY_COST + 4)       // uint32 -amount of regitsers used by the PSOM register, equals to the last read only register
+#define PSOM_REGISTER_COUNT       77
+
+/* ************ PSOM COMMANDS *********************************** */
+#define PSOM_SCMD_CLR_ENERGY     	0x00000001       	// uint8 - 1Byte - command to clear the energy registers
+#define PSOM_SCMD_RESTART					0x00000002
+#define PSOM_SCMD_CALLIB_V1				0X00000101
+#define PSOM_SCMD_CALLIB_V2				0X00000102
+#define PSOM_SCMD_CALLIB_V3				0X00000103
+#define PSOM_SCMD_CALLIB_I1				0X00000201
+#define PSOM_SCMD_CALLIB_I2				0X00000202
+#define PSOM_SCMD_CALLIB_I3				0X00000203
+#define PSOM_SCMD_CALLIB_T				0X00000500
+#define PSOM_SCMD_CALLIB_F   			0X00000501
+#define PSOM_SCMD_HARM_V 	  			0X00001000
+#define PSOM_SCMD_HARM_I 	  			0X00001001
+#define PSOM_SCMD_HARM_P 	  			0X00001002
+#define PSOM_SCMD_HARM_Q 	  			0X00001003
+
+
+/* ************ PSOM SAMPLE STYLES ******** */
+#define PSOM_SAMPLE_STYLE_NORM  	0x00000000     	// uint32 - - sampling style for normal operations
+#define PSOM_SAMPLE_STYLE_MEAN  	0x00000001      // uint32 - - sampling style for building the average over the amount of samples specified in the PSOM_SAMPLES_QUANTITY register
+/* ************ MEASUREMENT_SELECTION ***** */
+#define PSOM_SEL_TEMPERATURE    	0x00000001  // uint32 - - selection bit temperature measurement
+#define PSOM_SEL_FREQUENCY      	0x00000002  // uint32 - - selection bit frequency measurement
+#define PSOM_SEL_VOLTAGE_INST   	0x00000004  // uint32 - - selection bit ??? measurement
+#define PSOM_SEL_VOLTAGE_RMS    	0x00000008  // uint32 - - selection bit ??? measurement
+#define PSOM_SEL_FUND_THD         0x00000010  // uint32 - - selection bit ??? measurement
+#define PSOM_SEL_EMPTY1         	0x00000020  // uint32 - - selection bit ??? measurement
+#define PSOM_SEL_CURRENT_INST   	0x00000040  // uint32 - - selection bit ??? measurement
+#define PSOM_SEL_CURRENT_RMS    	0x00000080  // uint32 - - selection bit ??? measurement
+#define PSOM_SEL_EMPTY2          	0x00000100  // uint32 - - selection bit ??? measurement
+#define PSOM_SEL_EMPTY3           0x00000200  // uint32 - - selection bit ??? measurement
+#define PSOM_SEL_POWER_ACTIVE   	0x00000400  // uint32 - - selection bit active power measurement
+#define PSOM_SEL_POWER_REACTIVE 	0x00000800  // uint32 - - selection bit reactive power measurement
+#define PSOM_SEL_POWER_APPARENT 	0x00001000  // uint32 - - selection bit apparent power measurement
+#define PSOM_SEL_POWER_FACTOR   	0x00002000  // uint32 - - selection bit power factor measurement
+#define PSOM_SEL_ENERGY         	0x00004000  // uint32 - - selection bit energy measurement
+#define PSOM_SEL_ALL              0xFFFFFFFF
+/* ************ ENERGY UNIT *************** */
+#define ENERGY_UNIT_KWH         	0x00000001  // uint8 - 1Byte - selection for energy measurment in killo watt-hours
+#define ENERGY_UNIT_WH          	0x00000002 	// uint8 - 1Byte - selection for energy measurment in watt-hours
+#define ENERGY_UNIT_WS          	0x00000003  // uint8 - 1Byte - selection for energy measurment in watt-seconds
+
+
+
+/* ************ GENERAL ************ ************ ************** **/
+#define PSOM_STATE                0x0000  		// uint32  - - represents the state of the PSOM module
+#define PSOM_SCOMMAND             0x0004  		// uint32  - - the command register can setup functionality of the PSOM module
+#define PSOM_SCOMMAND_VALUE       0x0008  		// uint32  - - value to use by the software command
+#define PSOM_FW_VERSION           0x000C  		// uint32  - - PSOM firmeware version
+#define PSOM_ISO_GPIO_DIR         0x0010  		// uint32  - - direction of a isolated dios 1 = output, 0 = input
+#define PSOM_ISO_GPIO_STATE       0x0014  		// uint32  - - state of the isolated pin pin 1 = high, 0 = low
+#define HARMONIC_SELECTION        0x0018  		// uint32  - - selects the measured harmonic
+#define ENERGY_COSTS              0x001C  		// uint32  - - represents the costs per kWh - default = 0.25€
+#define ENERGY_UNIT               0x0020  		// uint32  - - selection of the energy unit kWh, Wh, Ws
+#define MEASURMENT_SELECTION      0x0024  		// uint32  - - represents the selection register to enable or disable specific measurements
+#define PSOM_SAMPLE_STYLE         0x0028  		// uint32  - - selection of the the sampling style norm, mean ...
+#define PSOM_SAMPLES_QUANTITY     0x002C  		// uint32  - - quantitiy of the samples for speacial measurment
+#define PSOM_SUB_ID               0x0030  		// uint32  - - represents the sub ID of the PSOM module
+//#define ?   0x0034
+//#define ?   0x0038
+//#define ?   0x003C
+//#define ?   0x0040
+//#define ?   0x0044
+//#define ?   0x0048
+//#define ?   0x004C
+//#define ?   0x0050
+//#define ?   0x0054
+//#define ?   0x0058
+//#define ?   0x005C
+/* ************ COMMON  ************ ************ ************** **/
+#define MODULE_TEMPERATURE_F      0x0060   		// float - °C- die temperature of the chip
+#define LINE_FREQUENCY_F          0x0064   		// float - Hz- frequency of all phases
+/* ************ VOLTAGE ************ ************ ************** **/
+#define L1_VOLTAGE_INST           0x0068   		// float - V - instantaneous voltage of phase 1
+#define L2_VOLTAGE_INST           0x006C   		// float - V - instantaneous voltage of phase 2
+#define L3_VOLTAGE_INST           0x0070   		// float - V - instantaneous voltage of phase 3
+#define L1_VOLTAGE_RMS            0x0074   		// float - V - RMS voltage of phase 1
+#define L2_VOLTAGE_RMS            0x0078   		// float - V - RMS voltage of phase 2
+#define L3_VOLTAGE_RMS            0x007C   		// float - V - RMS voltage of phase 3
+#define LT_VOLTAGE_RMS            0x0080   		// float - V - RMS average voltage of all phases
+#define L1_VOLTAGE_FUND           0x0084   		// float - V - fundamental voltage of phase 1
+#define L2_VOLTAGE_FUND           0x0088   		// float - V - fundamental voltage of phase 2
+#define L3_VOLTAGE_FUND           0x008C   		// float - V - fundamental voltage of phase 3
+#define L1_VOLTAGE_THD           	0x0090   		// float - V - harmonic voltage of phase 1
+#define L2_VOLTAGE_THD           	0x0094   		// float - V - harmonic voltage of phase 2
+#define L3_VOLTAGE_THD           	0x0098   		// float - V - harmonic voltage of phase 3
+/* ************ CURRENT ************ ************ ************** **/
+#define L1_CURRENT_INST           0x009C   		// float - A - instantaneous current of phase 1
+#define L2_CURRENT_INST           0x00A0   		// float - A - instantaneous current of phase 2
+#define L3_CURRENT_INST           0x00A4   		// float - A - instantaneous current of phase 3
+#define L1_CURRENT_RMS            0x00A8   		// float - A - RMS current of phase 1
+#define L2_CURRENT_RMS            0x00AC   		// float - A - RMS current of phase 2
+#define L3_CURRENT_RMS            0x00B0   		// float - A - RMS current of phase 3
+#define LT_CURRENT_RMS            0x00B4   		// float - A - RMS average current of all phases
+#define L1_CURRENT_FUND           0x00B8   		// float - A - ???
+#define L2_CURRENT_FUND           0x00BC   		// float - A - ???
+#define L3_CURRENT_FUND           0x00C0   		// float - A - ???
+#define L1_CURRENT_HARM           0x00C4   		// float - A - ???
+#define L2_CURRENT_HARM           0x00C8   		// float - A - ???
+#define L3_CURRENT_HARM           0x00CC   		// float - A - ???
+/* ************ POWER   ************ ************ ************** **/
+#define L1_POWER_ACTIVE           0x00D0   		// float - W - active power of phase 1
+#define L2_POWER_ACTIVE           0x00D4   		// float - W - active power of phase 2
+#define L3_POWER_ACTIVE           0x00D8   		// float - W - active power of phase 3
+#define LT_POWER_ACTIVE           0x00DC   		// float - W - average active power of all phases
+#define L1_POWER_REACTIVE         0x00E0   		// float - VAR - reactive power of phase 1
+#define L2_POWER_REACTIVE         0x00E4   		// float - VAR - reactive power of phase 2
+#define L3_POWER_REACTIVE         0x00E8   		// float - VAR - reactive power of phase 3
+#define LT_POWER_REACTIVE         0x00EC   		// float - VAR - average reactive power of all phases
+#define L1_POWER_APPARENT         0x00F0   		// float - VA - apparent power of phase 1
+#define L2_POWER_APPARENT         0x00F4   		// float - VA - apparent power of phase 2
+#define L3_POWER_APPARENT         0x00F8   		// float - VA - apparent power of phase 3
+#define LT_POWER_APPARENT         0x00FC   		// float - VA - average apparent power of all phases
+#define L1_POWER_FACTOR           0x0100   		// float - °  - power factor of phase 1
+#define L2_POWER_FACTOR           0x0104   		// float - °  - power factor of phase 2
+#define L3_POWER_FACTOR           0x0108   		// float - °  - power factor of phase 3
+#define LT_POWER_FACTOR           0x010C   		// float - °  - average power factor of all phases
+/* ************ ENERGY  ************ ************ ************** **/
+#define L1_ENERGY_ACTIVE       		0x0110   		// float - Wh - positive energy counter of phase 1
+#define L2_ENERGY_ACTIVE    	    0x0114   		// float - Wh - positive energy counter of phase 2
+#define L3_ENERGY_ACTIVE 		     	0x0118   		// float - Wh - positive energy counter of phase 3
+#define L1_ENERGY_REACTIVE          0x011C   		// float - Wh - negatvie energy counter of phase 1
+#define L2_ENERGY_REACTIVE          0x0120   		// float - Wh - negatvie energy counter of phase 2
+#define L3_ENERGY_REACTIVE        0x0124   		// float - Wh - negatvie energy counter of phase 3
+#define L1_ENERGY_COST            0x0128   		// float - $/€ - energy costs of phase 1
+#define L2_ENERGY_COST            0x012C   		// float - $/€ - energy costs of phase 2
+#define L3_ENERGY_COST            0x0130   		// float - $/€ - energy costs of phase 3
+
+#endif /* [] END OF FILE */
