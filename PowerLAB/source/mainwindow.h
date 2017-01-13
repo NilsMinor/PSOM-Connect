@@ -80,6 +80,7 @@ private:
     SettingsDialog      *settings;
     QSerialPort         *serial;
     qOsci               *oscillopscope;
+    qOsci               *harmonics;
 
 
 private slots:
@@ -119,6 +120,9 @@ private slots:
     void on_pBUpdateDirAllInput_released();
     void on_pushButtonTriggerHarmonicMeasurment_released();
     void on_pushButtonVersion_released();
+    void on_pBStartHarmonics_released();
+    void on_cBHarmonicsType_currentIndexChanged(const QString &arg1);
+    void on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1);
 };
 
 #endif // MAINWINDOW_H

@@ -23,9 +23,9 @@ SOURCES += \
     source/psomQt.cpp \
     source/psomQt_HAL.cpp \
     source/guihandler.cpp \
-    qOsci/qcustomplot.cpp \
     qOsci/qosci.cpp \
-    qOsci/qoscisignal.cpp
+    qOsci/qoscisignal.cpp \
+    qOsci/qcustomplot.cpp
 
 
 HEADERS += \
@@ -35,9 +35,9 @@ HEADERS += \
     source/psomQt.h \
     source/PSOMRegsiter.h \
     source/psomQt_HAL.h \
-    qOsci/qcustomplot.h \
     qOsci/qosci.h \
-    qOsci/qoscisignal.h
+    qOsci/qoscisignal.h \
+    qOsci/qcustomplot.h
 
 FORMS += \
     gui/mainwindow.ui \

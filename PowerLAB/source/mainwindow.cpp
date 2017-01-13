@@ -86,6 +86,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->tabScope->setLayout(&scopeLayout);
     oscillopscope->setScreenSize(QSize(ui->tabScope->size()));
 
+
+    // harmonics box
+    harmonics = new qOsci(NULL, OfTypeHarmonics);
+    ui->harmonicsLayout->addWidget(harmonics->getScreenWidget());
+    harmonics->setTableWidgetForHarmonics(ui->harmonicsTable);
+    ui->cBHarmonicsCount->setCurrentIndex(9);
+
 }
 MainWindow::~MainWindow() {
     delete settings;
@@ -306,4 +313,40 @@ void MainWindow::on_pushButtonTriggerHarmonicMeasurment_released()
 void MainWindow::on_pushButtonVersion_released()
 {
     ui->labelFWVersion->setText(testModule->getFWVersion() );
+}
+
+void MainWindow::on_pBStartHarmonics_released()
+{
+    if (ui->pBStartHarmonics->text() == "Start") {
+        ui->pBStartHarmonics->setText("Stop");
+
+        int datasize = ui->cBHarmonicsCount->currentText().toInt();
+
+        float *testData = new float[datasize];
+
+        for (int i=0; i!= datasize;i++) {
+            testData[i] = datasize - i;
+        }
+        harmonics->setHarmonics(testData, 50.321, datasize);
+        free (testData);
+
+    }
+    else {
+        ui->pBStartHarmonics->setText("Start");
+    }
+}
+
+void MainWindow::on_cBHarmonicsType_currentIndexChanged(const QString &arg1)
+{
+    if (arg1 == "Voltage")                  { harmonics->setVerticalAxisStyle(VoltageAxisStyle); }
+    else if  (arg1 == "Current")            { harmonics->setVerticalAxisStyle(CurrentAxisStyle); }
+    else if  (arg1 == "Active Power")       { harmonics->setVerticalAxisStyle(PPowerAxisStyle); }
+    else if  (arg1 == "Reactive Power")     { harmonics->setVerticalAxisStyle(QPowerAxisStyle); }
+    else                                    { }
+}
+void MainWindow::on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1)
+{
+    if (arg1 == "Frequency")                { harmonics->setHarmonicsAxisStyle(FrequencyAxisStyle); }
+    else if  (arg1 == "Harmonic")           { harmonics->setHarmonicsAxisStyle(HarmonicNumberAxisStyle); }
+    else                                    { }
 }
