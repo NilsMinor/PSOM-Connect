@@ -68,6 +68,12 @@
 #include "psomQt_HAL.h"
 
 
+enum HarmonicType {
+    VoltageHarmonics = 1,
+    CurrentHarmonics = 2,
+    PPowerHarmonics = 3,
+    QPowerHarmonics = 4
+};
 
 struct PSOM_Voltage {
     float rms;
@@ -142,7 +148,9 @@ public:
     int         getDIO  (int pin);
 
     void        selectMeasurement (uint32_t selection, bool state);
-    void        triggerHarmonicMeasruement (int harmonicCount, float *h_buf);
+    void        setHarmonicsCount (int count);
+    void        startHarmonicsScan (HarmonicType type);
+    void        stopHarmonicsScan (void);
 
 private:
     QElapsedTimer           elapsedTimer;
@@ -154,6 +162,9 @@ private:
     uint32_t                dio_state;
     bool                    psom_answered;
     QString                 fw_version;
+    bool                    harmonicMeasurmentState;
+    int                     harmonicsCount;
+
 private slots:
     void        m_timerTimeout (void);                                             //! timeout for measurment timer (periodic)
     void        assignEntirePSOMData  (uint32_t *data, int & dataCount);           //! assigns the recieved data to the psom struct data
@@ -164,6 +175,7 @@ signals:
     void        statusBarInfo   (QString information);
     void        stateChanged    (void);                                             //! signal is fired on every state change of the module
     void        newPSOMData     (void);                                             //! signal is fired when every new data is available
+    void        newHarmonicsData(float *data, float freq, int count);
 };
 
 #endif // PSOM_H

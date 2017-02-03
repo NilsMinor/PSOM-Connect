@@ -18,26 +18,11 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="tabPanel">
        <attribute name="title">
-        <string>Tab 1</string>
-       </attribute>
-       <widget class="QWidget" name="tabTerminal" native="true">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>10</y>
-          <width>581</width>
-          <height>251</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_2">
-       <attribute name="title">
-        <string>Tab 2</string>
+        <string>Panel</string>
        </attribute>
        <widget class="QPushButton" name="pushButtonStopMeasurment">
         <property name="geometry">
@@ -63,22 +48,6 @@
         </property>
         <property name="text">
          <string>Start</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButtonTriggerHarmonicMeasurment">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>560</x>
-          <y>330</y>
-          <width>171</width>
-          <height>30</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Trig. Harm.</string>
         </property>
        </widget>
        <widget class="QGroupBox" name="groupBox_3">
@@ -240,7 +209,7 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>130</y>
+           <y>148</y>
            <width>59</width>
            <height>16</height>
           </rect>
@@ -279,7 +248,7 @@
          <property name="geometry">
           <rect>
            <x>120</x>
-           <y>130</y>
+           <y>148</y>
            <width>41</width>
            <height>16</height>
           </rect>
@@ -318,7 +287,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>130</y>
+           <y>148</y>
            <width>81</width>
            <height>20</height>
           </rect>
@@ -344,7 +313,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>142</y>
+           <y>160</y>
            <width>81</width>
            <height>20</height>
           </rect>
@@ -357,7 +326,7 @@
          <property name="geometry">
           <rect>
            <x>120</x>
-           <y>142</y>
+           <y>160</y>
            <width>59</width>
            <height>16</height>
           </rect>
@@ -526,7 +495,7 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>130</y>
+           <y>148</y>
            <width>59</width>
            <height>16</height>
           </rect>
@@ -565,7 +534,7 @@
          <property name="geometry">
           <rect>
            <x>120</x>
-           <y>130</y>
+           <y>150</y>
            <width>41</width>
            <height>16</height>
           </rect>
@@ -604,7 +573,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>130</y>
+           <y>148</y>
            <width>81</width>
            <height>20</height>
           </rect>
@@ -630,7 +599,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>142</y>
+           <y>160</y>
            <width>81</width>
            <height>20</height>
           </rect>
@@ -643,7 +612,7 @@
          <property name="geometry">
           <rect>
            <x>120</x>
-           <y>142</y>
+           <y>160</y>
            <width>59</width>
            <height>16</height>
           </rect>
@@ -812,7 +781,7 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>130</y>
+           <y>150</y>
            <width>59</width>
            <height>16</height>
           </rect>
@@ -851,7 +820,7 @@
          <property name="geometry">
           <rect>
            <x>120</x>
-           <y>130</y>
+           <y>150</y>
            <width>41</width>
            <height>16</height>
           </rect>
@@ -890,7 +859,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>130</y>
+           <y>150</y>
            <width>81</width>
            <height>20</height>
           </rect>
@@ -916,7 +885,7 @@
          <property name="geometry">
           <rect>
            <x>120</x>
-           <y>142</y>
+           <y>160</y>
            <width>59</width>
            <height>16</height>
           </rect>
@@ -929,7 +898,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>142</y>
+           <y>162</y>
            <width>81</width>
            <height>20</height>
           </rect>
@@ -1098,7 +1067,7 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>130</y>
+           <y>148</y>
            <width>59</width>
            <height>16</height>
           </rect>
@@ -1137,7 +1106,7 @@
          <property name="geometry">
           <rect>
            <x>120</x>
-           <y>130</y>
+           <y>148</y>
            <width>41</width>
            <height>16</height>
           </rect>
@@ -1176,7 +1145,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>130</y>
+           <y>148</y>
            <width>81</width>
            <height>20</height>
           </rect>
@@ -1202,7 +1171,7 @@
          <property name="geometry">
           <rect>
            <x>120</x>
-           <y>142</y>
+           <y>160</y>
            <width>59</width>
            <height>16</height>
           </rect>
@@ -1215,7 +1184,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>142</y>
+           <y>160</y>
            <width>81</width>
            <height>20</height>
           </rect>
@@ -1424,7 +1393,7 @@
         <property name="geometry">
          <rect>
           <x>560</x>
-          <y>370</y>
+          <y>330</y>
           <width>113</width>
           <height>24</height>
          </rect>
@@ -1433,332 +1402,32 @@
          <string>5</string>
         </property>
        </widget>
+       <widget class="QWidget" name="tabTerminal" native="true">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>290</y>
+          <width>511</width>
+          <height>271</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tabScope">
        <attribute name="title">
         <string>Scope</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tab_3">
-       <attribute name="title">
-        <string>Seite</string>
-       </attribute>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>140</y>
-          <width>281</width>
-          <height>191</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Measurment selection (NOT WORKING)</string>
-        </property>
-        <widget class="QCheckBox" name="cBSelectAll">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>30</y>
-           <width>121</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Select all</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBTemperature">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>60</y>
-           <width>111</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Temperature</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBFrequency">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>80</y>
-           <width>86</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Frequency</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBActivePower">
-         <property name="geometry">
-          <rect>
-           <x>140</x>
-           <y>80</y>
-           <width>111</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Active Power</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBEnergy">
-         <property name="geometry">
-          <rect>
-           <x>140</x>
-           <y>160</y>
-           <width>111</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Energy</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBReactivePower">
-         <property name="geometry">
-          <rect>
-           <x>140</x>
-           <y>100</y>
-           <width>121</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Reactive Power</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBPowerFactor">
-         <property name="geometry">
-          <rect>
-           <x>140</x>
-           <y>140</y>
-           <width>111</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Power Factor</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBApparentPower">
-         <property name="geometry">
-          <rect>
-           <x>140</x>
-           <y>120</y>
-           <width>121</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Apparent Power</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBFundamentalTHD">
-         <property name="geometry">
-          <rect>
-           <x>140</x>
-           <y>60</y>
-           <width>151</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Fundamental + THD</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBRMSCurrent">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>160</y>
-           <width>111</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>RMS Current</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBInstVoltage">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>100</y>
-           <width>111</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Inst. Voltage</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBRMSVoltage">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>120</y>
-           <width>111</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>RMS Voltage</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBInstCurrent">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>140</y>
-           <width>111</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Inst. Current</string>
-         </property>
-        </widget>
-       </widget>
-       <widget class="QGroupBox" name="groupBox_7">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>30</y>
-          <width>251</width>
-          <height>101</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>Isolated GPIOs</string>
-        </property>
-        <widget class="QPushButton" name="pBUpdateDirAllInput">
-         <property name="geometry">
-          <rect>
-           <x>160</x>
-           <y>60</y>
-           <width>80</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>All Input</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBDIO6">
-         <property name="geometry">
-          <rect>
-           <x>80</x>
-           <y>70</y>
-           <width>86</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>DIO 6</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBDIO3">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>70</y>
-           <width>86</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>DIO 3</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBDIO1">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>30</y>
-           <width>86</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>DIO 1</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBDIO4">
-         <property name="geometry">
-          <rect>
-           <x>80</x>
-           <y>30</y>
-           <width>86</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>DIO 4</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBDIO5">
-         <property name="geometry">
-          <rect>
-           <x>80</x>
-           <y>50</y>
-           <width>86</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>DIO 5</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pBUpdateDirAllOutput">
-         <property name="geometry">
-          <rect>
-           <x>160</x>
-           <y>30</y>
-           <width>80</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>All Ouput</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="cBDIO2">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>50</y>
-           <width>86</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>DIO 2</string>
-         </property>
-        </widget>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_4">
+      <widget class="QWidget" name="tabHarmonics">
        <attribute name="title">
         <string>Harmonics</string>
        </attribute>
        <widget class="QPushButton" name="pBStartHarmonics">
         <property name="geometry">
          <rect>
-          <x>620</x>
+          <x>660</x>
           <y>450</y>
-          <width>80</width>
+          <width>51</width>
           <height>24</height>
          </rect>
         </property>
@@ -2135,6 +1804,354 @@
          </property>
         </item>
        </widget>
+       <widget class="QPushButton" name="pBSetHarmonicsCount">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>450</y>
+          <width>51</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>set</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pBTriggerHarmonics">
+        <property name="geometry">
+         <rect>
+          <x>610</x>
+          <y>450</y>
+          <width>51</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Trigger</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tabMisc">
+       <attribute name="title">
+        <string>Misc</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>140</y>
+          <width>281</width>
+          <height>191</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Measurment selection (NOT WORKING)</string>
+        </property>
+        <widget class="QCheckBox" name="cBSelectAll">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>121</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Select all</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBTemperature">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>60</y>
+           <width>111</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Temperature</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBFrequency">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>86</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Frequency</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBActivePower">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>80</y>
+           <width>111</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Active Power</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBEnergy">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>160</y>
+           <width>111</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Energy</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBReactivePower">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>100</y>
+           <width>121</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Reactive Power</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBPowerFactor">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>140</y>
+           <width>111</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Power Factor</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBApparentPower">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>120</y>
+           <width>121</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Apparent Power</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBFundamentalTHD">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>60</y>
+           <width>151</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Fundamental + THD</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBRMSCurrent">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>160</y>
+           <width>111</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>RMS Current</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBInstVoltage">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>111</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Inst. Voltage</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBRMSVoltage">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>111</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>RMS Voltage</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBInstCurrent">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>140</y>
+           <width>111</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Inst. Current</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_7">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>251</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Isolated GPIOs</string>
+        </property>
+        <widget class="QPushButton" name="pBUpdateDirAllInput">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>60</y>
+           <width>80</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>All Input</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBDIO6">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>70</y>
+           <width>86</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>DIO 6</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBDIO3">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>70</y>
+           <width>86</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>DIO 3</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBDIO1">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>86</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>DIO 1</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBDIO4">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>30</y>
+           <width>86</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>DIO 4</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBDIO5">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>50</y>
+           <width>86</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>DIO 5</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pBUpdateDirAllOutput">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>30</y>
+           <width>80</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>All Ouput</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="cBDIO2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>50</y>
+           <width>86</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>DIO 2</string>
+         </property>
+        </widget>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -2164,6 +2181,11 @@
     </property>
     <addaction name="actionConfigure"/>
     <addaction name="actionClear"/>
+    <addaction name="separator"/>
+    <addaction name="actionOscilloscope"/>
+    <addaction name="actionHarmonics"/>
+    <addaction name="separator"/>
+    <addaction name="actionStart"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -2171,9 +2193,21 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuTest">
+    <property name="title">
+     <string>Test</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuSystem">
+    <property name="title">
+     <string>System</string>
+    </property>
+   </widget>
    <addaction name="menuCalls"/>
    <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuTest"/>
+   <addaction name="menuSystem"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="windowTitle">
@@ -2201,6 +2235,9 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionHarmonics"/>
+   <addaction name="actionOscilloscope"/>
+   <addaction name="actionStart"/>
   </widget>
   <action name="actionAbout">
    <property name="text">
@@ -2288,6 +2325,42 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionHarmonics">
+   <property name="icon">
+    <iconset resource="../PowerLAB.qrc">
+     <normaloff>:/images/harmonics.png</normaloff>:/images/harmonics.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Harmonics</string>
+   </property>
+   <property name="shortcut">
+    <string>Meta+H</string>
+   </property>
+  </action>
+  <action name="actionOscilloscope">
+   <property name="icon">
+    <iconset resource="../PowerLAB.qrc">
+     <normaloff>:/images/osci.png</normaloff>:/images/osci.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Oscilloscope</string>
+   </property>
+   <property name="shortcut">
+    <string>Meta+O</string>
+   </property>
+  </action>
+  <action name="actionStart">
+   <property name="icon">
+    <iconset resource="../PowerLAB.qrc">
+     <normaloff>:/images/start.png</normaloff>:/images/start.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Start</string>
+   </property>
+   <property name="shortcut">
+    <string>Meta+S</string>
    </property>
   </action>
  </widget>

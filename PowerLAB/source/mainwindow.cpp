@@ -86,12 +86,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->tabScope->setLayout(&scopeLayout);
     oscillopscope->setScreenSize(QSize(ui->tabScope->size()));
 
-
     // harmonics box
     harmonics = new qOsci(NULL, OfTypeHarmonics);
     ui->harmonicsLayout->addWidget(harmonics->getScreenWidget());
     harmonics->setTableWidgetForHarmonics(ui->harmonicsTable);
-    ui->cBHarmonicsCount->setCurrentIndex(9);
+    ui->cBHarmonicsCount->setCurrentIndex(4);
+    connect (testModule, SIGNAL(newHarmonicsData(float*,float,int)),    // connect module with harmonics display
+             harmonics, SLOT(setHarmonics(float*,float,int)));
 
 }
 MainWindow::~MainWindow() {
@@ -170,7 +171,21 @@ void MainWindow::initActionsConnections()
     connect(ui->actionClear, SIGNAL(triggered()), console, SLOT(clear()));
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
     connect(ui->actionAboutQt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+    connect(ui->actionStart, SIGNAL(triggered()),this, SLOT(on_pushButtonStartMeasurment_released()));
+
+    //
+    connect (ui->actionHarmonics, SIGNAL(triggered( )), this, SLOT(handleActionHarmonics()));
+    connect (ui->actionOscilloscope, SIGNAL(triggered( )), this, SLOT(handleActionOscilloscope()));
 }
+
+void MainWindow::handleActionOscilloscope (void) {
+    ui->tabWidget->setCurrentIndex(1);
+}
+
+void MainWindow::handleActionHarmonics (void) {
+ui->tabWidget->setCurrentIndex(2);
+}
+
 void MainWindow::sendCommand(QByteArray cmd, double value) {
    QByteArray msg = cmd;
    msg.append(":");
@@ -290,7 +305,6 @@ void MainWindow::on_pBUpdateDirAllOutput_released()
     testModule->setDIODir(PSOM_DIO6, PSOM_DIO_OUTPUT);
 
 }
-
 void MainWindow::on_pBUpdateDirAllInput_released()
 {
     qDebug() << "Set all DIOs to INPUT";
@@ -300,14 +314,6 @@ void MainWindow::on_pBUpdateDirAllInput_released()
     testModule->setDIODir(PSOM_DIO4, PSOM_DIO_INPUT);
     testModule->setDIODir(PSOM_DIO5, PSOM_DIO_INPUT);
     testModule->setDIODir(PSOM_DIO6, PSOM_DIO_INPUT);
-}
-
-void MainWindow::on_pushButtonTriggerHarmonicMeasurment_released()
-{
-    qDebug() << "Trigger Harmonics measurment " << endl;
-    float harmonics_buf[10] = {0};
-    int harmCount = ui->lineEditHarmonicCount->text().toInt();
-    testModule->triggerHarmonicMeasruement (harmCount, harmonics_buf);
 }
 
 void MainWindow::on_pushButtonVersion_released()
@@ -320,22 +326,20 @@ void MainWindow::on_pBStartHarmonics_released()
     if (ui->pBStartHarmonics->text() == "Start") {
         ui->pBStartHarmonics->setText("Stop");
 
-        int datasize = ui->cBHarmonicsCount->currentText().toInt();
+        testModule->stopHarmonicsScan();
 
-        float *testData = new float[datasize];
+        for (long i=0; i!= 10000;i++) { }
 
-        for (int i=0; i!= datasize;i++) {
-            testData[i] = datasize - i;
-        }
-        harmonics->setHarmonics(testData, 50.321, datasize);
-        free (testData);
-
+        testModule->startHarmonicsScan(VoltageHarmonics);
     }
     else {
         ui->pBStartHarmonics->setText("Start");
+        testModule->stopHarmonicsScan();
     }
-}
 
+
+    testModule->startMeasurement(100);
+}
 void MainWindow::on_cBHarmonicsType_currentIndexChanged(const QString &arg1)
 {
     if (arg1 == "Voltage")                  { harmonics->setVerticalAxisStyle(VoltageAxisStyle); }
@@ -350,3 +354,31 @@ void MainWindow::on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1
     else if  (arg1 == "Harmonic")           { harmonics->setHarmonicsAxisStyle(HarmonicNumberAxisStyle); }
     else                                    { }
 }
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{
+    switch (index) {
+        case (0):   // Panel
+        break;
+        case (1):   // Scope
+        break;
+        case (2):   // Harmonics
+        break;
+        case (3):   // Misc
+        break;
+    }
+}
+
+void MainWindow::on_pBSetHarmonicsCount_released()
+{
+
+    int count = ui->cBHarmonicsCount->currentText().toInt();
+    testModule->setHarmonicsCount(count);
+}
+
+void MainWindow::on_pBTriggerHarmonics_released()
+{
+    testModule->startHarmonicsScan(VoltageHarmonics);
+}
+
+

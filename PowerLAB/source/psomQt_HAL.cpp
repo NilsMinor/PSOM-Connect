@@ -190,7 +190,12 @@ void        PSOM_HAL::recvNewSerialData()
 //! PUBLIC SLOTS
 void        PSOM_HAL::newSerialDataHandler (QByteArray data)
 {
-    //qDebug() << data << endl;
+    QString str(data.constData());
+
+    if (str.contains("ERR")) {
+        qDebug() << str;
+    }
+
     if ((uint8_t)data[POS_SYNC_HEADER] == 0xAA) {
         if (readRegisterState == true) {
             analyseIncomingReadData (data);

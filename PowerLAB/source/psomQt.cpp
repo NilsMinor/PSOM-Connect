@@ -25,6 +25,7 @@ PSOM::PSOM  (uint8_t _subID )
     dio_dir     = PSOM_DIO_ALL_INPUTS;
     dio_state   = 0;
     psom_answered = false;
+    harmonicMeasurmentState = false;
 }
 /**
  * \brief   PSOM constructor
@@ -42,6 +43,7 @@ PSOM::PSOM  (uint8_t _subID, QSerialPort *_ptr_SerialPortHandler)
     dio_dir     = PSOM_DIO_ALL_INPUTS;
     dio_state   = 0;
     psom_answered = false;
+    harmonicMeasurmentState = false;
 }
 /**
  * \brief   PSOM destructor
@@ -135,33 +137,28 @@ void        PSOM::selectMeasurement (uint32_t selection, bool state)
 
     qDebug() << myStringOfBits << selection << state ;
 }
-void        PSOM::triggerHarmonicMeasruement (int harmonicCount, float *h_buf)
+
+void PSOM::setHarmonicsCount(int count)
 {
-    triggerHarmonics = true;
-    // [1] check buffer size
-    // ?????
-
-    // [2] stop circulation timer
-    if (m_timer != NULL)
-        m_timer->stop();
-
-    // [3] set up psom scommand register with harmonics count
-    psom_answered = false;
-    //psom_hal->writeRegister(PSOM_SCOMMAND_VALUE, harmonicCount, false);
-    QThread::msleep(1000);
-    // [4] trigger psom harmonics measurment by writing the soft command
-    psom_hal->writeRegister(PSOM_SCOMMAND, PSOM_SCMD_HARM_V, false);
-
-    // [5] wait and receive the data
-
-
-
-
-    // [?] start circulation timer again
-    if (m_timer != NULL)
-        m_timer->start();
-
+    if (count >= 1 && count <= 20) {
+        harmonicsCount = count;
+        psom_hal->writeRegister(PSOM_SCOMMAND_VALUE, harmonicsCount, false);
+    }
 }
+
+void PSOM::startHarmonicsScan(HarmonicType type)
+{
+    if (type == VoltageHarmonics) {
+        psom_hal->writeRegister(PSOM_SCOMMAND, PSOM_SCMD_HARM_V, false);
+    }
+    harmonicMeasurmentState = true;
+}
+
+void PSOM::stopHarmonicsScan()
+{
+    harmonicMeasurmentState = false;
+}
+
 /**
  * \brief   timer timout of m_timer
  * \param   nothing
@@ -241,6 +238,19 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
         m_data.L1.energy.cost = toFloat(data[L1_ENERGY_COST/4]);
         m_data.L2.energy.cost = toFloat(data[L2_ENERGY_COST/4]);
         m_data.L3.energy.cost = toFloat(data[L3_ENERGY_COST/4]);
+
+        if (harmonicMeasurmentState) {
+            float * harmonicData = new float [harmonicsCount];
+            for (int i=0; i!= harmonicsCount; i++) {
+                harmonicData[i] = toFloat (data[ (TEMP_HARM1 / 4) + i]);
+
+                //qDebug() << "H" << i << data[ (TEMP_HARM1 / 4) + i];
+            }
+
+            emit newHarmonicsData(harmonicData, m_data.frequency, harmonicsCount);
+
+            free (harmonicData);
+        }
 
         m_data.circulationTime = elapsedTimer.elapsed();
         m_data.circulationFrequency =  1000.0 / m_data.circulationTime;

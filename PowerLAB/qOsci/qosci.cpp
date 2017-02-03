@@ -45,7 +45,7 @@ void qOsci::initAsOsci      (void){
     osciTimer->start(100);
 }
 
-bool qOsci::setHarmonics (float *data, float freq, int count) {
+void qOsci::setHarmonics(float *data, float freq, int count) {
 
     int size = 2 * count;
     int max = 0;
@@ -64,6 +64,7 @@ bool qOsci::setHarmonics (float *data, float freq, int count) {
             // If there is a table, add data to it
             if (harmonicsTable != NULL) {
                 harmonicsTable->setItem(0, dataCounter, new QTableWidgetItem(QString::number(y[i])));
+            }
 
             // find max value
             if (y[i] > max) max = y[i];
@@ -103,10 +104,7 @@ bool qOsci::setHarmonics (float *data, float freq, int count) {
     customPlot->xAxis->setTicker(textTicker);
     customPlot->xAxis->setTickLabelFont(QFont(font().family(),10));
 
-
-
     customPlot->replot();
-    return true;
 }
 void qOsci::setTableWidgetForHarmonics (QTableWidget * t) {
     this->harmonicsTable = t;

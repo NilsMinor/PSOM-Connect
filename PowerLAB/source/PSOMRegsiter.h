@@ -70,12 +70,13 @@ union PSOM_BigEndianMemory {
 #define PSOM_DIO_LOW            0
 
 /* ************ PSOM REGISTER SETUP ************* ************** **/
-#define PSOM_REG_START          	0x0000                  // uint32 -start address of the PSOM registers
+#define PSOM_REG_START          	0x0000                  // uint32 - start address of the PSOM registers
 #define PSOM_REG_WRITE_BORDER			PSOM_SUB_ID   					// uint32 - start address of the read/write registers of the PSOM register
-#define PSOM_REG_QUANTITY       	(L3_ENERGY_COST + 4)       // uint32 -amount of regitsers used by the PSOM register, equals to the last read only register
-#define PSOM_REGISTER_COUNT       77
+#define PSOM_REG_QUANTITY       	(TEMP_HARM20 + 4)       // uint32 - amount of regitsers used by the PSOM register, equals to the last read only register
+#define PSOM_REGISTER_COUNT       97   										// uint32 -
 
 /* ************ PSOM COMMANDS *********************************** */
+#define	PSOM_SCMD_DEFAULT					0x00000000
 #define PSOM_SCMD_CLR_ENERGY     	0x00000001       	// uint8 - 1Byte - command to clear the energy registers
 #define PSOM_SCMD_RESTART					0x00000002
 #define PSOM_SCMD_CALLIB_V1				0X00000101
@@ -133,8 +134,8 @@ union PSOM_BigEndianMemory {
 #define PSOM_SAMPLE_STYLE         0x0028  		// uint32  - - selection of the the sampling style norm, mean ...
 #define PSOM_SAMPLES_QUANTITY     0x002C  		// uint32  - - quantitiy of the samples for speacial measurment
 #define PSOM_SUB_ID               0x0030  		// uint32  - - represents the sub ID of the PSOM module
-//#define ?   0x0034
-//#define ?   0x0038
+#define PSOM_PWM1   							0x0034
+#define PSOM_PWM2   							0x0038
 //#define ?   0x003C
 //#define ?   0x0040
 //#define ?   0x0044
@@ -196,11 +197,33 @@ union PSOM_BigEndianMemory {
 #define L1_ENERGY_ACTIVE       		0x0110   		// float - Wh - positive energy counter of phase 1
 #define L2_ENERGY_ACTIVE    	    0x0114   		// float - Wh - positive energy counter of phase 2
 #define L3_ENERGY_ACTIVE 		     	0x0118   		// float - Wh - positive energy counter of phase 3
-#define L1_ENERGY_REACTIVE          0x011C   		// float - Wh - negatvie energy counter of phase 1
-#define L2_ENERGY_REACTIVE          0x0120   		// float - Wh - negatvie energy counter of phase 2
+#define L1_ENERGY_REACTIVE 		 		0x011C   		// float - Wh - negatvie energy counter of phase 1
+#define L2_ENERGY_REACTIVE        0x0120   		// float - Wh - negatvie energy counter of phase 2
 #define L3_ENERGY_REACTIVE        0x0124   		// float - Wh - negatvie energy counter of phase 3
 #define L1_ENERGY_COST            0x0128   		// float - $/€ - energy costs of phase 1
 #define L2_ENERGY_COST            0x012C   		// float - $/€ - energy costs of phase 2
 #define L3_ENERGY_COST            0x0130   		// float - $/€ - energy costs of phase 3
+#define TEMP_HARM1            		0x0134   		// float - ?? - harmonic 1
+#define TEMP_HARM2            		0x0138			// float - ?? - harmonic 1
+#define TEMP_HARM3            		0x013C   		// float - ?? - harmonic 1
+#define TEMP_HARM4            		0x0140   		// float - ?? - harmonic 1
+#define TEMP_HARM5            		0x0144   		// float - ?? - harmonic 1
+#define TEMP_HARM6            		0x0148   		// float - ?? - harmonic 1
+#define TEMP_HARM7            		0x014C   		// float - ?? - harmonic 1
+#define TEMP_HARM8            		0x0150   		// float - ?? - harmonic 1
+#define TEMP_HARM9            		0x0154   		// float - ?? - harmonic 1
+#define TEMP_HARM10            		0x0158   		// float - ?? - harmonic 1
+#define TEMP_HARM11            		0x015C   		// float - ?? - harmonic 1
+#define TEMP_HARM12            		0x0160   		// float - ?? - harmonic 1
+#define TEMP_HARM13            		0x0164   		// float - ?? - harmonic 1
+#define TEMP_HARM14            		0x0168   		// float - ?? - harmonic 1
+#define TEMP_HARM15            		0x016C   		// float - ?? - harmonic 1
+#define TEMP_HARM16            		0x0170   		// float - ?? - harmonic 1
+#define TEMP_HARM17            		0x0174   		// float - ?? - harmonic 1
+#define TEMP_HARM18            		0x0178   		// float - ?? - harmonic 1
+#define TEMP_HARM19            		0x017C   		// float - ?? - harmonic 1
+#define TEMP_HARM20            		0x0180   		// float - ?? - harmonic 1
+
+
 
 #endif /* [] END OF FILE */

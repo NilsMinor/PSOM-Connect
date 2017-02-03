@@ -54,7 +54,6 @@ public:
     explicit qOsci (QWidget *parent = 0, OsciType type = OfTypeOsci);
     QWidget         *getScreenWidget (void) { return screenWidget; }
     void            setScreenSize (QSize _screenSize);
-    bool            setHarmonics (float *data, float freq, int count);
     void            setTableWidgetForHarmonics (QTableWidget * t);
     void            setHarmonicsAxisStyle (OsciHarmAxisStyle style);
     void            setVerticalAxisStyle (OsciVerticalAxisStyle style);
@@ -62,7 +61,7 @@ public:
 signals:
 
 public slots:
-
+    void            setHarmonics (float *data, float freq, int count);
 private slots:
     void update_osci (void);
 };

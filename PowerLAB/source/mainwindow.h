@@ -118,11 +118,16 @@ private slots:
     void on_cBDIO6_released();
     void on_pBUpdateDirAllOutput_released();
     void on_pBUpdateDirAllInput_released();
-    void on_pushButtonTriggerHarmonicMeasurment_released();
     void on_pushButtonVersion_released();
     void on_pBStartHarmonics_released();
     void on_cBHarmonicsType_currentIndexChanged(const QString &arg1);
     void on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1);
+    void on_tabWidget_currentChanged(int index);
+    void on_pBSetHarmonicsCount_released();
+
+    void handleActionOscilloscope (void);
+    void handleActionHarmonics (void);
+    void on_pBTriggerHarmonics_released();
 };
 
 #endif // MAINWINDOW_H
