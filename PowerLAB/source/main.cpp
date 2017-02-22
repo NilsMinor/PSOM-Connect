@@ -34,14 +34,33 @@
 
 #include <QApplication>
 #include "mainwindow.h"
-
+#include <QSplashScreen>
+#include <QTimer>
 //
+
+#define STARTUP_TIME    1000
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+
+    QPixmap pixmap(":/images/PSOM_Splashscreen.jpeg");
+
+
+    QSplashScreen splash(pixmap);
+
+    splash.show();
+    splash.setAttribute(Qt::WA_TranslucentBackground);
+
+    splash.showMessage("Nils Minor ® 2017 ");
+
     MainWindow w;
-    w.move(0,0);
-    w.show();
+
+    QTimer::singleShot(STARTUP_TIME, &splash, SLOT( close() ) );
+    QTimer::singleShot(STARTUP_TIME, &w, SLOT( show() ) );
+
+    //w.move(0,0);
+
     return a.exec();
 }

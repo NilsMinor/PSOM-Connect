@@ -12,6 +12,8 @@
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
 
+QMAKE_MAC_SDK = macosx10.12
+
 TARGET = PowerLab
 TEMPLATE = app
 
