@@ -26,7 +26,19 @@ qOsci::qOsci(QWidget *parent, OsciType type) : QWidget(parent)
     screenWidget->setLayout(screenLayout);
 }
 
-void qOsci::initAsOsci      (void){
+void qOsci::initAsOsci      (void) {
+
+    osciTimer = new QTimer ();
+    osciTimer->setTimerType(Qt::PreciseTimer);
+
+    customPlot->addGraph(); // blue line
+    customPlot->graph(0)->setPen(QPen(QColor(40, 110, 255)));
+    customPlot->addGraph(); // red line
+    customPlot->graph(1)->setPen(QPen(QColor(255, 110, 40)));
+    customPlot->addGraph(); // violett line
+    customPlot->graph(2)->setPen(QPen(QColor(188, 110, 255)));
+    customPlot->addGraph(); // red line
+    customPlot->graph(3)->setPen(QPen(QColor(0, 240, 110)));
 
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%h:%m:%s");
@@ -38,23 +50,72 @@ void qOsci::initAsOsci      (void){
     connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis2, SLOT(setRange(QCPRange)));
     connect(customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->yAxis2, SLOT(setRange(QCPRange)));
 
-    osciTimer = new QTimer ();
-    osciTimer->setTimerType(Qt::PreciseTimer);
+    // setup a timer that repeatedly calls MainWindow::realtimeDataSlot:
+    connect(osciTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
+}
+void qOsci::osciStart()
+{
+    osciTimer->start(0);
+}
+void qOsci::osciStop()
+{
+    osciTimer->stop();
+}
+void qOsci::osciReset()
+{
 
-    connect (osciTimer, SIGNAL(timeout()),this, SLOT(update_osci()));
-    osciTimer->start(100);
+}
+void qOsci::update_osci()
+{
+    double key = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.0;
+    static double lastPointKey = 0;
+
+    testSig1->addData(key, 10, customPlot);
+}
+void qOsci::realtimeDataSlot()
+{
+    static QTime time(QTime::currentTime());
+    // calculate two new data points:
+    double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
+    static double lastPointKey = 0;
+    if (key-lastPointKey > 0.002) // at most add point every 2 ms
+    {
+      // add data to lines:
+      customPlot->graph(0)->addData(key, qSin(key)+qrand()/(double)RAND_MAX*1*qSin(key/0.3843));
+      customPlot->graph(1)->addData(key, qCos(key)+qrand()/(double)RAND_MAX*0.5*qSin(key/0.4364));
+      // rescale value (vertical) axis to fit the current data:
+      //ui->customPlot->graph(0)->rescaleValueAxis();
+      //ui->customPlot->graph(1)->rescaleValueAxis(true);
+      lastPointKey = key;
+    }
+    // make key axis range scroll with the data (at a constant range size of 8):
+    customPlot->xAxis->setRange(key, 8, Qt::AlignRight);
+   customPlot->replot();
+
+    // calculate frames per second:
+    static double lastFpsKey;
+    static int frameCount;
+    ++frameCount;
+    if (key-lastFpsKey > 2) // average fps over 2 seconds
+    {
+     /* statusBar->showMessage(
+            QString("%1 FPS, Total Data points: %2")
+            .arg(frameCount/(key-lastFpsKey), 0, 'f', 0)
+            .arg(ui->customPlot->graph(0)->data()->size()+ui->customPlot->graph(1)->data()->size())
+            , 0);*/
+      lastFpsKey = key;
+      frameCount = 0;
+    }
 }
 
-void qOsci::setHarmonics(float *data, float freq, int count) {
+
+void qOsci::setHarmonics(float *data, float freq, int count, int active) {
 
     int size = 2 * count;
     int max = 0;
     bool showFrequency = true;
     QVector<double> x(size), y(size),  frequency(count);
-
-    // clear table
-    harmonicsTable->clear();
-
+    qDebug() << active;
     int dataCounter = 0;
     for (int i= 0; i!= size -1; i++) {
         x[i] = i;
@@ -62,9 +123,6 @@ void qOsci::setHarmonics(float *data, float freq, int count) {
             // add data
             y[i] = data[dataCounter];
             // If there is a table, add data to it
-            if (harmonicsTable != NULL) {
-                harmonicsTable->setItem(0, dataCounter, new QTableWidgetItem(QString::number(y[i])));
-            }
 
             // find max value
             if (y[i] > max) max = y[i];
@@ -106,9 +164,6 @@ void qOsci::setHarmonics(float *data, float freq, int count) {
 
     customPlot->replot();
 }
-void qOsci::setTableWidgetForHarmonics (QTableWidget * t) {
-    this->harmonicsTable = t;
-}
 void qOsci::setHarmonicsAxisStyle(OsciHarmAxisStyle style)
 {
     harmonicsAxisStyle = style;
@@ -123,7 +178,6 @@ void qOsci::setHarmonicsAxisStyle(OsciHarmAxisStyle style)
     }
     customPlot->replot();
 }
-
 void qOsci::setVerticalAxisStyle(OsciVerticalAxisStyle style)
 {
     verticalAxisStyle = style;
@@ -144,11 +198,8 @@ void qOsci::setVerticalAxisStyle(OsciVerticalAxisStyle style)
     }
     customPlot->replot();
 }
-
 void qOsci::initAsHarmonics (void) {
     // prepare data:
-
-    harmonicsTable = NULL;
 
     /*// create and configure plottables:
     QCPGraph *graph1 = customPlot->addGraph();
@@ -209,7 +260,7 @@ void qOsci::initAsHarmonics (void) {
     groupTracerText->position->setType(QCPItemPosition::ptAxisRectRatio);
     groupTracerText->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     groupTracerText->position->setCoords(1.0, 0); // lower right corner of axis rect
-    groupTracerText->setText("Fixed positions in\nwave packet define\ngroup velocity vg");
+    //groupTracerText->setText("Fixed positions in\nwave packet define\ngroup velocity vg");
     groupTracerText->setTextAlignment(Qt::AlignLeft);
     groupTracerText->setFont(QFont(font().family(), 16));
     groupTracerText->setColor(QColor(Qt::red));
@@ -219,10 +270,4 @@ void qOsci::setScreenSize(QSize _screenSize)
 {
     screenWidget->setMinimumSize(_screenSize);
 }
-void qOsci::update_osci()
-{
-    double key = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.0;
-    static double lastPointKey = 0;
 
-    testSig1->addData(key, 10, customPlot);
-}

@@ -76,22 +76,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect (testModule, SIGNAL(newPSOMData(void)), this,SLOT(newPSOMData(void)));
     connect (testModule, SIGNAL(statusBarInfo(QString)), this, SLOT(changeStatusbarInformation(QString)));
 
-    // select all measurments
-    //ui->cBSelectAll->setChecked(true);
-
     oscillopscope = new qOsci();
-    QHBoxLayout scopeLayout;
-    scopeLayout.addWidget(oscillopscope->getScreenWidget());
-    ui->tabScope->setLayout(&scopeLayout);
-    oscillopscope->setScreenSize(QSize(ui->tabScope->size()));
+    ui->layoutOscilloscope->addWidget(oscillopscope->getScreenWidget());
 
     // harmonics box
-    harmonics = new qOsci(NULL, OfTypeHarmonics);
-    ui->harmonicsGraphLayout->addWidget(harmonics->getScreenWidget());
-    harmonics->setTableWidgetForHarmonics(ui->harmonicsTable);
+    harmonics = new qOsci(NULL, OfTypeHarmonics);    
+    ui->harmonicsGraphLayout->addWidget(harmonics->getScreenWidget()) ;
     ui->cBHarmonicsCount->setCurrentIndex(4);
-    connect (testModule, SIGNAL(newHarmonicsData(float*,float,int)),    // connect module with harmonics display
-             harmonics, SLOT(setHarmonics(float*,float,int)));
+    connect (testModule, SIGNAL(newHarmonicsData(float*,float,int,int)),    // connect module with harmonics display
+             harmonics, SLOT(setHarmonics(float*,float,int,int)));
 
 
     L1Data = new mDataHandler (this);
@@ -101,9 +94,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     L1Data->add("Q1","VAR");
     L1Data->add("S1","VA");
     L1Data->add("λ1","");
-    L1Data->add("E1","kWh");
+    L1Data->add("EP1","kWh");
+    L1Data->add("EQ1","kWh");
     L1Data->add("M1","€");
     ui->layoutPhaseL1->addWidget(L1Data);
+    ui->comboBoxOsciCh1->addItems(L1Data->getPrettyName());
 
     L2Data = new mDataHandler (NULL);
     L2Data->add("U2","Vrms");
@@ -112,7 +107,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     L2Data->add("2","VAR");
     L2Data->add("S2","VA");
     L2Data->add("λ2","");
-    L2Data->add("E2","kWh");
+    L2Data->add("EP2","kWh");
+    L2Data->add("EQ2","kWh");
     L2Data->add("M2","€");
     ui->layoutPhaseL2->addWidget(L2Data);
 
@@ -123,7 +119,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     L3Data->add("Q3","VAR");
     L3Data->add("S3","VA");
     L3Data->add("λ3","");
-    L3Data->add("E3","kWh");
+    L3Data->add("EP3","kWh");
+    L3Data->add("EQ3","kWh");
     L3Data->add("M3","€");
     ui->layoutPhaseL3->addWidget(L3Data);
 
@@ -147,6 +144,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     }
     ui->harmonicsDataLayout->addWidget(HData);
 
+
+    Common = new mDataHandler (this);
+    Common->add("F", "Hz");
+    Common->add("Temp", "°C");
+    Common->add("Circ T", "ms");
+    Common->add("Circ F", "°Hz");
+    ui->layoutCommonPanelData->addWidget(Common);
 
 }
 MainWindow::~MainWindow() {
@@ -231,15 +235,12 @@ void MainWindow::initActionsConnections()
     connect (ui->actionHarmonics, SIGNAL(triggered( )), this, SLOT(handleActionHarmonics()));
     connect (ui->actionOscilloscope, SIGNAL(triggered( )), this, SLOT(handleActionOscilloscope()));
 }
-
 void MainWindow::handleActionOscilloscope (void) {
     ui->tabWidget->setCurrentIndex(1);
 }
-
 void MainWindow::handleActionHarmonics (void) {
     ui->tabWidget->setCurrentIndex(2);
 }
-
 void MainWindow::sendCommand(QByteArray cmd, double value) {
    QByteArray msg = cmd;
    msg.append(":");
@@ -252,23 +253,14 @@ void MainWindow::sendCommand(QByteArray cmd, double value) {
 
 void MainWindow::newPSOMData(void)
 {
-    int accuracy = 3;
-    // Phase 1
-    ui->labelV1rms->setText (QString::number(testModule->getData().L1.voltage.rms,      'f', accuracy ));
-    ui->labelI1rms->setText (QString::number(testModule->getData().L1.current.rms,      'f', accuracy ));
-    ui->labelP1->setText    (QString::number(testModule->getData().L1.power.active,     'f', accuracy ));
-    ui->labelQ1->setText    (QString::number(testModule->getData().L1.power.reactive,   'f', accuracy ));
-    ui->labelS1->setText    (QString::number(testModule->getData().L1.power.apparent,   'f', accuracy ));
-    ui->labelE1->setText    (QString::number(testModule->getData().L1.energy.active,    'f', accuracy ));
-    ui->labelCost1->setText (QString::number(testModule->getData().L1.energy.cost,      'f', accuracy ));
-
-    L1Data->setData("U1", 234.56789, 0);
+    L1Data->setData("U1", testModule->getData().L1.voltage.rms, 0);
     L1Data->setData("I1", testModule->getData().L1.current.rms, 0);
     L1Data->setData("P1", testModule->getData().L1.power.active, 0);
     L1Data->setData("Q1", testModule->getData().L1.power.reactive, 0);
     L1Data->setData("S1", testModule->getData().L1.power.apparent, 0);
     L1Data->setData("λ1", testModule->getData().L1.power.factor, 0);
-    L1Data->setData("E1", testModule->getData().L1.energy.active, 0);
+    L1Data->setData("EP1", testModule->getData().L1.energy.active, 0);
+    L1Data->setData("EQ1", testModule->getData().L1.energy.reactive, 0);
     L1Data->setData("M1", testModule->getData().L1.energy.cost, 0);
 
 
@@ -278,7 +270,8 @@ void MainWindow::newPSOMData(void)
     L2Data->setData("Q2", testModule->getData().L2.power.reactive, 0);
     L2Data->setData("S2", testModule->getData().L2.power.apparent, 0);
     L2Data->setData("λ2", testModule->getData().L2.power.factor, 0);
-    L2Data->setData("E2", testModule->getData().L2.energy.active, 0);
+    L2Data->setData("EP2", testModule->getData().L2.energy.active, 0);
+    L2Data->setData("EQ2", testModule->getData().L2.energy.active, 0);
     L2Data->setData("M2", testModule->getData().L2.energy.cost, 0);
 
 
@@ -288,7 +281,8 @@ void MainWindow::newPSOMData(void)
     L3Data->setData("Q3", testModule->getData().L3.power.reactive, 0);
     L3Data->setData("S3", testModule->getData().L3.power.apparent, 0);
     L3Data->setData("λ3", testModule->getData().L3.power.factor, 0);
-    L3Data->setData("E3", testModule->getData().L3.energy.active, 0);
+    L3Data->setData("EP3", testModule->getData().L3.energy.active, 0);
+    L3Data->setData("EQ3", testModule->getData().L3.energy.active, 0);
     L3Data->setData("M3", testModule->getData().L3.energy.cost, 0);
 
 
@@ -301,39 +295,17 @@ void MainWindow::newPSOMData(void)
     LTData->setData("ET", testModule->getData().LT.energy.active, 0);
     LTData->setData("MT", testModule->getData().LT.energy.cost, 0);
 
+    Common->setData("F", testModule->getData().frequency, 0);
+    Common->setData("Temp", testModule->getData().sensor_temperature, 0);
+    Common->setData("Circ T", testModule->getData().circulationTime, 0);
+    Common->setData("Circ F", testModule->getData().circulationFrequency, 0);
 
-    ui->labelV2rms->setText (QString::number(testModule->getData().L2.voltage.rms,      'f', accuracy ));
-    ui->labelI2rms->setText (QString::number(testModule->getData().L2.current.rms,      'f', accuracy ));
-    ui->labelP2->setText    (QString::number(testModule->getData().L2.power.active,     'f', accuracy ));
-    ui->labelQ2->setText    (QString::number(testModule->getData().L2.power.reactive,   'f', accuracy ));
-    ui->labelS2->setText    (QString::number(testModule->getData().L2.power.apparent,   'f', accuracy ));
-    ui->labelE2->setText    (QString::number(testModule->getData().L2.energy.active,    'f', accuracy ));
-    ui->labelCost2->setText (QString::number(testModule->getData().L2.energy.cost,      'f', accuracy ));
-
-    ui->labelV3rms->setText (QString::number(testModule->getData().L3.voltage.rms,      'f', accuracy ));
-    ui->labelI3rms->setText (QString::number(testModule->getData().L3.current.rms,      'f', accuracy ));
-    ui->labelP3->setText    (QString::number(testModule->getData().L3.power.active,     'f', accuracy ));
-    ui->labelQ3->setText    (QString::number(testModule->getData().L3.power.reactive,   'f', accuracy ));
-    ui->labelS3->setText    (QString::number(testModule->getData().L3.power.apparent,   'f', accuracy ));
-    ui->labelE3->setText    (QString::number(testModule->getData().L3.energy.active,    'f', accuracy ));
-    ui->labelCost3->setText (QString::number(testModule->getData().L3.energy.cost,      'f', accuracy ));
-
-    ui->labelVTrms->setText (QString::number(testModule->getData().LT.voltage.rms,      'f', accuracy ));
-    ui->labelITrms->setText (QString::number(testModule->getData().LT.current.rms,      'f', accuracy ));
-    ui->labelPT->setText    (QString::number(testModule->getData().LT.power.active,     'f', accuracy ));
-    ui->labelQT->setText    (QString::number(testModule->getData().LT.power.reactive,   'f', accuracy ));
-    ui->labelST->setText    (QString::number(testModule->getData().LT.power.apparent,   'f', accuracy ));
-    ui->labelET->setText    (QString::number(testModule->getData().LT.energy.active,    'f', accuracy ));
-    ui->labelCostT->setText (QString::number(testModule->getData().LT.energy.cost,      'f', accuracy ));
-
-
-
-
-    ui->labelLineFreq->setText  (QString::number(testModule->getData().frequency,'f', accuracy ));
-    ui->labelModuleTemp->setText  (QString::number(testModule->getData().sensor_temperature,'f', accuracy ));
-    ui->labelCirculationFreq->setText  (QString::number(testModule->getData().circulationTime,'f', accuracy ));
-    ui->labelCirculationTime->setText  (QString::number(testModule->getData().circulationFrequency,'f', accuracy ));
-
+    int hc = 1;
+    for (int i=0; i<= HData->getCount(); i++) {
+        QString name = "H" + QString::number(hc);
+        HData->setData(name,testModule->getData().L1.harmonic.contentL1[ i ]);
+        hc += 2;
+    }
 }
 void MainWindow::on_pushButtonStopMeasurment_released () {
     qDebug() << "Stop testModule";
@@ -341,80 +313,7 @@ void MainWindow::on_pushButtonStopMeasurment_released () {
 }
 void MainWindow::on_pushButtonStartMeasurment_released () {
     qDebug() << "Start testModule";
-    testModule->startMeasurement(100);
-}
-
-
-
-
-void MainWindow::on_cBDIO1_released()
-{
-    if (ui->cBDIO1->isChecked())
-        testModule->setDIO(PSOM_DIO1, PSOM_DIO_HIGH);
-    else
-        testModule->setDIO(PSOM_DIO1, PSOM_DIO_LOW);
-}
-void MainWindow::on_cBDIO2_released()
-{
-    if (ui->cBDIO2->isChecked())
-        testModule->setDIO(PSOM_DIO2, PSOM_DIO_HIGH);
-    else
-        testModule->setDIO(PSOM_DIO2, PSOM_DIO_LOW);
-}
-void MainWindow::on_cBDIO3_released()
-{
-    if (ui->cBDIO3->isChecked())
-        testModule->setDIO(PSOM_DIO3, PSOM_DIO_HIGH);
-    else
-        testModule->setDIO(PSOM_DIO3, PSOM_DIO_LOW);
-}
-void MainWindow::on_cBDIO4_released()
-{
-    if (ui->cBDIO4->isChecked())
-        testModule->setDIO(PSOM_DIO4, PSOM_DIO_HIGH);
-    else
-        testModule->setDIO(PSOM_DIO4, PSOM_DIO_LOW);
-}
-void MainWindow::on_cBDIO5_released()
-{
-    if (ui->cBDIO5->isChecked())
-        testModule->setDIO(PSOM_DIO5, PSOM_DIO_HIGH);
-    else
-        testModule->setDIO(PSOM_DIO5, PSOM_DIO_LOW);
-}
-void MainWindow::on_cBDIO6_released()
-{
-    if (ui->cBDIO6->isChecked())
-        testModule->setDIO(PSOM_DIO6, PSOM_DIO_HIGH);
-    else
-        testModule->setDIO(PSOM_DIO6, PSOM_DIO_LOW);
-}
-
-void MainWindow::on_pBUpdateDirAllOutput_released()
-{
-    qDebug() << "Set all DIOs to OUTPUT";
-    testModule->setDIODir(PSOM_DIO1, PSOM_DIO_OUTPUT);
-    testModule->setDIODir(PSOM_DIO2, PSOM_DIO_OUTPUT);
-    testModule->setDIODir(PSOM_DIO3, PSOM_DIO_OUTPUT);
-    testModule->setDIODir(PSOM_DIO4, PSOM_DIO_OUTPUT);
-    testModule->setDIODir(PSOM_DIO5, PSOM_DIO_OUTPUT);
-    testModule->setDIODir(PSOM_DIO6, PSOM_DIO_OUTPUT);
-
-}
-void MainWindow::on_pBUpdateDirAllInput_released()
-{
-    qDebug() << "Set all DIOs to INPUT";
-    testModule->setDIODir(PSOM_DIO1, PSOM_DIO_INPUT);
-    testModule->setDIODir(PSOM_DIO2, PSOM_DIO_INPUT);
-    testModule->setDIODir(PSOM_DIO3, PSOM_DIO_INPUT);
-    testModule->setDIODir(PSOM_DIO4, PSOM_DIO_INPUT);
-    testModule->setDIODir(PSOM_DIO5, PSOM_DIO_INPUT);
-    testModule->setDIODir(PSOM_DIO6, PSOM_DIO_INPUT);
-}
-
-void MainWindow::on_pushButtonVersion_released()
-{
-    ui->labelFWVersion->setText(testModule->getFWVersion() );
+    testModule->startMeasurement(1000/ui->comboBoxCirculationFreq->currentText().toInt());
 }
 
 void MainWindow::on_pBStartHarmonics_released()
@@ -438,7 +337,9 @@ void MainWindow::on_pBStartHarmonics_released()
 }
 void MainWindow::on_cBHarmonicsType_currentIndexChanged(const QString &arg1)
 {
-    if (arg1 == "Voltage")                  { harmonics->setVerticalAxisStyle(VoltageAxisStyle); }
+    if (arg1 == "Voltage") {
+        harmonics->setVerticalAxisStyle(VoltageAxisStyle);
+    }
     else if  (arg1 == "Current")            { harmonics->setVerticalAxisStyle(CurrentAxisStyle); }
     else if  (arg1 == "Active Power")       { harmonics->setVerticalAxisStyle(PPowerAxisStyle); }
     else if  (arg1 == "Reactive Power")     { harmonics->setVerticalAxisStyle(QPowerAxisStyle); }
@@ -450,31 +351,51 @@ void MainWindow::on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1
     else if  (arg1 == "Harmonic")           { harmonics->setHarmonicsAxisStyle(HarmonicNumberAxisStyle); }
     else                                    { }
 }
-
-void MainWindow::on_tabWidget_currentChanged(int index)
-{
-    switch (index) {
-        case (0):   // Panel
-        break;
-        case (1):   // Scope
-        break;
-        case (2):   // Harmonics
-        break;
-        case (3):   // Misc
-        break;
-    }
-}
-
 void MainWindow::on_pBSetHarmonicsCount_released()
 {
 
     int count = ui->cBHarmonicsCount->currentText().toInt();
     testModule->setHarmonicsCount(count);
 }
-
 void MainWindow::on_pBTriggerHarmonics_released()
 {
     testModule->startHarmonicsScan(VoltageHarmonics);
 }
 
+void MainWindow::on_pBClearEnergyL1_released()
+{
+    testModule->sendSCMD(PSOM_SCMD_CLR_ENERGY_L1);
+}
+void MainWindow::on_pBClearEnergyL2_released()
+{
+    testModule->sendSCMD(PSOM_SCMD_CLR_ENERGY_L2);
+}
+void MainWindow::on_pBClearEnergyL3_released()
+{
+    testModule->sendSCMD(PSOM_SCMD_CLR_ENERGY_L3);
+}
+void MainWindow::on_pBClearEnergyLT_released()
+{
+    testModule->sendSCMD(PSOM_SCMD_CLR_ENERGY_ALL);
+}
 
+void MainWindow::on_comboBoxCirculationFreq_currentIndexChanged(int index)
+{
+    Q_UNUSED(index);
+    testModule->stopMeasurement();
+    qDebug() << "Change circulation frequency";
+    testModule->startMeasurement(1000/ui->comboBoxCirculationFreq->currentText().toInt());
+}
+
+void MainWindow::on_pushButtonOsciStart_released()
+{
+   oscillopscope->osciStart();
+}
+void MainWindow::on_pushButtonOsciStop_released()
+{
+    oscillopscope->osciStop();
+}
+void MainWindow::on_pushButtonOsciReset_released()
+{
+    oscillopscope->osciReset();
+}

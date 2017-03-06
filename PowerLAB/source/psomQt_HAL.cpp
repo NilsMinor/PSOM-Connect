@@ -1,5 +1,11 @@
 #include "psomQt_HAL.h"
 
+bool linuxOS = false;
+
+#ifdef Q_OS_LINUX
+    linuxOS = true;
+#endif
+
 PSOM_HAL::PSOM_HAL (uint8_t _subID) {
     readRegisterState = false;
     subID = _subID;
@@ -76,7 +82,7 @@ void        PSOM_HAL::readRegister          (uint16_t _regAddrStart, uint16_t _r
 
         fillDebugPacketInfo(psomMessage, nReg);
 
-        qDebug() << "send read request " << " " << psomMessage.toHex();
+       // qDebug() << "send read request " << " " << psomMessage.toHex();
         ptr_SerialPortHandler->write(psomMessage);
     }
 }
@@ -113,7 +119,7 @@ PSOM_State  PSOM_HAL::unpackStateFromPacket (QByteArray dataPtr)
 
     return (PSOM_State) PSOMMemoryModifier.uint32Data;
 }
-uint8_t     PSOM_HAL::calculateChecksum     (QByteArray dataPtr, uint32_t payloadLength) {
+uint8_t    PSOM_HAL::calculateChecksum     (QByteArray dataPtr, uint32_t payloadLength) {
     uint32_t sumOfBytes = 0;
     for (uint16_t i = POS_SUB_ID; i < payloadLength; i++) {
         sumOfBytes += dataPtr[i];
@@ -154,7 +160,7 @@ void        PSOM_HAL::fillDebugPacketInfo   (QByteArray data, uint8_t regCount)
 void        PSOM_HAL::analyseIncomingReadData(QByteArray data)
 {
     // read regsiters
-    if (data.length() == (regCountToRead * BYTE_COUNT + 3)) {
+    if (data.length() >= (regCountToRead * BYTE_COUNT + 3)) {
         if ((uint8_t)data[POS_DATA_COUNT] == regCountToRead) {
             uint32_t * tempBuffer = new uint32_t[regCountToRead];   // generate new buffer
 
@@ -172,6 +178,8 @@ void        PSOM_HAL::analyseIncomingReadData(QByteArray data)
                 tempBuffer[tempBufferDataCounter++] = PSOMMemoryModifier.uint32Data;
             }
 
+            if (linuxOS) uartRxBuffer.clear();
+
             emit newPSOMData (tempBuffer, tempBufferDataCounter);
             emit statusBarInfo("HAL::Received " + QString::number(tempBufferDataCounter) + " Bytes of data");
         }
@@ -182,8 +190,11 @@ void        PSOM_HAL::analyseIncomingReadData(QByteArray data)
 }
 void        PSOM_HAL::recvNewSerialData()
 {
-    if (ptr_SerialPortHandler != NULL) {
-        newSerialDataHandler(ptr_SerialPortHandler->readAll());
+    if (ptr_SerialPortHandler != NULL) {      
+        if (linuxOS)
+            newSerialDataHandlerLinux(ptr_SerialPortHandler->readAll());
+        else
+            newSerialDataHandler(ptr_SerialPortHandler->readAll());
     }
 }
 
@@ -195,6 +206,7 @@ void        PSOM_HAL::newSerialDataHandler (QByteArray data)
     if (str.contains("ERR")) {
         qDebug() << str;
     }
+    //qDebug() << data;
 
     if ((uint8_t)data[POS_SYNC_HEADER] == 0xAA) {
         if (readRegisterState == true) {
@@ -205,6 +217,33 @@ void        PSOM_HAL::newSerialDataHandler (QByteArray data)
             emit stateChanged();
         }
         emit psomAnswered ();
+    }
+    else {
+       // qDebug() << data.toHex();
+        emit statusBarInfo("HAL::Received Serial data is out of snyc");
+    }
+}
+void        PSOM_HAL::newSerialDataHandlerLinux (QByteArray data)
+{
+    QString str(data.constData());
+
+    if (str.contains("ERR")) {
+        qDebug() << str;
+    }
+
+    uartRxBuffer.append(data);
+    if ((uint8_t)  uartRxBuffer[POS_SYNC_HEADER] == 0xAA) {
+        if (readRegisterState == true) {
+            analyseIncomingReadData (uartRxBuffer);
+        }
+        else {
+            state = unpackStateFromPacket(data);
+            emit stateChanged();
+        }
+        emit psomAnswered ();
+    }
+    else if (data.length() > 100 ) {
+        uartRxBuffer.clear();
     }
     else {
         emit statusBarInfo("HAL::Received Serial data is out of snyc");

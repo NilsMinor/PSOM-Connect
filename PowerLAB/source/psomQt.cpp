@@ -21,9 +21,6 @@ PSOM::PSOM  (uint8_t _subID )
     connect (psom_hal, SIGNAL(statusBarInfo(QString)), this, SLOT(statusBarInfoHandler(QString)));
     connect (psom_hal, SIGNAL(psomAnswered()), this, SLOT(psomAnswered()));
     m_timer = NULL;
-    m_selection = PSOM_SEL_ALL;
-    dio_dir     = PSOM_DIO_ALL_INPUTS;
-    dio_state   = 0;
     psom_answered = false;
     harmonicMeasurmentState = false;
 }
@@ -39,9 +36,6 @@ PSOM::PSOM  (uint8_t _subID, QSerialPort *_ptr_SerialPortHandler)
     connect (psom_hal, SIGNAL(newPSOMData(uint32_t*,int&)),this,SLOT(assignEntirePSOMData(uint32_t*,int&)));
     connect (psom_hal, SIGNAL(psomAnswered()), this, SLOT(psomAnswered()));
     m_timer = NULL;
-    m_selection = PSOM_SEL_ALL;
-    dio_dir     = PSOM_DIO_ALL_INPUTS;
-    dio_state   = 0;
     psom_answered = false;
     harmonicMeasurmentState = false;
 }
@@ -63,6 +57,11 @@ PSOM::~PSOM ( )
 void        PSOM::setSerialConnectionHandler (QSerialPort *_ptr_SerialPortHandler)
 {
     psom_hal->setSerialConnectionHandler(_ptr_SerialPortHandler);
+}
+
+void PSOM::sendSCMD(uint32_t scmd)
+{
+    psom_hal->writeRegister(PSOM_SCOMMAND, scmd, false);
 }
 /**
  * \brief   starts the periodic measurment timer with an interval
@@ -105,38 +104,6 @@ float       PSOM::toFloat(uint32_t value) // restructing memory by a union
     return memory.floatData;
 }
 
-void        PSOM::setDIODir (int pin, int dir) {
-
-    if (dir == PSOM_DIO_INPUT) mset_bit(dio_dir, pin);
-    else if (dir == PSOM_DIO_OUTPUT) mclear_bit(dio_dir, pin) ;
-
-    psom_hal->writeRegister(PSOM_ISO_GPIO_DIR, dio_dir, false);
-}
-void        PSOM::setDIO  (int pin, int state) {
-
-    if (state == PSOM_DIO_HIGH) mset_bit(dio_state, pin);
-    else if (state == PSOM_DIO_LOW)  mclear_bit(dio_state, pin) ;
-
-    qDebug()  << "State to send = " << state << "for pin " << pin << endl;
-    psom_hal->writeRegister(PSOM_ISO_GPIO_STATE, dio_state, false);
-}
-int         PSOM::getDIO  (int pin) {
-    // maybe read it back
-    return (dio_state >> pin) & 1;
-}
-
-void        PSOM::selectMeasurement (uint32_t selection, bool state)
-{
-    if (state == true)
-        m_selection |=  (1u << selection);
-    else
-        m_selection &= ~(1u << selection);
-
-    QString myStringOfBits( QString::number( m_selection, 2 ) );
-
-
-    qDebug() << myStringOfBits << selection << state ;
-}
 
 void PSOM::setHarmonicsCount(int count)
 {
@@ -145,7 +112,6 @@ void PSOM::setHarmonicsCount(int count)
         psom_hal->writeRegister(PSOM_SCOMMAND_VALUE, harmonicsCount, false);
     }
 }
-
 void PSOM::startHarmonicsScan(HarmonicType type)
 {
     if (type == VoltageHarmonics) {
@@ -153,7 +119,6 @@ void PSOM::startHarmonicsScan(HarmonicType type)
     }
     harmonicMeasurmentState = true;
 }
-
 void PSOM::stopHarmonicsScan()
 {
     harmonicMeasurmentState = false;
@@ -240,16 +205,17 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
         m_data.L3.energy.cost = toFloat(data[L3_ENERGY_COST/4]);
 
         if (harmonicMeasurmentState) {
-            float * harmonicData = new float [harmonicsCount];
-            for (int i=0; i!= harmonicsCount; i++) {
-                harmonicData[i] = toFloat (data[ (TEMP_HARM1 / 4) + i]);
+            actualHarmonic = data[ (PSOM_ACTIVE_HARM/4)];
 
-                //qDebug() << "H" << i << data[ (TEMP_HARM1 / 4) + i];
+            for (int i=0; i!= harmonicsCount; i++) {
+                m_data.L1.harmonic.contentL1[ i ] = toFloat (data[ (HARM_L1_H1 / 4) + i]);
+                m_data.L2.harmonic.contentL2[ i ] = toFloat (data[ (HARM_L2_H1 / 4) + i]);
+                m_data.L3.harmonic.contentL3[ i ] = toFloat (data[ (HARM_L3_H1 / 4) + i]);
+               // qDebug() << "H" << i << data[ (HARM_L2_H1 / 4) + i];
             }
 
-            emit newHarmonicsData(harmonicData, m_data.frequency, harmonicsCount);
+            emit newHarmonicsData(m_data.L1.harmonic.contentL1, m_data.frequency, harmonicsCount, actualHarmonic);
 
-            free (harmonicData);
         }
 
         m_data.circulationTime = elapsedTimer.elapsed();
@@ -257,15 +223,6 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
 
         elapsedTimer.restart();
         emit newPSOMData();
-    }
-
-    if (triggerHarmonics) {
-
-        for (int i=0;i!=10;i++) {
-            qDebug () << toFloat(data[i]) << " V";
-        }
-
-        //triggerHarmonics = false;
     }
 }
 

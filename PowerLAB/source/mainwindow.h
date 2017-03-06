@@ -86,6 +86,7 @@ private:
     mDataHandler        *L3Data;
     mDataHandler        *LTData;
     mDataHandler        *HData;
+    mDataHandler        *Common;
 
 private slots:
     void openSerialPort();
@@ -101,37 +102,22 @@ private slots:
     void on_pushButtonStartMeasurment_released();
     void on_pushButtonStopMeasurment_released();
 
-    void on_cBSelectAll_toggled(bool checked);
-    void on_cBTemperature_toggled(bool checked);
-    void on_cBFrequency_toggled(bool checked);
-    void on_cBInstVoltage_toggled(bool checked);
-    void on_cBRMSVoltage_toggled(bool checked);
-    void on_cBInstCurrent_toggled(bool checked);
-    void on_cBRMSCurrent_toggled(bool checked);
-    void on_cBFundamentalTHD_toggled(bool checked);
-    void on_cBActivePower_toggled(bool checked);
-    void on_cBReactivePower_toggled(bool checked);
-    void on_cBApparentPower_toggled(bool checked);
-    void on_cBPowerFactor_toggled(bool checked);
-    void on_cBEnergy_toggled(bool checked);
-    void on_cBDIO1_released();
-    void on_cBDIO2_released();
-    void on_cBDIO3_released();
-    void on_cBDIO4_released();
-    void on_cBDIO5_released();
-    void on_cBDIO6_released();
-    void on_pBUpdateDirAllOutput_released();
-    void on_pBUpdateDirAllInput_released();
-    void on_pushButtonVersion_released();
     void on_pBStartHarmonics_released();
     void on_cBHarmonicsType_currentIndexChanged(const QString &arg1);
     void on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1);
-    void on_tabWidget_currentChanged(int index);
     void on_pBSetHarmonicsCount_released();
 
     void handleActionOscilloscope (void);
     void handleActionHarmonics (void);
     void on_pBTriggerHarmonics_released();
+    void on_pBClearEnergyL1_released();
+    void on_pBClearEnergyL2_released();
+    void on_pBClearEnergyL3_released();
+    void on_pBClearEnergyLT_released();
+    void on_comboBoxCirculationFreq_currentIndexChanged(int index);
+    void on_pushButtonOsciStart_released();
+    void on_pushButtonOsciStop_released();
+    void on_pushButtonOsciReset_released();
 };
 
 #endif // MAINWINDOW_H

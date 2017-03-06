@@ -22,11 +22,12 @@ public:
     bool setData (QString keyName, float data);
     bool setData (QString keyName, float data, float target);
     void setAccuracy (int accuracy);
+    int getCount (void);
+    QStringList getPrettyName (void);
 
 private:
     QMap <QString, mData*> m_dataMap;
-
-
+    QStringList m_pretty_name;
     QVBoxLayout *m_layout;
 
 

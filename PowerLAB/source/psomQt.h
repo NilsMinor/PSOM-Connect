@@ -66,7 +66,7 @@
 #include <QElapsedTimer>
 #include <QThread>
 #include "psomQt_HAL.h"
-
+#define HARM_QUANTITY				11
 
 enum HarmonicType {
     VoltageHarmonics = 1,
@@ -101,11 +101,18 @@ struct PSOM_Energy {
     float reactive;
     float cost;
 };
+struct PSOM_Harmonics {
+    float contentL1 [HARM_QUANTITY] = {0};
+    float contentL2 [HARM_QUANTITY] = {0};
+    float contentL3 [HARM_QUANTITY] = {0};
+};
+
 struct PSOM_phases {
     PSOM_Voltage voltage;
     PSOM_Current current;
     PSOM_Power  power;
     PSOM_Energy energy;
+    PSOM_Harmonics harmonic;
 };
 
 struct PSOM_measurement_data {
@@ -118,6 +125,7 @@ struct PSOM_measurement_data {
     float processor_temperature;
     float circulationTime;
     float circulationFrequency;
+    uint32_t uuid [4];
 };
 
 class PSOM : public QObject
@@ -137,17 +145,13 @@ public:
     PSOM_measurement_data   getData (void) { return m_data; }                       //! returns the data structure,
     PSOM_DebugPacketInfo    getDebugPacketInfo (void) { return psom_hal->getDebugPacketInfo(); }    //! returns debug packet with information about the low level packet
     PSOM_State              getState (void) { return psom_hal->getState(); }        //! returns the module state
+    void                        sendSCMD (uint32_t scmd);
 
     //! FUNCTIONS
     void        startMeasurement (int intervalTime);    //! start the measurment timer
     void        stopMeasurement  (void);                //! stop the measurement timer
     float       toFloat (uint32_t value);               //! interprets the psom uin32 data to it's respective float value
 
-    void        setDIODir (int pin, int dir);
-    void        setDIO  (int pin, int state);
-    int         getDIO  (int pin);
-
-    void        selectMeasurement (uint32_t selection, bool state);
     void        setHarmonicsCount (int count);
     void        startHarmonicsScan (HarmonicType type);
     void        stopHarmonicsScan (void);
@@ -157,13 +161,11 @@ private:
     QTimer                  * m_timer;                  //! measurment timer
     PSOM_measurement_data   m_data;                     //! PSOM data structure
     PSOM_HAL                * psom_hal;                 //! pointer to abstraction layer for psom communication
-    uint32_t                m_selection;
-    uint32_t                dio_dir;
-    uint32_t                dio_state;
     bool                    psom_answered;
     QString                 fw_version;
     bool                    harmonicMeasurmentState;
     int                     harmonicsCount;
+    int                     actualHarmonic;
 
 private slots:
     void        m_timerTimeout (void);                                             //! timeout for measurment timer (periodic)
@@ -175,7 +177,7 @@ signals:
     void        statusBarInfo   (QString information);
     void        stateChanged    (void);                                             //! signal is fired on every state change of the module
     void        newPSOMData     (void);                                             //! signal is fired when every new data is available
-    void        newHarmonicsData(float *data, float freq, int count);
+    void        newHarmonicsData(float *data, float freq, int count, int active);
 };
 
 #endif // PSOM_H

@@ -43,8 +43,8 @@ private:
     qOsciSignal     * testSig1;
     qOsciSignal     * testSig2;
     void    initAsOsci      (void);
+
     void    initAsHarmonics (void);
-    QTableWidget            * harmonicsTable;
     OsciType                osciType;
     OsciHarmAxisStyle       harmonicsAxisStyle;
     OsciVerticalAxisStyle   verticalAxisStyle;
@@ -52,18 +52,22 @@ private:
 
 public:
     explicit qOsci (QWidget *parent = 0, OsciType type = OfTypeOsci);
-    QWidget         *getScreenWidget (void) { return screenWidget; }
+    QWidget      *getScreenWidget (void) { return screenWidget; }
     void            setScreenSize (QSize _screenSize);
-    void            setTableWidgetForHarmonics (QTableWidget * t);
     void            setHarmonicsAxisStyle (OsciHarmAxisStyle style);
     void            setVerticalAxisStyle (OsciVerticalAxisStyle style);
+
+    void            osciStart (void);
+    void            osciStop (void);
+    void            osciReset (void);
 
 signals:
 
 public slots:
-    void            setHarmonics (float *data, float freq, int count);
+    void            setHarmonics (float *data, float freq, int count, int active);
 private slots:
     void update_osci (void);
+    void realtimeDataSlot (void);
 };
 
 #endif // QOSCI_H

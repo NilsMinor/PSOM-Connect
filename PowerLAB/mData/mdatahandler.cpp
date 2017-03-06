@@ -13,8 +13,8 @@ mDataHandler::mDataHandler(QWidget *parent) : QWidget(parent), m_layout (NULL)
 
 void mDataHandler::add(QString nameStr, QString unitStr)
 {
-    mData * m = new mData (NULL ,nameStr, unitStr);
-
+    mData * m = new mData (NULL , nameStr, unitStr);
+    m_pretty_name.append(nameStr);
     m_dataMap.insert(nameStr,m);
 
     if (m_layout != NULL) {
@@ -54,4 +54,14 @@ void mDataHandler::setAccuracy(int accuracy)
         m_dataIter.next();
         m_dataIter.value()->setAccuracy(accuracy);
     }
+}
+
+int mDataHandler::getCount()
+{
+    return m_dataMap.count();
+}
+
+QStringList mDataHandler::getPrettyName()
+{
+    return m_pretty_name;
 }

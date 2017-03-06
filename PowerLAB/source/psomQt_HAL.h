@@ -44,6 +44,7 @@ private:
     PSOM_State              state;                      //! state of the module
     bool                    readRegisterState;          //! true if read register was triggered
     uint16_t                regCountToRead;             //! saves the register count for read operation
+    QByteArray          uartRxBuffer;
 
     //! INTERNAL HELPER FUNCTIONS
     PSOM_State  unpackStateFromPacket   (QByteArray dataPtr);
@@ -60,6 +61,8 @@ signals:
 private slots:
     void        recvNewSerialData (void);
     void        newSerialDataHandler (QByteArray data);
+    void        newSerialDataHandlerLinux (QByteArray data);
+
 public slots:
 
 };
