@@ -36,29 +36,24 @@
 #include "mainwindow.h"
 #include <QSplashScreen>
 #include <QTimer>
-//
 
-#define STARTUP_TIME    1000
+
+#define GUI_STARTUP_TIME    500
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-
-    QPixmap pixmap(":/images/PSOM_Splashscreen.jpeg");
-
-
-    QSplashScreen splash(pixmap);
-
-    splash.show();
-    splash.setAttribute(Qt::WA_TranslucentBackground);
-
-    splash.showMessage("Nils Minor ® 2017 ");
-
     MainWindow w;
+    QPixmap pixmap(":/images/PSOM_Splashscreen/PSOM_Splashscreen.001.jpeg");
+    QSplashScreen splash(pixmap);
+    splash.show();
 
-    QTimer::singleShot(STARTUP_TIME, &splash, SLOT( close() ) );
-    QTimer::singleShot(STARTUP_TIME, &w, SLOT( show() ) );
+    splash.showMessage("Nils Minor ® 2017, running on " + QSysInfo::prettyProductName() + " " + QSysInfo::currentCpuArchitecture());
+
+
+    QTimer::singleShot(GUI_STARTUP_TIME, &splash, SLOT( close() ) );
+    QTimer::singleShot(GUI_STARTUP_TIME, &w, SLOT( show() ) );
 
     //w.move(0,0);
 

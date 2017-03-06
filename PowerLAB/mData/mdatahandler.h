@@ -3,12 +3,32 @@
 
 #include <QObject>
 #include <QWidget>
+#include <QString>
+#include <QDebug>
+#include <QVBoxLayout>
+#include <QMap>
+#include <QMapIterator>
+#include "mdata.h"
+
 
 class mDataHandler : public QWidget
 {
     Q_OBJECT
 public:
     explicit mDataHandler(QWidget *parent = 0);
+    void add (QString nameStr, QString unitStr);
+    void print (void);
+    QWidget getWidget (void);
+    bool setData (QString keyName, float data);
+    bool setData (QString keyName, float data, float target);
+    void setAccuracy (int accuracy);
+
+private:
+    QMap <QString, mData*> m_dataMap;
+
+
+    QVBoxLayout *m_layout;
+
 
 signals:
 

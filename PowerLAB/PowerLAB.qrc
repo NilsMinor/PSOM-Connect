@@ -9,7 +9,6 @@
         <file>images/osci.png</file>
         <file>images/stop.png</file>
         <file>images/start.png</file>
-        <file>images/PSOM_Splashscreen.jpeg</file>
-        <file>images/PSOM_Splashscreen.png</file>
+        <file>images/PSOM_Splashscreen/PSOM_Splashscreen.001.jpeg</file>
     </qresource>
 </RCC>

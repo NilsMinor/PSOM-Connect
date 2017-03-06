@@ -27,7 +27,9 @@ SOURCES += \
     source/guihandler.cpp \
     qOsci/qosci.cpp \
     qOsci/qoscisignal.cpp \
-    qOsci/qcustomplot.cpp
+    qOsci/qcustomplot.cpp \
+    mData/mdata.cpp \
+    mData/mdatahandler.cpp
 
 
 HEADERS += \
@@ -39,7 +41,9 @@ HEADERS += \
     source/psomQt_HAL.h \
     qOsci/qosci.h \
     qOsci/qoscisignal.h \
-    qOsci/qcustomplot.h
+    qOsci/qcustomplot.h \
+    mData/mdata.h \
+    mData/mdatahandler.h
 
 FORMS += \
     gui/mainwindow.ui \

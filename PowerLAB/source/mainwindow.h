@@ -42,7 +42,7 @@
 #include <QHeaderView>
 #include "psomQt.h"
 #include "qOsci/qosci.h"
-
+#include "mData/mdatahandler.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -81,7 +81,11 @@ private:
     QSerialPort         *serial;
     qOsci               *oscillopscope;
     qOsci               *harmonics;
-
+    mDataHandler        *L1Data;
+    mDataHandler        *L2Data;
+    mDataHandler        *L3Data;
+    mDataHandler        *LTData;
+    mDataHandler        *HData;
 
 private slots:
     void openSerialPort();
