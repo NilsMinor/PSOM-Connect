@@ -35,6 +35,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
+
 #include <QtCore/QtGlobal>
 #include <QtSerialPort/qserialport.h>
 #include <QMainWindow>

@@ -1,10 +1,12 @@
 #include "psomQt_HAL.h"
 
-bool linuxOS = false;
 
 #ifdef Q_OS_LINUX
-    linuxOS = true;
+    bool linuxOS = true;
+#else
+    bool linuxOS = false;
 #endif
+
 
 PSOM_HAL::PSOM_HAL (uint8_t _subID) {
     readRegisterState = false;

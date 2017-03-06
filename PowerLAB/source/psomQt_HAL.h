@@ -1,10 +1,15 @@
 #ifndef PSOM_HAL_H
 #define PSOM_HAL_H
 
+
+
 #include <QObject>
 #include <QDebug>
 #include <QtSerialPort/QSerialPort>
 #include "PSOMRegsiter.h"
+#include <stdint.h>
+
+
 
 #define BYTE_COUNT 4
 struct PSOM_DebugPacketInfo {

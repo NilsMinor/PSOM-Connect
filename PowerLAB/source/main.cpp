@@ -49,11 +49,18 @@ int main(int argc, char *argv[])
     QSplashScreen splash(pixmap);
     splash.show();
 
-    splash.showMessage("Nils Minor ® 2017, running on " + QSysInfo::prettyProductName() + " " + QSysInfo::currentCpuArchitecture());
-
+    #ifdef Q_OS_LINUX
+         splash.showMessage("Nils Minor ® 2017, running on Linux);
+    #else
+        splash.showMessage("Nils Minor ® 2017, running on " + QSysInfo::prettyProductName() + " " + QSysInfo::currentCpuArchitecture());
+    #endif
 
     QTimer::singleShot(GUI_STARTUP_TIME, &splash, SLOT( close() ) );
-    QTimer::singleShot(GUI_STARTUP_TIME, &w, SLOT( show() ) );
+    #ifdef Q_OS_LINUX
+        QTimer::singleShot(GUI_STARTUP_TIME, &w, SLOT( showMinimized()) ) );
+     #else
+        QTimer::singleShot(GUI_STARTUP_TIME, &w, SLOT( show() ) );
+    #endif
 
     //w.move(0,0);
 

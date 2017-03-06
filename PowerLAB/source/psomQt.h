@@ -59,6 +59,7 @@
  *
  */
 
+
 #include <QObject>
 #include <QDebug>
 #include <QTimer>
@@ -66,6 +67,10 @@
 #include <QElapsedTimer>
 #include <QThread>
 #include "psomQt_HAL.h"
+#include <stdint.h>
+
+
+
 #define HARM_QUANTITY				11
 
 enum HarmonicType {
