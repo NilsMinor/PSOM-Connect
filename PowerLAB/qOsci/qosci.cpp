@@ -166,11 +166,11 @@ void qOsci::initAsHarmonics (void) {
    // customPlot->yAxis->setRange(0, 2);
 
     // add label for group tracer:
-    QCPItemText *groupTracerText = new QCPItemText(customPlot);
+    groupTracerText = new QCPItemText(customPlot);
     groupTracerText->position->setType(QCPItemPosition::ptAxisRectRatio);
     groupTracerText->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     groupTracerText->position->setCoords(1.0, 0); // lower right corner of axis rect
-    //groupTracerText->setText("Fixed positions in\nwave packet define\ngroup velocity vg");
+    groupTracerText->setText("Harmonic =  1");
     groupTracerText->setTextAlignment(Qt::AlignLeft);
     groupTracerText->setFont(QFont(font().family(), 16));
     groupTracerText->setColor(QColor(Qt::red));
@@ -182,26 +182,26 @@ void qOsci::setHarmonics(float *data, float freq, int count, int active) {
     int max = 0;
     bool showFrequency = true;
     QVector<double> x(size), y(size),  frequency(count);
-    qDebug() << active;
+
+    groupTracerText->setText("Harmonic = " + QString::number(active));
+
+    if (data[0] != 0)   // only update when new data comes
+    {
     int dataCounter = 0;
     for (int i= 0; i!= size -1; i++) {
         x[i] = i;
         if (i%2 == 0) {
-            // add data
-            y[i] = data[dataCounter];
-            // If there is a table, add data to it
 
+            y[i] = data[dataCounter];    // add data
             // find max value
-            if (y[i] > max) max = y[i];
+            if (y[i] > max)
+                max = y[i];
 
-            // calculate frequency
-            frequency[dataCounter] = freq * (i+1);
-
-            // increment data counter
-            dataCounter++;
+            frequency[dataCounter] = freq * (i+1);  // calculate frequency
+            dataCounter++; // increment data counter
         }
         else {
-            y[i] = 1;
+            y[i] = 0;
         }
     }
 
@@ -228,8 +228,8 @@ void qOsci::setHarmonics(float *data, float freq, int count, int active) {
     textTicker->addTicks(ticks, labels);
     customPlot->xAxis->setTicker(textTicker);
     customPlot->xAxis->setTickLabelFont(QFont(font().family(),10));
-
-    customPlot->replot();
+    }
+   customPlot->replot();
 }
 void qOsci::setHarmonicsAxisStyle(OsciHarmAxisStyle style)
 {

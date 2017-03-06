@@ -46,6 +46,15 @@
 #include "qOsci/qosci.h"
 #include "mData/mdatahandler.h"
 
+#define TAB_PANEL                   1
+#define TAB_SCOPE                 2
+#define TAB_HARMONICS         3
+#define TAB_LOGGING              4
+#define TAB_QWT500               5
+#define TAB_EVSE                    6
+#define TAB_CALIBRATION       7
+
+
 QT_BEGIN_NAMESPACE
 
 class QLabel;
@@ -67,8 +76,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-
+    void rpiStartup (void);
 
 private:
     void initActionsConnections();
@@ -120,6 +128,15 @@ private slots:
     void on_pushButtonOsciStart_released();
     void on_pushButtonOsciStop_released();
     void on_pushButtonOsciReset_released();
+    void on_pushButtonPanel_released();
+    void on_pushButtonScope_released();
+    void on_pushButtonHarmonics_released();
+    void on_pushButtonLogging_released();
+    void on_QWT500_released();
+    void on_pushButtonCalibration_released();
+    void on_pushButtonInformation_released();
+    void on_pushButtonExit_released();
+    void on_pushButtonEVSE_released();
 };
 
 #endif // MAINWINDOW_H

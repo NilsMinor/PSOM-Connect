@@ -31,6 +31,17 @@ enum OsciVerticalAxisStyle {
 class qOsci : public QWidget
 {
     Q_OBJECT
+public:
+    explicit qOsci (QWidget *parent = 0, OsciType type = OfTypeOsci);
+    QWidget      *getScreenWidget (void) { return screenWidget; }
+    void            setScreenSize (QSize _screenSize);
+    void            setHarmonicsAxisStyle (OsciHarmAxisStyle style);
+    void            setVerticalAxisStyle (OsciVerticalAxisStyle style);
+
+    void            osciStart (void);
+    void            osciStop (void);
+    void            osciReset (void);
+
 private:
     QCustomPlot     *customPlot;
     QTimer          *osciTimer;
@@ -48,18 +59,8 @@ private:
     OsciType                osciType;
     OsciHarmAxisStyle       harmonicsAxisStyle;
     OsciVerticalAxisStyle   verticalAxisStyle;
+    QCPItemText *groupTracerText ;
 
-
-public:
-    explicit qOsci (QWidget *parent = 0, OsciType type = OfTypeOsci);
-    QWidget      *getScreenWidget (void) { return screenWidget; }
-    void            setScreenSize (QSize _screenSize);
-    void            setHarmonicsAxisStyle (OsciHarmAxisStyle style);
-    void            setVerticalAxisStyle (OsciVerticalAxisStyle style);
-
-    void            osciStart (void);
-    void            osciStop (void);
-    void            osciReset (void);
 
 signals:
 

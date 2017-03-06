@@ -107,7 +107,7 @@ float       PSOM::toFloat(uint32_t value) // restructing memory by a union
 
 void PSOM::setHarmonicsCount(int count)
 {
-    if (count >= 1 && count <= 20) {
+    if (count >= 1 && count <= HARM_QUANTITY) {
         harmonicsCount = count;
         psom_hal->writeRegister(PSOM_SCOMMAND_VALUE, harmonicsCount, false);
     }
@@ -117,6 +117,16 @@ void PSOM::startHarmonicsScan(HarmonicType type)
     if (type == VoltageHarmonics) {
         psom_hal->writeRegister(PSOM_SCOMMAND, PSOM_SCMD_HARM_V, false);
     }
+    else if (type == CurrentHarmonics) {
+        psom_hal->writeRegister(PSOM_SCOMMAND, PSOM_SCMD_HARM_I, false);
+    }
+    else if (type == PPowerHarmonics) {
+        psom_hal->writeRegister(PSOM_SCOMMAND, PSOM_SCMD_HARM_P, false);
+    }
+    else if (type == QPowerHarmonics) {
+        psom_hal->writeRegister(PSOM_SCOMMAND, PSOM_SCMD_HARM_Q, false);
+    }
+
     harmonicMeasurmentState = true;
 }
 void PSOM::stopHarmonicsScan()
@@ -213,7 +223,6 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
                 m_data.L3.harmonic.contentL3[ i ] = toFloat (data[ (HARM_L3_H1 / 4) + i]);
                // qDebug() << "H" << i << data[ (HARM_L2_H1 / 4) + i];
             }
-
             emit newHarmonicsData(m_data.L1.harmonic.contentL1, m_data.frequency, harmonicsCount, actualHarmonic);
 
         }

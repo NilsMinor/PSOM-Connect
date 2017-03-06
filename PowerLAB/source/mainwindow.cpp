@@ -178,7 +178,6 @@ void MainWindow::openSerialPort() {
     else {
         testModule->setSerialConnectionHandler(NULL);
         QMessageBox::critical(this, tr("Error"), serial->errorString());
-
     }
 }
 void MainWindow::closeSerialPort() {
@@ -247,6 +246,35 @@ void MainWindow::sendCommand(QByteArray cmd, double value) {
    msg.append(QByteArray::number(value));
    msg.append(";");
    serial->write(msg);
+}
+
+void MainWindow::rpiStartup()
+{
+    ui->mainToolBar->hide();
+    ui->toolBar->hide();
+
+    // connect to fixed comport
+    serial->setPortName("/dev/ttyAMA0");
+    serial->setBaudRate(QSerialPort::Baud115200);
+    serial->setDataBits(QSerialPort::Data8);
+    serial->setParity(QSerialPort::OddParity);
+    serial->setStopBits(QSerialPort::OneStop);
+    serial->setFlowControl(QSerialPort::NoFlowControl);
+
+    if (serial->open(QIODevice::ReadWrite)) {
+        console->setEnabled(true);
+        console->setLocalEchoEnabled(false);
+        ui->actionConnect->setEnabled(false);
+        ui->actionDisconnect->setEnabled(true);
+        ui->actionConfigure->setEnabled(false);
+
+        testModule->setSerialConnectionHandler(serial);
+        this->on_pushButtonStartMeasurment_released();
+    }
+    else {
+        testModule->setSerialConnectionHandler(NULL);
+        QMessageBox::critical(this, tr("Error can not connect to COM Port"), serial->errorString());
+    }
 }
 
 // PSOM functions and callback
@@ -337,9 +365,7 @@ void MainWindow::on_pBStartHarmonics_released()
 }
 void MainWindow::on_cBHarmonicsType_currentIndexChanged(const QString &arg1)
 {
-    if (arg1 == "Voltage") {
-        harmonics->setVerticalAxisStyle(VoltageAxisStyle);
-    }
+    if (arg1 == "Voltage") { harmonics->setVerticalAxisStyle(VoltageAxisStyle);  }
     else if  (arg1 == "Current")            { harmonics->setVerticalAxisStyle(CurrentAxisStyle); }
     else if  (arg1 == "Active Power")       { harmonics->setVerticalAxisStyle(PPowerAxisStyle); }
     else if  (arg1 == "Reactive Power")     { harmonics->setVerticalAxisStyle(QPowerAxisStyle); }
@@ -353,13 +379,28 @@ void MainWindow::on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1
 }
 void MainWindow::on_pBSetHarmonicsCount_released()
 {
-
     int count = ui->cBHarmonicsCount->currentText().toInt();
     testModule->setHarmonicsCount(count);
 }
 void MainWindow::on_pBTriggerHarmonics_released()
 {
-    testModule->startHarmonicsScan(VoltageHarmonics);
+    switch (ui->cBHarmonicsType->currentIndex()) {
+    case 0:
+         testModule->startHarmonicsScan(VoltageHarmonics);
+        break;
+    case 1:
+         testModule->startHarmonicsScan(CurrentHarmonics);
+        break;
+    case 2:
+         testModule->startHarmonicsScan(PPowerHarmonics);
+        break;
+    case 3:
+         testModule->startHarmonicsScan(QPowerHarmonics);
+        break;
+    default:
+        break;
+    }
+
 }
 
 void MainWindow::on_pBClearEnergyL1_released()
@@ -386,7 +427,6 @@ void MainWindow::on_comboBoxCirculationFreq_currentIndexChanged(int index)
     qDebug() << "Change circulation frequency";
     testModule->startMeasurement(1000/ui->comboBoxCirculationFreq->currentText().toInt());
 }
-
 void MainWindow::on_pushButtonOsciStart_released()
 {
    oscillopscope->osciStart();
@@ -399,3 +439,42 @@ void MainWindow::on_pushButtonOsciReset_released()
 {
     oscillopscope->osciReset();
 }
+
+void MainWindow::on_pushButtonPanel_released()
+{
+    ui->tabWidget->setCurrentIndex(TAB_PANEL);
+}
+void MainWindow::on_pushButtonScope_released()
+{
+    ui->tabWidget->setCurrentIndex(TAB_SCOPE);
+}
+void MainWindow::on_pushButtonHarmonics_released()
+{
+    ui->tabWidget->setCurrentIndex(TAB_HARMONICS);
+}
+void MainWindow::on_pushButtonLogging_released()
+{
+    ui->tabWidget->setCurrentIndex(TAB_LOGGING);
+}
+void MainWindow::on_QWT500_released()
+{
+    ui->tabWidget->setCurrentIndex(TAB_QWT500);
+}
+void MainWindow::on_pushButtonCalibration_released()
+{
+    ui->tabWidget->setCurrentIndex(TAB_CALIBRATION);
+}
+void MainWindow::on_pushButtonEVSE_released()
+{
+    ui->tabWidget->setCurrentIndex(TAB_EVSE);
+}
+void MainWindow::on_pushButtonInformation_released()
+{
+
+}
+void MainWindow::on_pushButtonExit_released()
+{
+    QCoreApplication::quit();
+}
+
+

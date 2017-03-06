@@ -50,14 +50,15 @@ int main(int argc, char *argv[])
     splash.show();
 
     #ifdef Q_OS_LINUX
-         splash.showMessage("Nils Minor ® 2017, running on Linux);
+         splash.showMessage("Nils Minor ® 2017, running on Linux");
     #else
         splash.showMessage("Nils Minor ® 2017, running on " + QSysInfo::prettyProductName() + " " + QSysInfo::currentCpuArchitecture());
     #endif
 
     QTimer::singleShot(GUI_STARTUP_TIME, &splash, SLOT( close() ) );
     #ifdef Q_OS_LINUX
-        QTimer::singleShot(GUI_STARTUP_TIME, &w, SLOT( showMinimized()) ) );
+        QTimer::singleShot(GUI_STARTUP_TIME, &w, SLOT( showMaximized() ) );
+        w.rpiStartup( );
      #else
         QTimer::singleShot(GUI_STARTUP_TIME, &w, SLOT( show() ) );
     #endif
