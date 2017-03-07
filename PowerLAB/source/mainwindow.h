@@ -42,9 +42,11 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QHeaderView>
+#include <QMessageBox>
 #include "psomQt.h"
 #include "qOsci/qosci.h"
 #include "mData/mdatahandler.h"
+#include "mData/mdatalogger.h"
 
 #define TAB_PANEL                   1
 #define TAB_SCOPE                 2
@@ -97,6 +99,7 @@ private:
     mDataHandler        *LTData;
     mDataHandler        *HData;
     mDataHandler        *Common;
+    mDataLogger         logger;
 
 private slots:
     void openSerialPort();
@@ -137,6 +140,7 @@ private slots:
     void on_pushButtonInformation_released();
     void on_pushButtonExit_released();
     void on_pushButtonEVSE_released();
+    void on_pushButtonStartLogging_released();
 };
 
 #endif // MAINWINDOW_H

@@ -29,7 +29,8 @@ SOURCES += \
     qOsci/qoscisignal.cpp \
     qOsci/qcustomplot.cpp \
     mData/mdata.cpp \
-    mData/mdatahandler.cpp
+    mData/mdatahandler.cpp \
+    mData/mdatalogger.cpp
 
 
 HEADERS += \
@@ -43,7 +44,8 @@ HEADERS += \
     qOsci/qoscisignal.h \
     qOsci/qcustomplot.h \
     mData/mdata.h \
-    mData/mdatahandler.h
+    mData/mdatahandler.h \
+    mData/mdatalogger.h
 
 FORMS += \
     gui/mainwindow.ui \
@@ -51,3 +53,5 @@ FORMS += \
 
 RESOURCES += \
     PowerLAB.qrc
+
+DISTFILES +=

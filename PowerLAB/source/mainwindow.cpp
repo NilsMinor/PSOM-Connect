@@ -152,6 +152,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     Common->add("Circ F", "°Hz");
     ui->layoutCommonPanelData->addWidget(Common);
 
+    logger.add(L1Data);
+    logger.add(L2Data);
+    logger.add(L3Data);
+    logger.add(LTData);
+
 }
 MainWindow::~MainWindow() {
     delete settings;
@@ -470,7 +475,11 @@ void MainWindow::on_pushButtonEVSE_released()
 }
 void MainWindow::on_pushButtonInformation_released()
 {
-
+    QMessageBox messageBox;
+     //messageBox.setIcon(QIcon( ":/images/information.svg"));
+     messageBox.setText("This project started as an advancement of ..");
+     messageBox.setWindowTitle("Information");
+     messageBox.exec();
 }
 void MainWindow::on_pushButtonExit_released()
 {
@@ -478,3 +487,18 @@ void MainWindow::on_pushButtonExit_released()
 }
 
 
+
+void MainWindow::on_pushButtonStartLogging_released()
+{
+    if (logger.isLogging() == false) {
+        int logIntervall = ui->comboBoxLoggingIntervall->currentText().toInt();
+        logger.create(ui->lineEditLogFileName->text());
+        logger.enableLogging(logIntervall);
+        ui->pushButtonLogging->setText("Stop Logging");
+    }
+    else
+    {
+        logger.disableLogging();
+        ui->pushButtonLogging->setText("Start Logging");
+    }
+}

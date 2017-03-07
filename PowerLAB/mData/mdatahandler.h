@@ -25,6 +25,7 @@ public:
     int getCount (void);
     QStringList getPrettyName (void);
 
+
 private:
     QMap <QString, mData*> m_dataMap;
     QStringList m_pretty_name;

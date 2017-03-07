@@ -10,5 +10,17 @@
         <file>images/stop.png</file>
         <file>images/start.png</file>
         <file>images/PSOM_Splashscreen/PSOM_Splashscreen.001.jpeg</file>
+        <file>images/bar-chart.svg</file>
+        <file>images/calibre.svg</file>
+        <file>images/diskette.svg</file>
+        <file>images/wt500.jpg</file>
+        <file>images/analytics.svg</file>
+        <file>images/contract.svg</file>
+        <file>images/information.svg</file>
+        <file>images/exit.svg</file>
+        <file>images/electric-car.svg</file>
+        <file>images/pie-chart.svg</file>
+        <file>images/back.svg</file>
+        <file>images/home.svg</file>
     </qresource>
 </RCC>

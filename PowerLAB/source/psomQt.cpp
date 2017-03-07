@@ -207,12 +207,17 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
         m_data.L1.energy.active = toFloat(data[L1_ENERGY_ACTIVE/4]) / 1000.0;
         m_data.L2.energy.active = toFloat(data[L2_ENERGY_ACTIVE/4]) / 1000.0;
         m_data.L3.energy.active = toFloat(data[L3_ENERGY_ACTIVE/4]) / 1000.0;
+        m_data.LT.energy.active = m_data.L1.energy.active + m_data.L2.energy.active + m_data.L3.energy.active ;
+
         m_data.L1.energy.reactive = toFloat(data[L1_ENERGY_REACTIVE/4]) / 1000.0;
         m_data.L2.energy.reactive = toFloat(data[L2_ENERGY_REACTIVE/4]) / 1000.0;
         m_data.L3.energy.reactive = toFloat(data[L3_ENERGY_REACTIVE/4]) / 1000.0;
+        m_data.LT.energy.reactive = m_data.L1.energy.reactive + m_data.L2.energy.reactive + m_data.L3.energy.reactive ;
+
         m_data.L1.energy.cost = toFloat(data[L1_ENERGY_COST/4]);
         m_data.L2.energy.cost = toFloat(data[L2_ENERGY_COST/4]);
         m_data.L3.energy.cost = toFloat(data[L3_ENERGY_COST/4]);
+        m_data.LT.energy.cost = m_data.L1.energy.cost + m_data.L2.energy.cost + m_data.L3.energy.cost ;
 
         if (harmonicMeasurmentState) {
             actualHarmonic = data[ (PSOM_ACTIVE_HARM/4)];

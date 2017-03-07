@@ -17,6 +17,8 @@ public:
     void setData (float data);
     void setData (float data, float target);
     void setAccuracy (int accuracy);
+    float getData (void) { return m_data; }
+    float getError (void) { return m_error; }
 
 private:
     float calcError (float target);
