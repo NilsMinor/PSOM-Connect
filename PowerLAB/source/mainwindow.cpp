@@ -131,7 +131,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     LTData->add("QT","VAR");
     LTData->add("ST","VA");
     LTData->add("λT","");
-    LTData->add("ET","kWh");
+    LTData->add("EPT","kWh");
+    LTData->add("EQT","kWh");
     LTData->add("MT","€");
     ui->layoutPhaseLT->addWidget(LTData);
 
@@ -156,6 +157,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     logger.add(L2Data);
     logger.add(L3Data);
     logger.add(LTData);
+    logger.add(Common);
 
 }
 MainWindow::~MainWindow() {
@@ -494,11 +496,13 @@ void MainWindow::on_pushButtonStartLogging_released()
         int logIntervall = ui->comboBoxLoggingIntervall->currentText().toInt();
         logger.create(ui->lineEditLogFileName->text());
         logger.enableLogging(logIntervall);
+        qDebug () << "Logging started";
         ui->pushButtonLogging->setText("Stop Logging");
     }
     else
     {
         logger.disableLogging();
+        qDebug () << "Logging stopped";
         ui->pushButtonLogging->setText("Start Logging");
     }
 }

@@ -185,7 +185,8 @@ void qOsci::setHarmonics(float *data, float freq, int count, int active) {
 
     groupTracerText->setText("Harmonic = " + QString::number(active));
 
-    if (data[0] != 0)   // only update when new data comes
+   // if (data[0] != 0)   // only update when new data comes
+    if (true)
     {
     int dataCounter = 0;
     for (int i= 0; i!= size -1; i++) {

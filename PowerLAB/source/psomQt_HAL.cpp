@@ -221,7 +221,7 @@ void        PSOM_HAL::newSerialDataHandler (QByteArray data)
         emit psomAnswered ();
     }
     else {
-       // qDebug() << data.toHex();
+         qDebug() << str;
         emit statusBarInfo("HAL::Received Serial data is out of snyc");
     }
 }

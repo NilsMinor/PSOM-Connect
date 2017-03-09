@@ -19,6 +19,7 @@ public:
     void setAccuracy (int accuracy);
     float getData (void) { return m_data; }
     float getError (void) { return m_error; }
+    QString getPrettyName (void) { return QString(m_nameStr + " [" + m_unitStr + "]"); }
 
 private:
     float calcError (float target);

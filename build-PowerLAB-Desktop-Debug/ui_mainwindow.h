@@ -1060,7 +1060,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(4);
         pushButtonPanel->setDefault(false);
         pushButtonInformation->setDefault(false);
         pushButtonHarmonics->setDefault(false);

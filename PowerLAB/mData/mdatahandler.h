@@ -21,9 +21,14 @@ public:
     QWidget getWidget (void);
     bool setData (QString keyName, float data);
     bool setData (QString keyName, float data, float target);
+    float getData (QString keyName);
+    float getError (QString keyName);
     void setAccuracy (int accuracy);
     int getCount (void);
     QStringList getPrettyName (void);
+    QList<mData *> getMDataList(void);
+
+
 
 
 private:

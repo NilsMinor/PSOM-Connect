@@ -27,6 +27,7 @@ private:
     bool                    logging;
     QFile                  *m_file;
     QTextStream     *m_stream;
+    void                    printHeader(void);
 signals:
 
 public slots:

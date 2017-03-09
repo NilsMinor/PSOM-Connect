@@ -28,12 +28,16 @@ void mDataLogger::disableLogging(void)
 }
 void mDataLogger::create(QString fileName)
 {
-    m_fileName = fileName.append(getTimestamp());
+    QDateTime dateTime = dateTime.currentDateTime();
+    m_fileName = fileName;
+    m_fileName.append("_" + dateTime.toString("yyyy-MM-dd hh-mm-ss"));
+    m_fileName.append(".csv");
     m_file = new QFile (m_fileName);
 
-    if (m_file->open(QFile::WriteOnly|QFile::Truncate))
+    if (m_file->open(QFile::WriteOnly | QFile::Truncate))
     {
          m_stream = new QTextStream (m_file);
+         this->printHeader();
     }
 }
 QString mDataLogger::getTimestamp()
@@ -43,17 +47,54 @@ QString mDataLogger::getTimestamp()
     return dateTime.toString("hh:mm:ss");
 }
 
-void mDataLogger::log()
+void mDataLogger::printHeader(void)
+{
+    if (m_file != NULL && m_stream != NULL) {
+
+       if (mDataHandlerList.size() != 5) return;   // L1, L2, L3, LT, Common
+
+       QDateTime dateTime = dateTime.currentDateTime();
+        *m_stream <<  dateTime.toString("yyyy-MM-dd") << ";"  ;
+        for (int i = 0; i!=  mDataHandlerList[0]->getMDataList().size(); i++)   // all lists must have the same size!
+        {
+             *m_stream  << mDataHandlerList[0]->getMDataList().at(i)->getPrettyName() << ";"     // L1
+                                 << mDataHandlerList[1]->getMDataList().at(i)->getPrettyName() << ";"     // L2
+                                 << mDataHandlerList[2]->getMDataList().at(i)->getPrettyName() << ";"     // L3
+                                 << mDataHandlerList[3]->getMDataList().at(i)->getPrettyName() << ";";    // LT
+        }
+        *m_stream << mDataHandlerList[4]->getMDataList().at(0)->getPrettyName() << ";";        // Line Frequency
+        *m_stream << mDataHandlerList[4]->getMDataList().at(1)->getPrettyName() << ";";        // Module Temperature
+        *m_stream << mDataHandlerList[4]->getMDataList().at(2)->getPrettyName() << ";";        // Circulation Time
+
+        *m_stream  << "\r\n";   // linefeed
+    }
+    else
+    {
+        qDebug() << "Log error m_file = " << m_file << " m_stream = " << m_stream;
+    }
+}
+void mDataLogger::log(void)
 {
     if (m_file != NULL && m_stream != NULL && logging) {
 
-        if (mDataHandlerList.size() != 4) return;   // L1, L2, L3, LT
+       if (mDataHandlerList.size() != 5) return;   // L1, L2, L3, LT, Common
 
-      qDebug () << getTimestamp();
-      /*  foreach( mData item, mDataHandlerList[0] )
+        *m_stream << getTimestamp() << ";"   ;  // log timestamp
+        for (int i = 0; i!=  mDataHandlerList[0]->getMDataList().size(); i++)   // all lists must have the same size!
         {
-            qDebug () << getTimestamp() << " " << item->getData();
+             *m_stream  << mDataHandlerList[0]->getMDataList().at(i)->getData() << ";"     // L1
+                                 << mDataHandlerList[1]->getMDataList().at(i)->getData() << ";"     // L2
+                                 << mDataHandlerList[2]->getMDataList().at(i)->getData() << ";"     // L3
+                                 << mDataHandlerList[3]->getMDataList().at(i)->getData() << ";";    // LT
         }
-        */
+        *m_stream   << mDataHandlerList[4]->getData("F") << ";";                                     // Line Frequency
+        *m_stream  << mDataHandlerList[4]->getData("Temp") << ";";                               // Module Temperature
+        *m_stream  << mDataHandlerList[4]->getData("Circ T") << ";";                              // Circulation Time
+
+        *m_stream  << "\r\n";   // linefeed
+    }
+    else
+    {
+        qDebug() << "Log error m_file = " << m_file << " m_stream = " << m_stream;
     }
 }
