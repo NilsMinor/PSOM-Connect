@@ -28,8 +28,9 @@ private:
     QFile                  *m_file;
     QTextStream     *m_stream;
     void                    printHeader(void);
+    int                     line_counter;
 signals:
-
+    void newDataLogged (int actual_line, qint64 file_size);
 public slots:
     void log        (void);
 };

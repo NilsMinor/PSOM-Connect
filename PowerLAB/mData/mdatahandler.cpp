@@ -16,7 +16,7 @@ void mDataHandler::add(QString nameStr, QString unitStr)
     mData * m = new mData (NULL , nameStr, unitStr);
     m_pretty_name.append(nameStr);
     m_dataMap.insert(nameStr, m);
-
+    m_dataList.append(m);
     if (m_layout != NULL) {
         m_layout->addWidget(m->getWidget());
     }
@@ -35,6 +35,12 @@ bool mDataHandler::setData(QString keyName, float data)
     if (!m_dataMap.contains(keyName))
         return false;
 
+    foreach (mData * ma, m_dataList) {
+        if (ma->getName() == keyName) {
+            ma->setData(data);
+        }
+    }
+
     m_dataMap.value(keyName)->setData(data);
     return true;
 }
@@ -42,6 +48,12 @@ bool mDataHandler::setData(QString keyName, float data, float target)
 {
     if (!m_dataMap.contains(keyName))
         return false;
+
+    foreach (mData * ma, m_dataList) {
+        if (ma->getName() == keyName) {
+            ma->setData(data,target);
+        }
+    }
 
     m_dataMap.value(keyName)->setData(data,target);
     return true;
@@ -80,15 +92,8 @@ QStringList mDataHandler::getPrettyName()
 {
     return m_pretty_name;
 }
-
 QList<mData*> mDataHandler::getMDataList(void)
 {
-    QList <mData*> dataList;
-
-    for(auto e : m_dataMap.keys())
-    {
-        dataList.append( m_dataMap.value(e) );
-    }
-    return dataList;
+       return m_dataList;
 }
 

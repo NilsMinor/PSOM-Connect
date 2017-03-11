@@ -87,6 +87,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
              harmonics, SLOT(setHarmonics(float*,float,int,int)));
 
 
+
     L1Data = new mDataHandler (this);
     L1Data->add("U1","Vrms");
     L1Data->add("I1","Irms");
@@ -98,7 +99,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     L1Data->add("EQ1","kWh");
     L1Data->add("M1","€");
     ui->layoutPhaseL1->addWidget(L1Data);
-    ui->comboBoxOsciCh1->addItems(L1Data->getPrettyName());
 
     L2Data = new mDataHandler (NULL);
     L2Data->add("U2","Vrms");
@@ -158,6 +158,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     logger.add(L3Data);
     logger.add(LTData);
     logger.add(Common);
+    connect (&logger, SIGNAL(newDataLogged(int,qint64)), this, SLOT(updateLoggingInformation(int, qint64)));
 
 }
 MainWindow::~MainWindow() {
@@ -225,6 +226,12 @@ void MainWindow::handleError(QSerialPort::SerialPortError error) {
 void MainWindow::changeStatusbarInformation(QString newInformation)
 {
     ui->statusBar->showMessage(newInformation);
+}
+
+void MainWindow::updateLoggingInformation(int actual_line, qint64 file_size)
+{
+    ui->labelLoggingLine->setText(QString::number(actual_line));
+    ui->labelFileSize->setText(QString::number(file_size/1024) + " kB");
 }
 void MainWindow::initActionsConnections()
 {
@@ -488,16 +495,15 @@ void MainWindow::on_pushButtonExit_released()
     QCoreApplication::quit();
 }
 
-
-
 void MainWindow::on_pushButtonStartLogging_released()
 {
     if (logger.isLogging() == false) {
+        ui->pushButtonLogging->setText("Stop Logging"); // not working
         int logIntervall = ui->comboBoxLoggingIntervall->currentText().toInt();
         logger.create(ui->lineEditLogFileName->text());
         logger.enableLogging(logIntervall);
         qDebug () << "Logging started";
-        ui->pushButtonLogging->setText("Stop Logging");
+
     }
     else
     {
@@ -505,4 +511,73 @@ void MainWindow::on_pushButtonStartLogging_released()
         qDebug () << "Logging stopped";
         ui->pushButtonLogging->setText("Start Logging");
     }
+}
+
+void MainWindow::on_pushButtonPanelHome_released()
+{
+    ui->tabWidget->setCurrentIndex(0);
+}
+void MainWindow::on_pushButtonScopeHome_released()
+{
+    on_pushButtonPanelHome_released();
+}
+void MainWindow::on_pushButtonHarmonicsHome_released()
+{
+    on_pushButtonPanelHome_released();
+}
+void MainWindow::on_pushButtonLoggingHome_released()
+{
+    on_pushButtonPanelHome_released();
+}
+void MainWindow::on_pushButtonQWT500Home_released()
+{
+    on_pushButtonPanelHome_released();
+}
+void MainWindow::on_pushButtonEVSEHome_released()
+{
+    on_pushButtonPanelHome_released();
+}
+void MainWindow::on_pushButtonCalibrationHome_released()
+{
+    on_pushButtonPanelHome_released();
+}
+
+void MainWindow::on_comboBoxOsci_currentIndexChanged(const QString &arg1)
+{
+
+}
+
+void MainWindow::on_comboBoxCalType_currentIndexChanged(int index)
+{
+    /*
+    typedef struct VCAL {
+        uint32_t VCAL_0;		// (0)  0V - 39V
+        uint32_t VCAL_40;		// (1)  40V - 79V
+        uint32_t VCAL_80;		// (2)  80V - 119V
+        uint32_t VCAL_120;	// (3)  120V - 159V
+        uint32_t VCAL_160;	// (4)  160V - 199V
+        uint32_t VCAL_200;	// (5)  200V - 239V
+        uint32_t VCAL_240;	// (6)  240V - 279V
+        uint32_t VCAL_280;	// (7)  280V - 319V
+        uint32_t VCAL_320;	// (8)  320V - 359V
+        uint32_t VCAL_360;	// (9)  360V - 399V
+        uint32_t VCAL_400;	// (10) < 400V
+        uint32_t VOFFS;			// (11)
+    } VCAL;
+
+    typedef struct ICAL {
+        uint32_t ICAL_0;		// (0)  0A - 0,499A
+        uint32_t ICAL_1;		// (1)  1A - 1,999A
+        uint32_t ICAL_2;		// (2)  2A - 3,999A
+        uint32_t ICAL_4;		// (3)  4A - 5,999A
+        uint32_t ICAL_6;		// (4)  5A - 7,999A
+        uint32_t ICAL_8;		// (5)  8A - 9,999A
+        uint32_t ICAL_10;		// (6)  10A - 11,999A
+        uint32_t ICAL_12;		// (7)  12A - 15,999A
+        uint32_t ICAL_16;		// (8)  16A - 19,999A
+        uint32_t ICAL_20;		// (9)  20A - 23,999A
+        uint32_t ICAL_24;		// (10) > 24A
+        uint32_t IOFFS;			// (11)
+    } ICAL;
+    */
 }
