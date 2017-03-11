@@ -33,6 +33,7 @@ public:
 
 private:
     QMap <QString, mData*> m_dataMap;
+    QList <mData*> m_dataList;
     QStringList m_pretty_name;
     QVBoxLayout *m_layout;
 

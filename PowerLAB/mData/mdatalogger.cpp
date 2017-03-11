@@ -5,6 +5,7 @@ mDataLogger::mDataLogger(QObject *parent) : QObject(parent)
     m_file = NULL;
     m_stream = NULL;
     logging = false;
+    line_counter = 0;
     m_timer.setTimerType(Qt::PreciseTimer);
     connect (&m_timer, SIGNAL(timeout()), this, SLOT(log()));
 }
@@ -25,6 +26,7 @@ void mDataLogger::disableLogging(void)
     m_file = NULL;
     m_stream = NULL;
     m_timer.stop();
+    emit newDataLogged(line_counter, m_file->size());
 }
 void mDataLogger::create(QString fileName)
 {
@@ -37,6 +39,7 @@ void mDataLogger::create(QString fileName)
     if (m_file->open(QFile::WriteOnly | QFile::Truncate))
     {
          m_stream = new QTextStream (m_file);
+         line_counter = 0;
          this->printHeader();
     }
 }
@@ -92,6 +95,8 @@ void mDataLogger::log(void)
         *m_stream  << mDataHandlerList[4]->getData("Circ T") << ";";                              // Circulation Time
 
         *m_stream  << "\r\n";   // linefeed
+        line_counter++;
+        emit newDataLogged(line_counter, m_file->size());
     }
     else
     {

@@ -109,6 +109,7 @@ private slots:
     void readData();
     void handleError(QSerialPort::SerialPortError error);
     void changeStatusbarInformation (QString newInformation);
+    void updateLoggingInformation(int actual_line, qint64 file_size);
 
     void newPSOMData (void);
 
@@ -141,6 +142,15 @@ private slots:
     void on_pushButtonExit_released();
     void on_pushButtonEVSE_released();
     void on_pushButtonStartLogging_released();
+    void on_pushButtonPanelHome_released();
+    void on_pushButtonScopeHome_released();
+    void on_pushButtonHarmonicsHome_released();
+    void on_pushButtonLoggingHome_released();
+    void on_pushButtonQWT500Home_released();
+    void on_pushButtonEVSEHome_released();
+    void on_pushButtonCalibrationHome_released();
+    void on_comboBoxOsci_currentIndexChanged(const QString &arg1);
+    void on_comboBoxCalType_currentIndexChanged(int index);
 };
 
 #endif // MAINWINDOW_H
