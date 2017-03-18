@@ -11,6 +11,7 @@
 
 #include "qcustomplot.h"
 #include "qoscisignal.h"
+#include "mData/mdatalogger.h"
 
 enum OsciType {
     OfTypeOsci = 1,
@@ -50,7 +51,6 @@ private:
     int             SignalCount;
 
      QCPBars *harmonicBars;
-   // QList <qOsciSignal> m_signals;
     qOsciSignal     * testSig1;
     qOsciSignal     * testSig2;
     void    initAsOsci      (void);
@@ -63,11 +63,11 @@ private:
 
 
 signals:
-
+    void osci_timeout (void);
 public slots:
-    void            setHarmonics (float *data, float freq, int count, int active);
+    void  setHarmonics (float *data, float freq, int count, int active);
+    void updateOsci(mDataHandler *L1,mDataHandler *L2,mDataHandler *L3,mDataHandler *LT );
 private slots:
-    void update_osci (void);
     void realtimeDataSlot (void);
 };
 

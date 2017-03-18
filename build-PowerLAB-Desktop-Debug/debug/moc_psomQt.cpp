@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_PSOM_t {
-    QByteArrayData data[19];
-    char stringdata0[199];
+    QByteArrayData data[20];
+    char stringdata0[223];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,20 +41,22 @@ QT_MOC_LITERAL(8, 81, 4), // "data"
 QT_MOC_LITERAL(9, 86, 4), // "freq"
 QT_MOC_LITERAL(10, 91, 5), // "count"
 QT_MOC_LITERAL(11, 97, 6), // "active"
-QT_MOC_LITERAL(12, 104, 14), // "m_timerTimeout"
-QT_MOC_LITERAL(13, 119, 20), // "assignEntirePSOMData"
-QT_MOC_LITERAL(14, 140, 9), // "uint32_t*"
-QT_MOC_LITERAL(15, 150, 4), // "int&"
-QT_MOC_LITERAL(16, 155, 9), // "dataCount"
-QT_MOC_LITERAL(17, 165, 20), // "statusBarInfoHandler"
-QT_MOC_LITERAL(18, 186, 12) // "psomAnswered"
+QT_MOC_LITERAL(12, 104, 23), // "harmonicMeasurmentReady"
+QT_MOC_LITERAL(13, 128, 14), // "m_timerTimeout"
+QT_MOC_LITERAL(14, 143, 20), // "assignEntirePSOMData"
+QT_MOC_LITERAL(15, 164, 9), // "uint32_t*"
+QT_MOC_LITERAL(16, 174, 4), // "int&"
+QT_MOC_LITERAL(17, 179, 9), // "dataCount"
+QT_MOC_LITERAL(18, 189, 20), // "statusBarInfoHandler"
+QT_MOC_LITERAL(19, 210, 12) // "psomAnswered"
 
     },
     "PSOM\0statusBarInfo\0\0information\0"
     "stateChanged\0newPSOMData\0newHarmonicsData\0"
     "float*\0data\0freq\0count\0active\0"
-    "m_timerTimeout\0assignEntirePSOMData\0"
-    "uint32_t*\0int&\0dataCount\0statusBarInfoHandler\0"
+    "harmonicMeasurmentReady\0m_timerTimeout\0"
+    "assignEntirePSOMData\0uint32_t*\0int&\0"
+    "dataCount\0statusBarInfoHandler\0"
     "psomAnswered"
 };
 #undef QT_MOC_LITERAL
@@ -65,34 +67,36 @@ static const uint qt_meta_data_PSOM[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       4,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   54,    2, 0x06 /* Public */,
-       4,    0,   57,    2, 0x06 /* Public */,
-       5,    0,   58,    2, 0x06 /* Public */,
-       6,    4,   59,    2, 0x06 /* Public */,
+       1,    1,   59,    2, 0x06 /* Public */,
+       4,    0,   62,    2, 0x06 /* Public */,
+       5,    0,   63,    2, 0x06 /* Public */,
+       6,    4,   64,    2, 0x06 /* Public */,
+      12,    0,   73,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      12,    0,   68,    2, 0x08 /* Private */,
-      13,    2,   69,    2, 0x08 /* Private */,
-      17,    1,   74,    2, 0x08 /* Private */,
-      18,    0,   77,    2, 0x08 /* Private */,
+      13,    0,   74,    2, 0x08 /* Private */,
+      14,    2,   75,    2, 0x08 /* Private */,
+      18,    1,   80,    2, 0x08 /* Private */,
+      19,    0,   83,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 7, QMetaType::Float, QMetaType::Int, QMetaType::Int,    8,    9,   10,   11,
+    QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 14, 0x80000000 | 15,    8,   16,
+    QMetaType::Void, 0x80000000 | 15, 0x80000000 | 16,    8,   17,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
 
@@ -109,10 +113,11 @@ void PSOM::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         case 1: _t->stateChanged(); break;
         case 2: _t->newPSOMData(); break;
         case 3: _t->newHarmonicsData((*reinterpret_cast< float*(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4]))); break;
-        case 4: _t->m_timerTimeout(); break;
-        case 5: _t->assignEntirePSOMData((*reinterpret_cast< uint32_t*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 6: _t->statusBarInfoHandler((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 7: _t->psomAnswered(); break;
+        case 4: _t->harmonicMeasurmentReady(); break;
+        case 5: _t->m_timerTimeout(); break;
+        case 6: _t->assignEntirePSOMData((*reinterpret_cast< uint32_t*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 7: _t->statusBarInfoHandler((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 8: _t->psomAnswered(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -146,6 +151,13 @@ void PSOM::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
                 return;
             }
         }
+        {
+            typedef void (PSOM::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&PSOM::harmonicMeasurmentReady)) {
+                *result = 4;
+                return;
+            }
+        }
     }
 }
 
@@ -174,13 +186,13 @@ int PSOM::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }
@@ -209,5 +221,11 @@ void PSOM::newHarmonicsData(float * _t1, float _t2, int _t3, int _t4)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);
+}
+
+// SIGNAL 4
+void PSOM::harmonicMeasurmentReady()
+{
+    QMetaObject::activate(this, &staticMetaObject, 4, Q_NULLPTR);
 }
 QT_END_MOC_NAMESPACE

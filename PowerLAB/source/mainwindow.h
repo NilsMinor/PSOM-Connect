@@ -35,8 +35,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
-
 #include <QtCore/QtGlobal>
 #include <QtSerialPort/qserialport.h>
 #include <QMainWindow>
@@ -47,6 +45,7 @@
 #include "qOsci/qosci.h"
 #include "mData/mdatahandler.h"
 #include "mData/mdatalogger.h"
+#include "qwt500widget.h"
 
 #define TAB_PANEL                   1
 #define TAB_SCOPE                 2
@@ -85,14 +84,14 @@ private:
     void sendCommand            (QByteArray cmd, double value);
     void updateDebugUIInfo      (void);
 
-    PSOM                *testModule;
-
+    PSOM                    *testModule;
+    QWT500Widget    *wt500;
     Ui::MainWindow      *ui;
-    Console             *console;
-    SettingsDialog      *settings;
-    QSerialPort         *serial;
-    qOsci               *oscillopscope;
-    qOsci               *harmonics;
+    Console                  *console;
+    SettingsDialog        *settings;
+    QSerialPort             *serial;
+    qOsci                      *oscillopscope;
+    qOsci                      *harmonics;
     mDataHandler        *L1Data;
     mDataHandler        *L2Data;
     mDataHandler        *L3Data;
@@ -107,10 +106,10 @@ private slots:
     void about();
     void writeData(const QByteArray &data);
     void readData();
+    void osciTimeout (void);
     void handleError(QSerialPort::SerialPortError error);
     void changeStatusbarInformation (QString newInformation);
     void updateLoggingInformation(int actual_line, qint64 file_size);
-
     void newPSOMData (void);
 
     void on_pushButtonStartMeasurment_released();
@@ -151,6 +150,11 @@ private slots:
     void on_pushButtonCalibrationHome_released();
     void on_comboBoxOsci_currentIndexChanged(const QString &arg1);
     void on_comboBoxCalType_currentIndexChanged(int index);
+
+    void on_comboBoxOsci_currentIndexChanged(int index);
+
+signals:
+    void updateOsci(mDataHandler *L1,mDataHandler *L2,mDataHandler *L3,mDataHandler *LT );
 };
 
 #endif // MAINWINDOW_H

@@ -5,9 +5,6 @@ qOsci::qOsci(QWidget *parent, OsciType type) : QWidget(parent)
     customPlot = new QCustomPlot(this);
     SignalCount = 0;
 
-    testSig1 = new qOsciSignal(NULL,customPlot,SignalCount++);  // 0
-    testSig2 = new qOsciSignal(NULL,customPlot,SignalCount++);  // 1
-
     osciType = type;
     setHarmonicsAxisStyle(HarmonicNumberAxisStyle);
     setVerticalAxisStyle (VoltageAxisStyle);
@@ -18,6 +15,21 @@ qOsci::qOsci(QWidget *parent, OsciType type) : QWidget(parent)
     else if (osciType == OfTypeHarmonics) {
         initAsHarmonics ();
     }
+
+    QLinearGradient plotGradient;
+    plotGradient.setStart(0, 0);
+    plotGradient.setFinalStop(0, 350);
+    plotGradient.setColorAt(0, QColor(100, 80, 200));
+    plotGradient.setColorAt(1, QColor(100, 80, 240));
+    customPlot->setBackground(plotGradient);
+
+    QLinearGradient axisRectGradient;
+    axisRectGradient.setStart(0, 0);
+    axisRectGradient.setFinalStop(0, 350);
+    axisRectGradient.setColorAt(0, QColor(255, 255, 255));
+    axisRectGradient.setColorAt(1, QColor(255, 255, 255));
+    customPlot->axisRect()->setBackground(axisRectGradient);
+    customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 
     // set widget to layout
     screenLayout = new QHBoxLayout();
@@ -31,14 +43,26 @@ void qOsci::initAsOsci      (void) {
     osciTimer = new QTimer ();
     osciTimer->setTimerType(Qt::PreciseTimer);
 
+    customPlot->legend->setVisible(true);
+    QFont legendFont = font();  // start out with MainWindow's font..
+    legendFont.setPointSize(9); // and make a bit smaller for legend
+    customPlot->legend->setFont(legendFont);
+    customPlot->legend->setBrush(QBrush(QColor(255,255,255,230)));
+    customPlot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop|Qt::AlignLeft);
+
+    int size = 4;
     customPlot->addGraph(); // blue line
-    customPlot->graph(0)->setPen(QPen(QColor(40, 110, 255)));
+    customPlot->graph(0)->setPen(QPen(QColor(40, 110, 255), size));
+    customPlot->graph(0)->setName("Phase L1");
     customPlot->addGraph(); // red line
-    customPlot->graph(1)->setPen(QPen(QColor(255, 110, 40)));
+    customPlot->graph(1)->setPen(QPen(QColor(255, 110, 40), size));
+    customPlot->graph(1)->setName("Phase L2");
     customPlot->addGraph(); // violett line
-    customPlot->graph(2)->setPen(QPen(QColor(188, 110, 255)));
+    customPlot->graph(2)->setPen(QPen(QColor(188, 110, 255), size));
+    customPlot->graph(2)->setName("Phase L3");
     customPlot->addGraph(); // red line
-    customPlot->graph(3)->setPen(QPen(QColor(0, 240, 110)));
+    customPlot->graph(3)->setPen(QPen(QColor(0, 240, 110), size));
+    customPlot->graph(3)->setName("Phase LT");
 
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%h:%m:%s");
@@ -65,32 +89,43 @@ void qOsci::osciReset()
 {
 
 }
-void qOsci::update_osci()
-{
-    double key = QDateTime::currentDateTime().toMSecsSinceEpoch() / 1000.0;
-    static double lastPointKey = 0;
 
-    testSig1->addData(key, 10, customPlot);
-}
 void qOsci::realtimeDataSlot()
+{
+    emit osci_timeout();
+}
+void qOsci::updateOsci(mDataHandler *L1,mDataHandler *L2,mDataHandler *L3,mDataHandler *LT )
 {
     static QTime time(QTime::currentTime());
     // calculate two new data points:
     double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
     static double lastPointKey = 0;
+
     if (key-lastPointKey > 0.002) // at most add point every 2 ms
     {
       // add data to lines:
-      customPlot->graph(0)->addData(key, qSin(key)+qrand()/(double)RAND_MAX*1*qSin(key/0.3843));
-      customPlot->graph(1)->addData(key, qCos(key)+qrand()/(double)RAND_MAX*0.5*qSin(key/0.4364));
-      // rescale value (vertical) axis to fit the current data:
-      //ui->customPlot->graph(0)->rescaleValueAxis();
-      //ui->customPlot->graph(1)->rescaleValueAxis(true);
+       if (verticalAxisStyle == VoltageAxisStyle) {
+         customPlot->graph(0)->addData(key, L1->getData("U1"));
+         customPlot->graph(1)->addData(key, L2->getData("U2"));
+         customPlot->graph(2)->addData(key, L3->getData("U3"));
+         customPlot->graph(3)->addData(key, LT->getData("UT"));
+       }
+       else if (verticalAxisStyle == CurrentAxisStyle) {
+           customPlot->graph(0)->addData(key, L1->getData("I1"));
+           customPlot->graph(1)->addData(key, L2->getData("I2"));
+           customPlot->graph(2)->addData(key, L3->getData("I3"));
+           customPlot->graph(3)->addData(key, LT->getData("IT"));
+}
+      customPlot->graph(0)->rescaleValueAxis(true);
+      customPlot->graph(1)->rescaleValueAxis(true);
+      customPlot->graph(2)->rescaleValueAxis(true);
+      customPlot->graph(3)->rescaleValueAxis(true);
       lastPointKey = key;
-    }
+     }
+
     // make key axis range scroll with the data (at a constant range size of 8):
     customPlot->xAxis->setRange(key, 8, Qt::AlignRight);
-   customPlot->replot();
+    customPlot->replot();
 
     // calculate frames per second:
     static double lastFpsKey;
@@ -146,21 +181,6 @@ void qOsci::initAsHarmonics (void) {
     customPlot->yAxis->grid()->setZeroLinePen(Qt::NoPen);
     customPlot->xAxis->setUpperEnding(QCPLineEnding::esSpikeArrow);
     customPlot->yAxis->setUpperEnding(QCPLineEnding::esSpikeArrow);
-
-    QLinearGradient plotGradient;
-    plotGradient.setStart(0, 0);
-    plotGradient.setFinalStop(0, 350);
-    plotGradient.setColorAt(0, QColor(100, 80, 200));
-    plotGradient.setColorAt(1, QColor(100, 80, 240));
-    customPlot->setBackground(plotGradient);
-
-    QLinearGradient axisRectGradient;
-    axisRectGradient.setStart(0, 0);
-    axisRectGradient.setFinalStop(0, 350);
-    axisRectGradient.setColorAt(0, QColor(255, 255, 255));
-    axisRectGradient.setColorAt(1, QColor(255, 255, 255));
-    customPlot->axisRect()->setBackground(axisRectGradient);
-    customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 
    // customPlot->rescaleAxes();
    // customPlot->yAxis->setRange(0, 2);
@@ -230,7 +250,7 @@ void qOsci::setHarmonics(float *data, float freq, int count, int active) {
     customPlot->xAxis->setTicker(textTicker);
     customPlot->xAxis->setTickLabelFont(QFont(font().family(),10));
     }
-   customPlot->replot();
+    customPlot->replot();
 }
 void qOsci::setHarmonicsAxisStyle(OsciHarmAxisStyle style)
 {

@@ -21,6 +21,16 @@ void mDataHandler::add(QString nameStr, QString unitStr)
         m_layout->addWidget(m->getWidget());
     }
  }
+void mDataHandler::addNoErr(QString nameStr, QString unitStr)
+{
+    mData * m = new mData (NULL , nameStr, unitStr, false);
+    m_pretty_name.append(nameStr);
+    m_dataMap.insert(nameStr, m);
+    m_dataList.append(m);
+    if (m_layout != NULL) {
+        m_layout->addWidget(m->getWidget());
+    }
+ }
 void mDataHandler::print()
 {
     QMapIterator<QString, mData*> m_dataIter (m_dataMap);

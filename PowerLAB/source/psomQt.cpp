@@ -1,6 +1,7 @@
 
 #include "psomQt.h"
 
+int harmOdd [HARM_QUANTITY] = {1,3,5,7,9,11,13,15,17,19};
 bool triggerHarmonics = false;
 /**
  * @file    psomQt.cpp
@@ -226,10 +227,14 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
                 m_data.L1.harmonic.contentL1[ i ] = toFloat (data[ (HARM_L1_H1 / 4) + i]);
                 m_data.L2.harmonic.contentL2[ i ] = toFloat (data[ (HARM_L2_H1 / 4) + i]);
                 m_data.L3.harmonic.contentL3[ i ] = toFloat (data[ (HARM_L3_H1 / 4) + i]);
-               // qDebug() << "H" << i << data[ (HARM_L2_H1 / 4) + i];
-            }
-            emit newHarmonicsData(m_data.L1.harmonic.contentL1, m_data.frequency, harmonicsCount, actualHarmonic);
 
+            }
+            if ( harmOdd [harmonicsCount-1]  == actualHarmonic )
+                emit harmonicMeasurmentReady ();
+            else
+                emit newHarmonicsData(m_data.L1.harmonic.contentL1, m_data.frequency, harmonicsCount, actualHarmonic);
+
+            //if (actualHarmonic == )
         }
 
         m_data.circulationTime = elapsedTimer.elapsed();

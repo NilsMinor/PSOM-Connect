@@ -11,7 +11,7 @@ class mData : public QObject
 {
     Q_OBJECT
 public:
-    explicit mData(QObject *parent = 0, QString nameStr = "", QString unitStr = "");
+    explicit mData(QObject *parent = 0, QString nameStr = "", QString unitStr = "", bool err = true);
     void print (void);
     QWidget * getWidget (void);
     void setData (float data);
@@ -34,6 +34,7 @@ private:
     QHBoxLayout *m_layout;
     QList <QLabel*> m_labels;
     int     m_accuracy;
+    bool m_supportError;
 
 signals:
 

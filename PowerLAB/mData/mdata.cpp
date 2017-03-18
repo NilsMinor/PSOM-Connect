@@ -1,19 +1,22 @@
 #include "mdata.h"
 
-mData::mData(QObject *parent, QString nameStr, QString unitStr)
+mData::mData(QObject *parent, QString nameStr, QString unitStr, bool err)
     : QObject(parent), m_nameStr (nameStr), m_unitStr (unitStr)
 
 {
     m_data = 0;
     m_error = 0;
     m_accuracy = 3;
+    m_supportError = err;
 
     m_labels.append( new QLabel ( m_nameStr));
     m_labels.append( new QLabel ( QString::number(m_data, 'f', m_accuracy ) ) );
     m_labels.append( new QLabel ( m_unitStr) );
-    m_labels.append( new QLabel ( QString::number(m_error, 'f', 1) ) );
 
-    m_labels[3]->setStyleSheet("QLabel { color : red }");
+    if (m_supportError) {
+        m_labels.append( new QLabel ( QString::number(m_error, 'f', 1) ) );
+        m_labels[3]->setStyleSheet("QLabel { color : red }");
+    }
     m_labels[1]->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
     m_layout = new QHBoxLayout ();
@@ -37,7 +40,6 @@ void mData::print()
 
 QWidget *mData::getWidget()
 {
-    QLabel * l = new QLabel ("Test1234");
     return m_widget;
 }
 void mData::setData(float data)
@@ -50,8 +52,10 @@ void mData::setData(float data, float target)
 {
     setData (data);
     m_target = target;
-    m_error = calcError (m_target);
-    m_labels[3]->setText( QString::number(m_error, 'f', 1) ); // update label
+    if (m_supportError) {
+        m_error = calcError (m_target);
+        m_labels[3]->setText( QString::number(m_error, 'f', 1) ); // update label
+    }
 }
 void mData::setAccuracy(int accuracy)
 {

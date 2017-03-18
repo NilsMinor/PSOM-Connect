@@ -12,8 +12,7 @@
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
 
-QMAKE_MAC_SDK = macosx10.12
-
+CONFIG  += no_batch
 TARGET = PowerLab
 TEMPLATE = app
 
@@ -45,7 +44,8 @@ HEADERS += \
     qOsci/qcustomplot.h \
     mData/mdata.h \
     mData/mdatahandler.h \
-    mData/mdatalogger.h
+    mData/mdatalogger.h \
+
 
 FORMS += \
     gui/mainwindow.ui \
@@ -53,5 +53,21 @@ FORMS += \
 
 RESOURCES += \
     PowerLAB.qrc
+###############################################################################################
+message(Build QWT500 Plugin) ####################################################################
+DEFINES+="QWT500_DIR=C:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/" # Path to QWT500 project
+DEFINES+="QWT500_LIB=C:/Users/Admin/ownCloud/Entwicklung/QWT500/build-QWT500-Desktop-Debug/debug/"
+LIBS += -LC:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/yokogawa/ -ltmctl64
+INCLUDEPATH += C:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/
+SOURCES +=\
+        C:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/qwt500widget.cpp \
+        C:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/qwt500.cpp \
+        C:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/qwt500item.cpp \
 
-DISTFILES +=
+HEADERS  += C:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/qwt500widget.h \
+        C:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/qwt500.h \
+        C:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/qwt500item.h \
+        C:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/yokogawa/tmctl.h \
+
+FORMS    += C:/Users/Admin/ownCloud/Entwicklung/QWT500/QWT500/qwt500widget.ui
+

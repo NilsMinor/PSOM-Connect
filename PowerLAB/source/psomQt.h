@@ -183,6 +183,7 @@ signals:
     void        stateChanged    (void);                                             //! signal is fired on every state change of the module
     void        newPSOMData     (void);                                             //! signal is fired when every new data is available
     void        newHarmonicsData(float *data, float freq, int count, int active);
+    void        harmonicMeasurmentReady (void);
 };
 
 #endif // PSOM_H

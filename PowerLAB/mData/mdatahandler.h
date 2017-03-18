@@ -17,6 +17,7 @@ class mDataHandler : public QWidget
 public:
     explicit mDataHandler(QWidget *parent = 0);
     void add (QString nameStr, QString unitStr);
+    void addNoErr (QString nameStr, QString unitStr);
     void print (void);
     QWidget getWidget (void);
     bool setData (QString keyName, float data);
@@ -27,9 +28,6 @@ public:
     int getCount (void);
     QStringList getPrettyName (void);
     QList<mData *> getMDataList(void);
-
-
-
 
 private:
     QMap <QString, mData*> m_dataMap;

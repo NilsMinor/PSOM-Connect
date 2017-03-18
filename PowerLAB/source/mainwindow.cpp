@@ -69,7 +69,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     initActionsConnections();
 
     connect(serial, SIGNAL(error(QSerialPort::SerialPortError)), this, SLOT(handleError(QSerialPort::SerialPortError)));
-    //connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
     connect(console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
 
     testModule = new PSOM(0);
@@ -78,6 +77,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     oscillopscope = new qOsci();
     ui->layoutOscilloscope->addWidget(oscillopscope->getScreenWidget());
+    connect (oscillopscope, SIGNAL(osci_timeout()), this, SLOT(osciTimeout()));
+    connect (this, SIGNAL(updateOsci(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)),
+             oscillopscope, SLOT(updateOsci(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)));
 
     // harmonics box
     harmonics = new qOsci(NULL, OfTypeHarmonics);    
@@ -86,7 +88,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect (testModule, SIGNAL(newHarmonicsData(float*,float,int,int)),    // connect module with harmonics display
              harmonics, SLOT(setHarmonics(float*,float,int,int)));
 
-
+    connect (testModule, SIGNAL(harmonicMeasurmentReady()), this, SLOT(on_pBTriggerHarmonics_released()));
 
     L1Data = new mDataHandler (this);
     L1Data->add("U1","Vrms");
@@ -160,6 +162,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     logger.add(Common);
     connect (&logger, SIGNAL(newDataLogged(int,qint64)), this, SLOT(updateLoggingInformation(int, qint64)));
 
+    wt500 = new QWT500Widget(this);
+    ui->wt500Layout->addWidget(wt500);
+
 }
 MainWindow::~MainWindow() {
     delete settings;
@@ -215,6 +220,11 @@ void MainWindow::readData() {
     //data = new QByteArray(serial->readAll());
     QByteArray data = serial->readAll();
     console->putData(data);
+}
+
+void MainWindow::osciTimeout()
+{
+    emit updateOsci(L1Data, L2Data, L3Data, LTData);
 }
 void MainWindow::handleError(QSerialPort::SerialPortError error) {
     if (error == QSerialPort::ResourceError) {
@@ -363,11 +373,8 @@ void MainWindow::on_pBStartHarmonics_released()
     if (ui->pBStartHarmonics->text() == "Start") {
         ui->pBStartHarmonics->setText("Stop");
 
-        testModule->stopHarmonicsScan();
-
-        for (long i=0; i!= 10000;i++) { }
-
-        testModule->startHarmonicsScan(VoltageHarmonics);
+        //testModule->stopHarmonicsScan();
+        // testModule->startHarmonicsScan(VoltageHarmonics);
     }
     else {
         ui->pBStartHarmonics->setText("Start");
@@ -414,7 +421,6 @@ void MainWindow::on_pBTriggerHarmonics_released()
     default:
         break;
     }
-
 }
 
 void MainWindow::on_pBClearEnergyL1_released()
@@ -444,10 +450,14 @@ void MainWindow::on_comboBoxCirculationFreq_currentIndexChanged(int index)
 void MainWindow::on_pushButtonOsciStart_released()
 {
    oscillopscope->osciStart();
+   ui->pushButtonOsciStart->setEnabled(false);
+   ui->pushButtonOsciStop->setEnabled(true);
 }
 void MainWindow::on_pushButtonOsciStop_released()
 {
     oscillopscope->osciStop();
+    ui->pushButtonOsciStart->setEnabled(true);
+    ui->pushButtonOsciStop->setEnabled(false);
 }
 void MainWindow::on_pushButtonOsciReset_released()
 {
@@ -546,7 +556,6 @@ void MainWindow::on_comboBoxOsci_currentIndexChanged(const QString &arg1)
 {
 
 }
-
 void MainWindow::on_comboBoxCalType_currentIndexChanged(int index)
 {
     /*
@@ -580,4 +589,15 @@ void MainWindow::on_comboBoxCalType_currentIndexChanged(int index)
         uint32_t IOFFS;			// (11)
     } ICAL;
     */
+}
+void MainWindow::on_comboBoxOsci_currentIndexChanged(int index)
+{
+    switch (index) {
+    case 0: oscillopscope->setVerticalAxisStyle(VoltageAxisStyle); break;
+    case 1: oscillopscope->setVerticalAxisStyle(CurrentAxisStyle); break;
+    case 2: oscillopscope->setVerticalAxisStyle(PPowerAxisStyle); break;
+    case 3: oscillopscope->setVerticalAxisStyle(QPowerAxisStyle); break;
+    case 4: oscillopscope->setVerticalAxisStyle(SPowerAxisStyle); break;
+
+    }
 }
