@@ -90,6 +90,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect (testModule, SIGNAL(harmonicMeasurmentReady()), this, SLOT(on_pBTriggerHarmonics_released()));
 
+
     L1Data = new mDataHandler (this);
     L1Data->add("U1","Vrms");
     L1Data->add("I1","Irms");
@@ -161,9 +162,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     logger.add(LTData);
     logger.add(Common);
     connect (&logger, SIGNAL(newDataLogged(int,qint64)), this, SLOT(updateLoggingInformation(int, qint64)));
+<<<<<<< HEAD
 
     wt500 = new QWT500Widget(this);
     ui->wt500Layout->addWidget(wt500);
+=======
+>>>>>>> master
 
 }
 MainWindow::~MainWindow() {
@@ -556,6 +560,10 @@ void MainWindow::on_comboBoxOsci_currentIndexChanged(const QString &arg1)
 {
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 void MainWindow::on_comboBoxCalType_currentIndexChanged(int index)
 {
     /*
@@ -590,6 +598,7 @@ void MainWindow::on_comboBoxCalType_currentIndexChanged(int index)
     } ICAL;
     */
 }
+<<<<<<< HEAD
 void MainWindow::on_comboBoxOsci_currentIndexChanged(int index)
 {
     switch (index) {
@@ -601,3 +610,5 @@ void MainWindow::on_comboBoxOsci_currentIndexChanged(int index)
 
     }
 }
+=======
+>>>>>>> master

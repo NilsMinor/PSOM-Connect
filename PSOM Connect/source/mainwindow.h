@@ -110,6 +110,10 @@ private slots:
     void handleError(QSerialPort::SerialPortError error);
     void changeStatusbarInformation (QString newInformation);
     void updateLoggingInformation(int actual_line, qint64 file_size);
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     void newPSOMData (void);
 
     void on_pushButtonStartMeasurment_released();
@@ -150,11 +154,14 @@ private slots:
     void on_pushButtonCalibrationHome_released();
     void on_comboBoxOsci_currentIndexChanged(const QString &arg1);
     void on_comboBoxCalType_currentIndexChanged(int index);
+<<<<<<< HEAD
 
     void on_comboBoxOsci_currentIndexChanged(int index);
 
 signals:
     void updateOsci(mDataHandler *L1,mDataHandler *L2,mDataHandler *L3,mDataHandler *LT );
+=======
+>>>>>>> master
 };
 
 #endif // MAINWINDOW_H

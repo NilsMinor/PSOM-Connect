@@ -151,10 +151,17 @@ public:
     QPushButton *pushButtonEVSEHome;
     QWidget *tabCalibration;
     QGridLayout *gridLayout_8;
+<<<<<<< HEAD
     QGroupBox *groupBox_9;
     QVBoxLayout *verticalLayout_5;
     QPushButton *pushButton_2;
     QLineEdit *lineEdit;
+=======
+    QGroupBox *groupBox_7;
+    QGridLayout *gridLayout_12;
+    QTableWidget *tableWidget;
+    QGroupBox *groupBox_9;
+>>>>>>> master
     QGroupBox *groupBox_2;
     QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_6;
@@ -174,9 +181,12 @@ public:
     QLabel *label_9;
     QPushButton *pushButton;
     QPushButton *pushButtonCalibrationHome;
+<<<<<<< HEAD
     QGroupBox *groupBox_7;
     QGridLayout *gridLayout_12;
     QTableWidget *tableWidget;
+=======
+>>>>>>> master
     QMenuBar *menuBar;
     QMenu *menuCalls;
     QMenu *menuTools;
@@ -929,6 +939,7 @@ public:
         gridLayout_8->setSpacing(6);
         gridLayout_8->setContentsMargins(11, 11, 11, 11);
         gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
+<<<<<<< HEAD
         groupBox_9 = new QGroupBox(tabCalibration);
         groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
         verticalLayout_5 = new QVBoxLayout(groupBox_9);
@@ -950,6 +961,60 @@ public:
 
         verticalLayout_5->addWidget(lineEdit);
 
+=======
+        groupBox_7 = new QGroupBox(tabCalibration);
+        groupBox_7->setObjectName(QStringLiteral("groupBox_7"));
+        gridLayout_12 = new QGridLayout(groupBox_7);
+        gridLayout_12->setSpacing(6);
+        gridLayout_12->setContentsMargins(11, 11, 11, 11);
+        gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
+        tableWidget = new QTableWidget(groupBox_7);
+        if (tableWidget->columnCount() < 2)
+            tableWidget->setColumnCount(2);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        if (tableWidget->rowCount() < 12)
+            tableWidget->setRowCount(12);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(1, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(2, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(3, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(4, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(5, __qtablewidgetitem7);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(6, __qtablewidgetitem8);
+        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(7, __qtablewidgetitem9);
+        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(8, __qtablewidgetitem10);
+        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(9, __qtablewidgetitem11);
+        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(10, __qtablewidgetitem12);
+        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(11, __qtablewidgetitem13);
+        tableWidget->setObjectName(QStringLiteral("tableWidget"));
+        sizePolicy.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
+        tableWidget->setSizePolicy(sizePolicy);
+        tableWidget->setAutoScrollMargin(14);
+        tableWidget->horizontalHeader()->setDefaultSectionSize(120);
+
+        gridLayout_12->addWidget(tableWidget, 0, 0, 1, 1);
+
+
+        gridLayout_8->addWidget(groupBox_7, 0, 1, 2, 1);
+
+        groupBox_9 = new QGroupBox(tabCalibration);
+        groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
+>>>>>>> master
 
         gridLayout_8->addWidget(groupBox_9, 1, 0, 1, 1);
 
@@ -1044,6 +1109,7 @@ public:
         pushButtonCalibrationHome->setIconSize(QSize(32, 32));
 
         gridLayout_8->addWidget(groupBox_2, 0, 0, 1, 1);
+<<<<<<< HEAD
 
         groupBox_7 = new QGroupBox(tabCalibration);
         groupBox_7->setObjectName(QStringLiteral("groupBox_7"));
@@ -1094,6 +1160,8 @@ public:
 
 
         gridLayout_8->addWidget(groupBox_7, 0, 1, 2, 1);
+=======
+>>>>>>> master
 
         tabWidget->addTab(tabCalibration, QString());
 
@@ -1151,7 +1219,11 @@ public:
 
         retranslateUi(MainWindow);
 
+<<<<<<< HEAD
         tabWidget->setCurrentIndex(5);
+=======
+        tabWidget->setCurrentIndex(7);
+>>>>>>> master
         pushButtonPanel->setDefault(false);
         pushButtonInformation->setDefault(false);
         pushButtonHarmonics->setDefault(false);
@@ -1323,8 +1395,41 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tabWT500), QApplication::translate("MainWindow", "WT500", Q_NULLPTR));
         pushButtonEVSEHome->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabEVSE), QApplication::translate("MainWindow", "EVSE", Q_NULLPTR));
+<<<<<<< HEAD
         groupBox_9->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Export", Q_NULLPTR));
+=======
+        groupBox_7->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "VCAL", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "SCALE", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->verticalHeaderItem(0);
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->verticalHeaderItem(1);
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->verticalHeaderItem(2);
+        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->verticalHeaderItem(3);
+        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidget->verticalHeaderItem(4);
+        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem7 = tableWidget->verticalHeaderItem(5);
+        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem8 = tableWidget->verticalHeaderItem(6);
+        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem9 = tableWidget->verticalHeaderItem(7);
+        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem10 = tableWidget->verticalHeaderItem(8);
+        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem11 = tableWidget->verticalHeaderItem(9);
+        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem12 = tableWidget->verticalHeaderItem(10);
+        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem13 = tableWidget->verticalHeaderItem(11);
+        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "VOFFS", Q_NULLPTR));
+        groupBox_9->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
+>>>>>>> master
         groupBox_2->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
         label_7->setText(QApplication::translate("MainWindow", "Type", Q_NULLPTR));
         comboBoxCalType->clear();
@@ -1373,6 +1478,7 @@ public:
         label_9->setText(QApplication::translate("MainWindow", "A", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "Next", Q_NULLPTR));
         pushButtonCalibrationHome->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
+<<<<<<< HEAD
         groupBox_7->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "VCAL", Q_NULLPTR));
@@ -1402,6 +1508,8 @@ public:
         ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "400", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem13 = tableWidget->verticalHeaderItem(11);
         ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "VOFFS", Q_NULLPTR));
+=======
+>>>>>>> master
         tabWidget->setTabText(tabWidget->indexOf(tabCalibration), QApplication::translate("MainWindow", "Calibration", Q_NULLPTR));
         menuCalls->setTitle(QApplication::translate("MainWindow", "Calls", Q_NULLPTR));
         menuTools->setTitle(QApplication::translate("MainWindow", "Tools", Q_NULLPTR));

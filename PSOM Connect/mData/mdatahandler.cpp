@@ -17,6 +17,7 @@ void mDataHandler::add(QString nameStr, QString unitStr)
     m_pretty_name.append(nameStr);
     m_dataMap.insert(nameStr, m);
     m_dataList.append(m);
+<<<<<<< HEAD
     if (m_layout != NULL) {
         m_layout->addWidget(m->getWidget());
     }
@@ -27,6 +28,8 @@ void mDataHandler::addNoErr(QString nameStr, QString unitStr)
     m_pretty_name.append(nameStr);
     m_dataMap.insert(nameStr, m);
     m_dataList.append(m);
+=======
+>>>>>>> master
     if (m_layout != NULL) {
         m_layout->addWidget(m->getWidget());
     }
