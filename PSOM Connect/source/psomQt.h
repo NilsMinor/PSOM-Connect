@@ -151,11 +151,12 @@ public:
     PSOM_DebugPacketInfo    getDebugPacketInfo (void) { return psom_hal->getDebugPacketInfo(); }    //! returns debug packet with information about the low level packet
     PSOM_State              getState (void) { return psom_hal->getState(); }        //! returns the module state
     void                        sendSCMD (uint32_t scmd);
+    void                        loadCalibrationData (int phase);
 
     //! FUNCTIONS
     void        startMeasurement (int intervalTime);    //! start the measurment timer
     void        stopMeasurement  (void);                //! stop the measurement timer
-    float       toFloat (uint32_t value);               //! interprets the psom uin32 data to it's respective float value
+    float        toFloat (uint32_t value);               //! interprets the psom uin32 data to it's respective float value
 
     void        setHarmonicsCount (int count);
     void        startHarmonicsScan (HarmonicType type);

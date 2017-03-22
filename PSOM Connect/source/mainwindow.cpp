@@ -39,13 +39,9 @@
 ****************************************************************************/
 
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "console.h"
-#include "settingsdialog.h"
 
-#include <QMessageBox>
-#include <QLabel>
-#include <QtSerialPort/QSerialPort>
+
+
 
 // Serial Port and window functions
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -162,150 +158,20 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     logger.add(LTData);
     logger.add(Common);
     connect (&logger, SIGNAL(newDataLogged(int,qint64)), this, SLOT(updateLoggingInformation(int, qint64)));
-<<<<<<< HEAD
 
-    wt500 = new QWT500Widget(this);
-    ui->wt500Layout->addWidget(wt500);
-=======
->>>>>>> master
+    #ifdef Q_OS_WIN
+        wt500 = new QWT500Widget(NULL);
+        ui->wt500Layout->addWidget(wt500);
+        connect (wt500, SIGNAL(newDataMeasured(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)),
+                        this, SLOT(updateErrorData(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)));
+    #endif
 
+     ui->evseImageWidget->setStyleSheet("background-image: url(:/images/unplugged.png)");
 }
 MainWindow::~MainWindow() {
     delete settings;
     delete ui;
 }
-void MainWindow::openSerialPort() {
-    SettingsDialog::Settings p = settings->settings();
-    serial->setPortName(p.name);
-    serial->setBaudRate(p.baudRate);
-    serial->setDataBits(p.dataBits);
-    serial->setParity(p.parity);
-    serial->setStopBits(p.stopBits);
-    serial->setFlowControl(p.flowControl);
-
-    if (serial->open(QIODevice::ReadWrite)) {
-        console->setEnabled(true);
-        console->setLocalEchoEnabled(p.localEchoEnabled);
-        ui->actionConnect->setEnabled(false);
-        ui->actionDisconnect->setEnabled(true);
-        ui->actionConfigure->setEnabled(false);
-
-        testModule->setSerialConnectionHandler(serial);
-    }
-    else {
-        testModule->setSerialConnectionHandler(NULL);
-        QMessageBox::critical(this, tr("Error"), serial->errorString());
-    }
-}
-void MainWindow::closeSerialPort() {
-    if (serial->isOpen())
-        serial->close();
-
-    if (testModule != NULL)
-        testModule->stopMeasurement();
-
-    console->setEnabled(false);
-    ui->actionConnect->setEnabled(true);
-    ui->actionDisconnect->setEnabled(false);
-    ui->actionConfigure->setEnabled(true);
-}
-void MainWindow::about() {
-    QMessageBox::about(this, tr("About PowerLAB"),
-                       tr("Test software for PSOM"
-                          "® Nils Minor "));
-}
-void MainWindow::writeData(const QByteArray &data) {
-    if (ui->tabWidget->currentIndex() == 0) {
-        serial->write(data);
-    }
-}
-void MainWindow::readData() {
-    //QByteArray *data;
-    //data = new QByteArray(serial->readAll());
-    QByteArray data = serial->readAll();
-    console->putData(data);
-}
-
-void MainWindow::osciTimeout()
-{
-    emit updateOsci(L1Data, L2Data, L3Data, LTData);
-}
-void MainWindow::handleError(QSerialPort::SerialPortError error) {
-    if (error == QSerialPort::ResourceError) {
-        QMessageBox::critical(this, tr("Critical Error"), serial->errorString());
-        closeSerialPort();
-    }
-}
-
-void MainWindow::changeStatusbarInformation(QString newInformation)
-{
-    ui->statusBar->showMessage(newInformation);
-}
-
-void MainWindow::updateLoggingInformation(int actual_line, qint64 file_size)
-{
-    ui->labelLoggingLine->setText(QString::number(actual_line));
-    ui->labelFileSize->setText(QString::number(file_size/1024) + " kB");
-}
-void MainWindow::initActionsConnections()
-{
-    connect(ui->actionConnect, SIGNAL(triggered()), this, SLOT(openSerialPort()));
-    connect(ui->actionDisconnect, SIGNAL(triggered()), this, SLOT(closeSerialPort()));
-    connect(ui->actionQuit, SIGNAL(triggered()), this, SLOT(close()));
-    connect(ui->actionConfigure, SIGNAL(triggered()), settings, SLOT(show()));
-    connect(ui->actionClear, SIGNAL(triggered()), console, SLOT(clear()));
-    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(about()));
-    connect(ui->actionAboutQt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-    connect(ui->actionStart, SIGNAL(triggered()),this, SLOT(on_pushButtonStartMeasurment_released()));
-
-    //
-    connect (ui->actionHarmonics, SIGNAL(triggered( )), this, SLOT(handleActionHarmonics()));
-    connect (ui->actionOscilloscope, SIGNAL(triggered( )), this, SLOT(handleActionOscilloscope()));
-}
-void MainWindow::handleActionOscilloscope (void) {
-    ui->tabWidget->setCurrentIndex(1);
-}
-void MainWindow::handleActionHarmonics (void) {
-    ui->tabWidget->setCurrentIndex(2);
-}
-void MainWindow::sendCommand(QByteArray cmd, double value) {
-   QByteArray msg = cmd;
-   msg.append(":");
-   msg.append(QByteArray::number(value));
-   msg.append(";");
-   serial->write(msg);
-}
-
-void MainWindow::rpiStartup()
-{
-    ui->mainToolBar->hide();
-    ui->toolBar->hide();
-
-    // connect to fixed comport
-    serial->setPortName("/dev/ttyAMA0");
-    serial->setBaudRate(QSerialPort::Baud115200);
-    serial->setDataBits(QSerialPort::Data8);
-    serial->setParity(QSerialPort::OddParity);
-    serial->setStopBits(QSerialPort::OneStop);
-    serial->setFlowControl(QSerialPort::NoFlowControl);
-
-    if (serial->open(QIODevice::ReadWrite)) {
-        console->setEnabled(true);
-        console->setLocalEchoEnabled(false);
-        ui->actionConnect->setEnabled(false);
-        ui->actionDisconnect->setEnabled(true);
-        ui->actionConfigure->setEnabled(false);
-
-        testModule->setSerialConnectionHandler(serial);
-        this->on_pushButtonStartMeasurment_released();
-    }
-    else {
-        testModule->setSerialConnectionHandler(NULL);
-        QMessageBox::critical(this, tr("Error can not connect to COM Port"), serial->errorString());
-    }
-}
-
-// PSOM functions and callback
 
 void MainWindow::newPSOMData(void)
 {
@@ -363,111 +229,9 @@ void MainWindow::newPSOMData(void)
         hc += 2;
     }
 }
-void MainWindow::on_pushButtonStopMeasurment_released () {
-    qDebug() << "Stop testModule";
-    testModule->stopMeasurement();
-}
-void MainWindow::on_pushButtonStartMeasurment_released () {
-    qDebug() << "Start testModule";
-    testModule->startMeasurement(1000/ui->comboBoxCirculationFreq->currentText().toInt());
-}
-
-void MainWindow::on_pBStartHarmonics_released()
-{
-    if (ui->pBStartHarmonics->text() == "Start") {
-        ui->pBStartHarmonics->setText("Stop");
-
-        //testModule->stopHarmonicsScan();
-        // testModule->startHarmonicsScan(VoltageHarmonics);
-    }
-    else {
-        ui->pBStartHarmonics->setText("Start");
-        testModule->stopHarmonicsScan();
-    }
 
 
-    testModule->startMeasurement(100);
-}
-void MainWindow::on_cBHarmonicsType_currentIndexChanged(const QString &arg1)
-{
-    if (arg1 == "Voltage") { harmonics->setVerticalAxisStyle(VoltageAxisStyle);  }
-    else if  (arg1 == "Current")            { harmonics->setVerticalAxisStyle(CurrentAxisStyle); }
-    else if  (arg1 == "Active Power")       { harmonics->setVerticalAxisStyle(PPowerAxisStyle); }
-    else if  (arg1 == "Reactive Power")     { harmonics->setVerticalAxisStyle(QPowerAxisStyle); }
-    else                                    { }
-}
-void MainWindow::on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1)
-{
-    if (arg1 == "Frequency")                { harmonics->setHarmonicsAxisStyle(FrequencyAxisStyle); }
-    else if  (arg1 == "Harmonic")           { harmonics->setHarmonicsAxisStyle(HarmonicNumberAxisStyle); }
-    else                                    { }
-}
-void MainWindow::on_pBSetHarmonicsCount_released()
-{
-    int count = ui->cBHarmonicsCount->currentText().toInt();
-    testModule->setHarmonicsCount(count);
-}
-void MainWindow::on_pBTriggerHarmonics_released()
-{
-    switch (ui->cBHarmonicsType->currentIndex()) {
-    case 0:
-         testModule->startHarmonicsScan(VoltageHarmonics);
-        break;
-    case 1:
-         testModule->startHarmonicsScan(CurrentHarmonics);
-        break;
-    case 2:
-         testModule->startHarmonicsScan(PPowerHarmonics);
-        break;
-    case 3:
-         testModule->startHarmonicsScan(QPowerHarmonics);
-        break;
-    default:
-        break;
-    }
-}
-
-void MainWindow::on_pBClearEnergyL1_released()
-{
-    testModule->sendSCMD(PSOM_SCMD_CLR_ENERGY_L1);
-}
-void MainWindow::on_pBClearEnergyL2_released()
-{
-    testModule->sendSCMD(PSOM_SCMD_CLR_ENERGY_L2);
-}
-void MainWindow::on_pBClearEnergyL3_released()
-{
-    testModule->sendSCMD(PSOM_SCMD_CLR_ENERGY_L3);
-}
-void MainWindow::on_pBClearEnergyLT_released()
-{
-    testModule->sendSCMD(PSOM_SCMD_CLR_ENERGY_ALL);
-}
-
-void MainWindow::on_comboBoxCirculationFreq_currentIndexChanged(int index)
-{
-    Q_UNUSED(index);
-    testModule->stopMeasurement();
-    qDebug() << "Change circulation frequency";
-    testModule->startMeasurement(1000/ui->comboBoxCirculationFreq->currentText().toInt());
-}
-void MainWindow::on_pushButtonOsciStart_released()
-{
-   oscillopscope->osciStart();
-   ui->pushButtonOsciStart->setEnabled(false);
-   ui->pushButtonOsciStop->setEnabled(true);
-}
-void MainWindow::on_pushButtonOsciStop_released()
-{
-    oscillopscope->osciStop();
-    ui->pushButtonOsciStart->setEnabled(true);
-    ui->pushButtonOsciStop->setEnabled(false);
-}
-void MainWindow::on_pushButtonOsciReset_released()
-{
-    oscillopscope->osciReset();
-}
-
+// menu
 void MainWindow::on_pushButtonPanel_released()
 {
     ui->tabWidget->setCurrentIndex(TAB_PANEL);
@@ -484,7 +248,7 @@ void MainWindow::on_pushButtonLogging_released()
 {
     ui->tabWidget->setCurrentIndex(TAB_LOGGING);
 }
-void MainWindow::on_QWT500_released()
+void MainWindow::on_pushButtonQWT500_released()
 {
     ui->tabWidget->setCurrentIndex(TAB_QWT500);
 }
@@ -500,7 +264,9 @@ void MainWindow::on_pushButtonInformation_released()
 {
     QMessageBox messageBox;
      //messageBox.setIcon(QIcon( ":/images/information.svg"));
-     messageBox.setText("This project started as an advancement of ..");
+     messageBox.setText("This software was written as part of the PSOM project. "
+                        "For further Informations check www.nilsminor.de.  "
+                        "THE SOFTWARE IS PROVIDED -AS IS-, WITHOUT WARRANTY OF ANY KIND ");
      messageBox.setWindowTitle("Information");
      messageBox.exec();
 }
@@ -509,106 +275,20 @@ void MainWindow::on_pushButtonExit_released()
     QCoreApplication::quit();
 }
 
-void MainWindow::on_pushButtonStartLogging_released()
-{
-    if (logger.isLogging() == false) {
-        ui->pushButtonLogging->setText("Stop Logging"); // not working
-        int logIntervall = ui->comboBoxLoggingIntervall->currentText().toInt();
-        logger.create(ui->lineEditLogFileName->text());
-        logger.enableLogging(logIntervall);
-        qDebug () << "Logging started";
 
-    }
-    else
-    {
-        logger.disableLogging();
-        qDebug () << "Logging stopped";
-        ui->pushButtonLogging->setText("Start Logging");
-    }
-}
-
-void MainWindow::on_pushButtonPanelHome_released()
-{
-    ui->tabWidget->setCurrentIndex(0);
-}
-void MainWindow::on_pushButtonScopeHome_released()
-{
-    on_pushButtonPanelHome_released();
-}
-void MainWindow::on_pushButtonHarmonicsHome_released()
-{
-    on_pushButtonPanelHome_released();
-}
-void MainWindow::on_pushButtonLoggingHome_released()
-{
-    on_pushButtonPanelHome_released();
-}
+// qwt500
 void MainWindow::on_pushButtonQWT500Home_released()
 {
     on_pushButtonPanelHome_released();
 }
-void MainWindow::on_pushButtonEVSEHome_released()
+void MainWindow::updateErrorData(mDataHandler *L1, mDataHandler *L2, mDataHandler *L3, mDataHandler *LT)
 {
-    on_pushButtonPanelHome_released();
-}
-void MainWindow::on_pushButtonCalibrationHome_released()
-{
-    on_pushButtonPanelHome_released();
+    L1Data->assignTargetDataByList(L1);
+    L2Data->assignTargetDataByList(L2);
+    L3Data->assignTargetDataByList(L3);
+    LTData->assignTargetDataByList(LT);
 }
 
-void MainWindow::on_comboBoxOsci_currentIndexChanged(const QString &arg1)
-{
 
-}
-<<<<<<< HEAD
-=======
 
->>>>>>> master
-void MainWindow::on_comboBoxCalType_currentIndexChanged(int index)
-{
-    /*
-    typedef struct VCAL {
-        uint32_t VCAL_0;		// (0)  0V - 39V
-        uint32_t VCAL_40;		// (1)  40V - 79V
-        uint32_t VCAL_80;		// (2)  80V - 119V
-        uint32_t VCAL_120;	// (3)  120V - 159V
-        uint32_t VCAL_160;	// (4)  160V - 199V
-        uint32_t VCAL_200;	// (5)  200V - 239V
-        uint32_t VCAL_240;	// (6)  240V - 279V
-        uint32_t VCAL_280;	// (7)  280V - 319V
-        uint32_t VCAL_320;	// (8)  320V - 359V
-        uint32_t VCAL_360;	// (9)  360V - 399V
-        uint32_t VCAL_400;	// (10) < 400V
-        uint32_t VOFFS;			// (11)
-    } VCAL;
 
-    typedef struct ICAL {
-        uint32_t ICAL_0;		// (0)  0A - 0,499A
-        uint32_t ICAL_1;		// (1)  1A - 1,999A
-        uint32_t ICAL_2;		// (2)  2A - 3,999A
-        uint32_t ICAL_4;		// (3)  4A - 5,999A
-        uint32_t ICAL_6;		// (4)  5A - 7,999A
-        uint32_t ICAL_8;		// (5)  8A - 9,999A
-        uint32_t ICAL_10;		// (6)  10A - 11,999A
-        uint32_t ICAL_12;		// (7)  12A - 15,999A
-        uint32_t ICAL_16;		// (8)  16A - 19,999A
-        uint32_t ICAL_20;		// (9)  20A - 23,999A
-        uint32_t ICAL_24;		// (10) > 24A
-        uint32_t IOFFS;			// (11)
-    } ICAL;
-    */
-}
-<<<<<<< HEAD
-void MainWindow::on_comboBoxOsci_currentIndexChanged(int index)
-{
-    switch (index) {
-    case 0: oscillopscope->setVerticalAxisStyle(VoltageAxisStyle); break;
-    case 1: oscillopscope->setVerticalAxisStyle(CurrentAxisStyle); break;
-    case 2: oscillopscope->setVerticalAxisStyle(PPowerAxisStyle); break;
-    case 3: oscillopscope->setVerticalAxisStyle(QPowerAxisStyle); break;
-    case 4: oscillopscope->setVerticalAxisStyle(SPowerAxisStyle); break;
-
-    }
-}
-=======
->>>>>>> master

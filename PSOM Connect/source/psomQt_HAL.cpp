@@ -131,7 +131,7 @@ uint8_t    PSOM_HAL::calculateChecksum     (QByteArray dataPtr, uint32_t payload
 }
 void        PSOM_HAL::packCommonPacketInfo  (QByteArray &psomMessage, uint8_t _dataCount, int16_t _regAddr, PSOM_COMMANDS _command) {
     // check size !!!
-    psomMessage[POS_SYNC_HEADER] = PSOM_SYNC_HEADER;        // sync header
+    psomMessage[POS_SYNC_HEADER] = PSOM_SYNC;        // sync header
     psomMessage[POS_DATA_COUNT] = _dataCount;               // amount of 32bit values in payload
     // payload (1)                                          //
     psomMessage[POS_SUB_ID] = subID;                        // sub-ID of target

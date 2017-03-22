@@ -22,5 +22,7 @@
         <file>images/pie-chart.svg</file>
         <file>images/back.svg</file>
         <file>images/home.svg</file>
+        <file>images/unplugged.png</file>
+        <file>images/plugged.png</file>
     </qresource>
 </RCC>

@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_QWT500Widget_t {
-    QByteArrayData data[7];
-    char stringdata0[142];
+    QByteArrayData data[17];
+    char stringdata0[352];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,18 +30,33 @@ struct qt_meta_stringdata_QWT500Widget_t {
 static const qt_meta_stringdata_QWT500Widget_t qt_meta_stringdata_QWT500Widget = {
     {
 QT_MOC_LITERAL(0, 0, 12), // "QWT500Widget"
-QT_MOC_LITERAL(1, 13, 28), // "on_pushButtonSearch_released"
-QT_MOC_LITERAL(2, 42, 0), // ""
-QT_MOC_LITERAL(3, 43, 27), // "on_pushButtonStart_released"
-QT_MOC_LITERAL(4, 71, 37), // "on_comboBoxPeriod_currentInde..."
-QT_MOC_LITERAL(5, 109, 4), // "arg1"
-QT_MOC_LITERAL(6, 114, 27) // "on_pushButtonReset_released"
+QT_MOC_LITERAL(1, 13, 15), // "newDataMeasured"
+QT_MOC_LITERAL(2, 29, 0), // ""
+QT_MOC_LITERAL(3, 30, 13), // "mDataHandler*"
+QT_MOC_LITERAL(4, 44, 2), // "L1"
+QT_MOC_LITERAL(5, 47, 2), // "L2"
+QT_MOC_LITERAL(6, 50, 2), // "L3"
+QT_MOC_LITERAL(7, 53, 2), // "LT"
+QT_MOC_LITERAL(8, 56, 34), // "on_pushButtonQWT500Search_rel..."
+QT_MOC_LITERAL(9, 91, 33), // "on_pushButtonQWT500Start_rele..."
+QT_MOC_LITERAL(10, 125, 33), // "on_pushButtonQWT500Reset_rele..."
+QT_MOC_LITERAL(11, 159, 49), // "on_comboBoxQWT500CurrentRange..."
+QT_MOC_LITERAL(12, 209, 4), // "arg1"
+QT_MOC_LITERAL(13, 214, 49), // "on_comboBoxQWT500VoltageRange..."
+QT_MOC_LITERAL(14, 264, 43), // "on_comboBoxQWT500Period_curre..."
+QT_MOC_LITERAL(15, 308, 26), // "on_pushButtonInfo_released"
+QT_MOC_LITERAL(16, 335, 16) // "newDataAvailable"
 
     },
-    "QWT500Widget\0on_pushButtonSearch_released\0"
-    "\0on_pushButtonStart_released\0"
-    "on_comboBoxPeriod_currentIndexChanged\0"
-    "arg1\0on_pushButtonReset_released"
+    "QWT500Widget\0newDataMeasured\0\0"
+    "mDataHandler*\0L1\0L2\0L3\0LT\0"
+    "on_pushButtonQWT500Search_released\0"
+    "on_pushButtonQWT500Start_released\0"
+    "on_pushButtonQWT500Reset_released\0"
+    "on_comboBoxQWT500CurrentRange_currentIndexChanged\0"
+    "arg1\0on_comboBoxQWT500VoltageRange_currentIndexChanged\0"
+    "on_comboBoxQWT500Period_currentIndexChanged\0"
+    "on_pushButtonInfo_released\0newDataAvailable"
 };
 #undef QT_MOC_LITERAL
 
@@ -51,23 +66,37 @@ static const uint qt_meta_data_QWT500Widget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    4,   59,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x08 /* Private */,
-       3,    0,   35,    2, 0x08 /* Private */,
-       4,    1,   36,    2, 0x08 /* Private */,
-       6,    0,   39,    2, 0x08 /* Private */,
+       8,    0,   68,    2, 0x08 /* Private */,
+       9,    0,   69,    2, 0x08 /* Private */,
+      10,    0,   70,    2, 0x08 /* Private */,
+      11,    1,   71,    2, 0x08 /* Private */,
+      13,    1,   74,    2, 0x08 /* Private */,
+      14,    1,   77,    2, 0x08 /* Private */,
+      15,    0,   80,    2, 0x08 /* Private */,
+      16,    0,   81,    2, 0x08 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3,    4,    5,    6,    7,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    5,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   12,
+    QMetaType::Void, QMetaType::QString,   12,
+    QMetaType::Void, QMetaType::QString,   12,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -79,11 +108,40 @@ void QWT500Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         QWT500Widget *_t = static_cast<QWT500Widget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_pushButtonSearch_released(); break;
-        case 1: _t->on_pushButtonStart_released(); break;
-        case 2: _t->on_comboBoxPeriod_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: _t->on_pushButtonReset_released(); break;
+        case 0: _t->newDataMeasured((*reinterpret_cast< mDataHandler*(*)>(_a[1])),(*reinterpret_cast< mDataHandler*(*)>(_a[2])),(*reinterpret_cast< mDataHandler*(*)>(_a[3])),(*reinterpret_cast< mDataHandler*(*)>(_a[4]))); break;
+        case 1: _t->on_pushButtonQWT500Search_released(); break;
+        case 2: _t->on_pushButtonQWT500Start_released(); break;
+        case 3: _t->on_pushButtonQWT500Reset_released(); break;
+        case 4: _t->on_comboBoxQWT500CurrentRange_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 5: _t->on_comboBoxQWT500VoltageRange_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 6: _t->on_comboBoxQWT500Period_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 7: _t->on_pushButtonInfo_released(); break;
+        case 8: _t->newDataAvailable(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 0:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 3:
+            case 2:
+            case 1:
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< mDataHandler* >(); break;
+            }
+            break;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        void **func = reinterpret_cast<void **>(_a[1]);
+        {
+            typedef void (QWT500Widget::*_t)(mDataHandler * , mDataHandler * , mDataHandler * , mDataHandler * );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&QWT500Widget::newDataMeasured)) {
+                *result = 0;
+                return;
+            }
         }
     }
 }
@@ -113,14 +171,21 @@ int QWT500Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        if (_id < 9)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 9;
     }
     return _id;
+}
+
+// SIGNAL 0
+void QWT500Widget::newDataMeasured(mDataHandler * _t1, mDataHandler * _t2, mDataHandler * _t3, mDataHandler * _t4)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_END_MOC_NAMESPACE

@@ -38,11 +38,7 @@
        </font>
       </property>
       <property name="currentIndex">
-<<<<<<< HEAD
-       <number>5</number>
-=======
-       <number>7</number>
->>>>>>> master
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -292,7 +288,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QPushButton" name="QWT500">
+           <widget class="QPushButton" name="pushButtonQWT500">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -618,6 +614,12 @@
                </item>
                <item row="0" column="0">
                 <widget class="QPushButton" name="pushButtonStartMeasurment">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
@@ -630,6 +632,12 @@
                </item>
                <item row="1" column="0">
                 <widget class="QComboBox" name="comboBoxCirculationFreq">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
@@ -677,6 +685,12 @@
                </item>
                <item row="0" column="1">
                 <widget class="QPushButton" name="pushButtonStopMeasurment">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
@@ -755,7 +769,7 @@
            </size>
           </property>
           <property name="title">
-           <string>GroupBox</string>
+           <string>Scope</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_9">
            <item row="1" column="0">
@@ -790,12 +804,9 @@
            </item>
            <item row="9" column="0" colspan="2">
             <widget class="QPushButton" name="pushButtonOsciStop">
-<<<<<<< HEAD
              <property name="enabled">
               <bool>false</bool>
              </property>
-=======
->>>>>>> master
              <property name="font">
               <font>
                <pointsize>10</pointsize>
@@ -842,7 +853,7 @@
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QCheckBox" name="checkBox_2">
+            <widget class="QCheckBox" name="checkBoxOsciEnableL3">
              <property name="font">
               <font>
                <pointsize>18</pointsize>
@@ -870,7 +881,7 @@
             </spacer>
            </item>
            <item row="3" column="0">
-            <widget class="QCheckBox" name="checkBox_4">
+            <widget class="QCheckBox" name="checkBoxOsciEnableL1">
              <property name="font">
               <font>
                <pointsize>18</pointsize>
@@ -888,7 +899,7 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QCheckBox" name="checkBox_3">
+            <widget class="QCheckBox" name="checkBoxOsciEnableL2">
              <property name="font">
               <font>
                <pointsize>18</pointsize>
@@ -903,7 +914,7 @@
             </widget>
            </item>
            <item row="5" column="1">
-            <widget class="QCheckBox" name="checkBox">
+            <widget class="QCheckBox" name="checkBoxOsciEnableLT">
              <property name="font">
               <font>
                <pointsize>18</pointsize>
@@ -1413,35 +1424,92 @@
        <attribute name="title">
         <string>EVSE</string>
        </attribute>
-       <widget class="QPushButton" name="pushButtonEVSEHome">
-        <property name="geometry">
-         <rect>
-          <x>550</x>
-          <y>200</y>
-          <width>126</width>
-          <height>38</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>    Home</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../PowerLAB.qrc">
-          <normaloff>:/images/home.svg</normaloff>:/images/home.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
-       </widget>
+       <layout class="QGridLayout" name="gridLayout_13">
+        <item row="0" column="0" rowspan="4">
+         <widget class="QWidget" name="evseImageWidget" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>500</width>
+            <height>370</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLCDNumber" name="lcdNumber">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="pushButtonStartCharging">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Start</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButtonStopCharging">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Stop</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="pushButtonEVSEHome">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>    Home</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../PowerLAB.qrc">
+            <normaloff>:/images/home.svg</normaloff>:/images/home.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tabCalibration">
        <attribute name="title">
@@ -1472,12 +1540,6 @@
             </widget>
            </item>
           </layout>
-<<<<<<< HEAD
-=======
-          <zorder>groupBox_7</zorder>
-          <zorder>pushButton_2</zorder>
-          <zorder>lineEdit</zorder>
->>>>>>> master
          </widget>
         </item>
         <item row="0" column="0">
@@ -1756,6 +1818,19 @@
             </size>
            </property>
           </widget>
+          <widget class="QPushButton" name="pushButtonLoadCalibration">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>160</y>
+             <width>91</width>
+             <height>31</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Load</string>
+           </property>
+          </widget>
          </widget>
         </item>
         <item row="0" column="1" rowspan="2">
@@ -1884,8 +1959,6 @@
     <addaction name="actionConfigure"/>
     <addaction name="actionClear"/>
     <addaction name="separator"/>
-    <addaction name="actionOscilloscope"/>
-    <addaction name="actionHarmonics"/>
     <addaction name="separator"/>
     <addaction name="actionStart"/>
    </widget>
@@ -1937,8 +2010,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionHarmonics"/>
-   <addaction name="actionOscilloscope"/>
    <addaction name="actionStart"/>
   </widget>
   <action name="actionAbout">
@@ -2027,30 +2098,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
-   </property>
-  </action>
-  <action name="actionHarmonics">
-   <property name="icon">
-    <iconset resource="../PowerLAB.qrc">
-     <normaloff>:/images/harmonics.png</normaloff>:/images/harmonics.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Harmonics</string>
-   </property>
-   <property name="shortcut">
-    <string>Meta+H</string>
-   </property>
-  </action>
-  <action name="actionOscilloscope">
-   <property name="icon">
-    <iconset resource="../PowerLAB.qrc">
-     <normaloff>:/images/osci.png</normaloff>:/images/osci.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Oscilloscope</string>
-   </property>
-   <property name="shortcut">
-    <string>Meta+O</string>
    </property>
   </action>
   <action name="actionStart">

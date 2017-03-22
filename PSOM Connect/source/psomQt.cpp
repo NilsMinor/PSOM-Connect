@@ -55,7 +55,7 @@ PSOM::~PSOM ( )
  * \param   _ptr_SerialPortHandler  pointer to an initialized QSerialPort object, used for communication
  * \retval  nothing
  */
-void        PSOM::setSerialConnectionHandler (QSerialPort *_ptr_SerialPortHandler)
+void PSOM::setSerialConnectionHandler (QSerialPort *_ptr_SerialPortHandler)
 {
     psom_hal->setSerialConnectionHandler(_ptr_SerialPortHandler);
 }
@@ -63,6 +63,24 @@ void        PSOM::setSerialConnectionHandler (QSerialPort *_ptr_SerialPortHandle
 void PSOM::sendSCMD(uint32_t scmd)
 {
     psom_hal->writeRegister(PSOM_SCOMMAND, scmd, false);
+}
+
+void PSOM::loadCalibrationData(int phase)
+{
+    switch (phase)
+    {
+    case (1):   this->sendSCMD(PSOM_SCMD_CALLOAD_L1);
+        break;
+    case (2):   this->sendSCMD(PSOM_SCMD_CALLOAD_L2);
+        break;
+    case (3):   this->sendSCMD(PSOM_SCMD_CALLOAD_L3);
+        break;
+    }
+
+     // HARM_L1_X contains VCAL data
+    // HARM_L2_X contains ICAL data
+    psom_hal->readRegister(HARM_L1_H1, 24, false);
+
 }
 /**
  * \brief   starts the periodic measurment timer with an interval
@@ -205,14 +223,14 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
         m_data.LT.power.factor = toFloat(data[LT_POWER_FACTOR/4]);
 
         // ENERGY
-        m_data.L1.energy.active = toFloat(data[L1_ENERGY_ACTIVE/4]) / 1000.0;
-        m_data.L2.energy.active = toFloat(data[L2_ENERGY_ACTIVE/4]) / 1000.0;
-        m_data.L3.energy.active = toFloat(data[L3_ENERGY_ACTIVE/4]) / 1000.0;
+        m_data.L1.energy.active = toFloat(data[L1_ENERGY_ACTIVE/4]) / 100000.0;
+        m_data.L2.energy.active = toFloat(data[L2_ENERGY_ACTIVE/4]) / 100000.0 ;
+        m_data.L3.energy.active = toFloat(data[L3_ENERGY_ACTIVE/4]) / 100000.0 ;
         m_data.LT.energy.active = m_data.L1.energy.active + m_data.L2.energy.active + m_data.L3.energy.active ;
 
-        m_data.L1.energy.reactive = toFloat(data[L1_ENERGY_REACTIVE/4]) / 1000.0;
-        m_data.L2.energy.reactive = toFloat(data[L2_ENERGY_REACTIVE/4]) / 1000.0;
-        m_data.L3.energy.reactive = toFloat(data[L3_ENERGY_REACTIVE/4]) / 1000.0;
+        m_data.L1.energy.reactive = toFloat(data[L1_ENERGY_REACTIVE/4]) / 100000.0;
+        m_data.L2.energy.reactive = toFloat(data[L2_ENERGY_REACTIVE/4]) / 100000.0 ;
+        m_data.L3.energy.reactive = toFloat(data[L3_ENERGY_REACTIVE/4]) / 100000.0 ;
         m_data.LT.energy.reactive = m_data.L1.energy.reactive + m_data.L2.energy.reactive + m_data.L3.energy.reactive ;
 
         m_data.L1.energy.cost = toFloat(data[L1_ENERGY_COST/4]);
@@ -242,6 +260,11 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
 
         elapsedTimer.restart();
         emit newPSOMData();
+    }
+    else {
+        for (int i =0; i!= dataCount; i++) {
+             qDebug() << data [i];
+        }
     }
 }
 

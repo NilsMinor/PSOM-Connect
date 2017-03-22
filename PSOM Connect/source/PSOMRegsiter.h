@@ -25,7 +25,7 @@
 #define PSOM_SVERSION1				0
 #define PSOM_SVERSION2				0
 
-#define PSOM_SYNC_HEADER			0xAA
+#define PSOM_SYNC                       0xAA
 
 
 typedef enum 		PSOM_COM_STATE  {
@@ -69,19 +69,6 @@ typedef union PSOM_BigEndianMemory {
     char        charData[4];
 }PSOM_BigEndianMemory;
 
-#define PSOM_DIO_ALL_INPUTS     0xFFFFFFFF
-#define PSOM_DIO_ALL_OFF        0x00000000
-#define PSOM_DIO1               0
-#define PSOM_DIO2               1
-#define PSOM_DIO3               2
-#define PSOM_DIO4               3
-#define PSOM_DIO5               4
-#define PSOM_DIO6               5
-#define PSOM_DIO_INPUT          1
-#define PSOM_DIO_OUTPUT         0
-#define PSOM_DIO_HIGH           1
-#define PSOM_DIO_LOW            0
-
 /* ************ PSOM REGISTER SETUP ************* ************** **/
 #define PSOM_REG_START          	0x0000                  // uint32 - start address of the PSOM registers
 #define PSOM_REG_WRITE_BORDER			PSOM_SUB_ID   					// uint32 - start address of the read/write registers of the PSOM register
@@ -101,6 +88,9 @@ typedef union PSOM_BigEndianMemory {
 #define PSOM_SCMD_CALLIB_I1				0X00000201
 #define PSOM_SCMD_CALLIB_I2				0X00000202
 #define PSOM_SCMD_CALLIB_I3				0X00000203
+#define PSOM_SCMD_CALLOAD_L1			0X00000204
+#define PSOM_SCMD_CALLOAD_L2			0X00000205
+#define PSOM_SCMD_CALLOAD_L3			0X00000206
 #define PSOM_SCMD_CALLIB_T				0X00000500
 #define PSOM_SCMD_CALLIB_F   			0X00000501
 #define PSOM_SCMD_HARM_V 	  			0X00001000

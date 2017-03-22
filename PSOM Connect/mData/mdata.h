@@ -17,6 +17,7 @@ public:
     void setData (float data);
     void setData (float data, float target);
     void setAccuracy (int accuracy);
+    void setTarget (float target);
     float getData (void) { return m_data; }
     float getError (void) { return m_error; }
     QString getName (void) { return m_nameStr; }

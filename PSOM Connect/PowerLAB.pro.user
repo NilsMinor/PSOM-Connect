@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<<<<<<< HEAD
-<!-- Written by QtCreator 4.2.0, 2017-03-18T20:44:28. -->
-=======
-<!-- Written by QtCreator 4.2.0, 2017-03-11T17:36:59. -->
->>>>>>> master
+<!-- Written by QtCreator 4.2.0, 2017-03-22T23:56:15. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -290,7 +286,7 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">PowerLAB</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Admin/ownCloud/Entwicklung/PSOM/Software/PSOM Connect/PowerLAB/PowerLAB.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Admin/ownCloud/Entwicklung/PSOM/Software/PSOM Connect/PSOM Connect/PowerLAB.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">PowerLAB.pro</value>

@@ -20,6 +20,7 @@
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -46,8 +47,6 @@ public:
     QAction *actionConfigure;
     QAction *actionClear;
     QAction *actionQuit;
-    QAction *actionHarmonics;
-    QAction *actionOscilloscope;
     QAction *actionStart;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
@@ -61,7 +60,7 @@ public:
     QPushButton *pushButtonCalibration;
     QPushButton *pushButtonEVSE;
     QPushButton *pushButtonLogging;
-    QPushButton *QWT500;
+    QPushButton *pushButtonQWT500;
     QPushButton *pushButtonScope;
     QPushButton *pushButtonExit;
     QWidget *tabPanel;
@@ -102,11 +101,11 @@ public:
     QPushButton *pushButtonOsciStop;
     QPushButton *pushButtonOsciReset;
     QPushButton *pushButtonScopeHome;
-    QCheckBox *checkBox_2;
+    QCheckBox *checkBoxOsciEnableL3;
     QSpacerItem *verticalSpacer;
-    QCheckBox *checkBox_4;
-    QCheckBox *checkBox_3;
-    QCheckBox *checkBox;
+    QCheckBox *checkBoxOsciEnableL1;
+    QCheckBox *checkBoxOsciEnableL2;
+    QCheckBox *checkBoxOsciEnableLT;
     QComboBox *comboBoxOsci;
     QVBoxLayout *layoutOscilloscope;
     QWidget *tabHarmonics;
@@ -148,20 +147,18 @@ public:
     QVBoxLayout *wt500Layout;
     QPushButton *pushButtonQWT500Home;
     QWidget *tabEVSE;
+    QGridLayout *gridLayout_13;
+    QWidget *evseImageWidget;
+    QLCDNumber *lcdNumber;
+    QPushButton *pushButtonStartCharging;
+    QPushButton *pushButtonStopCharging;
     QPushButton *pushButtonEVSEHome;
     QWidget *tabCalibration;
     QGridLayout *gridLayout_8;
-<<<<<<< HEAD
     QGroupBox *groupBox_9;
     QVBoxLayout *verticalLayout_5;
     QPushButton *pushButton_2;
     QLineEdit *lineEdit;
-=======
-    QGroupBox *groupBox_7;
-    QGridLayout *gridLayout_12;
-    QTableWidget *tableWidget;
-    QGroupBox *groupBox_9;
->>>>>>> master
     QGroupBox *groupBox_2;
     QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_6;
@@ -181,12 +178,10 @@ public:
     QLabel *label_9;
     QPushButton *pushButton;
     QPushButton *pushButtonCalibrationHome;
-<<<<<<< HEAD
+    QPushButton *pushButtonLoadCalibration;
     QGroupBox *groupBox_7;
     QGridLayout *gridLayout_12;
     QTableWidget *tableWidget;
-=======
->>>>>>> master
     QMenuBar *menuBar;
     QMenu *menuCalls;
     QMenu *menuTools;
@@ -237,21 +232,11 @@ public:
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/images/application-exit.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionQuit->setIcon(icon4);
-        actionHarmonics = new QAction(MainWindow);
-        actionHarmonics->setObjectName(QStringLiteral("actionHarmonics"));
-        QIcon icon5;
-        icon5.addFile(QStringLiteral(":/images/harmonics.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionHarmonics->setIcon(icon5);
-        actionOscilloscope = new QAction(MainWindow);
-        actionOscilloscope->setObjectName(QStringLiteral("actionOscilloscope"));
-        QIcon icon6;
-        icon6.addFile(QStringLiteral(":/images/osci.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionOscilloscope->setIcon(icon6);
         actionStart = new QAction(MainWindow);
         actionStart->setObjectName(QStringLiteral("actionStart"));
-        QIcon icon7;
-        icon7.addFile(QStringLiteral(":/images/start.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionStart->setIcon(icon7);
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/images/start.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionStart->setIcon(icon5);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -284,9 +269,9 @@ public:
         pushButtonPanel->setSizePolicy(sizePolicy1);
         pushButtonPanel->setAutoFillBackground(false);
         pushButtonPanel->setInputMethodHints(Qt::ImhNone);
-        QIcon icon8;
-        icon8.addFile(QStringLiteral(":/images/pie-chart.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButtonPanel->setIcon(icon8);
+        QIcon icon6;
+        icon6.addFile(QStringLiteral(":/images/pie-chart.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonPanel->setIcon(icon6);
         pushButtonPanel->setIconSize(QSize(100, 100));
         pushButtonPanel->setAutoDefault(false);
         pushButtonPanel->setFlat(true);
@@ -299,9 +284,9 @@ public:
         pushButtonInformation->setSizePolicy(sizePolicy1);
         pushButtonInformation->setAutoFillBackground(false);
         pushButtonInformation->setInputMethodHints(Qt::ImhNone);
-        QIcon icon9;
-        icon9.addFile(QStringLiteral(":/images/information.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButtonInformation->setIcon(icon9);
+        QIcon icon7;
+        icon7.addFile(QStringLiteral(":/images/information.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonInformation->setIcon(icon7);
         pushButtonInformation->setIconSize(QSize(100, 100));
         pushButtonInformation->setAutoDefault(false);
         pushButtonInformation->setFlat(true);
@@ -314,9 +299,9 @@ public:
         pushButtonHarmonics->setSizePolicy(sizePolicy1);
         pushButtonHarmonics->setAutoFillBackground(false);
         pushButtonHarmonics->setInputMethodHints(Qt::ImhNone);
-        QIcon icon10;
-        icon10.addFile(QStringLiteral(":/images/bar-chart.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButtonHarmonics->setIcon(icon10);
+        QIcon icon8;
+        icon8.addFile(QStringLiteral(":/images/bar-chart.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonHarmonics->setIcon(icon8);
         pushButtonHarmonics->setIconSize(QSize(100, 100));
         pushButtonHarmonics->setAutoDefault(false);
         pushButtonHarmonics->setFlat(true);
@@ -329,9 +314,9 @@ public:
         pushButtonCalibration->setSizePolicy(sizePolicy1);
         pushButtonCalibration->setAutoFillBackground(false);
         pushButtonCalibration->setInputMethodHints(Qt::ImhNone);
-        QIcon icon11;
-        icon11.addFile(QStringLiteral(":/images/calibre.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButtonCalibration->setIcon(icon11);
+        QIcon icon9;
+        icon9.addFile(QStringLiteral(":/images/calibre.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonCalibration->setIcon(icon9);
         pushButtonCalibration->setIconSize(QSize(100, 100));
         pushButtonCalibration->setCheckable(false);
         pushButtonCalibration->setAutoDefault(false);
@@ -345,9 +330,9 @@ public:
         pushButtonEVSE->setSizePolicy(sizePolicy1);
         pushButtonEVSE->setAutoFillBackground(false);
         pushButtonEVSE->setInputMethodHints(Qt::ImhNone);
-        QIcon icon12;
-        icon12.addFile(QStringLiteral(":/images/electric-car.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButtonEVSE->setIcon(icon12);
+        QIcon icon10;
+        icon10.addFile(QStringLiteral(":/images/electric-car.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonEVSE->setIcon(icon10);
         pushButtonEVSE->setIconSize(QSize(100, 100));
         pushButtonEVSE->setAutoDefault(false);
         pushButtonEVSE->setFlat(true);
@@ -360,29 +345,29 @@ public:
         pushButtonLogging->setSizePolicy(sizePolicy1);
         pushButtonLogging->setAutoFillBackground(false);
         pushButtonLogging->setInputMethodHints(Qt::ImhNone);
-        QIcon icon13;
-        icon13.addFile(QStringLiteral(":/images/diskette.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButtonLogging->setIcon(icon13);
+        QIcon icon11;
+        icon11.addFile(QStringLiteral(":/images/diskette.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonLogging->setIcon(icon11);
         pushButtonLogging->setIconSize(QSize(100, 100));
         pushButtonLogging->setAutoDefault(false);
         pushButtonLogging->setFlat(true);
 
         testLayout1->addWidget(pushButtonLogging, 2, 0, 1, 1);
 
-        QWT500 = new QPushButton(tabMenu);
-        QWT500->setObjectName(QStringLiteral("QWT500"));
-        sizePolicy1.setHeightForWidth(QWT500->sizePolicy().hasHeightForWidth());
-        QWT500->setSizePolicy(sizePolicy1);
-        QWT500->setAutoFillBackground(false);
-        QWT500->setInputMethodHints(Qt::ImhNone);
-        QIcon icon14;
-        icon14.addFile(QStringLiteral(":/images/wt500.jpg"), QSize(), QIcon::Normal, QIcon::Off);
-        QWT500->setIcon(icon14);
-        QWT500->setIconSize(QSize(100, 100));
-        QWT500->setAutoDefault(false);
-        QWT500->setFlat(true);
+        pushButtonQWT500 = new QPushButton(tabMenu);
+        pushButtonQWT500->setObjectName(QStringLiteral("pushButtonQWT500"));
+        sizePolicy1.setHeightForWidth(pushButtonQWT500->sizePolicy().hasHeightForWidth());
+        pushButtonQWT500->setSizePolicy(sizePolicy1);
+        pushButtonQWT500->setAutoFillBackground(false);
+        pushButtonQWT500->setInputMethodHints(Qt::ImhNone);
+        QIcon icon12;
+        icon12.addFile(QStringLiteral(":/images/wt500.jpg"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonQWT500->setIcon(icon12);
+        pushButtonQWT500->setIconSize(QSize(100, 100));
+        pushButtonQWT500->setAutoDefault(false);
+        pushButtonQWT500->setFlat(true);
 
-        testLayout1->addWidget(QWT500, 2, 1, 1, 1);
+        testLayout1->addWidget(pushButtonQWT500, 2, 1, 1, 1);
 
         pushButtonScope = new QPushButton(tabMenu);
         pushButtonScope->setObjectName(QStringLiteral("pushButtonScope"));
@@ -390,9 +375,9 @@ public:
         pushButtonScope->setSizePolicy(sizePolicy1);
         pushButtonScope->setAutoFillBackground(false);
         pushButtonScope->setInputMethodHints(Qt::ImhNone);
-        QIcon icon15;
-        icon15.addFile(QStringLiteral(":/images/analytics.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButtonScope->setIcon(icon15);
+        QIcon icon13;
+        icon13.addFile(QStringLiteral(":/images/analytics.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonScope->setIcon(icon13);
         pushButtonScope->setIconSize(QSize(100, 100));
         pushButtonScope->setAutoDefault(false);
         pushButtonScope->setFlat(true);
@@ -405,9 +390,9 @@ public:
         pushButtonExit->setSizePolicy(sizePolicy);
         pushButtonExit->setAutoFillBackground(false);
         pushButtonExit->setInputMethodHints(Qt::ImhNone);
-        QIcon icon16;
-        icon16.addFile(QStringLiteral(":/images/exit.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButtonExit->setIcon(icon16);
+        QIcon icon14;
+        icon14.addFile(QStringLiteral(":/images/exit.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonExit->setIcon(icon14);
         pushButtonExit->setIconSize(QSize(100, 100));
         pushButtonExit->setAutoDefault(false);
         pushButtonExit->setFlat(true);
@@ -562,6 +547,8 @@ public:
 
         pushButtonStartMeasurment = new QPushButton(groupBox);
         pushButtonStartMeasurment->setObjectName(QStringLiteral("pushButtonStartMeasurment"));
+        sizePolicy1.setHeightForWidth(pushButtonStartMeasurment->sizePolicy().hasHeightForWidth());
+        pushButtonStartMeasurment->setSizePolicy(sizePolicy1);
         QFont font2;
         font2.setPointSize(12);
         pushButtonStartMeasurment->setFont(font2);
@@ -570,12 +557,16 @@ public:
 
         comboBoxCirculationFreq = new QComboBox(groupBox);
         comboBoxCirculationFreq->setObjectName(QStringLiteral("comboBoxCirculationFreq"));
+        sizePolicy2.setHeightForWidth(comboBoxCirculationFreq->sizePolicy().hasHeightForWidth());
+        comboBoxCirculationFreq->setSizePolicy(sizePolicy2);
         comboBoxCirculationFreq->setFont(font2);
 
         gridLayout->addWidget(comboBoxCirculationFreq, 1, 0, 1, 1);
 
         pushButtonStopMeasurment = new QPushButton(groupBox);
         pushButtonStopMeasurment->setObjectName(QStringLiteral("pushButtonStopMeasurment"));
+        sizePolicy1.setHeightForWidth(pushButtonStopMeasurment->sizePolicy().hasHeightForWidth());
+        pushButtonStopMeasurment->setSizePolicy(sizePolicy1);
         pushButtonStopMeasurment->setFont(font2);
 
         gridLayout->addWidget(pushButtonStopMeasurment, 0, 1, 1, 1);
@@ -584,9 +575,9 @@ public:
         pushButtonPanelHome->setObjectName(QStringLiteral("pushButtonPanelHome"));
         sizePolicy3.setHeightForWidth(pushButtonPanelHome->sizePolicy().hasHeightForWidth());
         pushButtonPanelHome->setSizePolicy(sizePolicy3);
-        QIcon icon17;
-        icon17.addFile(QStringLiteral(":/images/home.svg"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButtonPanelHome->setIcon(icon17);
+        QIcon icon15;
+        icon15.addFile(QStringLiteral(":/images/home.svg"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButtonPanelHome->setIcon(icon15);
         pushButtonPanelHome->setIconSize(QSize(32, 32));
 
         gridLayout->addWidget(pushButtonPanelHome, 1, 1, 1, 1);
@@ -653,45 +644,45 @@ public:
         pushButtonScopeHome = new QPushButton(groupBox_3);
         pushButtonScopeHome->setObjectName(QStringLiteral("pushButtonScopeHome"));
         pushButtonScopeHome->setMinimumSize(QSize(0, 0));
-        pushButtonScopeHome->setIcon(icon17);
+        pushButtonScopeHome->setIcon(icon15);
         pushButtonScopeHome->setIconSize(QSize(32, 32));
 
         gridLayout_9->addWidget(pushButtonScopeHome, 11, 0, 1, 2);
 
-        checkBox_2 = new QCheckBox(groupBox_3);
-        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
+        checkBoxOsciEnableL3 = new QCheckBox(groupBox_3);
+        checkBoxOsciEnableL3->setObjectName(QStringLiteral("checkBoxOsciEnableL3"));
         QFont font3;
         font3.setPointSize(18);
-        checkBox_2->setFont(font3);
-        checkBox_2->setTristate(false);
+        checkBoxOsciEnableL3->setFont(font3);
+        checkBoxOsciEnableL3->setTristate(false);
 
-        gridLayout_9->addWidget(checkBox_2, 5, 0, 1, 1);
+        gridLayout_9->addWidget(checkBoxOsciEnableL3, 5, 0, 1, 1);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         gridLayout_9->addItem(verticalSpacer, 7, 0, 1, 1);
 
-        checkBox_4 = new QCheckBox(groupBox_3);
-        checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
-        checkBox_4->setFont(font3);
-        checkBox_4->setChecked(true);
-        checkBox_4->setTristate(false);
+        checkBoxOsciEnableL1 = new QCheckBox(groupBox_3);
+        checkBoxOsciEnableL1->setObjectName(QStringLiteral("checkBoxOsciEnableL1"));
+        checkBoxOsciEnableL1->setFont(font3);
+        checkBoxOsciEnableL1->setChecked(true);
+        checkBoxOsciEnableL1->setTristate(false);
 
-        gridLayout_9->addWidget(checkBox_4, 3, 0, 1, 1);
+        gridLayout_9->addWidget(checkBoxOsciEnableL1, 3, 0, 1, 1);
 
-        checkBox_3 = new QCheckBox(groupBox_3);
-        checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
-        checkBox_3->setFont(font3);
-        checkBox_3->setTristate(false);
+        checkBoxOsciEnableL2 = new QCheckBox(groupBox_3);
+        checkBoxOsciEnableL2->setObjectName(QStringLiteral("checkBoxOsciEnableL2"));
+        checkBoxOsciEnableL2->setFont(font3);
+        checkBoxOsciEnableL2->setTristate(false);
 
-        gridLayout_9->addWidget(checkBox_3, 3, 1, 1, 1);
+        gridLayout_9->addWidget(checkBoxOsciEnableL2, 3, 1, 1, 1);
 
-        checkBox = new QCheckBox(groupBox_3);
-        checkBox->setObjectName(QStringLiteral("checkBox"));
-        checkBox->setFont(font3);
-        checkBox->setTristate(false);
+        checkBoxOsciEnableLT = new QCheckBox(groupBox_3);
+        checkBoxOsciEnableLT->setObjectName(QStringLiteral("checkBoxOsciEnableLT"));
+        checkBoxOsciEnableLT->setFont(font3);
+        checkBoxOsciEnableLT->setTristate(false);
 
-        gridLayout_9->addWidget(checkBox, 5, 1, 1, 1);
+        gridLayout_9->addWidget(checkBoxOsciEnableLT, 5, 1, 1, 1);
 
         comboBoxOsci = new QComboBox(groupBox_3);
         comboBoxOsci->setObjectName(QStringLiteral("comboBoxOsci"));
@@ -820,7 +811,7 @@ public:
 
         pushButtonHarmonicsHome = new QPushButton(groupBoxHarmonicsData);
         pushButtonHarmonicsHome->setObjectName(QStringLiteral("pushButtonHarmonicsHome"));
-        pushButtonHarmonicsHome->setIcon(icon17);
+        pushButtonHarmonicsHome->setIcon(icon15);
 
         gridLayout_14->addWidget(pushButtonHarmonicsHome, 7, 0, 1, 5);
 
@@ -894,7 +885,7 @@ public:
         sizePolicy.setHeightForWidth(pushButtonLoggingHome->sizePolicy().hasHeightForWidth());
         pushButtonLoggingHome->setSizePolicy(sizePolicy);
         pushButtonLoggingHome->setMinimumSize(QSize(150, 0));
-        pushButtonLoggingHome->setIcon(icon17);
+        pushButtonLoggingHome->setIcon(icon15);
         pushButtonLoggingHome->setIconSize(QSize(32, 32));
 
         gridLayout_11->addWidget(pushButtonLoggingHome, 0, 3, 3, 1);
@@ -918,7 +909,7 @@ public:
         pushButtonQWT500Home = new QPushButton(tabWT500);
         pushButtonQWT500Home->setObjectName(QStringLiteral("pushButtonQWT500Home"));
         pushButtonQWT500Home->setMinimumSize(QSize(0, 0));
-        pushButtonQWT500Home->setIcon(icon17);
+        pushButtonQWT500Home->setIcon(icon15);
         pushButtonQWT500Home->setIconSize(QSize(32, 32));
 
         verticalLayout_6->addWidget(pushButtonQWT500Home);
@@ -926,12 +917,53 @@ public:
         tabWidget->addTab(tabWT500, QString());
         tabEVSE = new QWidget();
         tabEVSE->setObjectName(QStringLiteral("tabEVSE"));
+        gridLayout_13 = new QGridLayout(tabEVSE);
+        gridLayout_13->setSpacing(6);
+        gridLayout_13->setContentsMargins(11, 11, 11, 11);
+        gridLayout_13->setObjectName(QStringLiteral("gridLayout_13"));
+        evseImageWidget = new QWidget(tabEVSE);
+        evseImageWidget->setObjectName(QStringLiteral("evseImageWidget"));
+        QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(evseImageWidget->sizePolicy().hasHeightForWidth());
+        evseImageWidget->setSizePolicy(sizePolicy6);
+        evseImageWidget->setMinimumSize(QSize(500, 370));
+
+        gridLayout_13->addWidget(evseImageWidget, 0, 0, 4, 1);
+
+        lcdNumber = new QLCDNumber(tabEVSE);
+        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
+        sizePolicy2.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
+        lcdNumber->setSizePolicy(sizePolicy2);
+
+        gridLayout_13->addWidget(lcdNumber, 0, 1, 1, 1);
+
+        pushButtonStartCharging = new QPushButton(tabEVSE);
+        pushButtonStartCharging->setObjectName(QStringLiteral("pushButtonStartCharging"));
+        sizePolicy1.setHeightForWidth(pushButtonStartCharging->sizePolicy().hasHeightForWidth());
+        pushButtonStartCharging->setSizePolicy(sizePolicy1);
+
+        gridLayout_13->addWidget(pushButtonStartCharging, 1, 1, 1, 1);
+
+        pushButtonStopCharging = new QPushButton(tabEVSE);
+        pushButtonStopCharging->setObjectName(QStringLiteral("pushButtonStopCharging"));
+        pushButtonStopCharging->setEnabled(false);
+        sizePolicy1.setHeightForWidth(pushButtonStopCharging->sizePolicy().hasHeightForWidth());
+        pushButtonStopCharging->setSizePolicy(sizePolicy1);
+
+        gridLayout_13->addWidget(pushButtonStopCharging, 2, 1, 1, 1);
+
         pushButtonEVSEHome = new QPushButton(tabEVSE);
         pushButtonEVSEHome->setObjectName(QStringLiteral("pushButtonEVSEHome"));
-        pushButtonEVSEHome->setGeometry(QRect(550, 200, 126, 38));
+        sizePolicy1.setHeightForWidth(pushButtonEVSEHome->sizePolicy().hasHeightForWidth());
+        pushButtonEVSEHome->setSizePolicy(sizePolicy1);
         pushButtonEVSEHome->setMinimumSize(QSize(0, 0));
-        pushButtonEVSEHome->setIcon(icon17);
+        pushButtonEVSEHome->setIcon(icon15);
         pushButtonEVSEHome->setIconSize(QSize(32, 32));
+
+        gridLayout_13->addWidget(pushButtonEVSEHome, 3, 1, 1, 1);
+
         tabWidget->addTab(tabEVSE, QString());
         tabCalibration = new QWidget();
         tabCalibration->setObjectName(QStringLiteral("tabCalibration"));
@@ -939,7 +971,6 @@ public:
         gridLayout_8->setSpacing(6);
         gridLayout_8->setContentsMargins(11, 11, 11, 11);
         gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
-<<<<<<< HEAD
         groupBox_9 = new QGroupBox(tabCalibration);
         groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
         verticalLayout_5 = new QVBoxLayout(groupBox_9);
@@ -953,68 +984,14 @@ public:
 
         lineEdit = new QLineEdit(groupBox_9);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        QSizePolicy sizePolicy6(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(lineEdit->sizePolicy().hasHeightForWidth());
-        lineEdit->setSizePolicy(sizePolicy6);
+        QSizePolicy sizePolicy7(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(lineEdit->sizePolicy().hasHeightForWidth());
+        lineEdit->setSizePolicy(sizePolicy7);
 
         verticalLayout_5->addWidget(lineEdit);
 
-=======
-        groupBox_7 = new QGroupBox(tabCalibration);
-        groupBox_7->setObjectName(QStringLiteral("groupBox_7"));
-        gridLayout_12 = new QGridLayout(groupBox_7);
-        gridLayout_12->setSpacing(6);
-        gridLayout_12->setContentsMargins(11, 11, 11, 11);
-        gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
-        tableWidget = new QTableWidget(groupBox_7);
-        if (tableWidget->columnCount() < 2)
-            tableWidget->setColumnCount(2);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        if (tableWidget->rowCount() < 12)
-            tableWidget->setRowCount(12);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem2);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(1, __qtablewidgetitem3);
-        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(2, __qtablewidgetitem4);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(3, __qtablewidgetitem5);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(4, __qtablewidgetitem6);
-        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(5, __qtablewidgetitem7);
-        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(6, __qtablewidgetitem8);
-        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(7, __qtablewidgetitem9);
-        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(8, __qtablewidgetitem10);
-        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(9, __qtablewidgetitem11);
-        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(10, __qtablewidgetitem12);
-        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(11, __qtablewidgetitem13);
-        tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        sizePolicy.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
-        tableWidget->setSizePolicy(sizePolicy);
-        tableWidget->setAutoScrollMargin(14);
-        tableWidget->horizontalHeader()->setDefaultSectionSize(120);
-
-        gridLayout_12->addWidget(tableWidget, 0, 0, 1, 1);
-
-
-        gridLayout_8->addWidget(groupBox_7, 0, 1, 2, 1);
-
-        groupBox_9 = new QGroupBox(tabCalibration);
-        groupBox_9->setObjectName(QStringLiteral("groupBox_9"));
->>>>>>> master
 
         gridLayout_8->addWidget(groupBox_9, 1, 0, 1, 1);
 
@@ -1105,11 +1082,13 @@ public:
         pushButtonCalibrationHome->setObjectName(QStringLiteral("pushButtonCalibrationHome"));
         pushButtonCalibrationHome->setGeometry(QRect(230, 160, 126, 38));
         pushButtonCalibrationHome->setMinimumSize(QSize(0, 0));
-        pushButtonCalibrationHome->setIcon(icon17);
+        pushButtonCalibrationHome->setIcon(icon15);
         pushButtonCalibrationHome->setIconSize(QSize(32, 32));
+        pushButtonLoadCalibration = new QPushButton(groupBox_2);
+        pushButtonLoadCalibration->setObjectName(QStringLiteral("pushButtonLoadCalibration"));
+        pushButtonLoadCalibration->setGeometry(QRect(30, 160, 91, 31));
 
         gridLayout_8->addWidget(groupBox_2, 0, 0, 1, 1);
-<<<<<<< HEAD
 
         groupBox_7 = new QGroupBox(tabCalibration);
         groupBox_7->setObjectName(QStringLiteral("groupBox_7"));
@@ -1160,8 +1139,6 @@ public:
 
 
         gridLayout_8->addWidget(groupBox_7, 0, 1, 2, 1);
-=======
->>>>>>> master
 
         tabWidget->addTab(tabCalibration, QString());
 
@@ -1204,8 +1181,6 @@ public:
         menuTools->addAction(actionConfigure);
         menuTools->addAction(actionClear);
         menuTools->addSeparator();
-        menuTools->addAction(actionOscilloscope);
-        menuTools->addAction(actionHarmonics);
         menuTools->addSeparator();
         menuTools->addAction(actionStart);
         menuHelp->addAction(actionAbout);
@@ -1213,24 +1188,18 @@ public:
         mainToolBar->addAction(actionDisconnect);
         mainToolBar->addAction(actionConfigure);
         mainToolBar->addAction(actionClear);
-        toolBar->addAction(actionHarmonics);
-        toolBar->addAction(actionOscilloscope);
         toolBar->addAction(actionStart);
 
         retranslateUi(MainWindow);
 
-<<<<<<< HEAD
-        tabWidget->setCurrentIndex(5);
-=======
-        tabWidget->setCurrentIndex(7);
->>>>>>> master
+        tabWidget->setCurrentIndex(1);
         pushButtonPanel->setDefault(false);
         pushButtonInformation->setDefault(false);
         pushButtonHarmonics->setDefault(false);
         pushButtonCalibration->setDefault(false);
         pushButtonEVSE->setDefault(false);
         pushButtonLogging->setDefault(false);
-        QWT500->setDefault(false);
+        pushButtonQWT500->setDefault(false);
         pushButtonScope->setDefault(false);
         pushButtonExit->setDefault(false);
         comboBoxCirculationFreq->setCurrentIndex(1);
@@ -1271,10 +1240,6 @@ public:
         actionClear->setShortcut(QApplication::translate("MainWindow", "Alt+L", Q_NULLPTR));
         actionQuit->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
         actionQuit->setShortcut(QApplication::translate("MainWindow", "Ctrl+Q", Q_NULLPTR));
-        actionHarmonics->setText(QApplication::translate("MainWindow", "&Harmonics", Q_NULLPTR));
-        actionHarmonics->setShortcut(QApplication::translate("MainWindow", "Meta+H", Q_NULLPTR));
-        actionOscilloscope->setText(QApplication::translate("MainWindow", "&Oscilloscope", Q_NULLPTR));
-        actionOscilloscope->setShortcut(QApplication::translate("MainWindow", "Meta+O", Q_NULLPTR));
         actionStart->setText(QApplication::translate("MainWindow", "&Start", Q_NULLPTR));
         actionStart->setShortcut(QApplication::translate("MainWindow", "Meta+S", Q_NULLPTR));
         pushButtonPanel->setText(QApplication::translate("MainWindow", "      Panel", Q_NULLPTR));
@@ -1283,7 +1248,7 @@ public:
         pushButtonCalibration->setText(QApplication::translate("MainWindow", "  Calibration", Q_NULLPTR));
         pushButtonEVSE->setText(QApplication::translate("MainWindow", "       EVSE", Q_NULLPTR));
         pushButtonLogging->setText(QApplication::translate("MainWindow", "    Logging", Q_NULLPTR));
-        QWT500->setText(QApplication::translate("MainWindow", "  QWT500", Q_NULLPTR));
+        pushButtonQWT500->setText(QApplication::translate("MainWindow", "  QWT500", Q_NULLPTR));
         pushButtonScope->setText(QApplication::translate("MainWindow", "     Scope", Q_NULLPTR));
         pushButtonExit->setText(QApplication::translate("MainWindow", "           Exit", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabMenu), QApplication::translate("MainWindow", "Men\303\274", Q_NULLPTR));
@@ -1310,16 +1275,16 @@ public:
         pushButtonStopMeasurment->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
         pushButtonPanelHome->setText(QApplication::translate("MainWindow", "     Home", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabPanel), QApplication::translate("MainWindow", "Panel", Q_NULLPTR));
-        groupBox_3->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
+        groupBox_3->setTitle(QApplication::translate("MainWindow", "Scope", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Type:", Q_NULLPTR));
         pushButtonOsciStart->setText(QApplication::translate("MainWindow", "Start", Q_NULLPTR));
         pushButtonOsciStop->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
         pushButtonOsciReset->setText(QApplication::translate("MainWindow", "Reset", Q_NULLPTR));
         pushButtonScopeHome->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
-        checkBox_2->setText(QApplication::translate("MainWindow", "L3", Q_NULLPTR));
-        checkBox_4->setText(QApplication::translate("MainWindow", "L1", Q_NULLPTR));
-        checkBox_3->setText(QApplication::translate("MainWindow", "L2", Q_NULLPTR));
-        checkBox->setText(QApplication::translate("MainWindow", "LT", Q_NULLPTR));
+        checkBoxOsciEnableL3->setText(QApplication::translate("MainWindow", "L3", Q_NULLPTR));
+        checkBoxOsciEnableL1->setText(QApplication::translate("MainWindow", "L1", Q_NULLPTR));
+        checkBoxOsciEnableL2->setText(QApplication::translate("MainWindow", "L2", Q_NULLPTR));
+        checkBoxOsciEnableLT->setText(QApplication::translate("MainWindow", "LT", Q_NULLPTR));
         comboBoxOsci->clear();
         comboBoxOsci->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "Voltage RMS", Q_NULLPTR)
@@ -1393,43 +1358,12 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tabLogging), QApplication::translate("MainWindow", "Logging", Q_NULLPTR));
         pushButtonQWT500Home->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabWT500), QApplication::translate("MainWindow", "WT500", Q_NULLPTR));
+        pushButtonStartCharging->setText(QApplication::translate("MainWindow", "Start", Q_NULLPTR));
+        pushButtonStopCharging->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
         pushButtonEVSEHome->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabEVSE), QApplication::translate("MainWindow", "EVSE", Q_NULLPTR));
-<<<<<<< HEAD
         groupBox_9->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Export", Q_NULLPTR));
-=======
-        groupBox_7->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "VCAL", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "SCALE", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->verticalHeaderItem(0);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->verticalHeaderItem(1);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->verticalHeaderItem(2);
-        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->verticalHeaderItem(3);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem6 = tableWidget->verticalHeaderItem(4);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem7 = tableWidget->verticalHeaderItem(5);
-        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem8 = tableWidget->verticalHeaderItem(6);
-        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem9 = tableWidget->verticalHeaderItem(7);
-        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem10 = tableWidget->verticalHeaderItem(8);
-        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem11 = tableWidget->verticalHeaderItem(9);
-        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem12 = tableWidget->verticalHeaderItem(10);
-        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem13 = tableWidget->verticalHeaderItem(11);
-        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "VOFFS", Q_NULLPTR));
-        groupBox_9->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
->>>>>>> master
         groupBox_2->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
         label_7->setText(QApplication::translate("MainWindow", "Type", Q_NULLPTR));
         comboBoxCalType->clear();
@@ -1478,7 +1412,7 @@ public:
         label_9->setText(QApplication::translate("MainWindow", "A", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "Next", Q_NULLPTR));
         pushButtonCalibrationHome->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
-<<<<<<< HEAD
+        pushButtonLoadCalibration->setText(QApplication::translate("MainWindow", "Load", Q_NULLPTR));
         groupBox_7->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "VCAL", Q_NULLPTR));
@@ -1508,8 +1442,6 @@ public:
         ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "400", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem13 = tableWidget->verticalHeaderItem(11);
         ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "VOFFS", Q_NULLPTR));
-=======
->>>>>>> master
         tabWidget->setTabText(tabWidget->indexOf(tabCalibration), QApplication::translate("MainWindow", "Calibration", Q_NULLPTR));
         menuCalls->setTitle(QApplication::translate("MainWindow", "Calls", Q_NULLPTR));
         menuTools->setTitle(QApplication::translate("MainWindow", "Tools", Q_NULLPTR));

@@ -6,7 +6,7 @@ mData::mData(QObject *parent, QString nameStr, QString unitStr, bool err)
 {
     m_data = 0;
     m_error = 0;
-    m_accuracy = 3;
+    m_accuracy = 4;
     m_supportError = err;
 
     m_labels.append( new QLabel ( m_nameStr));
@@ -61,6 +61,14 @@ void mData::setAccuracy(int accuracy)
 {
     m_accuracy = accuracy;
     this->setData( m_data,m_target ); // update
+}
+void mData::setTarget(float target)
+{
+    m_target = target;
+    if (m_supportError) {
+        m_error = calcError (m_target);
+        m_labels[3]->setText( QString::number(m_error, 'f', 1) ); // update label
+    }
 }
 float mData::calcError(float target)
 {

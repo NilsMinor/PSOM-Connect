@@ -23,8 +23,6 @@ void mDataLogger::disableLogging(void)
 {
     logging = false;
     m_file->close();
-    m_file = NULL;
-    m_stream = NULL;
     m_timer.stop();
     emit newDataLogged(line_counter, m_file->size());
 }

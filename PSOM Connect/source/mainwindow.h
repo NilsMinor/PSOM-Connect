@@ -39,13 +39,27 @@
 #include <QtSerialPort/qserialport.h>
 #include <QMainWindow>
 #include <QTimer>
+#include <QDebug>
 #include <QHeaderView>
 #include <QMessageBox>
+#include <QLabel>
+#include <QtSerialPort/QSerialPort>
+
+#include "ui_mainwindow.h"
+#include "console.h"
+#include "settingsdialog.h"
+
+
 #include "psomQt.h"
 #include "qOsci/qosci.h"
 #include "mData/mdatahandler.h"
 #include "mData/mdatalogger.h"
-#include "qwt500widget.h"
+
+
+
+#ifdef Q_OS_WIN
+    #include "qwt500widget.h"
+#endif
 
 #define TAB_PANEL                   1
 #define TAB_SCOPE                 2
@@ -84,8 +98,11 @@ private:
     void sendCommand            (QByteArray cmd, double value);
     void updateDebugUIInfo      (void);
 
+#ifdef Q_OS_WIN
+     QWT500Widget    *wt500;
+#endif
+
     PSOM                    *testModule;
-    QWT500Widget    *wt500;
     Ui::MainWindow      *ui;
     Console                  *console;
     SettingsDialog        *settings;
@@ -103,65 +120,77 @@ private:
 private slots:
     void openSerialPort();
     void closeSerialPort();
-    void about();
     void writeData(const QByteArray &data);
     void readData();
-    void osciTimeout (void);
     void handleError(QSerialPort::SerialPortError error);
     void changeStatusbarInformation (QString newInformation);
     void updateLoggingInformation(int actual_line, qint64 file_size);
-<<<<<<< HEAD
-=======
 
->>>>>>> master
     void newPSOMData (void);
 
-    void on_pushButtonStartMeasurment_released();
-    void on_pushButtonStopMeasurment_released();
-
-    void on_pBStartHarmonics_released();
-    void on_cBHarmonicsType_currentIndexChanged(const QString &arg1);
-    void on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1);
-    void on_pBSetHarmonicsCount_released();
-
-    void handleActionOscilloscope (void);
-    void handleActionHarmonics (void);
-    void on_pBTriggerHarmonics_released();
-    void on_pBClearEnergyL1_released();
-    void on_pBClearEnergyL2_released();
-    void on_pBClearEnergyL3_released();
-    void on_pBClearEnergyLT_released();
-    void on_comboBoxCirculationFreq_currentIndexChanged(int index);
-    void on_pushButtonOsciStart_released();
-    void on_pushButtonOsciStop_released();
-    void on_pushButtonOsciReset_released();
+    // menu
     void on_pushButtonPanel_released();
-    void on_pushButtonScope_released();
     void on_pushButtonHarmonics_released();
     void on_pushButtonLogging_released();
-    void on_QWT500_released();
+    void on_pushButtonQWT500_released();
     void on_pushButtonCalibration_released();
     void on_pushButtonInformation_released();
     void on_pushButtonExit_released();
     void on_pushButtonEVSE_released();
-    void on_pushButtonStartLogging_released();
-    void on_pushButtonPanelHome_released();
-    void on_pushButtonScopeHome_released();
-    void on_pushButtonHarmonicsHome_released();
-    void on_pushButtonLoggingHome_released();
-    void on_pushButtonQWT500Home_released();
-    void on_pushButtonEVSEHome_released();
-    void on_pushButtonCalibrationHome_released();
-    void on_comboBoxOsci_currentIndexChanged(const QString &arg1);
-    void on_comboBoxCalType_currentIndexChanged(int index);
-<<<<<<< HEAD
 
+    // panel
+    void on_pushButtonStartMeasurment_released();
+    void on_pushButtonStopMeasurment_released();
+    void on_pBClearEnergyL1_released();
+    void on_pBClearEnergyL2_released();
+    void on_pBClearEnergyL3_released();
+    void on_pBClearEnergyLT_released();
+    void on_pushButtonPanelHome_released();
+    void on_comboBoxCirculationFreq_currentIndexChanged(int index);
+
+    // oscilloscope
+    void on_pushButtonOsciStart_released();
+    void on_pushButtonOsciStop_released();
+    void on_pushButtonOsciReset_released();
+    void on_pushButtonScope_released();
+    void osciTimeout (void);
+    void on_checkBoxOsciEnableL1_released();
+    void on_checkBoxOsciEnableL2_released();
+    void on_checkBoxOsciEnableL3_released();
+    void on_checkBoxOsciEnableLT_released();
+    void on_pushButtonScopeHome_released();
     void on_comboBoxOsci_currentIndexChanged(int index);
 
+    // harmonics
+    void on_pushButtonHarmonicsHome_released();
+    void on_pBStartHarmonics_released();
+    void on_cBHarmonicsType_currentIndexChanged(const QString &arg1);
+    void on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1);
+    void on_pBSetHarmonicsCount_released();
+    void on_pBTriggerHarmonics_released();
+
+    // logging
+    void on_pushButtonStartLogging_released();
+    void on_pushButtonLoggingHome_released();
+
+    // calibration
+    void on_pushButtonCalibrationHome_released();
+    void on_comboBoxCalType_currentIndexChanged(int index);
+    void on_pushButtonLoadCalibration_released();
+
+    // qwt500
+    void on_pushButtonQWT500Home_released();
+    void updateErrorData (mDataHandler *L1, mDataHandler *L2, mDataHandler *L3, mDataHandler *LT);
+
+    // evse
+    void on_pushButtonEVSEHome_released();
+    void on_pushButtonStartCharging_released();
+    void on_pushButtonStopCharging_released();
+
+
 signals:
-    void updateOsci(mDataHandler *L1,mDataHandler *L2,mDataHandler *L3,mDataHandler *LT );
-=======
->>>>>>> master
+    void updateOsci (mDataHandler *L1, mDataHandler *L2, mDataHandler *L3, mDataHandler *LT );
+
 };
 
 #endif // MAINWINDOW_H

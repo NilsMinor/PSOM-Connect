@@ -22,10 +22,12 @@ public:
     QWidget getWidget (void);
     bool setData (QString keyName, float data);
     bool setData (QString keyName, float data, float target);
+    bool setTarget(QString keyName, float target);
     float getData (QString keyName);
     float getError (QString keyName);
     void setAccuracy (int accuracy);
-    int getCount (void);
+    int   getCount (void);
+    void assignTargetDataByList (mDataHandler * target);
     QStringList getPrettyName (void);
     QList<mData *> getMDataList(void);
 
