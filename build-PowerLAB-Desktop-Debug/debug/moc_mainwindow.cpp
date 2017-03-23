@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[67];
-    char stringdata0[1651];
+    QByteArrayData data[68];
+    char stringdata0[1689];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -95,7 +95,8 @@ QT_MOC_LITERAL(62, 1500, 32), // "on_pushButtonQWT500Home_released"
 QT_MOC_LITERAL(63, 1533, 15), // "updateErrorData"
 QT_MOC_LITERAL(64, 1549, 30), // "on_pushButtonEVSEHome_released"
 QT_MOC_LITERAL(65, 1580, 35), // "on_pushButtonStartCharging_re..."
-QT_MOC_LITERAL(66, 1616, 34) // "on_pushButtonStopCharging_rel..."
+QT_MOC_LITERAL(66, 1616, 34), // "on_pushButtonStopCharging_rel..."
+QT_MOC_LITERAL(67, 1651, 37) // "on_pushButtonCalibrateOffset_..."
 
     },
     "MainWindow\0updateOsci\0\0mDataHandler*\0"
@@ -144,7 +145,8 @@ QT_MOC_LITERAL(66, 1616, 34) // "on_pushButtonStopCharging_rel..."
     "on_pushButtonQWT500Home_released\0"
     "updateErrorData\0on_pushButtonEVSEHome_released\0"
     "on_pushButtonStartCharging_released\0"
-    "on_pushButtonStopCharging_released"
+    "on_pushButtonStopCharging_released\0"
+    "on_pushButtonCalibrateOffset_released"
 };
 #undef QT_MOC_LITERAL
 
@@ -154,7 +156,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      52,   14, // methods
+      53,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -162,60 +164,61 @@ static const uint qt_meta_data_MainWindow[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    4,  274,    2, 0x06 /* Public */,
+       1,    4,  279,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    0,  283,    2, 0x08 /* Private */,
-       9,    0,  284,    2, 0x08 /* Private */,
-      10,    1,  285,    2, 0x08 /* Private */,
-      12,    0,  288,    2, 0x08 /* Private */,
-      13,    1,  289,    2, 0x08 /* Private */,
-      16,    1,  292,    2, 0x08 /* Private */,
-      18,    2,  295,    2, 0x08 /* Private */,
-      21,    0,  300,    2, 0x08 /* Private */,
-      22,    0,  301,    2, 0x08 /* Private */,
-      23,    0,  302,    2, 0x08 /* Private */,
-      24,    0,  303,    2, 0x08 /* Private */,
-      25,    0,  304,    2, 0x08 /* Private */,
-      26,    0,  305,    2, 0x08 /* Private */,
-      27,    0,  306,    2, 0x08 /* Private */,
-      28,    0,  307,    2, 0x08 /* Private */,
-      29,    0,  308,    2, 0x08 /* Private */,
-      30,    0,  309,    2, 0x08 /* Private */,
-      31,    0,  310,    2, 0x08 /* Private */,
-      32,    0,  311,    2, 0x08 /* Private */,
-      33,    0,  312,    2, 0x08 /* Private */,
-      34,    0,  313,    2, 0x08 /* Private */,
-      35,    0,  314,    2, 0x08 /* Private */,
-      36,    0,  315,    2, 0x08 /* Private */,
-      37,    1,  316,    2, 0x08 /* Private */,
-      39,    0,  319,    2, 0x08 /* Private */,
-      40,    0,  320,    2, 0x08 /* Private */,
-      41,    0,  321,    2, 0x08 /* Private */,
-      42,    0,  322,    2, 0x08 /* Private */,
-      43,    0,  323,    2, 0x08 /* Private */,
-      44,    0,  324,    2, 0x08 /* Private */,
-      45,    0,  325,    2, 0x08 /* Private */,
-      46,    0,  326,    2, 0x08 /* Private */,
-      47,    0,  327,    2, 0x08 /* Private */,
-      48,    0,  328,    2, 0x08 /* Private */,
-      49,    1,  329,    2, 0x08 /* Private */,
-      50,    0,  332,    2, 0x08 /* Private */,
-      51,    0,  333,    2, 0x08 /* Private */,
-      52,    1,  334,    2, 0x08 /* Private */,
-      54,    1,  337,    2, 0x08 /* Private */,
-      55,    0,  340,    2, 0x08 /* Private */,
-      56,    0,  341,    2, 0x08 /* Private */,
-      57,    0,  342,    2, 0x08 /* Private */,
-      58,    0,  343,    2, 0x08 /* Private */,
-      59,    0,  344,    2, 0x08 /* Private */,
-      60,    1,  345,    2, 0x08 /* Private */,
-      61,    0,  348,    2, 0x08 /* Private */,
-      62,    0,  349,    2, 0x08 /* Private */,
-      63,    4,  350,    2, 0x08 /* Private */,
-      64,    0,  359,    2, 0x08 /* Private */,
-      65,    0,  360,    2, 0x08 /* Private */,
-      66,    0,  361,    2, 0x08 /* Private */,
+       8,    0,  288,    2, 0x08 /* Private */,
+       9,    0,  289,    2, 0x08 /* Private */,
+      10,    1,  290,    2, 0x08 /* Private */,
+      12,    0,  293,    2, 0x08 /* Private */,
+      13,    1,  294,    2, 0x08 /* Private */,
+      16,    1,  297,    2, 0x08 /* Private */,
+      18,    2,  300,    2, 0x08 /* Private */,
+      21,    0,  305,    2, 0x08 /* Private */,
+      22,    0,  306,    2, 0x08 /* Private */,
+      23,    0,  307,    2, 0x08 /* Private */,
+      24,    0,  308,    2, 0x08 /* Private */,
+      25,    0,  309,    2, 0x08 /* Private */,
+      26,    0,  310,    2, 0x08 /* Private */,
+      27,    0,  311,    2, 0x08 /* Private */,
+      28,    0,  312,    2, 0x08 /* Private */,
+      29,    0,  313,    2, 0x08 /* Private */,
+      30,    0,  314,    2, 0x08 /* Private */,
+      31,    0,  315,    2, 0x08 /* Private */,
+      32,    0,  316,    2, 0x08 /* Private */,
+      33,    0,  317,    2, 0x08 /* Private */,
+      34,    0,  318,    2, 0x08 /* Private */,
+      35,    0,  319,    2, 0x08 /* Private */,
+      36,    0,  320,    2, 0x08 /* Private */,
+      37,    1,  321,    2, 0x08 /* Private */,
+      39,    0,  324,    2, 0x08 /* Private */,
+      40,    0,  325,    2, 0x08 /* Private */,
+      41,    0,  326,    2, 0x08 /* Private */,
+      42,    0,  327,    2, 0x08 /* Private */,
+      43,    0,  328,    2, 0x08 /* Private */,
+      44,    0,  329,    2, 0x08 /* Private */,
+      45,    0,  330,    2, 0x08 /* Private */,
+      46,    0,  331,    2, 0x08 /* Private */,
+      47,    0,  332,    2, 0x08 /* Private */,
+      48,    0,  333,    2, 0x08 /* Private */,
+      49,    1,  334,    2, 0x08 /* Private */,
+      50,    0,  337,    2, 0x08 /* Private */,
+      51,    0,  338,    2, 0x08 /* Private */,
+      52,    1,  339,    2, 0x08 /* Private */,
+      54,    1,  342,    2, 0x08 /* Private */,
+      55,    0,  345,    2, 0x08 /* Private */,
+      56,    0,  346,    2, 0x08 /* Private */,
+      57,    0,  347,    2, 0x08 /* Private */,
+      58,    0,  348,    2, 0x08 /* Private */,
+      59,    0,  349,    2, 0x08 /* Private */,
+      60,    1,  350,    2, 0x08 /* Private */,
+      61,    0,  353,    2, 0x08 /* Private */,
+      62,    0,  354,    2, 0x08 /* Private */,
+      63,    4,  355,    2, 0x08 /* Private */,
+      64,    0,  364,    2, 0x08 /* Private */,
+      65,    0,  365,    2, 0x08 /* Private */,
+      66,    0,  366,    2, 0x08 /* Private */,
+      67,    0,  367,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3,    4,    5,    6,    7,
@@ -269,6 +272,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3,    4,    5,    6,    7,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -334,6 +338,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 49: _t->on_pushButtonEVSEHome_released(); break;
         case 50: _t->on_pushButtonStartCharging_released(); break;
         case 51: _t->on_pushButtonStopCharging_released(); break;
+        case 52: _t->on_pushButtonCalibrateOffset_released(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -398,13 +403,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 52)
+        if (_id < 53)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 52;
+        _id -= 53;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 52)
+        if (_id < 53)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 52;
+        _id -= 53;
     }
     return _id;
 }

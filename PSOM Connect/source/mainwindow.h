@@ -188,6 +188,8 @@ private slots:
     void on_pushButtonStopCharging_released();
 
 
+    void on_pushButtonCalibrateOffset_released();
+
 signals:
     void updateOsci (mDataHandler *L1, mDataHandler *L2, mDataHandler *L3, mDataHandler *LT );
 

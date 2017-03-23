@@ -23,7 +23,6 @@ SOURCES += \
     source/settingsdialog.cpp \
     source/psomQt.cpp \
     source/psomQt_HAL.cpp \
-    source/guihandler.cpp \
     qOsci/qosci.cpp \
     qOsci/qoscisignal.cpp \
     qOsci/qcustomplot.cpp \

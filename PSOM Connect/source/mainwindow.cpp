@@ -136,11 +136,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->layoutPhaseLT->addWidget(LTData);
 
     HData = new mDataHandler (this);
-    int hc = 1;
+
     for (int i=1; i<=10;i++) {
-        QString name = "H" + QString::number(hc);
+        QString name = "H" + QString::number(i);
         HData->add(name, "");
-        hc += 2;
     }
     ui->harmonicsDataLayout->addWidget(HData);
 
@@ -288,6 +287,8 @@ void MainWindow::updateErrorData(mDataHandler *L1, mDataHandler *L2, mDataHandle
     L3Data->assignTargetDataByList(L3);
     LTData->assignTargetDataByList(LT);
 }
+
+
 
 
 

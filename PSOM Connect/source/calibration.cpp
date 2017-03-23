@@ -42,3 +42,15 @@ void MainWindow::on_pushButtonCalibrationHome_released()
 {
     on_pushButtonPanelHome_released();
 }
+void MainWindow::on_pushButtonCalibrateOffset_released()
+{
+    switch (ui->comboBoxCalPhase->currentIndex())
+    {
+    case (0):   testModule->sendSCMD(PSOM_SCMD_CALLIB_OFF1);    // Calibrate OFFSET of L1
+        break;
+    case (1):   testModule->sendSCMD(PSOM_SCMD_CALLIB_OFF2);    // Calibrate OFFSET of L1
+        break;
+    case (2):   testModule->sendSCMD(PSOM_SCMD_CALLIB_OFF3);    // Calibrate OFFSET of L1
+        break;
+    }
+}

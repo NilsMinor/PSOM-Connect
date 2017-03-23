@@ -38,7 +38,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1558,7 +1558,7 @@
             <rect>
              <x>10</x>
              <y>60</y>
-             <width>216</width>
+             <width>302</width>
              <height>29</height>
             </rect>
            </property>
@@ -1588,6 +1588,13 @@
              <widget class="QPushButton" name="pushButton_3">
               <property name="text">
                <string>Calibrate</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonCalibrateOffset">
+              <property name="text">
+               <string>Offset</string>
               </property>
              </widget>
             </item>

@@ -165,6 +165,7 @@ public:
     QLabel *label_7;
     QComboBox *comboBoxCalType;
     QPushButton *pushButton_3;
+    QPushButton *pushButtonCalibrateOffset;
     QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_7;
     QLabel *label_6;
@@ -1001,7 +1002,7 @@ public:
         groupBox_2->setSizePolicy(sizePolicy);
         layoutWidget = new QWidget(groupBox_2);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 60, 216, 29));
+        layoutWidget->setGeometry(QRect(10, 60, 302, 29));
         horizontalLayout_6 = new QHBoxLayout(layoutWidget);
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
@@ -1021,6 +1022,11 @@ public:
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
 
         horizontalLayout_6->addWidget(pushButton_3);
+
+        pushButtonCalibrateOffset = new QPushButton(layoutWidget);
+        pushButtonCalibrateOffset->setObjectName(QStringLiteral("pushButtonCalibrateOffset"));
+
+        horizontalLayout_6->addWidget(pushButtonCalibrateOffset);
 
         layoutWidget1 = new QWidget(groupBox_2);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
@@ -1192,7 +1198,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(7);
         pushButtonPanel->setDefault(false);
         pushButtonInformation->setDefault(false);
         pushButtonHarmonics->setDefault(false);
@@ -1372,6 +1378,7 @@ public:
          << QApplication::translate("MainWindow", "Current [A]", Q_NULLPTR)
         );
         pushButton_3->setText(QApplication::translate("MainWindow", "Calibrate", Q_NULLPTR));
+        pushButtonCalibrateOffset->setText(QApplication::translate("MainWindow", "Offset", Q_NULLPTR));
         label_6->setText(QApplication::translate("MainWindow", "Phase", Q_NULLPTR));
         comboBoxCalPhase->clear();
         comboBoxCalPhase->insertItems(0, QStringList()

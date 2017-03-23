@@ -198,7 +198,7 @@ void qOsci::initAsHarmonics (void) {
 }
 void qOsci::setHarmonics(float *data, float freq, int count, int active) {
 
-    int size = 2 * count;
+    int size = count;
     int max = 0;
     bool showFrequency = true;
     QVector<double> x(size), y(size),  frequency(count);
@@ -209,21 +209,16 @@ void qOsci::setHarmonics(float *data, float freq, int count, int active) {
     if (true)
     {
     int dataCounter = 0;
-    for (int i= 0; i!= size -1; i++) {
+    for (int i= 0; i!= size -1; i++)
+    {
         x[i] = i;
-        if (i%2 == 0) {
+        y[i] = data[dataCounter];    // add data
+        // find max value
+        if (y[i] > max)
+            max = y[i];
 
-            y[i] = data[dataCounter];    // add data
-            // find max value
-            if (y[i] > max)
-                max = y[i];
-
-            frequency[dataCounter] = freq * (i+1);  // calculate frequency
-            dataCounter++; // increment data counter
-        }
-        else {
-            y[i] = 0;
-        }
+        frequency[dataCounter] = freq * (i+1);  // calculate frequency
+        dataCounter++; // increment data counter
     }
 
     // resize
@@ -236,7 +231,7 @@ void qOsci::setHarmonics(float *data, float freq, int count, int active) {
     QVector<QString> labels;
 
     dataCounter = 0;
-    for (int i=0; i!= size; i+=2) {
+    for (int i=0; i!= size; i++) {
         ticks << i;
 
         if (harmonicsAxisStyle == FrequencyAxisStyle)

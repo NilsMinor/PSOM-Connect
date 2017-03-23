@@ -25,7 +25,7 @@
 #define PSOM_SVERSION1				0
 #define PSOM_SVERSION2				0
 
-#define PSOM_SYNC                       0xAA
+#define PSOM_SYNC							0xAA
 
 
 typedef enum 		PSOM_COM_STATE  {
@@ -72,7 +72,7 @@ typedef union PSOM_BigEndianMemory {
 /* ************ PSOM REGISTER SETUP ************* ************** **/
 #define PSOM_REG_START          	0x0000                  // uint32 - start address of the PSOM registers
 #define PSOM_REG_WRITE_BORDER			PSOM_SUB_ID   					// uint32 - start address of the read/write registers of the PSOM register
-#define PSOM_REG_QUANTITY       	(HARM_L3_H21 + 4)       // uint32 - amount of regitsers used by the PSOM register, equals to the last read only register
+#define PSOM_REG_QUANTITY       	(HARM_L3_H11 + 4)       // uint32 - amount of regitsers used by the PSOM register, equals to the last read only register
 #define PSOM_REGISTER_COUNT       110 										// uint32 -
 
 /* ************ PSOM COMMANDS *********************************** */
@@ -91,6 +91,9 @@ typedef union PSOM_BigEndianMemory {
 #define PSOM_SCMD_CALLOAD_L1			0X00000204
 #define PSOM_SCMD_CALLOAD_L2			0X00000205
 #define PSOM_SCMD_CALLOAD_L3			0X00000206
+#define PSOM_SCMD_CALLIB_OFF1			0X00000301
+#define PSOM_SCMD_CALLIB_OFF2			0X00000302
+#define PSOM_SCMD_CALLIB_OFF3			0X00000303
 #define PSOM_SCMD_CALLIB_T				0X00000500
 #define PSOM_SCMD_CALLIB_F   			0X00000501
 #define PSOM_SCMD_HARM_V 	  			0X00001000
@@ -188,38 +191,38 @@ typedef union PSOM_BigEndianMemory {
 #define L3_ENERGY_COST            0x0130   		// float - $/€ - energy costs of phase 3
 /* ************ ENERGY  ************ ************ ************** **/
 #define HARM_L1_H1            		0x0134   		// float - ?? - harmonic 1
-#define HARM_L1_H3            		0x0138			// float - ?? - harmonic 2
-#define HARM_L1_H5            		0x013C   		// float - ?? - harmonic 3
-#define HARM_L1_H7            		0x0140   		// float - ?? - harmonic 4
-#define HARM_L1_H9            		0x0144   		// float - ?? - harmonic 5
-#define HARM_L1_H11            		0x0148   		// float - ?? - harmonic 6
-#define HARM_L1_H13            		0x014C   		// float - ?? - harmonic 7
-#define HARM_L1_H15            		0x0150   		// float - ?? - harmonic 8
-#define HARM_L1_H17            		0x0154   		// float - ?? - harmonic 9
-#define HARM_L1_H19            		0x0158   		// float - ?? - harmonic 10
-#define HARM_L1_H21            		0x015C   		// float - ?? - harmonic 11
+#define HARM_L1_H2            		0x0138			// float - ?? - harmonic 2
+#define HARM_L1_H3            		0x013C   		// float - ?? - harmonic 3
+#define HARM_L1_H4            		0x0140   		// float - ?? - harmonic 4
+#define HARM_L1_H5            		0x0144   		// float - ?? - harmonic 5
+#define HARM_L1_H6            		0x0148   		// float - ?? - harmonic 6
+#define HARM_L1_H7            		0x014C   		// float - ?? - harmonic 7
+#define HARM_L1_H8            		0x0150   		// float - ?? - harmonic 8
+#define HARM_L1_H9            		0x0154   		// float - ?? - harmonic 9
+#define HARM_L1_H10            		0x0158   		// float - ?? - harmonic 10
+#define HARM_L1_H11            		0x015C   		// float - ?? - harmonic 11
 #define HARM_L2_H1            		0x0160   		// float - ?? - harmonic 1
-#define HARM_L2_H3            		0x0164   		// float - ?? - harmonic 2
-#define HARM_L2_H5            		0x0168   		// float - ?? - harmonic 3
-#define HARM_L2_H7            		0x016C   		// float - ?? - harmonic 4
-#define HARM_L2_H9            		0x0170   		// float - ?? - harmonic 5
-#define HARM_L2_H11            		0x0174   		// float - ?? - harmonic 6
-#define HARM_L2_H13            		0x0178   		// float - ?? - harmonic 7
-#define HARM_L2_H15            		0x017C   		// float - ?? - harmonic 8
-#define HARM_L2_H17            		0x0180   		// float - ?? - harmonic 9
-#define HARM_L2_H19            		0x0184      // float - ?? - harmonic 10
-#define HARM_L2_H21            		0x0188   		// float - ?? - harmonic 11
+#define HARM_L2_H2            		0x0164   		// float - ?? - harmonic 2
+#define HARM_L2_H3            		0x0168   		// float - ?? - harmonic 3
+#define HARM_L2_H4            		0x016C   		// float - ?? - harmonic 4
+#define HARM_L2_H5            		0x0170   		// float - ?? - harmonic 5
+#define HARM_L2_H6            		0x0174   		// float - ?? - harmonic 6
+#define HARM_L2_H7            		0x0178   		// float - ?? - harmonic 7
+#define HARM_L2_H8            		0x017C   		// float - ?? - harmonic 8
+#define HARM_L2_H9            		0x0180   		// float - ?? - harmonic 9
+#define HARM_L2_H10            		0x0184      // float - ?? - harmonic 10
+#define HARM_L2_H11            		0x0188   		// float - ?? - harmonic 11
 #define HARM_L3_H1            		0x018C   		// float - ?? - harmonic 1
-#define HARM_L3_H3            		0x0190   		// float - ?? - harmonic 2
-#define HARM_L3_H5            		0x0194   		// float - ?? - harmonic 3
-#define HARM_L3_H7            		0x0198   		// float - ?? - harmonic 4
-#define HARM_L3_H9            		0x019C   		// float - ?? - harmonic 5
-#define HARM_L3_H11            		0x01A0   		// float - ?? - harmonic 6
-#define HARM_L3_H13            		0x01A4   		// float - ?? - harmonic 7
-#define HARM_L3_H15            		0x01A8   		// float - ?? - harmonic 8
-#define HARM_L3_H17            		0x01AC   		// float - ?? - harmonic 9
-#define HARM_L3_H19            		0x01B0   		// float - ?? - harmonic 10
-#define HARM_L3_H21            		0x01B4   		// float - ?? - harmonic 11
+#define HARM_L3_H2            		0x0190   		// float - ?? - harmonic 2
+#define HARM_L3_H3            		0x0194   		// float - ?? - harmonic 3
+#define HARM_L3_H4            		0x0198   		// float - ?? - harmonic 4
+#define HARM_L3_H5            		0x019C   		// float - ?? - harmonic 5
+#define HARM_L3_H6            		0x01A0   		// float - ?? - harmonic 6
+#define HARM_L3_H7            		0x01A4   		// float - ?? - harmonic 7
+#define HARM_L3_H8            		0x01A8   		// float - ?? - harmonic 8
+#define HARM_L3_H9            		0x01AC   		// float - ?? - harmonic 9
+#define HARM_L3_H10            		0x01B0   		// float - ?? - harmonic 10
+#define HARM_L3_H11            		0x01B4   		// float - ?? - harmonic 11
 
 
 #endif /* [] END OF FILE */
