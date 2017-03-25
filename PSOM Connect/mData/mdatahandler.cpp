@@ -42,6 +42,14 @@ void mDataHandler::print()
         m_dataIter.value()->print();
     }
 }
+void mDataHandler::assignTargetDataByList(mDataHandler *target)
+{
+    foreach(mData * target, target->getMDataList()) {
+        this->setTarget(target->getName(),  // use name as key
+                                    target->getData()); // get Data
+    }
+}
+
 bool mDataHandler::setData(QString keyName, float data)
 {
     if (!m_dataMap.contains(keyName))
@@ -70,7 +78,6 @@ bool mDataHandler::setData(QString keyName, float data, float target)
     m_dataMap.value(keyName)->setData(data,target);
     return true;
 }
-
 bool mDataHandler::setTarget(QString keyName, float target)
 {
     if (!m_dataMap.contains(keyName))
@@ -83,6 +90,24 @@ bool mDataHandler::setTarget(QString keyName, float target)
     }
     m_dataMap.value(keyName)->setTarget(target);
     return true;
+}
+void mDataHandler::setAccuracy(int accuracy)
+{
+    QMapIterator<QString, mData*> m_dataIter (m_dataMap);
+    while(m_dataIter.hasNext())
+    {
+        m_dataIter.next();
+        m_dataIter.value()->setAccuracy(accuracy);
+    }
+}
+void mDataHandler::setErrorStyle(ERR_STYLE style)
+{
+    QMapIterator<QString, mData*> m_dataIter (m_dataMap);
+    while(m_dataIter.hasNext())
+    {
+        m_dataIter.next();
+        m_dataIter.value()->setErrorStyle(style);
+    }
 }
 
 float mDataHandler::getData(QString keyName)
@@ -99,29 +124,10 @@ float mDataHandler::getError(QString keyName)
     else
         return -1;
 }
-void mDataHandler::setAccuracy(int accuracy)
-{
-    QMapIterator<QString, mData*> m_dataIter (m_dataMap);
-    while(m_dataIter.hasNext())
-    {
-        m_dataIter.next();
-        m_dataIter.value()->setAccuracy(accuracy);
-    }
-}
-
 int mDataHandler::getCount()
 {
     return m_dataMap.count();
 }
-
-void mDataHandler::assignTargetDataByList(mDataHandler *target)
-{
-    foreach(mData * target, target->getMDataList()) {
-        this->setTarget(target->getName(),  // use name as key
-                                    target->getData()); // get Data
-    }
-}
-
 QStringList mDataHandler::getPrettyName()
 {
     return m_pretty_name;

@@ -38,7 +38,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -609,9 +609,6 @@
                <property name="sizeConstraint">
                 <enum>QLayout::SetMinimumSize</enum>
                </property>
-               <item row="2" column="0" colspan="2">
-                <widget class="QWidget" name="tabTerminal" native="true"/>
-               </item>
                <item row="0" column="0">
                 <widget class="QPushButton" name="pushButtonStartMeasurment">
                  <property name="sizePolicy">
@@ -627,6 +624,77 @@
                  </property>
                  <property name="text">
                   <string>Start</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QPushButton" name="pushButtonStopMeasurment">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Stop</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QComboBox" name="comboBoxErrorStyle">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Absolute error</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Relative error %</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Absolute error %</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QPushButton" name="pushButtonPanelHome">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>     Home</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../PowerLAB.qrc">
+                   <normaloff>:/images/home.svg</normaloff>:/images/home.svg</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>32</width>
+                   <height>32</height>
+                  </size>
                  </property>
                 </widget>
                </item>
@@ -683,46 +751,8 @@
                  </item>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QPushButton" name="pushButtonStopMeasurment">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>12</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Stop</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QPushButton" name="pushButtonPanelHome">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>     Home</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="../PowerLAB.qrc">
-                   <normaloff>:/images/home.svg</normaloff>:/images/home.svg</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>32</width>
-                   <height>32</height>
-                  </size>
-                 </property>
-                </widget>
+               <item row="2" column="0">
+                <widget class="QWidget" name="tabTerminal" native="true"/>
                </item>
               </layout>
              </item>
@@ -1243,8 +1273,64 @@
         <string>Logging</string>
        </attribute>
        <layout class="QFormLayout" name="formLayout">
-        <item row="0" column="0">
+        <item row="0" column="0" colspan="2">
          <layout class="QGridLayout" name="gridLayout_11">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMinimumSize</enum>
+          </property>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_13">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Size:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="labelFileSize">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3" rowspan="3">
+           <widget class="QPushButton" name="pushButtonLoggingHome">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Home</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../PowerLAB.qrc">
+              <normaloff>:/images/home.svg</normaloff>:/images/home.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_12">
             <property name="font">
@@ -1330,56 +1416,52 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_13">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
+          <item row="3" column="3">
+           <widget class="QPushButton" name="pushButtonSingleLog">
             <property name="text">
-             <string>Size:</string>
+             <string>Single Log</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="labelFileSize">
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <layout class="QGridLayout" name="gridLayout_18">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMaximumSize</enum>
+          </property>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="checkBox_3">
             <property name="text">
-             <string>0</string>
+             <string>CheckBox</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="3" rowspan="3">
-           <widget class="QPushButton" name="pushButtonLoggingHome">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>150</width>
-              <height>0</height>
-             </size>
-            </property>
+          <item row="0" column="3">
+           <widget class="QCheckBox" name="checkBox_2">
             <property name="text">
-             <string>Home</string>
+             <string>CheckBox</string>
             </property>
-            <property name="icon">
-             <iconset resource="../PowerLAB.qrc">
-              <normaloff>:/images/home.svg</normaloff>:/images/home.svg</iconset>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="checkBox">
+            <property name="text">
+             <string>CheckBox</string>
             </property>
-            <property name="iconSize">
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="checkBox_4">
+            <property name="text">
+             <string>CheckBox</string>
             </property>
            </widget>
           </item>
@@ -1558,43 +1640,28 @@
             <rect>
              <x>10</x>
              <y>60</y>
-             <width>302</width>
-             <height>29</height>
+             <width>351</width>
+             <height>26</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Type</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="comboBoxCalType">
-              <item>
-               <property name="text">
-                <string>Voltage [V]</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Current [A]</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_3">
-              <property name="text">
-               <string>Calibrate</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QPushButton" name="pushButtonCalibrateOffset">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Offset</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonCalibrateGain">
+              <property name="text">
+               <string>Calibrate</string>
               </property>
              </widget>
             </item>
@@ -1605,19 +1672,12 @@
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>111</width>
-             <height>29</height>
+             <width>351</width>
+             <height>26</height>
             </rect>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_7">
-            <item>
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>Phase</string>
-              </property>
-             </widget>
-            </item>
-            <item>
+           <layout class="QGridLayout" name="gridLayout_15">
+            <item row="0" column="1">
              <widget class="QComboBox" name="comboBoxCalPhase">
               <item>
                <property name="text">
@@ -1636,6 +1696,34 @@
               </item>
              </widget>
             </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Phase</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QComboBox" name="comboBoxCalType">
+              <item>
+               <property name="text">
+                <string>Voltage [V]</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Current [A]</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Type</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="layoutWidget">
@@ -1643,20 +1731,47 @@
             <rect>
              <x>10</x>
              <y>90</y>
-             <width>348</width>
-             <height>29</height>
+             <width>351</width>
+             <height>26</height>
             </rect>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
+           <layout class="QGridLayout" name="gridLayout_16">
+            <item row="0" column="5">
+             <widget class="QPushButton" name="pushButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Next</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>A</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>V</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
              <widget class="QLabel" name="label_10">
               <property name="text">
                <string>Calibration Target</string>
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QComboBox" name="comboBox_3">
+            <item row="0" column="1">
+             <widget class="QComboBox" name="comboBoxVoltageCalValue">
               <item>
                <property name="text">
                 <string>0</string>
@@ -1714,15 +1829,8 @@
               </item>
              </widget>
             </item>
-            <item>
-             <widget class="QLabel" name="label_8">
-              <property name="text">
-               <string>V</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="comboBox_4">
+            <item row="0" column="3">
+             <widget class="QComboBox" name="comboBoxCurrentCalValue">
               <item>
                <property name="text">
                 <string>0</string>
@@ -1778,20 +1886,6 @@
                 <string>24</string>
                </property>
               </item>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_9">
-              <property name="text">
-               <string>A</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton">
-              <property name="text">
-               <string>Next</string>
-              </property>
              </widget>
             </item>
            </layout>

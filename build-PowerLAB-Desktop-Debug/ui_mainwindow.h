@@ -16,6 +16,7 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFormLayout>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -86,11 +87,12 @@ public:
     QGridLayout *gridLayout_4;
     QHBoxLayout *layoutCommonPanelData;
     QGridLayout *gridLayout;
-    QWidget *tabTerminal;
     QPushButton *pushButtonStartMeasurment;
-    QComboBox *comboBoxCirculationFreq;
     QPushButton *pushButtonStopMeasurment;
+    QComboBox *comboBoxErrorStyle;
     QPushButton *pushButtonPanelHome;
+    QComboBox *comboBoxCirculationFreq;
+    QWidget *tabTerminal;
     QSpacerItem *horizontalSpacer;
     QWidget *tabScope;
     QGridLayout *gridLayout_3;
@@ -134,14 +136,21 @@ public:
     QWidget *tabLogging;
     QFormLayout *formLayout;
     QGridLayout *gridLayout_11;
+    QLabel *label_13;
+    QLabel *labelFileSize;
+    QPushButton *pushButtonLoggingHome;
     QLabel *label_12;
     QLineEdit *lineEditLogFileName;
     QLabel *labelLoggingLine;
     QComboBox *comboBoxLoggingIntervall;
     QPushButton *pushButtonStartLogging;
-    QLabel *label_13;
-    QLabel *labelFileSize;
-    QPushButton *pushButtonLoggingHome;
+    QPushButton *pushButtonSingleLog;
+    QFrame *line;
+    QGridLayout *gridLayout_18;
+    QCheckBox *checkBox_3;
+    QCheckBox *checkBox_2;
+    QCheckBox *checkBox;
+    QCheckBox *checkBox_4;
     QWidget *tabWT500;
     QVBoxLayout *verticalLayout_6;
     QVBoxLayout *wt500Layout;
@@ -162,22 +171,22 @@ public:
     QGroupBox *groupBox_2;
     QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_6;
-    QLabel *label_7;
-    QComboBox *comboBoxCalType;
-    QPushButton *pushButton_3;
     QPushButton *pushButtonCalibrateOffset;
+    QPushButton *pushButtonCalibrateGain;
     QWidget *layoutWidget1;
-    QHBoxLayout *horizontalLayout_7;
-    QLabel *label_6;
+    QGridLayout *gridLayout_15;
     QComboBox *comboBoxCalPhase;
+    QLabel *label_6;
+    QComboBox *comboBoxCalType;
+    QLabel *label_7;
     QWidget *layoutWidget2;
-    QHBoxLayout *horizontalLayout_4;
-    QLabel *label_10;
-    QComboBox *comboBox_3;
-    QLabel *label_8;
-    QComboBox *comboBox_4;
-    QLabel *label_9;
+    QGridLayout *gridLayout_16;
     QPushButton *pushButton;
+    QLabel *label_9;
+    QLabel *label_8;
+    QLabel *label_10;
+    QComboBox *comboBoxVoltageCalValue;
+    QComboBox *comboBoxCurrentCalValue;
     QPushButton *pushButtonCalibrationHome;
     QPushButton *pushButtonLoadCalibration;
     QGroupBox *groupBox_7;
@@ -541,11 +550,6 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setSizeConstraint(QLayout::SetMinimumSize);
-        tabTerminal = new QWidget(groupBox);
-        tabTerminal->setObjectName(QStringLiteral("tabTerminal"));
-
-        gridLayout->addWidget(tabTerminal, 2, 0, 1, 2);
-
         pushButtonStartMeasurment = new QPushButton(groupBox);
         pushButtonStartMeasurment->setObjectName(QStringLiteral("pushButtonStartMeasurment"));
         sizePolicy1.setHeightForWidth(pushButtonStartMeasurment->sizePolicy().hasHeightForWidth());
@@ -556,14 +560,6 @@ public:
 
         gridLayout->addWidget(pushButtonStartMeasurment, 0, 0, 1, 1);
 
-        comboBoxCirculationFreq = new QComboBox(groupBox);
-        comboBoxCirculationFreq->setObjectName(QStringLiteral("comboBoxCirculationFreq"));
-        sizePolicy2.setHeightForWidth(comboBoxCirculationFreq->sizePolicy().hasHeightForWidth());
-        comboBoxCirculationFreq->setSizePolicy(sizePolicy2);
-        comboBoxCirculationFreq->setFont(font2);
-
-        gridLayout->addWidget(comboBoxCirculationFreq, 1, 0, 1, 1);
-
         pushButtonStopMeasurment = new QPushButton(groupBox);
         pushButtonStopMeasurment->setObjectName(QStringLiteral("pushButtonStopMeasurment"));
         sizePolicy1.setHeightForWidth(pushButtonStopMeasurment->sizePolicy().hasHeightForWidth());
@@ -571,6 +567,14 @@ public:
         pushButtonStopMeasurment->setFont(font2);
 
         gridLayout->addWidget(pushButtonStopMeasurment, 0, 1, 1, 1);
+
+        comboBoxErrorStyle = new QComboBox(groupBox);
+        comboBoxErrorStyle->setObjectName(QStringLiteral("comboBoxErrorStyle"));
+        sizePolicy2.setHeightForWidth(comboBoxErrorStyle->sizePolicy().hasHeightForWidth());
+        comboBoxErrorStyle->setSizePolicy(sizePolicy2);
+        comboBoxErrorStyle->setFont(font2);
+
+        gridLayout->addWidget(comboBoxErrorStyle, 1, 1, 1, 1);
 
         pushButtonPanelHome = new QPushButton(groupBox);
         pushButtonPanelHome->setObjectName(QStringLiteral("pushButtonPanelHome"));
@@ -581,7 +585,20 @@ public:
         pushButtonPanelHome->setIcon(icon15);
         pushButtonPanelHome->setIconSize(QSize(32, 32));
 
-        gridLayout->addWidget(pushButtonPanelHome, 1, 1, 1, 1);
+        gridLayout->addWidget(pushButtonPanelHome, 2, 1, 1, 1);
+
+        comboBoxCirculationFreq = new QComboBox(groupBox);
+        comboBoxCirculationFreq->setObjectName(QStringLiteral("comboBoxCirculationFreq"));
+        sizePolicy2.setHeightForWidth(comboBoxCirculationFreq->sizePolicy().hasHeightForWidth());
+        comboBoxCirculationFreq->setSizePolicy(sizePolicy2);
+        comboBoxCirculationFreq->setFont(font2);
+
+        gridLayout->addWidget(comboBoxCirculationFreq, 1, 0, 1, 1);
+
+        tabTerminal = new QWidget(groupBox);
+        tabTerminal->setObjectName(QStringLiteral("tabTerminal"));
+
+        gridLayout->addWidget(tabTerminal, 2, 0, 1, 1);
 
 
         layoutCommonPanelData->addLayout(gridLayout);
@@ -839,6 +856,29 @@ public:
         gridLayout_11 = new QGridLayout();
         gridLayout_11->setSpacing(6);
         gridLayout_11->setObjectName(QStringLiteral("gridLayout_11"));
+        gridLayout_11->setSizeConstraint(QLayout::SetMinimumSize);
+        label_13 = new QLabel(tabLogging);
+        label_13->setObjectName(QStringLiteral("label_13"));
+        label_13->setFont(font2);
+
+        gridLayout_11->addWidget(label_13, 2, 0, 1, 1);
+
+        labelFileSize = new QLabel(tabLogging);
+        labelFileSize->setObjectName(QStringLiteral("labelFileSize"));
+        labelFileSize->setFont(font2);
+
+        gridLayout_11->addWidget(labelFileSize, 2, 1, 1, 1);
+
+        pushButtonLoggingHome = new QPushButton(tabLogging);
+        pushButtonLoggingHome->setObjectName(QStringLiteral("pushButtonLoggingHome"));
+        sizePolicy.setHeightForWidth(pushButtonLoggingHome->sizePolicy().hasHeightForWidth());
+        pushButtonLoggingHome->setSizePolicy(sizePolicy);
+        pushButtonLoggingHome->setMinimumSize(QSize(150, 0));
+        pushButtonLoggingHome->setIcon(icon15);
+        pushButtonLoggingHome->setIconSize(QSize(32, 32));
+
+        gridLayout_11->addWidget(pushButtonLoggingHome, 0, 3, 3, 1);
+
         label_12 = new QLabel(tabLogging);
         label_12->setObjectName(QStringLiteral("label_12"));
         label_12->setFont(font2);
@@ -869,30 +909,47 @@ public:
 
         gridLayout_11->addWidget(pushButtonStartLogging, 0, 2, 1, 1);
 
-        label_13 = new QLabel(tabLogging);
-        label_13->setObjectName(QStringLiteral("label_13"));
-        label_13->setFont(font2);
+        pushButtonSingleLog = new QPushButton(tabLogging);
+        pushButtonSingleLog->setObjectName(QStringLiteral("pushButtonSingleLog"));
 
-        gridLayout_11->addWidget(label_13, 2, 0, 1, 1);
-
-        labelFileSize = new QLabel(tabLogging);
-        labelFileSize->setObjectName(QStringLiteral("labelFileSize"));
-        labelFileSize->setFont(font2);
-
-        gridLayout_11->addWidget(labelFileSize, 2, 1, 1, 1);
-
-        pushButtonLoggingHome = new QPushButton(tabLogging);
-        pushButtonLoggingHome->setObjectName(QStringLiteral("pushButtonLoggingHome"));
-        sizePolicy.setHeightForWidth(pushButtonLoggingHome->sizePolicy().hasHeightForWidth());
-        pushButtonLoggingHome->setSizePolicy(sizePolicy);
-        pushButtonLoggingHome->setMinimumSize(QSize(150, 0));
-        pushButtonLoggingHome->setIcon(icon15);
-        pushButtonLoggingHome->setIconSize(QSize(32, 32));
-
-        gridLayout_11->addWidget(pushButtonLoggingHome, 0, 3, 3, 1);
+        gridLayout_11->addWidget(pushButtonSingleLog, 3, 3, 1, 1);
 
 
-        formLayout->setLayout(0, QFormLayout::LabelRole, gridLayout_11);
+        formLayout->setLayout(0, QFormLayout::SpanningRole, gridLayout_11);
+
+        line = new QFrame(tabLogging);
+        line->setObjectName(QStringLiteral("line"));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+
+        formLayout->setWidget(1, QFormLayout::LabelRole, line);
+
+        gridLayout_18 = new QGridLayout();
+        gridLayout_18->setSpacing(6);
+        gridLayout_18->setObjectName(QStringLiteral("gridLayout_18"));
+        gridLayout_18->setSizeConstraint(QLayout::SetMaximumSize);
+        checkBox_3 = new QCheckBox(tabLogging);
+        checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
+
+        gridLayout_18->addWidget(checkBox_3, 0, 2, 1, 1);
+
+        checkBox_2 = new QCheckBox(tabLogging);
+        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
+
+        gridLayout_18->addWidget(checkBox_2, 0, 3, 1, 1);
+
+        checkBox = new QCheckBox(tabLogging);
+        checkBox->setObjectName(QStringLiteral("checkBox"));
+
+        gridLayout_18->addWidget(checkBox, 0, 0, 1, 1);
+
+        checkBox_4 = new QCheckBox(tabLogging);
+        checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
+
+        gridLayout_18->addWidget(checkBox_4, 0, 1, 1, 1);
+
+
+        formLayout->setLayout(1, QFormLayout::FieldRole, gridLayout_18);
 
         tabWidget->addTab(tabLogging, QString());
         tabWT500 = new QWidget();
@@ -1002,87 +1059,91 @@ public:
         groupBox_2->setSizePolicy(sizePolicy);
         layoutWidget = new QWidget(groupBox_2);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 60, 302, 29));
+        layoutWidget->setGeometry(QRect(10, 60, 351, 26));
         horizontalLayout_6 = new QHBoxLayout(layoutWidget);
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
-        label_7 = new QLabel(layoutWidget);
-        label_7->setObjectName(QStringLiteral("label_7"));
-
-        horizontalLayout_6->addWidget(label_7);
-
-        comboBoxCalType = new QComboBox(layoutWidget);
-        comboBoxCalType->setObjectName(QStringLiteral("comboBoxCalType"));
-
-        horizontalLayout_6->addWidget(comboBoxCalType);
-
-        pushButton_3 = new QPushButton(layoutWidget);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-
-        horizontalLayout_6->addWidget(pushButton_3);
-
         pushButtonCalibrateOffset = new QPushButton(layoutWidget);
         pushButtonCalibrateOffset->setObjectName(QStringLiteral("pushButtonCalibrateOffset"));
+        sizePolicy2.setHeightForWidth(pushButtonCalibrateOffset->sizePolicy().hasHeightForWidth());
+        pushButtonCalibrateOffset->setSizePolicy(sizePolicy2);
 
         horizontalLayout_6->addWidget(pushButtonCalibrateOffset);
 
+        pushButtonCalibrateGain = new QPushButton(layoutWidget);
+        pushButtonCalibrateGain->setObjectName(QStringLiteral("pushButtonCalibrateGain"));
+
+        horizontalLayout_6->addWidget(pushButtonCalibrateGain);
+
         layoutWidget1 = new QWidget(groupBox_2);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(10, 30, 111, 29));
-        horizontalLayout_7 = new QHBoxLayout(layoutWidget1);
-        horizontalLayout_7->setSpacing(6);
-        horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
-        label_6 = new QLabel(layoutWidget1);
-        label_6->setObjectName(QStringLiteral("label_6"));
-
-        horizontalLayout_7->addWidget(label_6);
-
+        layoutWidget1->setGeometry(QRect(10, 30, 351, 26));
+        gridLayout_15 = new QGridLayout(layoutWidget1);
+        gridLayout_15->setSpacing(6);
+        gridLayout_15->setContentsMargins(11, 11, 11, 11);
+        gridLayout_15->setObjectName(QStringLiteral("gridLayout_15"));
+        gridLayout_15->setContentsMargins(0, 0, 0, 0);
         comboBoxCalPhase = new QComboBox(layoutWidget1);
         comboBoxCalPhase->setObjectName(QStringLiteral("comboBoxCalPhase"));
 
-        horizontalLayout_7->addWidget(comboBoxCalPhase);
+        gridLayout_15->addWidget(comboBoxCalPhase, 0, 1, 1, 1);
+
+        label_6 = new QLabel(layoutWidget1);
+        label_6->setObjectName(QStringLiteral("label_6"));
+
+        gridLayout_15->addWidget(label_6, 0, 0, 1, 1);
+
+        comboBoxCalType = new QComboBox(layoutWidget1);
+        comboBoxCalType->setObjectName(QStringLiteral("comboBoxCalType"));
+
+        gridLayout_15->addWidget(comboBoxCalType, 0, 3, 1, 1);
+
+        label_7 = new QLabel(layoutWidget1);
+        label_7->setObjectName(QStringLiteral("label_7"));
+
+        gridLayout_15->addWidget(label_7, 0, 2, 1, 1);
 
         layoutWidget2 = new QWidget(groupBox_2);
         layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(10, 90, 348, 29));
-        horizontalLayout_4 = new QHBoxLayout(layoutWidget2);
-        horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
-        label_10 = new QLabel(layoutWidget2);
-        label_10->setObjectName(QStringLiteral("label_10"));
+        layoutWidget2->setGeometry(QRect(10, 90, 351, 26));
+        gridLayout_16 = new QGridLayout(layoutWidget2);
+        gridLayout_16->setSpacing(6);
+        gridLayout_16->setContentsMargins(11, 11, 11, 11);
+        gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
+        gridLayout_16->setContentsMargins(0, 0, 0, 0);
+        pushButton = new QPushButton(layoutWidget2);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        sizePolicy1.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy1);
 
-        horizontalLayout_4->addWidget(label_10);
-
-        comboBox_3 = new QComboBox(layoutWidget2);
-        comboBox_3->setObjectName(QStringLiteral("comboBox_3"));
-
-        horizontalLayout_4->addWidget(comboBox_3);
-
-        label_8 = new QLabel(layoutWidget2);
-        label_8->setObjectName(QStringLiteral("label_8"));
-
-        horizontalLayout_4->addWidget(label_8);
-
-        comboBox_4 = new QComboBox(layoutWidget2);
-        comboBox_4->setObjectName(QStringLiteral("comboBox_4"));
-
-        horizontalLayout_4->addWidget(comboBox_4);
+        gridLayout_16->addWidget(pushButton, 0, 5, 1, 1);
 
         label_9 = new QLabel(layoutWidget2);
         label_9->setObjectName(QStringLiteral("label_9"));
 
-        horizontalLayout_4->addWidget(label_9);
+        gridLayout_16->addWidget(label_9, 0, 4, 1, 1);
 
-        pushButton = new QPushButton(layoutWidget2);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        label_8 = new QLabel(layoutWidget2);
+        label_8->setObjectName(QStringLiteral("label_8"));
 
-        horizontalLayout_4->addWidget(pushButton);
+        gridLayout_16->addWidget(label_8, 0, 2, 1, 1);
+
+        label_10 = new QLabel(layoutWidget2);
+        label_10->setObjectName(QStringLiteral("label_10"));
+
+        gridLayout_16->addWidget(label_10, 0, 0, 1, 1);
+
+        comboBoxVoltageCalValue = new QComboBox(layoutWidget2);
+        comboBoxVoltageCalValue->setObjectName(QStringLiteral("comboBoxVoltageCalValue"));
+
+        gridLayout_16->addWidget(comboBoxVoltageCalValue, 0, 1, 1, 1);
+
+        comboBoxCurrentCalValue = new QComboBox(layoutWidget2);
+        comboBoxCurrentCalValue->setObjectName(QStringLiteral("comboBoxCurrentCalValue"));
+
+        gridLayout_16->addWidget(comboBoxCurrentCalValue, 0, 3, 1, 1);
 
         pushButtonCalibrationHome = new QPushButton(groupBox_2);
         pushButtonCalibrationHome->setObjectName(QStringLiteral("pushButtonCalibrationHome"));
@@ -1198,7 +1259,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(7);
+        tabWidget->setCurrentIndex(1);
         pushButtonPanel->setDefault(false);
         pushButtonInformation->setDefault(false);
         pushButtonHarmonics->setDefault(false);
@@ -1268,6 +1329,14 @@ public:
         pBClearEnergyLT->setText(QApplication::translate("MainWindow", "Clear Energy LT", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
         pushButtonStartMeasurment->setText(QApplication::translate("MainWindow", "Start", Q_NULLPTR));
+        pushButtonStopMeasurment->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
+        comboBoxErrorStyle->clear();
+        comboBoxErrorStyle->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "Absolute error", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "Relative error %", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "Absolute error %", Q_NULLPTR)
+        );
+        pushButtonPanelHome->setText(QApplication::translate("MainWindow", "     Home", Q_NULLPTR));
         comboBoxCirculationFreq->clear();
         comboBoxCirculationFreq->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "5", Q_NULLPTR)
@@ -1278,8 +1347,6 @@ public:
          << QApplication::translate("MainWindow", "40", Q_NULLPTR)
          << QApplication::translate("MainWindow", "50", Q_NULLPTR)
         );
-        pushButtonStopMeasurment->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
-        pushButtonPanelHome->setText(QApplication::translate("MainWindow", "     Home", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabPanel), QApplication::translate("MainWindow", "Panel", Q_NULLPTR));
         groupBox_3->setTitle(QApplication::translate("MainWindow", "Scope", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Type:", Q_NULLPTR));
@@ -1346,6 +1413,9 @@ public:
         checkBoxDisplayL3->setText(QApplication::translate("MainWindow", "L3", Q_NULLPTR));
         pushButtonHarmonicsHome->setText(QApplication::translate("MainWindow", "Home", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabHarmonics), QApplication::translate("MainWindow", "Harmonics", Q_NULLPTR));
+        label_13->setText(QApplication::translate("MainWindow", "Size:", Q_NULLPTR));
+        labelFileSize->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        pushButtonLoggingHome->setText(QApplication::translate("MainWindow", "Home", Q_NULLPTR));
         label_12->setText(QApplication::translate("MainWindow", "Logged lines :", Q_NULLPTR));
         lineEditLogFileName->setText(QApplication::translate("MainWindow", "C:\\Log\\test", Q_NULLPTR));
         labelLoggingLine->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
@@ -1358,9 +1428,11 @@ public:
          << QApplication::translate("MainWindow", "15", Q_NULLPTR)
         );
         pushButtonStartLogging->setText(QApplication::translate("MainWindow", "Start Logging", Q_NULLPTR));
-        label_13->setText(QApplication::translate("MainWindow", "Size:", Q_NULLPTR));
-        labelFileSize->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
-        pushButtonLoggingHome->setText(QApplication::translate("MainWindow", "Home", Q_NULLPTR));
+        pushButtonSingleLog->setText(QApplication::translate("MainWindow", "Single Log", Q_NULLPTR));
+        checkBox_3->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
+        checkBox_2->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
+        checkBox->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
+        checkBox_4->setText(QApplication::translate("MainWindow", "CheckBox", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabLogging), QApplication::translate("MainWindow", "Logging", Q_NULLPTR));
         pushButtonQWT500Home->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabWT500), QApplication::translate("MainWindow", "WT500", Q_NULLPTR));
@@ -1371,24 +1443,27 @@ public:
         groupBox_9->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Export", Q_NULLPTR));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
-        label_7->setText(QApplication::translate("MainWindow", "Type", Q_NULLPTR));
-        comboBoxCalType->clear();
-        comboBoxCalType->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Voltage [V]", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "Current [A]", Q_NULLPTR)
-        );
-        pushButton_3->setText(QApplication::translate("MainWindow", "Calibrate", Q_NULLPTR));
         pushButtonCalibrateOffset->setText(QApplication::translate("MainWindow", "Offset", Q_NULLPTR));
-        label_6->setText(QApplication::translate("MainWindow", "Phase", Q_NULLPTR));
+        pushButtonCalibrateGain->setText(QApplication::translate("MainWindow", "Calibrate", Q_NULLPTR));
         comboBoxCalPhase->clear();
         comboBoxCalPhase->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "L1", Q_NULLPTR)
          << QApplication::translate("MainWindow", "L2", Q_NULLPTR)
          << QApplication::translate("MainWindow", "L3", Q_NULLPTR)
         );
+        label_6->setText(QApplication::translate("MainWindow", "Phase", Q_NULLPTR));
+        comboBoxCalType->clear();
+        comboBoxCalType->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "Voltage [V]", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "Current [A]", Q_NULLPTR)
+        );
+        label_7->setText(QApplication::translate("MainWindow", "Type", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainWindow", "Next", Q_NULLPTR));
+        label_9->setText(QApplication::translate("MainWindow", "A", Q_NULLPTR));
+        label_8->setText(QApplication::translate("MainWindow", "V", Q_NULLPTR));
         label_10->setText(QApplication::translate("MainWindow", "Calibration Target", Q_NULLPTR));
-        comboBox_3->clear();
-        comboBox_3->insertItems(0, QStringList()
+        comboBoxVoltageCalValue->clear();
+        comboBoxVoltageCalValue->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "0", Q_NULLPTR)
          << QApplication::translate("MainWindow", "40", Q_NULLPTR)
          << QApplication::translate("MainWindow", "80", Q_NULLPTR)
@@ -1401,9 +1476,8 @@ public:
          << QApplication::translate("MainWindow", "360", Q_NULLPTR)
          << QApplication::translate("MainWindow", "400", Q_NULLPTR)
         );
-        label_8->setText(QApplication::translate("MainWindow", "V", Q_NULLPTR));
-        comboBox_4->clear();
-        comboBox_4->insertItems(0, QStringList()
+        comboBoxCurrentCalValue->clear();
+        comboBoxCurrentCalValue->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "0", Q_NULLPTR)
          << QApplication::translate("MainWindow", "1", Q_NULLPTR)
          << QApplication::translate("MainWindow", "2", Q_NULLPTR)
@@ -1416,8 +1490,6 @@ public:
          << QApplication::translate("MainWindow", "20", Q_NULLPTR)
          << QApplication::translate("MainWindow", "24", Q_NULLPTR)
         );
-        label_9->setText(QApplication::translate("MainWindow", "A", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("MainWindow", "Next", Q_NULLPTR));
         pushButtonCalibrationHome->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
         pushButtonLoadCalibration->setText(QApplication::translate("MainWindow", "Load", Q_NULLPTR));
         groupBox_7->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));

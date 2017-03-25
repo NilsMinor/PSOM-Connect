@@ -26,6 +26,7 @@ public:
     float getData (QString keyName);
     float getError (QString keyName);
     void setAccuracy (int accuracy);
+    void setErrorStyle (ERR_STYLE style);
     int   getCount (void);
     void assignTargetDataByList (mDataHandler * target);
     QStringList getPrettyName (void);

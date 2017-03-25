@@ -88,8 +88,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 
     L1Data = new mDataHandler (this);
-    L1Data->add("U1","Vrms");
-    L1Data->add("I1","Irms");
+    L1Data->add("U1","V");
+    L1Data->add("I1","A");
     L1Data->add("P1","W");
     L1Data->add("Q1","VAR");
     L1Data->add("S1","VA");
@@ -100,8 +100,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->layoutPhaseL1->addWidget(L1Data);
 
     L2Data = new mDataHandler (NULL);
-    L2Data->add("U2","Vrms");
-    L2Data->add("I2","Irms");
+    L2Data->add("U2","V");
+    L2Data->add("I2","A");
     L2Data->add("P2","W");
     L2Data->add("2","VAR");
     L2Data->add("S2","VA");
@@ -112,8 +112,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->layoutPhaseL2->addWidget(L2Data);
 
     L3Data = new mDataHandler (this);
-    L3Data->add("U3","Vrms");
-    L3Data->add("I3","Irms");
+    L3Data->add("U3","V");
+    L3Data->add("I3","A");
     L3Data->add("P3","W");
     L3Data->add("Q3","VAR");
     L3Data->add("S3","VA");
@@ -124,8 +124,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->layoutPhaseL3->addWidget(L3Data);
 
     LTData = new mDataHandler (this);
-    LTData->add("UT","Vrms");
-    LTData->add("IT","Irms");
+    LTData->add("UT","V");
+    LTData->add("IT","A");
     LTData->add("PT","W");
     LTData->add("QT","VAR");
     LTData->add("ST","VA");
@@ -176,6 +176,7 @@ void MainWindow::newPSOMData(void)
 {
     L1Data->setData("U1", testModule->getData().L1.voltage.rms, 0);
     L1Data->setData("I1", testModule->getData().L1.current.rms, 0);
+    L1Data->setTarget("I1", qRound( testModule->getData().L1.current.rms));
     L1Data->setData("P1", testModule->getData().L1.power.active, 0);
     L1Data->setData("Q1", testModule->getData().L1.power.reactive, 0);
     L1Data->setData("S1", testModule->getData().L1.power.apparent, 0);
@@ -287,6 +288,14 @@ void MainWindow::updateErrorData(mDataHandler *L1, mDataHandler *L2, mDataHandle
     L3Data->assignTargetDataByList(L3);
     LTData->assignTargetDataByList(LT);
 }
+
+
+
+
+
+
+
+
 
 
 

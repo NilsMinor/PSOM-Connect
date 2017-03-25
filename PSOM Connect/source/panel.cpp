@@ -35,3 +35,26 @@ void MainWindow::on_pushButtonPanelHome_released()
 {
     ui->tabWidget->setCurrentIndex(0);
 }
+void MainWindow::on_comboBoxErrorStyle_currentIndexChanged(int index)
+{
+    switch (index) {
+    case 0: // Absolute error
+        L1Data->setErrorStyle(absolute);
+        L2Data->setErrorStyle(absolute);
+        L3Data->setErrorStyle(absolute);
+        LTData->setErrorStyle(absolute);
+        break;
+    case 1: // Relative error
+        L1Data->setErrorStyle(relative);
+        L2Data->setErrorStyle(relative);
+        L3Data->setErrorStyle(relative);
+        LTData->setErrorStyle(relative);
+        break;
+    case 2: // Absolute error %
+        L1Data->setErrorStyle(absolute_percent);
+        L2Data->setErrorStyle(absolute_percent);
+        L3Data->setErrorStyle(absolute_percent);
+        LTData->setErrorStyle(absolute_percent);
+        break;
+    }
+}

@@ -190,6 +190,13 @@ private slots:
 
     void on_pushButtonCalibrateOffset_released();
 
+
+    void on_pushButtonCalibrateGain_released();
+
+    void on_pushButtonSingleLog_released();
+
+    void on_comboBoxErrorStyle_currentIndexChanged(int index);
+
 signals:
     void updateOsci (mDataHandler *L1, mDataHandler *L2, mDataHandler *L3, mDataHandler *LT );
 

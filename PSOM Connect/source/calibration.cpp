@@ -2,6 +2,19 @@
 
 void MainWindow::on_comboBoxCalType_currentIndexChanged(int index)
 {
+    switch (index)
+    {
+    case 0: // Voltage
+        ui->comboBoxVoltageCalValue->setEnabled(true);
+        ui->comboBoxCurrentCalValue->setEnabled(false);
+        break;
+
+    case 1:
+        ui->comboBoxVoltageCalValue->setEnabled(false);
+        ui->comboBoxCurrentCalValue->setEnabled(true);
+        break;
+    }
+
     /*
     typedef struct VCAL {
         uint32_t VCAL_0;		// (0)  0V - 39V
@@ -51,6 +64,20 @@ void MainWindow::on_pushButtonCalibrateOffset_released()
     case (1):   testModule->sendSCMD(PSOM_SCMD_CALLIB_OFF2);    // Calibrate OFFSET of L1
         break;
     case (2):   testModule->sendSCMD(PSOM_SCMD_CALLIB_OFF3);    // Calibrate OFFSET of L1
+        break;
+    }
+}
+void MainWindow::on_pushButtonCalibrateGain_released()
+{
+    //float target = ui->
+    //QThread::wait(100);
+    switch (ui->comboBoxCalPhase->currentIndex())
+    {
+    case (0):   testModule->sendSCMD(PSOM_SCMD_CALLIB_V1);
+        break;
+    case (1):   testModule->sendSCMD(PSOM_SCMD_CALLIB_V2);
+        break;
+    case (2):   testModule->sendSCMD(PSOM_SCMD_CALLIB_V3);
         break;
     }
 }

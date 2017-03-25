@@ -8,7 +8,6 @@ void MainWindow::on_pushButtonStartLogging_released()
         logger.create(ui->lineEditLogFileName->text());
         logger.enableLogging(logIntervall);
         qDebug () << "Logging started";
-
     }
     else
     {
@@ -25,4 +24,8 @@ void MainWindow::updateLoggingInformation(int actual_line, qint64 file_size)
 {
     ui->labelLoggingLine->setText(QString::number(actual_line));
     ui->labelFileSize->setText(QString::number(file_size/1024) + " kB");
+}
+void MainWindow::on_pushButtonSingleLog_released()
+{
+
 }

@@ -4,9 +4,10 @@ mData::mData(QObject *parent, QString nameStr, QString unitStr, bool err)
     : QObject(parent), m_nameStr (nameStr), m_unitStr (unitStr)
 
 {
+    m_errstyle = absolute;
     m_data = 0;
     m_error = 0;
-    m_accuracy = 4;
+    m_accuracy = 3;
     m_supportError = err;
 
     m_labels.append( new QLabel ( m_nameStr));
@@ -37,24 +38,68 @@ void mData::print()
 {
     qDebug () << m_nameStr << " : " << m_data << " : " << m_unitStr;
 }
-
-QWidget *mData::getWidget()
+QString mData::calcError(float target)
 {
-    return m_widget;
+    if (target == 0)    return QString("0.0");
+    int accuracy = 2;
+    QString appendix;
+
+
+    switch (m_errstyle) {
+    case absolute:
+        m_error = m_data - target ;  // F = x_meas - x_real
+        appendix = this->m_unitStr;
+        break;
+    case relative:
+        m_error = ( (m_data - target) / target) * 100;     // F = x_meas - x_real / x_real * 100%
+        appendix = "%";
+        break;
+    case absolute_percent:
+        m_error =  100 - (m_data * 100.0 / target);
+        appendix = "%";
+        break;
+
+    default:
+        break;
+    }
+
+    if (m_error < 1) {
+        appendix.clear();
+
+        switch (m_errstyle) {
+        case absolute:
+             m_error =  m_error * 1000;  // V to mV
+            appendix ="m" + this->m_unitStr;
+            break;
+        case relative:
+             m_error =  m_error * 10;   // % to ppm
+            appendix = "ppm";
+            break;
+        case absolute_percent:
+            m_error =  m_error * 10;   // % to ppm
+           appendix = "ppm";
+            break;
+        }
+
+    }
+
+    QString error_str;
+    error_str = QString::number(m_error, 'f', accuracy);
+    error_str.append(appendix);
+    return  error_str;
 }
+
 void mData::setData(float data)
 {
     m_data = data;
     m_labels[1]->setText( QString::number(m_data, 'f', m_accuracy) ); // update label
 }
-
 void mData::setData(float data, float target)
 {
     setData (data);
     m_target = target;
-    if (m_supportError) {
-        m_error = calcError (m_target);
-        m_labels[3]->setText( QString::number(m_error, 'f', 1) ); // update label
+    if (m_supportError ) {
+        m_labels[3]->setText(calcError (m_target)); // update label
     }
 }
 void mData::setAccuracy(int accuracy)
@@ -66,17 +111,18 @@ void mData::setTarget(float target)
 {
     m_target = target;
     if (m_supportError) {
-        m_error = calcError (m_target);
-        m_labels[3]->setText( QString::number(m_error, 'f', 1) ); // update label
+        m_labels[3]->setText( calcError ( m_target ) ); // update label
     }
 }
-float mData::calcError(float target)
+void mData::setErrorStyle(ERR_STYLE style)
 {
-    // target = 100%
-    // m_data = x
-    if (target == 0)
-        return 0;
-
-    return (float) 100 - (m_data * 100.0 / target);
+    m_errstyle = style;
 }
+
+QWidget *mData::getWidget()
+{
+    return m_widget;
+}
+
+
 
