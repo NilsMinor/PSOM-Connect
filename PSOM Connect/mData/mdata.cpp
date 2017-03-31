@@ -63,7 +63,7 @@ QString mData::calcError(float target)
         break;
     }
 
-    if (m_error < 1) {
+    if (qAbs(m_error) < 1) {
         appendix.clear();
 
         switch (m_errstyle) {
@@ -98,7 +98,7 @@ void mData::setData(float data, float target)
 {
     setData (data);
     m_target = target;
-    if (m_supportError ) {
+    if (m_supportError && target != 0 ) {
         m_labels[3]->setText(calcError (m_target)); // update label
     }
 }
@@ -110,7 +110,7 @@ void mData::setAccuracy(int accuracy)
 void mData::setTarget(float target)
 {
     m_target = target;
-    if (m_supportError) {
+    if (m_supportError  && target != 0) {
         m_labels[3]->setText( calcError ( m_target ) ); // update label
     }
 }

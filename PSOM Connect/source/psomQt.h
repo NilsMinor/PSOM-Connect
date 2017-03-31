@@ -59,7 +59,6 @@
  *
  */
 
-
 #include <QObject>
 #include <QDebug>
 #include <QTimer>
@@ -70,7 +69,6 @@
 #include <stdint.h>
 
 
-
 #define HARM_QUANTITY				11
 
 enum HarmonicType {
@@ -78,6 +76,11 @@ enum HarmonicType {
     CurrentHarmonics = 2,
     PPowerHarmonics = 3,
     QPowerHarmonics = 4
+};
+
+enum ReadingStates {
+    readNormal = 0,
+    readCalData = 1
 };
 
 struct PSOM_Voltage {
@@ -151,7 +154,8 @@ public:
     PSOM_DebugPacketInfo    getDebugPacketInfo (void) { return psom_hal->getDebugPacketInfo(); }    //! returns debug packet with information about the low level packet
     PSOM_State              getState (void) { return psom_hal->getState(); }        //! returns the module state
     void                        sendSCMD (uint32_t scmd);
-    void                        loadCalibrationData (int phase);
+    void                        writeSCMDValue (float value);
+    void                        loadCalibrationData ();
 
     //! FUNCTIONS
     void        startMeasurement (int intervalTime);    //! start the measurment timer
@@ -167,11 +171,12 @@ private:
     QTimer                  * m_timer;                  //! measurment timer
     PSOM_measurement_data   m_data;                     //! PSOM data structure
     PSOM_HAL                * psom_hal;                 //! pointer to abstraction layer for psom communication
-    bool                    psom_answered;
-    QString                 fw_version;
-    bool                    harmonicMeasurmentState;
-    int                     harmonicsCount;
-    int                     actualHarmonic;
+    bool                     psom_answered;
+    QString               fw_version;
+    bool                     harmonicMeasurmentState;
+    int                         harmonicsCount;
+    int                         actualHarmonic;
+    ReadingStates   readingState;
 
 private slots:
     void        m_timerTimeout (void);                                             //! timeout for measurment timer (periodic)
@@ -185,6 +190,7 @@ signals:
     void        newPSOMData     (void);                                             //! signal is fired when every new data is available
     void        newHarmonicsData(float *data, float freq, int count, int active);
     void        harmonicMeasurmentReady (void);
+    void        updateCalData   (uint32_t * cal);
 };
 
 #endif // PSOM_H

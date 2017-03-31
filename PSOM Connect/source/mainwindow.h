@@ -147,6 +147,7 @@ private slots:
     void on_pBClearEnergyLT_released();
     void on_pushButtonPanelHome_released();
     void on_comboBoxCirculationFreq_currentIndexChanged(int index);
+    void on_comboBoxErrorStyle_currentIndexChanged(int index);
 
     // oscilloscope
     void on_pushButtonOsciStart_released();
@@ -172,11 +173,17 @@ private slots:
     // logging
     void on_pushButtonStartLogging_released();
     void on_pushButtonLoggingHome_released();
+    void on_pushButtonSingleLog_released();
 
     // calibration
     void on_pushButtonCalibrationHome_released();
     void on_comboBoxCalType_currentIndexChanged(int index);
     void on_pushButtonLoadCalibration_released();
+    void on_pushButtonCalibrateOffset_released();
+    void on_pushButtonCalibrateGain_released();
+    void on_comboBoxVoltageCalValue_currentIndexChanged(const QString &arg1);
+    void on_comboBoxCurrentCalValue_currentIndexChanged(const QString &arg1);
+    void updateCalData (uint32_t * cal);
 
     // qwt500
     void on_pushButtonQWT500Home_released();
@@ -186,16 +193,6 @@ private slots:
     void on_pushButtonEVSEHome_released();
     void on_pushButtonStartCharging_released();
     void on_pushButtonStopCharging_released();
-
-
-    void on_pushButtonCalibrateOffset_released();
-
-
-    void on_pushButtonCalibrateGain_released();
-
-    void on_pushButtonSingleLog_released();
-
-    void on_comboBoxErrorStyle_currentIndexChanged(int index);
 
 signals:
     void updateOsci (mDataHandler *L1, mDataHandler *L2, mDataHandler *L3, mDataHandler *LT );

@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[71];
-    char stringdata0[1799];
+    QByteArrayData data[76];
+    char stringdata0[1921];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -68,38 +68,43 @@ QT_MOC_LITERAL(35, 652, 27), // "on_pBClearEnergyLT_released"
 QT_MOC_LITERAL(36, 680, 31), // "on_pushButtonPanelHome_released"
 QT_MOC_LITERAL(37, 712, 46), // "on_comboBoxCirculationFreq_cu..."
 QT_MOC_LITERAL(38, 759, 5), // "index"
-QT_MOC_LITERAL(39, 765, 31), // "on_pushButtonOsciStart_released"
-QT_MOC_LITERAL(40, 797, 30), // "on_pushButtonOsciStop_released"
-QT_MOC_LITERAL(41, 828, 31), // "on_pushButtonOsciReset_released"
-QT_MOC_LITERAL(42, 860, 27), // "on_pushButtonScope_released"
-QT_MOC_LITERAL(43, 888, 11), // "osciTimeout"
-QT_MOC_LITERAL(44, 900, 32), // "on_checkBoxOsciEnableL1_released"
-QT_MOC_LITERAL(45, 933, 32), // "on_checkBoxOsciEnableL2_released"
-QT_MOC_LITERAL(46, 966, 32), // "on_checkBoxOsciEnableL3_released"
-QT_MOC_LITERAL(47, 999, 32), // "on_checkBoxOsciEnableLT_released"
-QT_MOC_LITERAL(48, 1032, 31), // "on_pushButtonScopeHome_released"
-QT_MOC_LITERAL(49, 1064, 35), // "on_comboBoxOsci_currentIndexC..."
-QT_MOC_LITERAL(50, 1100, 35), // "on_pushButtonHarmonicsHome_re..."
-QT_MOC_LITERAL(51, 1136, 28), // "on_pBStartHarmonics_released"
-QT_MOC_LITERAL(52, 1165, 38), // "on_cBHarmonicsType_currentInd..."
-QT_MOC_LITERAL(53, 1204, 4), // "arg1"
-QT_MOC_LITERAL(54, 1209, 43), // "on_cBHarmonicsAxisStyle_curre..."
-QT_MOC_LITERAL(55, 1253, 31), // "on_pBSetHarmonicsCount_released"
-QT_MOC_LITERAL(56, 1285, 30), // "on_pBTriggerHarmonics_released"
-QT_MOC_LITERAL(57, 1316, 34), // "on_pushButtonStartLogging_rel..."
-QT_MOC_LITERAL(58, 1351, 33), // "on_pushButtonLoggingHome_rele..."
-QT_MOC_LITERAL(59, 1385, 37), // "on_pushButtonCalibrationHome_..."
-QT_MOC_LITERAL(60, 1423, 38), // "on_comboBoxCalType_currentInd..."
-QT_MOC_LITERAL(61, 1462, 37), // "on_pushButtonLoadCalibration_..."
-QT_MOC_LITERAL(62, 1500, 32), // "on_pushButtonQWT500Home_released"
-QT_MOC_LITERAL(63, 1533, 15), // "updateErrorData"
-QT_MOC_LITERAL(64, 1549, 30), // "on_pushButtonEVSEHome_released"
-QT_MOC_LITERAL(65, 1580, 35), // "on_pushButtonStartCharging_re..."
-QT_MOC_LITERAL(66, 1616, 34), // "on_pushButtonStopCharging_rel..."
-QT_MOC_LITERAL(67, 1651, 37), // "on_pushButtonCalibrateOffset_..."
-QT_MOC_LITERAL(68, 1689, 35), // "on_pushButtonCalibrateGain_re..."
-QT_MOC_LITERAL(69, 1725, 31), // "on_pushButtonSingleLog_released"
-QT_MOC_LITERAL(70, 1757, 41) // "on_comboBoxErrorStyle_current..."
+QT_MOC_LITERAL(39, 765, 41), // "on_comboBoxErrorStyle_current..."
+QT_MOC_LITERAL(40, 807, 31), // "on_pushButtonOsciStart_released"
+QT_MOC_LITERAL(41, 839, 30), // "on_pushButtonOsciStop_released"
+QT_MOC_LITERAL(42, 870, 31), // "on_pushButtonOsciReset_released"
+QT_MOC_LITERAL(43, 902, 27), // "on_pushButtonScope_released"
+QT_MOC_LITERAL(44, 930, 11), // "osciTimeout"
+QT_MOC_LITERAL(45, 942, 32), // "on_checkBoxOsciEnableL1_released"
+QT_MOC_LITERAL(46, 975, 32), // "on_checkBoxOsciEnableL2_released"
+QT_MOC_LITERAL(47, 1008, 32), // "on_checkBoxOsciEnableL3_released"
+QT_MOC_LITERAL(48, 1041, 32), // "on_checkBoxOsciEnableLT_released"
+QT_MOC_LITERAL(49, 1074, 31), // "on_pushButtonScopeHome_released"
+QT_MOC_LITERAL(50, 1106, 35), // "on_comboBoxOsci_currentIndexC..."
+QT_MOC_LITERAL(51, 1142, 35), // "on_pushButtonHarmonicsHome_re..."
+QT_MOC_LITERAL(52, 1178, 28), // "on_pBStartHarmonics_released"
+QT_MOC_LITERAL(53, 1207, 38), // "on_cBHarmonicsType_currentInd..."
+QT_MOC_LITERAL(54, 1246, 4), // "arg1"
+QT_MOC_LITERAL(55, 1251, 43), // "on_cBHarmonicsAxisStyle_curre..."
+QT_MOC_LITERAL(56, 1295, 31), // "on_pBSetHarmonicsCount_released"
+QT_MOC_LITERAL(57, 1327, 30), // "on_pBTriggerHarmonics_released"
+QT_MOC_LITERAL(58, 1358, 34), // "on_pushButtonStartLogging_rel..."
+QT_MOC_LITERAL(59, 1393, 33), // "on_pushButtonLoggingHome_rele..."
+QT_MOC_LITERAL(60, 1427, 31), // "on_pushButtonSingleLog_released"
+QT_MOC_LITERAL(61, 1459, 37), // "on_pushButtonCalibrationHome_..."
+QT_MOC_LITERAL(62, 1497, 38), // "on_comboBoxCalType_currentInd..."
+QT_MOC_LITERAL(63, 1536, 37), // "on_pushButtonLoadCalibration_..."
+QT_MOC_LITERAL(64, 1574, 37), // "on_pushButtonCalibrateOffset_..."
+QT_MOC_LITERAL(65, 1612, 35), // "on_pushButtonCalibrateGain_re..."
+QT_MOC_LITERAL(66, 1648, 46), // "on_comboBoxVoltageCalValue_cu..."
+QT_MOC_LITERAL(67, 1695, 46), // "on_comboBoxCurrentCalValue_cu..."
+QT_MOC_LITERAL(68, 1742, 13), // "updateCalData"
+QT_MOC_LITERAL(69, 1756, 9), // "uint32_t*"
+QT_MOC_LITERAL(70, 1766, 3), // "cal"
+QT_MOC_LITERAL(71, 1770, 32), // "on_pushButtonQWT500Home_released"
+QT_MOC_LITERAL(72, 1803, 15), // "updateErrorData"
+QT_MOC_LITERAL(73, 1819, 30), // "on_pushButtonEVSEHome_released"
+QT_MOC_LITERAL(74, 1850, 35), // "on_pushButtonStartCharging_re..."
+QT_MOC_LITERAL(75, 1886, 34) // "on_pushButtonStopCharging_rel..."
 
     },
     "MainWindow\0updateOsci\0\0mDataHandler*\0"
@@ -124,7 +129,8 @@ QT_MOC_LITERAL(70, 1757, 41) // "on_comboBoxErrorStyle_current..."
     "on_pBClearEnergyLT_released\0"
     "on_pushButtonPanelHome_released\0"
     "on_comboBoxCirculationFreq_currentIndexChanged\0"
-    "index\0on_pushButtonOsciStart_released\0"
+    "index\0on_comboBoxErrorStyle_currentIndexChanged\0"
+    "on_pushButtonOsciStart_released\0"
     "on_pushButtonOsciStop_released\0"
     "on_pushButtonOsciReset_released\0"
     "on_pushButtonScope_released\0osciTimeout\0"
@@ -142,17 +148,19 @@ QT_MOC_LITERAL(70, 1757, 41) // "on_comboBoxErrorStyle_current..."
     "on_pBTriggerHarmonics_released\0"
     "on_pushButtonStartLogging_released\0"
     "on_pushButtonLoggingHome_released\0"
+    "on_pushButtonSingleLog_released\0"
     "on_pushButtonCalibrationHome_released\0"
     "on_comboBoxCalType_currentIndexChanged\0"
     "on_pushButtonLoadCalibration_released\0"
+    "on_pushButtonCalibrateOffset_released\0"
+    "on_pushButtonCalibrateGain_released\0"
+    "on_comboBoxVoltageCalValue_currentIndexChanged\0"
+    "on_comboBoxCurrentCalValue_currentIndexChanged\0"
+    "updateCalData\0uint32_t*\0cal\0"
     "on_pushButtonQWT500Home_released\0"
     "updateErrorData\0on_pushButtonEVSEHome_released\0"
     "on_pushButtonStartCharging_released\0"
-    "on_pushButtonStopCharging_released\0"
-    "on_pushButtonCalibrateOffset_released\0"
-    "on_pushButtonCalibrateGain_released\0"
-    "on_pushButtonSingleLog_released\0"
-    "on_comboBoxErrorStyle_currentIndexChanged"
+    "on_pushButtonStopCharging_released"
 };
 #undef QT_MOC_LITERAL
 
@@ -162,7 +170,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      56,   14, // methods
+      59,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -170,64 +178,67 @@ static const uint qt_meta_data_MainWindow[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    4,  294,    2, 0x06 /* Public */,
+       1,    4,  309,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    0,  303,    2, 0x08 /* Private */,
-       9,    0,  304,    2, 0x08 /* Private */,
-      10,    1,  305,    2, 0x08 /* Private */,
-      12,    0,  308,    2, 0x08 /* Private */,
-      13,    1,  309,    2, 0x08 /* Private */,
-      16,    1,  312,    2, 0x08 /* Private */,
-      18,    2,  315,    2, 0x08 /* Private */,
-      21,    0,  320,    2, 0x08 /* Private */,
-      22,    0,  321,    2, 0x08 /* Private */,
-      23,    0,  322,    2, 0x08 /* Private */,
-      24,    0,  323,    2, 0x08 /* Private */,
-      25,    0,  324,    2, 0x08 /* Private */,
-      26,    0,  325,    2, 0x08 /* Private */,
-      27,    0,  326,    2, 0x08 /* Private */,
-      28,    0,  327,    2, 0x08 /* Private */,
-      29,    0,  328,    2, 0x08 /* Private */,
-      30,    0,  329,    2, 0x08 /* Private */,
-      31,    0,  330,    2, 0x08 /* Private */,
-      32,    0,  331,    2, 0x08 /* Private */,
-      33,    0,  332,    2, 0x08 /* Private */,
-      34,    0,  333,    2, 0x08 /* Private */,
-      35,    0,  334,    2, 0x08 /* Private */,
-      36,    0,  335,    2, 0x08 /* Private */,
-      37,    1,  336,    2, 0x08 /* Private */,
-      39,    0,  339,    2, 0x08 /* Private */,
-      40,    0,  340,    2, 0x08 /* Private */,
-      41,    0,  341,    2, 0x08 /* Private */,
-      42,    0,  342,    2, 0x08 /* Private */,
-      43,    0,  343,    2, 0x08 /* Private */,
-      44,    0,  344,    2, 0x08 /* Private */,
-      45,    0,  345,    2, 0x08 /* Private */,
-      46,    0,  346,    2, 0x08 /* Private */,
-      47,    0,  347,    2, 0x08 /* Private */,
-      48,    0,  348,    2, 0x08 /* Private */,
-      49,    1,  349,    2, 0x08 /* Private */,
-      50,    0,  352,    2, 0x08 /* Private */,
-      51,    0,  353,    2, 0x08 /* Private */,
-      52,    1,  354,    2, 0x08 /* Private */,
-      54,    1,  357,    2, 0x08 /* Private */,
-      55,    0,  360,    2, 0x08 /* Private */,
-      56,    0,  361,    2, 0x08 /* Private */,
-      57,    0,  362,    2, 0x08 /* Private */,
-      58,    0,  363,    2, 0x08 /* Private */,
-      59,    0,  364,    2, 0x08 /* Private */,
-      60,    1,  365,    2, 0x08 /* Private */,
-      61,    0,  368,    2, 0x08 /* Private */,
-      62,    0,  369,    2, 0x08 /* Private */,
-      63,    4,  370,    2, 0x08 /* Private */,
-      64,    0,  379,    2, 0x08 /* Private */,
-      65,    0,  380,    2, 0x08 /* Private */,
-      66,    0,  381,    2, 0x08 /* Private */,
-      67,    0,  382,    2, 0x08 /* Private */,
-      68,    0,  383,    2, 0x08 /* Private */,
-      69,    0,  384,    2, 0x08 /* Private */,
-      70,    1,  385,    2, 0x08 /* Private */,
+       8,    0,  318,    2, 0x08 /* Private */,
+       9,    0,  319,    2, 0x08 /* Private */,
+      10,    1,  320,    2, 0x08 /* Private */,
+      12,    0,  323,    2, 0x08 /* Private */,
+      13,    1,  324,    2, 0x08 /* Private */,
+      16,    1,  327,    2, 0x08 /* Private */,
+      18,    2,  330,    2, 0x08 /* Private */,
+      21,    0,  335,    2, 0x08 /* Private */,
+      22,    0,  336,    2, 0x08 /* Private */,
+      23,    0,  337,    2, 0x08 /* Private */,
+      24,    0,  338,    2, 0x08 /* Private */,
+      25,    0,  339,    2, 0x08 /* Private */,
+      26,    0,  340,    2, 0x08 /* Private */,
+      27,    0,  341,    2, 0x08 /* Private */,
+      28,    0,  342,    2, 0x08 /* Private */,
+      29,    0,  343,    2, 0x08 /* Private */,
+      30,    0,  344,    2, 0x08 /* Private */,
+      31,    0,  345,    2, 0x08 /* Private */,
+      32,    0,  346,    2, 0x08 /* Private */,
+      33,    0,  347,    2, 0x08 /* Private */,
+      34,    0,  348,    2, 0x08 /* Private */,
+      35,    0,  349,    2, 0x08 /* Private */,
+      36,    0,  350,    2, 0x08 /* Private */,
+      37,    1,  351,    2, 0x08 /* Private */,
+      39,    1,  354,    2, 0x08 /* Private */,
+      40,    0,  357,    2, 0x08 /* Private */,
+      41,    0,  358,    2, 0x08 /* Private */,
+      42,    0,  359,    2, 0x08 /* Private */,
+      43,    0,  360,    2, 0x08 /* Private */,
+      44,    0,  361,    2, 0x08 /* Private */,
+      45,    0,  362,    2, 0x08 /* Private */,
+      46,    0,  363,    2, 0x08 /* Private */,
+      47,    0,  364,    2, 0x08 /* Private */,
+      48,    0,  365,    2, 0x08 /* Private */,
+      49,    0,  366,    2, 0x08 /* Private */,
+      50,    1,  367,    2, 0x08 /* Private */,
+      51,    0,  370,    2, 0x08 /* Private */,
+      52,    0,  371,    2, 0x08 /* Private */,
+      53,    1,  372,    2, 0x08 /* Private */,
+      55,    1,  375,    2, 0x08 /* Private */,
+      56,    0,  378,    2, 0x08 /* Private */,
+      57,    0,  379,    2, 0x08 /* Private */,
+      58,    0,  380,    2, 0x08 /* Private */,
+      59,    0,  381,    2, 0x08 /* Private */,
+      60,    0,  382,    2, 0x08 /* Private */,
+      61,    0,  383,    2, 0x08 /* Private */,
+      62,    1,  384,    2, 0x08 /* Private */,
+      63,    0,  387,    2, 0x08 /* Private */,
+      64,    0,  388,    2, 0x08 /* Private */,
+      65,    0,  389,    2, 0x08 /* Private */,
+      66,    1,  390,    2, 0x08 /* Private */,
+      67,    1,  393,    2, 0x08 /* Private */,
+      68,    1,  396,    2, 0x08 /* Private */,
+      71,    0,  399,    2, 0x08 /* Private */,
+      72,    4,  400,    2, 0x08 /* Private */,
+      73,    0,  409,    2, 0x08 /* Private */,
+      74,    0,  410,    2, 0x08 /* Private */,
+      75,    0,  411,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3,    4,    5,    6,    7,
@@ -257,6 +268,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   38,
+    QMetaType::Void, QMetaType::Int,   38,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -270,8 +282,9 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Int,   38,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   53,
-    QMetaType::Void, QMetaType::QString,   53,
+    QMetaType::Void, QMetaType::QString,   54,
+    QMetaType::Void, QMetaType::QString,   54,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -279,15 +292,16 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   38,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   54,
+    QMetaType::Void, QMetaType::QString,   54,
+    QMetaType::Void, 0x80000000 | 69,   70,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 3,    4,    5,    6,    7,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   38,
 
        0        // eod
 };
@@ -323,37 +337,40 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 22: _t->on_pBClearEnergyLT_released(); break;
         case 23: _t->on_pushButtonPanelHome_released(); break;
         case 24: _t->on_comboBoxCirculationFreq_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 25: _t->on_pushButtonOsciStart_released(); break;
-        case 26: _t->on_pushButtonOsciStop_released(); break;
-        case 27: _t->on_pushButtonOsciReset_released(); break;
-        case 28: _t->on_pushButtonScope_released(); break;
-        case 29: _t->osciTimeout(); break;
-        case 30: _t->on_checkBoxOsciEnableL1_released(); break;
-        case 31: _t->on_checkBoxOsciEnableL2_released(); break;
-        case 32: _t->on_checkBoxOsciEnableL3_released(); break;
-        case 33: _t->on_checkBoxOsciEnableLT_released(); break;
-        case 34: _t->on_pushButtonScopeHome_released(); break;
-        case 35: _t->on_comboBoxOsci_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 36: _t->on_pushButtonHarmonicsHome_released(); break;
-        case 37: _t->on_pBStartHarmonics_released(); break;
-        case 38: _t->on_cBHarmonicsType_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 39: _t->on_cBHarmonicsAxisStyle_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 40: _t->on_pBSetHarmonicsCount_released(); break;
-        case 41: _t->on_pBTriggerHarmonics_released(); break;
-        case 42: _t->on_pushButtonStartLogging_released(); break;
-        case 43: _t->on_pushButtonLoggingHome_released(); break;
-        case 44: _t->on_pushButtonCalibrationHome_released(); break;
-        case 45: _t->on_comboBoxCalType_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 46: _t->on_pushButtonLoadCalibration_released(); break;
-        case 47: _t->on_pushButtonQWT500Home_released(); break;
-        case 48: _t->updateErrorData((*reinterpret_cast< mDataHandler*(*)>(_a[1])),(*reinterpret_cast< mDataHandler*(*)>(_a[2])),(*reinterpret_cast< mDataHandler*(*)>(_a[3])),(*reinterpret_cast< mDataHandler*(*)>(_a[4]))); break;
-        case 49: _t->on_pushButtonEVSEHome_released(); break;
-        case 50: _t->on_pushButtonStartCharging_released(); break;
-        case 51: _t->on_pushButtonStopCharging_released(); break;
-        case 52: _t->on_pushButtonCalibrateOffset_released(); break;
-        case 53: _t->on_pushButtonCalibrateGain_released(); break;
-        case 54: _t->on_pushButtonSingleLog_released(); break;
-        case 55: _t->on_comboBoxErrorStyle_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 25: _t->on_comboBoxErrorStyle_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 26: _t->on_pushButtonOsciStart_released(); break;
+        case 27: _t->on_pushButtonOsciStop_released(); break;
+        case 28: _t->on_pushButtonOsciReset_released(); break;
+        case 29: _t->on_pushButtonScope_released(); break;
+        case 30: _t->osciTimeout(); break;
+        case 31: _t->on_checkBoxOsciEnableL1_released(); break;
+        case 32: _t->on_checkBoxOsciEnableL2_released(); break;
+        case 33: _t->on_checkBoxOsciEnableL3_released(); break;
+        case 34: _t->on_checkBoxOsciEnableLT_released(); break;
+        case 35: _t->on_pushButtonScopeHome_released(); break;
+        case 36: _t->on_comboBoxOsci_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 37: _t->on_pushButtonHarmonicsHome_released(); break;
+        case 38: _t->on_pBStartHarmonics_released(); break;
+        case 39: _t->on_cBHarmonicsType_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 40: _t->on_cBHarmonicsAxisStyle_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 41: _t->on_pBSetHarmonicsCount_released(); break;
+        case 42: _t->on_pBTriggerHarmonics_released(); break;
+        case 43: _t->on_pushButtonStartLogging_released(); break;
+        case 44: _t->on_pushButtonLoggingHome_released(); break;
+        case 45: _t->on_pushButtonSingleLog_released(); break;
+        case 46: _t->on_pushButtonCalibrationHome_released(); break;
+        case 47: _t->on_comboBoxCalType_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 48: _t->on_pushButtonLoadCalibration_released(); break;
+        case 49: _t->on_pushButtonCalibrateOffset_released(); break;
+        case 50: _t->on_pushButtonCalibrateGain_released(); break;
+        case 51: _t->on_comboBoxVoltageCalValue_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 52: _t->on_comboBoxCurrentCalValue_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 53: _t->updateCalData((*reinterpret_cast< uint32_t*(*)>(_a[1]))); break;
+        case 54: _t->on_pushButtonQWT500Home_released(); break;
+        case 55: _t->updateErrorData((*reinterpret_cast< mDataHandler*(*)>(_a[1])),(*reinterpret_cast< mDataHandler*(*)>(_a[2])),(*reinterpret_cast< mDataHandler*(*)>(_a[3])),(*reinterpret_cast< mDataHandler*(*)>(_a[4]))); break;
+        case 56: _t->on_pushButtonEVSEHome_released(); break;
+        case 57: _t->on_pushButtonStartCharging_released(); break;
+        case 58: _t->on_pushButtonStopCharging_released(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -369,7 +386,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< mDataHandler* >(); break;
             }
             break;
-        case 48:
+        case 55:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 3:
@@ -418,13 +435,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 56)
+        if (_id < 59)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 56;
+        _id -= 59;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 56)
+        if (_id < 59)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 56;
+        _id -= 59;
     }
     return _id;
 }

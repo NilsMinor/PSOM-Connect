@@ -65,22 +65,18 @@ void PSOM::sendSCMD(uint32_t scmd)
     psom_hal->writeRegister(PSOM_SCOMMAND, scmd, false);
 }
 
-void PSOM::loadCalibrationData(int phase)
+void PSOM::writeSCMDValue(float value)
 {
-    switch (phase)
-    {
-    case (1):   this->sendSCMD(PSOM_SCMD_CALLOAD_L1);
-        break;
-    case (2):   this->sendSCMD(PSOM_SCMD_CALLOAD_L2);
-        break;
-    case (3):   this->sendSCMD(PSOM_SCMD_CALLOAD_L3);
-        break;
-    }
+     psom_hal->writeRegister(PSOM_SCOMMAND_VALUE, value, false);
+}
 
-     // HARM_L1_X contains VCAL data
-    // HARM_L2_X contains ICAL data
-    psom_hal->readRegister(HARM_L1_H1, 24, false);
+void PSOM::loadCalibrationData( )
+{
+    this->sendSCMD(PSOM_SCMD_CALLOAD);
 
+    for (long i=0;i!=1000000;i++) { }
+   // readingState = readCalData;
+   // psom_hal->readRegister(HARM_L1_H1, 12, false);
 }
 /**
  * \brief   starts the periodic measurment timer with an interval
@@ -161,6 +157,7 @@ void PSOM::stopHarmonicsScan()
 void        PSOM::m_timerTimeout()
 {
     //qDebug() << "m_timer timeout";
+    readingState = readNormal;
     psom_hal->copyPSOMBuffer();
 }
 /**
@@ -172,100 +169,111 @@ void        PSOM::m_timerTimeout()
  */
 void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
 {
-    if (dataCount == PSOM_REGISTER_COUNT) {
-        fw_version = QString::number(data[PSOM_FW_VERSION/4]);
+    switch (readingState) {
+    case readNormal:
+        if (dataCount == PSOM_REGISTER_COUNT) {
+            fw_version = QString::number(data[PSOM_FW_VERSION/4]);
 
-        // COMMON
-        m_data.frequency = toFloat(data[LINE_FREQUENCY_F/4]);
-        m_data.sensor_temperature = toFloat(data[MODULE_TEMPERATURE_F/4]);
+            // COMMON
+            m_data.frequency = toFloat(data[LINE_FREQUENCY_F/4]);
+            m_data.sensor_temperature = toFloat(data[MODULE_TEMPERATURE_F/4]);
 
-        // VOLTAGE
-        m_data.L1.voltage.rms = toFloat(data[L1_VOLTAGE_RMS/4]);
-        m_data.L2.voltage.rms = toFloat(data[L2_VOLTAGE_RMS/4]);
-        m_data.L3.voltage.rms = toFloat(data[L3_VOLTAGE_RMS/4]);
-        m_data.LT.voltage.rms = toFloat(data[LT_VOLTAGE_RMS/4]);
+            // VOLTAGE
+            m_data.L1.voltage.rms = toFloat(data[L1_VOLTAGE_RMS/4]);
+            m_data.L2.voltage.rms = toFloat(data[L2_VOLTAGE_RMS/4]);
+            m_data.L3.voltage.rms = toFloat(data[L3_VOLTAGE_RMS/4]);
+            m_data.LT.voltage.rms = toFloat(data[LT_VOLTAGE_RMS/4]);
 
-        m_data.L1.voltage.inst = toFloat(data[L1_VOLTAGE_INST/4]);
-        m_data.L2.voltage.inst = toFloat(data[L2_VOLTAGE_INST/4]);
-        m_data.L3.voltage.inst = toFloat(data[L3_VOLTAGE_INST/4]);
-        m_data.LT.voltage.inst = 0;
+            m_data.L1.voltage.inst = toFloat(data[L1_VOLTAGE_INST/4]);
+            m_data.L2.voltage.inst = toFloat(data[L2_VOLTAGE_INST/4]);
+            m_data.L3.voltage.inst = toFloat(data[L3_VOLTAGE_INST/4]);
+            m_data.LT.voltage.inst = 0;
 
-        // CURRENT
-        m_data.L1.current.rms = toFloat(data[L1_CURRENT_RMS/4]);
-        m_data.L2.current.rms = toFloat(data[L2_CURRENT_RMS/4]);
-        m_data.L3.current.rms = toFloat(data[L3_CURRENT_RMS/4]);
-        m_data.LT.current.rms = toFloat(data[LT_CURRENT_RMS/4]);
+            // CURRENT
+            m_data.L1.current.rms = toFloat(data[L1_CURRENT_RMS/4]);
+            m_data.L2.current.rms = toFloat(data[L2_CURRENT_RMS/4]);
+            m_data.L3.current.rms = toFloat(data[L3_CURRENT_RMS/4]);
+            m_data.LT.current.rms = toFloat(data[LT_CURRENT_RMS/4]);
 
-        m_data.L1.current.inst = toFloat(data[L1_CURRENT_INST/4]);
-        m_data.L2.current.inst = toFloat(data[L2_CURRENT_INST/4]);
-        m_data.L3.current.inst = toFloat(data[L3_CURRENT_INST/4]);
-        m_data.LT.current.inst = 0;
+            m_data.L1.current.inst = toFloat(data[L1_CURRENT_INST/4]);
+            m_data.L2.current.inst = toFloat(data[L2_CURRENT_INST/4]);
+            m_data.L3.current.inst = toFloat(data[L3_CURRENT_INST/4]);
+            m_data.LT.current.inst = 0;
 
-        // POWER
-        m_data.L1.power.active = toFloat(data[L1_POWER_ACTIVE/4]);
-        m_data.L2.power.active = toFloat(data[L2_POWER_ACTIVE/4]);
-        m_data.L3.power.active = toFloat(data[L3_POWER_ACTIVE/4]);
-        m_data.LT.power.active = toFloat(data[LT_POWER_ACTIVE/4]);
+            // POWER
+            m_data.L1.power.active = toFloat(data[L1_POWER_ACTIVE/4]);
+            m_data.L2.power.active = toFloat(data[L2_POWER_ACTIVE/4]);
+            m_data.L3.power.active = toFloat(data[L3_POWER_ACTIVE/4]);
+            m_data.LT.power.active = toFloat(data[LT_POWER_ACTIVE/4]);
 
-        m_data.L1.power.reactive = toFloat(data[L1_POWER_REACTIVE/4]);
-        m_data.L2.power.reactive = toFloat(data[L2_POWER_REACTIVE/4]);
-        m_data.L3.power.reactive = toFloat(data[L3_POWER_REACTIVE/4]);
-        m_data.LT.power.reactive = toFloat(data[LT_POWER_REACTIVE/4]);
+            m_data.L1.power.reactive = toFloat(data[L1_POWER_REACTIVE/4]);
+            m_data.L2.power.reactive = toFloat(data[L2_POWER_REACTIVE/4]);
+            m_data.L3.power.reactive = toFloat(data[L3_POWER_REACTIVE/4]);
+            m_data.LT.power.reactive = toFloat(data[LT_POWER_REACTIVE/4]);
 
-        m_data.L1.power.apparent = toFloat(data[L1_POWER_APPARENT/4]);
-        m_data.L2.power.apparent = toFloat(data[L2_POWER_APPARENT/4]);
-        m_data.L3.power.apparent = toFloat(data[L3_POWER_APPARENT/4]);
-        m_data.LT.power.apparent = toFloat(data[LT_POWER_APPARENT/4]);
+            m_data.L1.power.apparent = toFloat(data[L1_POWER_APPARENT/4]);
+            m_data.L2.power.apparent = toFloat(data[L2_POWER_APPARENT/4]);
+            m_data.L3.power.apparent = toFloat(data[L3_POWER_APPARENT/4]);
+            m_data.LT.power.apparent = toFloat(data[LT_POWER_APPARENT/4]);
 
-        m_data.L1.power.factor = toFloat(data[L1_POWER_FACTOR/4]);
-        m_data.L2.power.factor = toFloat(data[L2_POWER_FACTOR/4]);
-        m_data.L3.power.factor = toFloat(data[L3_POWER_FACTOR/4]);
-        m_data.LT.power.factor = toFloat(data[LT_POWER_FACTOR/4]);
+            m_data.L1.power.factor = toFloat(data[L1_POWER_FACTOR/4]);
+            m_data.L2.power.factor = toFloat(data[L2_POWER_FACTOR/4]);
+            m_data.L3.power.factor = toFloat(data[L3_POWER_FACTOR/4]);
+            m_data.LT.power.factor = toFloat(data[LT_POWER_FACTOR/4]);
 
-        // ENERGY
-        m_data.L1.energy.active = toFloat(data[L1_ENERGY_ACTIVE/4]) / 100000.0;
-        m_data.L2.energy.active = toFloat(data[L2_ENERGY_ACTIVE/4]) / 100000.0 ;
-        m_data.L3.energy.active = toFloat(data[L3_ENERGY_ACTIVE/4]) / 100000.0 ;
-        m_data.LT.energy.active = m_data.L1.energy.active + m_data.L2.energy.active + m_data.L3.energy.active ;
+            // ENERGY
+            m_data.L1.energy.active = toFloat(data[L1_ENERGY_ACTIVE/4]) / 100000.0;
+            m_data.L2.energy.active = toFloat(data[L2_ENERGY_ACTIVE/4]) / 100000.0 ;
+            m_data.L3.energy.active = toFloat(data[L3_ENERGY_ACTIVE/4]) / 100000.0 ;
+            m_data.LT.energy.active = m_data.L1.energy.active + m_data.L2.energy.active + m_data.L3.energy.active ;
 
-        m_data.L1.energy.reactive = toFloat(data[L1_ENERGY_REACTIVE/4]) / 100000.0;
-        m_data.L2.energy.reactive = toFloat(data[L2_ENERGY_REACTIVE/4]) / 100000.0 ;
-        m_data.L3.energy.reactive = toFloat(data[L3_ENERGY_REACTIVE/4]) / 100000.0 ;
-        m_data.LT.energy.reactive = m_data.L1.energy.reactive + m_data.L2.energy.reactive + m_data.L3.energy.reactive ;
+            m_data.L1.energy.reactive = toFloat(data[L1_ENERGY_REACTIVE/4]) / 100000.0;
+            m_data.L2.energy.reactive = toFloat(data[L2_ENERGY_REACTIVE/4]) / 100000.0 ;
+            m_data.L3.energy.reactive = toFloat(data[L3_ENERGY_REACTIVE/4]) / 100000.0 ;
+            m_data.LT.energy.reactive = m_data.L1.energy.reactive + m_data.L2.energy.reactive + m_data.L3.energy.reactive ;
 
-        m_data.L1.energy.cost = toFloat(data[L1_ENERGY_COST/4]);
-        m_data.L2.energy.cost = toFloat(data[L2_ENERGY_COST/4]);
-        m_data.L3.energy.cost = toFloat(data[L3_ENERGY_COST/4]);
-        m_data.LT.energy.cost = m_data.L1.energy.cost + m_data.L2.energy.cost + m_data.L3.energy.cost ;
+            m_data.L1.energy.cost = toFloat(data[L1_ENERGY_COST/4]);
+            m_data.L2.energy.cost = toFloat(data[L2_ENERGY_COST/4]);
+            m_data.L3.energy.cost = toFloat(data[L3_ENERGY_COST/4]);
+            m_data.LT.energy.cost = m_data.L1.energy.cost + m_data.L2.energy.cost + m_data.L3.energy.cost ;
 
-        if (harmonicMeasurmentState) {
-            actualHarmonic = data[ (PSOM_ACTIVE_HARM/4)];
+            if (harmonicMeasurmentState) {
+                actualHarmonic = data[ (PSOM_ACTIVE_HARM/4)];
 
-            for (int i=0; i!= harmonicsCount; i++) {
-                m_data.L1.harmonic.contentL1[ i ] = toFloat (data[ (HARM_L1_H1 / 4) + i]);
-                m_data.L2.harmonic.contentL2[ i ] = toFloat (data[ (HARM_L2_H1 / 4) + i]);
-                m_data.L3.harmonic.contentL3[ i ] = toFloat (data[ (HARM_L3_H1 / 4) + i]);
+                for (int i=0; i!= harmonicsCount; i++) {
+                    m_data.L1.harmonic.contentL1[ i ] = toFloat (data[ (HARM_L1_H1 / 4) + i]);
+                    m_data.L2.harmonic.contentL2[ i ] = toFloat (data[ (HARM_L2_H1 / 4) + i]);
+                    m_data.L3.harmonic.contentL3[ i ] = toFloat (data[ (HARM_L3_H1 / 4) + i]);
 
+                }
+                if ( harmOdd [harmonicsCount-1]  == actualHarmonic )
+                    emit harmonicMeasurmentReady ();
+                else
+                    emit newHarmonicsData(m_data.L1.harmonic.contentL1, m_data.frequency, harmonicsCount, actualHarmonic);
+
+                //if (actualHarmonic == )
             }
-            if ( harmOdd [harmonicsCount-1]  == actualHarmonic )
-                emit harmonicMeasurmentReady ();
-            else
-                emit newHarmonicsData(m_data.L1.harmonic.contentL1, m_data.frequency, harmonicsCount, actualHarmonic);
 
-            //if (actualHarmonic == )
+            m_data.circulationTime = elapsedTimer.elapsed();
+            m_data.circulationFrequency =  1000.0 / m_data.circulationTime;
+
+            elapsedTimer.restart();
+            emit newPSOMData();
+        }
+        else {
+            for (int i =0; i!= dataCount; i++) {
+                 qDebug() << data [i];
+            }
         }
 
-        m_data.circulationTime = elapsedTimer.elapsed();
-        m_data.circulationFrequency =  1000.0 / m_data.circulationTime;
-
-        elapsedTimer.restart();
-        emit newPSOMData();
-    }
-    else {
-        for (int i =0; i!= dataCount; i++) {
-             qDebug() << data [i];
+        break;
+    case readCalData:
+        if (dataCount == 12) {
+            emit updateCalData (data);
         }
+        break;
     }
+
 }
 
 void        PSOM::statusBarInfoHandler(QString information)

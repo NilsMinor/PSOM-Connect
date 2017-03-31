@@ -23,6 +23,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -48,7 +49,13 @@ public:
     QLabel *label;
     QPushButton *pushButtonInfo;
     QLabel *label_4;
+    QStackedWidget *stackedWidget;
+    QWidget *page_5;
+    QHBoxLayout *horizontalLayout;
     QHBoxLayout *qwt500HorizontalLayout;
+    QWidget *page_6;
+    QHBoxLayout *horizontalLayout_2;
+    QHBoxLayout *qwt500HarmonicsLayout;
     QMenuBar *qwt500MenuBar;
     QToolBar *qwt500MainToolBar;
 
@@ -93,6 +100,7 @@ public:
 
         comboBoxQWT500VoltageRange = new QComboBox(qwt500CentralWidget);
         comboBoxQWT500VoltageRange->setObjectName(QStringLiteral("comboBoxQWT500VoltageRange"));
+        comboBoxQWT500VoltageRange->setEnabled(false);
 
         qwt500GridLayout->addWidget(comboBoxQWT500VoltageRange, 0, 7, 1, 1);
 
@@ -115,6 +123,7 @@ public:
 
         pushButtonQWT500Reset = new QPushButton(qwt500CentralWidget);
         pushButtonQWT500Reset->setObjectName(QStringLiteral("pushButtonQWT500Reset"));
+        pushButtonQWT500Reset->setEnabled(false);
 
         qwt500GridLayout->addWidget(pushButtonQWT500Reset, 1, 1, 1, 1);
 
@@ -130,6 +139,7 @@ public:
 
         comboBoxQWT500CurrentRange = new QComboBox(qwt500CentralWidget);
         comboBoxQWT500CurrentRange->setObjectName(QStringLiteral("comboBoxQWT500CurrentRange"));
+        comboBoxQWT500CurrentRange->setEnabled(false);
 
         qwt500GridLayout->addWidget(comboBoxQWT500CurrentRange, 1, 7, 1, 1);
 
@@ -161,11 +171,36 @@ public:
 
         gridLayout_2->addLayout(qwt500GridLayout, 0, 0, 1, 1);
 
+        stackedWidget = new QStackedWidget(qwt500CentralWidget);
+        stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
+        page_5 = new QWidget();
+        page_5->setObjectName(QStringLiteral("page_5"));
+        horizontalLayout = new QHBoxLayout(page_5);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         qwt500HorizontalLayout = new QHBoxLayout();
         qwt500HorizontalLayout->setSpacing(6);
         qwt500HorizontalLayout->setObjectName(QStringLiteral("qwt500HorizontalLayout"));
 
-        gridLayout_2->addLayout(qwt500HorizontalLayout, 1, 0, 1, 1);
+        horizontalLayout->addLayout(qwt500HorizontalLayout);
+
+        stackedWidget->addWidget(page_5);
+        page_6 = new QWidget();
+        page_6->setObjectName(QStringLiteral("page_6"));
+        horizontalLayout_2 = new QHBoxLayout(page_6);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        qwt500HarmonicsLayout = new QHBoxLayout();
+        qwt500HarmonicsLayout->setSpacing(6);
+        qwt500HarmonicsLayout->setObjectName(QStringLiteral("qwt500HarmonicsLayout"));
+
+        horizontalLayout_2->addLayout(qwt500HarmonicsLayout);
+
+        stackedWidget->addWidget(page_6);
+
+        gridLayout_2->addWidget(stackedWidget, 1, 0, 1, 1);
 
         QWT500Widget->setCentralWidget(qwt500CentralWidget);
         qwt500MenuBar = new QMenuBar(QWT500Widget);
@@ -177,6 +212,9 @@ public:
         QWT500Widget->addToolBar(Qt::TopToolBarArea, qwt500MainToolBar);
 
         retranslateUi(QWT500Widget);
+
+        stackedWidget->setCurrentIndex(0);
+
 
         QMetaObject::connectSlotsByName(QWT500Widget);
     } // setupUi

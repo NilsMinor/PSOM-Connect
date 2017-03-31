@@ -38,7 +38,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>7</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1601,7 +1601,7 @@
         <item row="1" column="0">
          <widget class="QGroupBox" name="groupBox_9">
           <property name="title">
-           <string>GroupBox</string>
+           <string>Export</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
@@ -1619,7 +1619,26 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="text">
+              <string>C:\Log\cal</string>
+             </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Minimum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -1633,305 +1652,309 @@
            </sizepolicy>
           </property>
           <property name="title">
-           <string>GroupBox</string>
+           <string>Control</string>
           </property>
-          <widget class="QWidget" name="layoutWidget">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>60</y>
-             <width>351</width>
-             <height>26</height>
-            </rect>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
-            <item>
-             <widget class="QPushButton" name="pushButtonCalibrateOffset">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Offset</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButtonCalibrateGain">
-              <property name="text">
-               <string>Calibrate</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="layoutWidget">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>30</y>
-             <width>351</width>
-             <height>26</height>
-            </rect>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_15">
-            <item row="0" column="1">
-             <widget class="QComboBox" name="comboBoxCalPhase">
-              <item>
-               <property name="text">
-                <string>L1</string>
+          <layout class="QGridLayout" name="gridLayout_17">
+           <item row="3" column="0">
+            <widget class="QPushButton" name="pushButtonLoadCalibration">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Load</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="pushButtonCalibrationHome">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>    Home</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../PowerLAB.qrc">
+               <normaloff>:/images/home.svg</normaloff>:/images/home.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>32</width>
+               <height>32</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <layout class="QGridLayout" name="gridLayout_15">
+             <item row="0" column="1">
+              <widget class="QComboBox" name="comboBoxCalPhase">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
-              </item>
-              <item>
+               <item>
+                <property name="text">
+                 <string>L1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>L2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>L3</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_6">
                <property name="text">
-                <string>L2</string>
+                <string>Phase</string>
                </property>
-              </item>
-              <item>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QComboBox" name="comboBoxCalType">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Voltage [V]</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Current [A]</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_7">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
-                <string>L3</string>
+                <string>Type</string>
                </property>
-              </item>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>Phase</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QComboBox" name="comboBoxCalType">
-              <item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <item>
+              <widget class="QPushButton" name="pushButtonCalibrateOffset">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
-                <string>Voltage [V]</string>
+                <string>Offset</string>
                </property>
-              </item>
-              <item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButtonCalibrateGain">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
-                <string>Current [A]</string>
+                <string>Calibrate</string>
                </property>
-              </item>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Type</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="layoutWidget">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>90</y>
-             <width>351</width>
-             <height>26</height>
-            </rect>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_16">
-            <item row="0" column="5">
-             <widget class="QPushButton" name="pushButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Next</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="4">
-             <widget class="QLabel" name="label_9">
-              <property name="text">
-               <string>A</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="label_8">
-              <property name="text">
-               <string>V</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_10">
-              <property name="text">
-               <string>Calibration Target</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QComboBox" name="comboBoxVoltageCalValue">
-              <item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <layout class="QGridLayout" name="gridLayout_16">
+             <item row="0" column="4">
+              <widget class="QLabel" name="labelCurrentCalUnit">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
-                <string>0</string>
+                <string>A</string>
                </property>
-              </item>
-              <item>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="labelVoltageCalUnit">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="text">
-                <string>40</string>
+                <string>V</string>
                </property>
-              </item>
-              <item>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_10">
                <property name="text">
-                <string>80</string>
+                <string>Calibration Target</string>
                </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>120</string>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="comboBoxVoltageCalValue">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>160</string>
+               <item>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>40</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>80</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>120</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>160</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>200</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>240</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>280</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>320</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>360</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>400</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QComboBox" name="comboBoxCurrentCalValue">
+               <property name="enabled">
+                <bool>false</bool>
                </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>200</string>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>240</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>280</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>320</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>360</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>400</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QComboBox" name="comboBoxCurrentCalValue">
-              <item>
-               <property name="text">
-                <string>0</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>1</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>2</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>4</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>6</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>8</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>10</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>12</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>16</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>20</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>24</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QPushButton" name="pushButtonCalibrationHome">
-           <property name="geometry">
-            <rect>
-             <x>230</x>
-             <y>160</y>
-             <width>126</width>
-             <height>38</height>
-            </rect>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>    Home</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../PowerLAB.qrc">
-             <normaloff>:/images/home.svg</normaloff>:/images/home.svg</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="pushButtonLoadCalibration">
-           <property name="geometry">
-            <rect>
-             <x>30</x>
-             <y>160</y>
-             <width>91</width>
-             <height>31</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>Load</string>
-           </property>
-          </widget>
+               <item>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>6</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>8</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>10</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>12</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>16</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>20</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>24</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="0" column="1" rowspan="2">
@@ -1956,62 +1979,32 @@
              </attribute>
              <row>
               <property name="text">
-               <string>0V</string>
+               <string>CAL_L1</string>
               </property>
              </row>
              <row>
               <property name="text">
-               <string>40V</string>
+               <string>CAL_L2</string>
               </property>
              </row>
              <row>
               <property name="text">
-               <string>80V</string>
+               <string>CAL_L3</string>
               </property>
              </row>
              <row>
               <property name="text">
-               <string>120V</string>
+               <string>OFFS_L1</string>
               </property>
              </row>
              <row>
               <property name="text">
-               <string>160V</string>
+               <string>VOFFS_L3</string>
               </property>
              </row>
              <row>
               <property name="text">
-               <string>200V</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>240V</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>280V</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>320V</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>360V</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>400</string>
-              </property>
-             </row>
-             <row>
-              <property name="text">
-               <string>VOFFS</string>
+               <string>OFFS_L3</string>
               </property>
              </row>
              <column>
@@ -2021,7 +2014,7 @@
              </column>
              <column>
               <property name="text">
-               <string>SCALE</string>
+               <string>ICAL</string>
               </property>
              </column>
             </widget>

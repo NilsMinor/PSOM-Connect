@@ -86,6 +86,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect (testModule, SIGNAL(harmonicMeasurmentReady()), this, SLOT(on_pBTriggerHarmonics_released()));
 
+    // callibration
+    connect (testModule, SIGNAL(updateCalData(uint32_t*)), this, SLOT(updateCalData(uint32_t*)));
 
     L1Data = new mDataHandler (this);
     L1Data->add("U1","V");
@@ -288,6 +290,8 @@ void MainWindow::updateErrorData(mDataHandler *L1, mDataHandler *L2, mDataHandle
     L3Data->assignTargetDataByList(L3);
     LTData->assignTargetDataByList(LT);
 }
+
+
 
 
 
