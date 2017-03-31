@@ -62,5 +62,12 @@ void MainWindow::on_comboBoxCurrentCalValue_currentIndexChanged(const QString &a
 }
 void MainWindow::updateCalData(uint32_t *cal)
 {
-    qDebug() << "VCAL " << cal[0];
+    int datacounter =0;
+    for (int ridx = 0 ; ridx < 6 ; ridx++ ) {
+        for (int cidx = 0 ; cidx < 2 ; cidx++) {
+          QTableWidgetItem* item = new QTableWidgetItem();
+          item->setText(QString::number(cal[datacounter++]));
+          ui->tableWidgetCalData->setItem(ridx, cidx, item);
+        }
+    }
 }

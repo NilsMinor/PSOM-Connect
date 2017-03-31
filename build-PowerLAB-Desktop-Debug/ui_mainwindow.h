@@ -189,7 +189,7 @@ public:
     QComboBox *comboBoxCurrentCalValue;
     QGroupBox *groupBox_7;
     QGridLayout *gridLayout_12;
-    QTableWidget *tableWidget;
+    QTableWidget *tableWidgetCalData;
     QMenuBar *menuBar;
     QMenu *menuCalls;
     QMenu *menuTools;
@@ -1180,34 +1180,37 @@ public:
         gridLayout_12->setSpacing(6);
         gridLayout_12->setContentsMargins(11, 11, 11, 11);
         gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
-        tableWidget = new QTableWidget(groupBox_7);
-        if (tableWidget->columnCount() < 2)
-            tableWidget->setColumnCount(2);
+        tableWidgetCalData = new QTableWidget(groupBox_7);
+        if (tableWidgetCalData->columnCount() < 2)
+            tableWidgetCalData->setColumnCount(2);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        tableWidgetCalData->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        if (tableWidget->rowCount() < 6)
-            tableWidget->setRowCount(6);
+        tableWidgetCalData->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        if (tableWidgetCalData->rowCount() < 6)
+            tableWidgetCalData->setRowCount(6);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem2);
+        tableWidgetCalData->setVerticalHeaderItem(0, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(1, __qtablewidgetitem3);
+        tableWidgetCalData->setVerticalHeaderItem(1, __qtablewidgetitem3);
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(2, __qtablewidgetitem4);
+        tableWidgetCalData->setVerticalHeaderItem(2, __qtablewidgetitem4);
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(3, __qtablewidgetitem5);
+        tableWidgetCalData->setVerticalHeaderItem(3, __qtablewidgetitem5);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(4, __qtablewidgetitem6);
+        tableWidgetCalData->setVerticalHeaderItem(4, __qtablewidgetitem6);
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(5, __qtablewidgetitem7);
-        tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        sizePolicy.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
-        tableWidget->setSizePolicy(sizePolicy);
-        tableWidget->setAutoScrollMargin(14);
-        tableWidget->horizontalHeader()->setDefaultSectionSize(120);
+        tableWidgetCalData->setVerticalHeaderItem(5, __qtablewidgetitem7);
+        tableWidgetCalData->setObjectName(QStringLiteral("tableWidgetCalData"));
+        QSizePolicy sizePolicy9(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        sizePolicy9.setHorizontalStretch(0);
+        sizePolicy9.setVerticalStretch(0);
+        sizePolicy9.setHeightForWidth(tableWidgetCalData->sizePolicy().hasHeightForWidth());
+        tableWidgetCalData->setSizePolicy(sizePolicy9);
+        tableWidgetCalData->setAutoScrollMargin(14);
+        tableWidgetCalData->horizontalHeader()->setDefaultSectionSize(120);
 
-        gridLayout_12->addWidget(tableWidget, 0, 0, 1, 1);
+        gridLayout_12->addWidget(tableWidgetCalData, 0, 0, 1, 1);
 
 
         gridLayout_8->addWidget(groupBox_7, 0, 1, 2, 1);
@@ -1498,21 +1501,21 @@ public:
          << QApplication::translate("MainWindow", "24", Q_NULLPTR)
         );
         groupBox_7->setTitle(QApplication::translate("MainWindow", "GroupBox", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
+        QTableWidgetItem *___qtablewidgetitem = tableWidgetCalData->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "VCAL", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidgetCalData->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "ICAL", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->verticalHeaderItem(0);
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidgetCalData->verticalHeaderItem(0);
         ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "CAL_L1", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->verticalHeaderItem(1);
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidgetCalData->verticalHeaderItem(1);
         ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "CAL_L2", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->verticalHeaderItem(2);
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidgetCalData->verticalHeaderItem(2);
         ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "CAL_L3", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->verticalHeaderItem(3);
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidgetCalData->verticalHeaderItem(3);
         ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "OFFS_L1", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem6 = tableWidget->verticalHeaderItem(4);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "VOFFS_L3", Q_NULLPTR));
-        QTableWidgetItem *___qtablewidgetitem7 = tableWidget->verticalHeaderItem(5);
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidgetCalData->verticalHeaderItem(4);
+        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "OFFS_L2", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem7 = tableWidgetCalData->verticalHeaderItem(5);
         ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "OFFS_L3", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabCalibration), QApplication::translate("MainWindow", "Calibration", Q_NULLPTR));
         menuCalls->setTitle(QApplication::translate("MainWindow", "Calls", Q_NULLPTR));

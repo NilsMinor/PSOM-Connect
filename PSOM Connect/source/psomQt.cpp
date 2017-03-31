@@ -74,9 +74,9 @@ void PSOM::loadCalibrationData( )
 {
     this->sendSCMD(PSOM_SCMD_CALLOAD);
 
-    for (long i=0;i!=1000000;i++) { }
-   // readingState = readCalData;
-   // psom_hal->readRegister(HARM_L1_H1, 12, false);
+   for (long i=0;i!=10000000;i++) { }
+   readingState = readCalData;
+   psom_hal->readRegister(HARM_L1_H1, 12, false);
 }
 /**
  * \brief   starts the periodic measurment timer with an interval
