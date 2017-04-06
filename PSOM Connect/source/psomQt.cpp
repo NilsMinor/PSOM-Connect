@@ -244,14 +244,15 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
                     m_data.L1.harmonic.contentL1[ i ] = toFloat (data[ (HARM_L1_H1 / 4) + i]);
                     m_data.L2.harmonic.contentL2[ i ] = toFloat (data[ (HARM_L2_H1 / 4) + i]);
                     m_data.L3.harmonic.contentL3[ i ] = toFloat (data[ (HARM_L3_H1 / 4) + i]);
-
                 }
-                if ( harmOdd [harmonicsCount-1]  == actualHarmonic )
-                    emit harmonicMeasurmentReady ();
-                else
-                    emit newHarmonicsData(m_data.L1.harmonic.contentL1, m_data.frequency, harmonicsCount, actualHarmonic);
 
-                //if (actualHarmonic == )
+
+                if ( harmonicsCount  == actualHarmonic ) {
+                    emit newHarmonicsData(m_data.L1.harmonic.contentL1, m_data.frequency, harmonicsCount, actualHarmonic);
+                    emit harmonicMeasurmentReady ();
+                }
+                else
+                    emit  updateActualHarmonic ( actualHarmonic);
             }
 
             m_data.circulationTime = elapsedTimer.elapsed();
@@ -285,5 +286,7 @@ void PSOM::psomAnswered()
 {
     psom_answered = true;
 }
+
+
 
 

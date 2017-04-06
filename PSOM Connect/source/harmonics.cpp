@@ -1,20 +1,42 @@
 #include "mainwindow.h"
 
+static bool harmonicsAutoTrigger = false;
+
+void MainWindow::initHarmonicSettings (void) {
+    // harmonics box
+    harmonics = new qOsci(NULL, OfTypeHarmonics);
+    ui->harmonicsGraphLayout->addWidget(harmonics->getScreenWidget()) ;
+    ui->cBHarmonicsCount->setCurrentIndex(4);
+    connect (testModule, SIGNAL(newHarmonicsData(float*,float,int,int)),    // connect module with harmonics display
+             harmonics, SLOT(setHarmonics(float*,float,int,int)));
+
+    connect (testModule, SIGNAL(harmonicMeasurmentReady()), this, SLOT(on_autoHarmonicMeasurement()));
+
+    connect (testModule, SIGNAL(updateActualHarmonic(int)), harmonics, SLOT(updateActualHarmonic(int)));        // update actual harmonic
+
+    HData = new mDataHandler (this);
+
+    for (int i=1; i<=10;i++) {
+        QString name = "H" + QString::number(i);
+        HData->add(name, "");
+    }
+    ui->harmonicsDataLayout->addWidget(HData);
+}
+
 void MainWindow::on_pBStartHarmonics_released()
 {
     if (ui->pBStartHarmonics->text() == "Start") {
         ui->pBStartHarmonics->setText("Stop");
 
-        //testModule->stopHarmonicsScan();
-        // testModule->startHarmonicsScan(VoltageHarmonics);
+       harmonicsAutoTrigger = true;
+       on_pBTriggerHarmonics_released();
     }
     else {
         ui->pBStartHarmonics->setText("Start");
-        testModule->stopHarmonicsScan();
+        harmonicsAutoTrigger = false;
+
     }
 
-
-    testModule->startMeasurement(100);
 }
 void MainWindow::on_cBHarmonicsType_currentIndexChanged(const QString &arg1)
 {
@@ -52,6 +74,15 @@ void MainWindow::on_pBTriggerHarmonics_released()
         break;
     default:
         break;
+    }
+}
+
+void MainWindow::on_autoHarmonicMeasurement()
+{
+
+    emit harmonicsMeasurementReady();
+    if(harmonicsAutoTrigger) {
+        on_pBTriggerHarmonics_released();
     }
 }
 void MainWindow::on_pushButtonHarmonicsHome_released()

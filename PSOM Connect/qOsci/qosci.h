@@ -67,6 +67,7 @@ signals:
 public slots:
     void  setHarmonics (float *data, float freq, int count, int active);
     void updateOsci(mDataHandler *L1,mDataHandler *L2,mDataHandler *L3,mDataHandler *LT );
+     void updateActualHarmonic (int actualHarm);
 private slots:
     void realtimeDataSlot (void);
 };

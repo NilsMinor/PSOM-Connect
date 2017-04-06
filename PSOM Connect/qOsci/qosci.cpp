@@ -143,6 +143,13 @@ void qOsci::updateOsci(mDataHandler *L1,mDataHandler *L2,mDataHandler *L3,mDataH
     }
 }
 
+void qOsci::updateActualHarmonic(int actualHarm)
+{
+      //qDebug() << "Update!";
+       groupTracerText->setText("Harmonic = " + QString::number(actualHarm));
+       customPlot->replot();
+}
+
 void qOsci::initAsHarmonics (void) {
     // prepare data:
 
@@ -198,18 +205,18 @@ void qOsci::initAsHarmonics (void) {
 }
 void qOsci::setHarmonics(float *data, float freq, int count, int active) {
 
-    int size = count;
-    int max = 0;
-    bool showFrequency = true;
-    QVector<double> x(size), y(size),  frequency(count);
-
     groupTracerText->setText("Harmonic = " + QString::number(active));
 
-   // if (data[0] != 0)   // only update when new data comes
-    if (true)
-    {
+    for (int i=0;i!=5;i++) {
+        qDebug() << "Harmonic " << i+1 << " = " << data[i];
+    }
+
+    int size = count;
+    int max = 0;
+    QVector<double> x(size), y(size),  frequency(count);
+
     int dataCounter = 0;
-    for (int i= 0; i!= size -1; i++)
+    for (int i= 0; i!= size; i++)
     {
         x[i] = i;
         y[i] = data[dataCounter];    // add data
@@ -244,7 +251,7 @@ void qOsci::setHarmonics(float *data, float freq, int count, int active) {
     textTicker->addTicks(ticks, labels);
     customPlot->xAxis->setTicker(textTicker);
     customPlot->xAxis->setTickLabelFont(QFont(font().family(),10));
-    }
+
     customPlot->replot();
 }
 void qOsci::setHarmonicsAxisStyle(OsciHarmAxisStyle style)

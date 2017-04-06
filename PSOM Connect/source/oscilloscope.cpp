@@ -1,5 +1,13 @@
 #include "mainwindow.h"
 
+void MainWindow::initOscilloscopeSettings(void) {
+    oscillopscope = new qOsci();
+    ui->layoutOscilloscope->addWidget(oscillopscope->getScreenWidget());
+    connect (oscillopscope, SIGNAL(osci_timeout()), this, SLOT(osciTimeout()));
+    connect (this, SIGNAL(updateOsci(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)),
+             oscillopscope, SLOT(updateOsci(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)));
+}
+
 void MainWindow::on_pushButtonOsciStart_released()
 {
    oscillopscope->osciStart();

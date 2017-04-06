@@ -191,6 +191,7 @@ signals:
     void        newHarmonicsData(float *data, float freq, int count, int active);
     void        harmonicMeasurmentReady (void);
     void        updateCalData   (uint32_t * cal);
+    void        updateActualHarmonic (int actualHarm);
 };
 
 #endif // PSOM_H

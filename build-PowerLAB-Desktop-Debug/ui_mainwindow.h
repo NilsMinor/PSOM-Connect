@@ -1202,11 +1202,8 @@ public:
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
         tableWidgetCalData->setVerticalHeaderItem(5, __qtablewidgetitem7);
         tableWidgetCalData->setObjectName(QStringLiteral("tableWidgetCalData"));
-        QSizePolicy sizePolicy9(QSizePolicy::Minimum, QSizePolicy::Expanding);
-        sizePolicy9.setHorizontalStretch(0);
-        sizePolicy9.setVerticalStretch(0);
-        sizePolicy9.setHeightForWidth(tableWidgetCalData->sizePolicy().hasHeightForWidth());
-        tableWidgetCalData->setSizePolicy(sizePolicy9);
+        sizePolicy.setHeightForWidth(tableWidgetCalData->sizePolicy().hasHeightForWidth());
+        tableWidgetCalData->setSizePolicy(sizePolicy);
         tableWidgetCalData->setAutoScrollMargin(14);
         tableWidgetCalData->horizontalHeader()->setDefaultSectionSize(120);
 

@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_qOsci_t {
-    QByteArrayData data[16];
-    char stringdata0[117];
+    QByteArrayData data[18];
+    char stringdata0[149];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,12 +44,16 @@ QT_MOC_LITERAL(11, 88, 2), // "L1"
 QT_MOC_LITERAL(12, 91, 2), // "L2"
 QT_MOC_LITERAL(13, 94, 2), // "L3"
 QT_MOC_LITERAL(14, 97, 2), // "LT"
-QT_MOC_LITERAL(15, 100, 16) // "realtimeDataSlot"
+QT_MOC_LITERAL(15, 100, 20), // "updateActualHarmonic"
+QT_MOC_LITERAL(16, 121, 10), // "actualHarm"
+QT_MOC_LITERAL(17, 132, 16) // "realtimeDataSlot"
 
     },
     "qOsci\0osci_timeout\0\0setHarmonics\0"
     "float*\0data\0freq\0count\0active\0updateOsci\0"
-    "mDataHandler*\0L1\0L2\0L3\0LT\0realtimeDataSlot"
+    "mDataHandler*\0L1\0L2\0L3\0LT\0"
+    "updateActualHarmonic\0actualHarm\0"
+    "realtimeDataSlot"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,7 +63,7 @@ static const uint qt_meta_data_qOsci[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -67,12 +71,13 @@ static const uint qt_meta_data_qOsci[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x06 /* Public */,
+       1,    0,   39,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    4,   35,    2, 0x0a /* Public */,
-       9,    4,   44,    2, 0x0a /* Public */,
-      15,    0,   53,    2, 0x08 /* Private */,
+       3,    4,   40,    2, 0x0a /* Public */,
+       9,    4,   49,    2, 0x0a /* Public */,
+      15,    1,   58,    2, 0x0a /* Public */,
+      17,    0,   61,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -80,6 +85,7 @@ static const uint qt_meta_data_qOsci[] = {
  // slots: parameters
     QMetaType::Void, 0x80000000 | 4, QMetaType::Float, QMetaType::Int, QMetaType::Int,    5,    6,    7,    8,
     QMetaType::Void, 0x80000000 | 10, 0x80000000 | 10, 0x80000000 | 10, 0x80000000 | 10,   11,   12,   13,   14,
+    QMetaType::Void, QMetaType::Int,   16,
     QMetaType::Void,
 
        0        // eod
@@ -94,7 +100,8 @@ void qOsci::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 0: _t->osci_timeout(); break;
         case 1: _t->setHarmonics((*reinterpret_cast< float*(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4]))); break;
         case 2: _t->updateOsci((*reinterpret_cast< mDataHandler*(*)>(_a[1])),(*reinterpret_cast< mDataHandler*(*)>(_a[2])),(*reinterpret_cast< mDataHandler*(*)>(_a[3])),(*reinterpret_cast< mDataHandler*(*)>(_a[4]))); break;
-        case 3: _t->realtimeDataSlot(); break;
+        case 3: _t->updateActualHarmonic((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->realtimeDataSlot(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -149,13 +156,13 @@ int qOsci::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

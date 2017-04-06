@@ -46,45 +46,14 @@
 // Serial Port and window functions
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    console = new Console;
-    console->setEnabled(false);
-
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->addWidget(console);
-    ui->tabTerminal->setLayout(mainLayout);
-
-    serial = new QSerialPort(this);
-    settings = new SettingsDialog;
-    settings->move(this->x()+this->width(), this->y());
-
-    ui->actionConnect->setEnabled(true);
-    ui->actionDisconnect->setEnabled(false);
-    ui->actionQuit->setEnabled(true);
-    ui->actionConfigure->setEnabled(true);
-
-    initActionsConnections();
-
-    connect(serial, SIGNAL(error(QSerialPort::SerialPortError)), this, SLOT(handleError(QSerialPort::SerialPortError)));
-    connect(console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
+    this->initSerialSettings();
 
     testModule = new PSOM(0);
     connect (testModule, SIGNAL(newPSOMData(void)), this,SLOT(newPSOMData(void)));
     connect (testModule, SIGNAL(statusBarInfo(QString)), this, SLOT(changeStatusbarInformation(QString)));
 
-    oscillopscope = new qOsci();
-    ui->layoutOscilloscope->addWidget(oscillopscope->getScreenWidget());
-    connect (oscillopscope, SIGNAL(osci_timeout()), this, SLOT(osciTimeout()));
-    connect (this, SIGNAL(updateOsci(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)),
-             oscillopscope, SLOT(updateOsci(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)));
-
-    // harmonics box
-    harmonics = new qOsci(NULL, OfTypeHarmonics);    
-    ui->harmonicsGraphLayout->addWidget(harmonics->getScreenWidget()) ;
-    ui->cBHarmonicsCount->setCurrentIndex(4);
-    connect (testModule, SIGNAL(newHarmonicsData(float*,float,int,int)),    // connect module with harmonics display
-             harmonics, SLOT(setHarmonics(float*,float,int,int)));
-
-    connect (testModule, SIGNAL(harmonicMeasurmentReady()), this, SLOT(on_pBTriggerHarmonics_released()));
+    this->initOscilloscopeSettings();
+    this->initHarmonicSettings();
 
     // callibration
     connect (testModule, SIGNAL(updateCalData(uint32_t*)), this, SLOT(updateCalData(uint32_t*)));
@@ -137,13 +106,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     LTData->add("MT","€");
     ui->layoutPhaseLT->addWidget(LTData);
 
-    HData = new mDataHandler (this);
 
-    for (int i=1; i<=10;i++) {
-        QString name = "H" + QString::number(i);
-        HData->add(name, "");
-    }
-    ui->harmonicsDataLayout->addWidget(HData);
 
 
     Common = new mDataHandler (this);
@@ -224,11 +187,9 @@ void MainWindow::newPSOMData(void)
     Common->setData("Circ T", testModule->getData().circulationTime, 0);
     Common->setData("Circ F", testModule->getData().circulationFrequency, 0);
 
-    int hc = 1;
-    for (int i=0; i<= HData->getCount(); i++) {
-        QString name = "H" + QString::number(hc);
-        HData->setData(name,testModule->getData().L1.harmonic.contentL1[ i ]);
-        hc += 2;
+    for (int i=1; i<= HData->getCount(); i++) {
+        QString name = "H" + QString::number(i);
+        HData->setData(name,testModule->getData().L1.harmonic.contentL1[ i - 1]);
     }
 }
 

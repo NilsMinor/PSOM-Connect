@@ -98,6 +98,10 @@ private:
     void sendCommand            (QByteArray cmd, double value);
     void updateDebugUIInfo      (void);
 
+    void initHarmonicSettings (void);
+    void initOscilloscopeSettings (void);
+    void initSerialSettings (void);
+
 #ifdef Q_OS_WIN
      QWT500Widget    *wt500;
 #endif
@@ -169,6 +173,7 @@ private slots:
     void on_cBHarmonicsAxisStyle_currentIndexChanged(const QString &arg1);
     void on_pBSetHarmonicsCount_released();
     void on_pBTriggerHarmonics_released();
+    void on_autoHarmonicMeasurement ();
 
     // logging
     void on_pushButtonStartLogging_released();
@@ -196,7 +201,7 @@ private slots:
 
 signals:
     void updateOsci (mDataHandler *L1, mDataHandler *L2, mDataHandler *L3, mDataHandler *LT );
-
+    void harmonicsMeasurementReady ( );
 };
 
 #endif // MAINWINDOW_H

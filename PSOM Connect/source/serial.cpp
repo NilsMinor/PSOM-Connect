@@ -1,5 +1,28 @@
 #include "mainwindow.h"
 
+void MainWindow::initSerialSettings (void) {
+    console = new Console;
+    console->setEnabled(false);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout->addWidget(console);
+    ui->tabTerminal->setLayout(mainLayout);
+
+    serial = new QSerialPort(this);
+    settings = new SettingsDialog;
+    settings->move(this->x()+this->width(), this->y());
+
+    ui->actionConnect->setEnabled(true);
+    ui->actionDisconnect->setEnabled(false);
+    ui->actionQuit->setEnabled(true);
+    ui->actionConfigure->setEnabled(true);
+
+    initActionsConnections();
+
+    connect(serial, SIGNAL(error(QSerialPort::SerialPortError)), this, SLOT(handleError(QSerialPort::SerialPortError)));
+    connect(console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
+}
+
 void MainWindow::handleError(QSerialPort::SerialPortError error) {
     if (error == QSerialPort::ResourceError) {
         QMessageBox::critical(this, tr("Critical Error"), serial->errorString());
