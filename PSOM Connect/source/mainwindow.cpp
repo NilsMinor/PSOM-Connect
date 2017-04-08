@@ -44,6 +44,7 @@
 
 
 // Serial Port and window functions
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     this->initSerialSettings();
@@ -54,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     this->initOscilloscopeSettings();
     this->initHarmonicSettings();
+    this->teamprojectInitSettings();
 
     // callibration
     connect (testModule, SIGNAL(updateCalData(uint32_t*)), this, SLOT(updateCalData(uint32_t*)));
@@ -106,9 +108,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     LTData->add("MT","€");
     ui->layoutPhaseLT->addWidget(LTData);
 
-
-
-
     Common = new mDataHandler (this);
     Common->add("F", "Hz");
     Common->add("Temp", "°C");
@@ -121,6 +120,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     logger.add(L3Data);
     logger.add(LTData);
     logger.add(Common);
+    logger.add(HData);
     connect (&logger, SIGNAL(newDataLogged(int,qint64)), this, SLOT(updateLoggingInformation(int, qint64)));
 
     #ifdef Q_OS_WIN
@@ -130,8 +130,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
                         this, SLOT(updateErrorData(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)));
     #endif
 
-     ui->evseImageWidget->setStyleSheet("background-image: url(:/images/unplugged.png)");
+
 }
+
 MainWindow::~MainWindow() {
     delete settings;
     delete ui;
@@ -187,9 +188,11 @@ void MainWindow::newPSOMData(void)
     Common->setData("Circ T", testModule->getData().circulationTime, 0);
     Common->setData("Circ F", testModule->getData().circulationFrequency, 0);
 
-    for (int i=1; i<= HData->getCount(); i++) {
-        QString name = "H" + QString::number(i);
-        HData->setData(name,testModule->getData().L1.harmonic.contentL1[ i - 1]);
+    int hc = 1;
+    for (int i=0; i<= HData->getCount(); i++) {
+        QString name = "H" + QString::number(hc);
+        HData->setData(name,testModule->getData().L1.harmonic.contentL1[ i ]);
+        hc += 2;
     }
 }
 
@@ -251,6 +254,7 @@ void MainWindow::updateErrorData(mDataHandler *L1, mDataHandler *L2, mDataHandle
     L3Data->assignTargetDataByList(L3);
     LTData->assignTargetDataByList(LT);
 }
+
 
 
 

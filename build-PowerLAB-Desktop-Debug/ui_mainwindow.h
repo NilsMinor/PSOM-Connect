@@ -157,11 +157,14 @@ public:
     QPushButton *pushButtonQWT500Home;
     QWidget *tabEVSE;
     QGridLayout *gridLayout_13;
-    QWidget *evseImageWidget;
     QLCDNumber *lcdNumber;
     QPushButton *pushButtonStartCharging;
     QPushButton *pushButtonStopCharging;
     QPushButton *pushButtonEVSEHome;
+    QComboBox *comboBoxPWM2;
+    QComboBox *comboBoxPWM1;
+    QComboBox *comboBoxPWM3;
+    QWidget *evseImageWidget;
     QWidget *tabCalibration;
     QGridLayout *gridLayout_8;
     QGroupBox *groupBox_9;
@@ -977,17 +980,6 @@ public:
         gridLayout_13->setSpacing(6);
         gridLayout_13->setContentsMargins(11, 11, 11, 11);
         gridLayout_13->setObjectName(QStringLiteral("gridLayout_13"));
-        evseImageWidget = new QWidget(tabEVSE);
-        evseImageWidget->setObjectName(QStringLiteral("evseImageWidget"));
-        QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(evseImageWidget->sizePolicy().hasHeightForWidth());
-        evseImageWidget->setSizePolicy(sizePolicy6);
-        evseImageWidget->setMinimumSize(QSize(500, 370));
-
-        gridLayout_13->addWidget(evseImageWidget, 0, 0, 4, 1);
-
         lcdNumber = new QLCDNumber(tabEVSE);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
         sizePolicy2.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
@@ -1019,6 +1011,32 @@ public:
         pushButtonEVSEHome->setIconSize(QSize(32, 32));
 
         gridLayout_13->addWidget(pushButtonEVSEHome, 3, 1, 1, 1);
+
+        comboBoxPWM2 = new QComboBox(tabEVSE);
+        comboBoxPWM2->setObjectName(QStringLiteral("comboBoxPWM2"));
+
+        gridLayout_13->addWidget(comboBoxPWM2, 5, 1, 1, 1);
+
+        comboBoxPWM1 = new QComboBox(tabEVSE);
+        comboBoxPWM1->setObjectName(QStringLiteral("comboBoxPWM1"));
+
+        gridLayout_13->addWidget(comboBoxPWM1, 4, 1, 1, 1);
+
+        comboBoxPWM3 = new QComboBox(tabEVSE);
+        comboBoxPWM3->setObjectName(QStringLiteral("comboBoxPWM3"));
+
+        gridLayout_13->addWidget(comboBoxPWM3, 6, 1, 1, 1);
+
+        evseImageWidget = new QWidget(tabEVSE);
+        evseImageWidget->setObjectName(QStringLiteral("evseImageWidget"));
+        QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(evseImageWidget->sizePolicy().hasHeightForWidth());
+        evseImageWidget->setSizePolicy(sizePolicy6);
+        evseImageWidget->setMinimumSize(QSize(500, 370));
+
+        gridLayout_13->addWidget(evseImageWidget, 0, 0, 4, 1);
 
         tabWidget->addTab(tabEVSE, QString());
         tabCalibration = new QWidget();
@@ -1264,7 +1282,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(7);
+        tabWidget->setCurrentIndex(6);
         pushButtonPanel->setDefault(false);
         pushButtonInformation->setDefault(false);
         pushButtonHarmonics->setDefault(false);

@@ -1,5 +1,15 @@
 #include "mainwindow.h"
 
+void MainWindow::teamprojectInitSettings (void) {
+    ui->evseImageWidget->setStyleSheet("background-image: url(:/images/unplugged.png)");
+
+    for (int i=0;i!=100;i++) {
+        ui->comboBoxPWM1->addItem(QString::number(i));
+        ui->comboBoxPWM2->addItem(QString::number(i));
+        ui->comboBoxPWM3->addItem(QString::number(i));
+    }
+}
+
 void MainWindow::on_pushButtonStartCharging_released()
 {
     ui->evseImageWidget->setStyleSheet("background-image: url(:/images/plugged.png)");
@@ -44,4 +54,18 @@ void MainWindow::rpiStartup()
         testModule->setSerialConnectionHandler(NULL);
         QMessageBox::critical(this, tr("Error can not connect to COM Port"), serial->errorString());
     }
+}
+void MainWindow::on_comboBoxPWM1_currentIndexChanged(int index)
+{
+    testModule->pwm_set(1,index);
+}
+
+void MainWindow::on_comboBoxPWM2_currentIndexChanged(int index)
+{
+    testModule->pwm_set(2,index);
+}
+
+void MainWindow::on_comboBoxPWM3_currentIndexChanged(int index)
+{
+    testModule->pwm_set(3,index);
 }

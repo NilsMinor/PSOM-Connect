@@ -109,25 +109,25 @@ typedef union PSOM_BigEndianMemory {
 #define PSOM_SCOMMAND             0x0004  		// uint32  - - the command register can setup functionality of the PSOM module
 #define PSOM_SCOMMAND_VALUE       0x0008  		// uint32  - - value to use by the software command
 #define PSOM_FW_VERSION           0x000C  		// uint32  - - PSOM firmeware version
-#define PSOM_ACTIVE_HARM          0x0010  		// uint32  - - direction of a isolated dios 1 = output, 0 = input
-#define PSOM_ISO_GPIO_STATE       0x0014  		// uint32  - - state of the isolated pin pin 1 = high, 0 = low
-#define HARMONIC_SELECTION        0x0018  		// uint32  - - selects the measured harmonic phase
-#define ENERGY_COSTS              0x001C  		// uint32  - - represents the costs per kWh - default = 0.25€
-#define ENERGY_UNIT               0x0020  		// uint32  - - selection of the energy unit kWh, Wh, Ws
-#define PSOM_FREE1				      	0x0024  		// uint32  - - represents the selection register to enable or disable specific measurements
-#define PSOM_SAMPLE_STYLE         0x0028  		// uint32  - - selection of the the sampling style norm, mean ...
-#define PSOM_SAMPLES_QUANTITY     0x002C  		// uint32  - - quantitiy of the samples for speacial measurment
-#define PSOM_SUB_ID               0x0030  		// uint32  - - represents the sub ID of the PSOM module
-#define PSOM_PWM1   							0x0034
-#define PSOM_PWM2   							0x0038
-#define PSOM_UUID_H 							0x003C
-#define PSOM_UUID_MH   						0x0040
-#define PSOM_UUID_ML   						0x0044
-#define PSOM_UUID_L	   						0x0048
-//#define ?   0x004C
-//#define ?   0x0050
-//#define ?   0x0054
-//#define ?   0x0058
+#define PSOM_ACTIVE_HARM          0x0010  		// uint32  - -
+#define HARMONIC_SELECTION				0x0014  		// uint32  - - Selects the measured harmonic phase
+#define ENERGY_COSTS        			0x0018  		// uint32  - - represents the costs per kWh - default = 0.25€
+#define ENERGY_UNIT              	0x001C  		// uint32  - - selection of the energy unit kWh, Wh, Ws
+#define PSOM_FREE2               	0x0020  		// uint32  - -
+#define PSOM_SAMPLE_STYLE				  0x0024  		// uint32  - - selection of the the sampling style norm, mean ...
+#define PSOM_SAMPLES_QUANTITY     0x0028  		// uint32  - - quantitiy of the samples for speacial measurment
+#define PSOM_SUB_ID     					0x002C  		// uint32  - - represents the sub ID of the PSOM module
+#define PSOM_PWM1               	0x0030  		// uint32  - -
+#define PSOM_PWM2   							0x0034  		//
+#define PSOM_PWM3   							0x0038  		//
+#define PSOM_UUID_H 							0x003C  		//
+#define PSOM_UUID_MH   						0x0040  		//
+#define PSOM_UUID_ML   						0x0044  		//
+#define PSOM_UUID_L	   						0x0048  		//
+#define ADC1_VOLTAGE							0x004C  		//
+#define ADC2_VOLTAGE 							0x0050  		//
+#define ADC3_VOLTAGE   						0x0054  		//
+#define ADC4_VOLTAGE   						0x0058  		//
 //#define ?   0x005C
 /* ************ COMMON  ************ ************ ************** **/
 #define MODULE_TEMPERATURE_F      0x0060   		// float - °C- die temperature of the chip

@@ -101,6 +101,7 @@ private:
     void initHarmonicSettings (void);
     void initOscilloscopeSettings (void);
     void initSerialSettings (void);
+    void teamprojectInitSettings (void);
 
 #ifdef Q_OS_WIN
      QWT500Widget    *wt500;
@@ -198,6 +199,13 @@ private slots:
     void on_pushButtonEVSEHome_released();
     void on_pushButtonStartCharging_released();
     void on_pushButtonStopCharging_released();
+
+
+    void on_comboBoxPWM2_currentIndexChanged(int index);
+
+    void on_comboBoxPWM3_currentIndexChanged(int index);
+
+    void on_comboBoxPWM1_currentIndexChanged(int index);
 
 signals:
     void updateOsci (mDataHandler *L1, mDataHandler *L2, mDataHandler *L3, mDataHandler *LT );

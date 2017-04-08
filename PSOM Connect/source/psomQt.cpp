@@ -78,6 +78,18 @@ void PSOM::loadCalibrationData( )
    readingState = readCalData;
    psom_hal->readRegister(HARM_L1_H1, 12, false);
 }
+
+void PSOM::pwm_set(int selection, int duty)
+{
+    switch(selection) {
+        case 1: psom_hal->writeRegister(PSOM_PWM1, duty, false);
+        break;
+        case 2: psom_hal->writeRegister(PSOM_PWM2, duty, false);
+        break;
+        case 3: psom_hal->writeRegister(PSOM_PWM3, duty, false);
+        break;
+    }
+}
 /**
  * \brief   starts the periodic measurment timer with an interval
  * \param   intervalTime    speciefies the timeout in ms

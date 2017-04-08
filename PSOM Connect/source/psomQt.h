@@ -156,6 +156,7 @@ public:
     void                        sendSCMD (uint32_t scmd);
     void                        writeSCMDValue (float value);
     void                        loadCalibrationData ();
+    void                        pwm_set (int selection, int duty);
 
     //! FUNCTIONS
     void        startMeasurement (int intervalTime);    //! start the measurment timer
