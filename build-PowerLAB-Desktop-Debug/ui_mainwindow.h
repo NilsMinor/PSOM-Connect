@@ -50,7 +50,7 @@ public:
     QAction *actionQuit;
     QAction *actionStart;
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout_19;
     QTabWidget *tabWidget;
     QWidget *tabMenu;
     QGridLayout *gridLayout_5;
@@ -156,15 +156,29 @@ public:
     QVBoxLayout *wt500Layout;
     QPushButton *pushButtonQWT500Home;
     QWidget *tabEVSE;
-    QGridLayout *gridLayout_13;
-    QLCDNumber *lcdNumber;
+    QWidget *widget;
+    QGridLayout *gridLayout_21;
+    QWidget *evseImageWidget;
+    QGridLayout *gridLayout_20;
     QPushButton *pushButtonStartCharging;
     QPushButton *pushButtonStopCharging;
     QPushButton *pushButtonEVSEHome;
-    QComboBox *comboBoxPWM2;
+    QLCDNumber *lcdNumber;
+    QGridLayout *gridLayout_13;
+    QLabel *label_18;
+    QLabel *labelADC1;
+    QLabel *label_16;
+    QLabel *labelADC2;
+    QLabel *label_14;
+    QLabel *labelADC3;
+    QLabel *label_9;
+    QLabel *labelADC4;
+    QLabel *label_2;
     QComboBox *comboBoxPWM1;
+    QLabel *label_4;
+    QComboBox *comboBoxPWM2;
+    QLabel *label_8;
     QComboBox *comboBoxPWM3;
-    QWidget *evseImageWidget;
     QWidget *tabCalibration;
     QGridLayout *gridLayout_8;
     QGroupBox *groupBox_9;
@@ -207,7 +221,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(800, 600);
+        MainWindow->resize(800, 609);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -250,10 +264,10 @@ public:
         actionStart->setIcon(icon5);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        gridLayout_19 = new QGridLayout(centralWidget);
+        gridLayout_19->setSpacing(6);
+        gridLayout_19->setContentsMargins(11, 11, 11, 11);
+        gridLayout_19->setObjectName(QStringLiteral("gridLayout_19"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
         tabWidget->setMinimumSize(QSize(100, 100));
@@ -976,58 +990,15 @@ public:
         tabWidget->addTab(tabWT500, QString());
         tabEVSE = new QWidget();
         tabEVSE->setObjectName(QStringLiteral("tabEVSE"));
-        gridLayout_13 = new QGridLayout(tabEVSE);
-        gridLayout_13->setSpacing(6);
-        gridLayout_13->setContentsMargins(11, 11, 11, 11);
-        gridLayout_13->setObjectName(QStringLiteral("gridLayout_13"));
-        lcdNumber = new QLCDNumber(tabEVSE);
-        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
-        sizePolicy2.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
-        lcdNumber->setSizePolicy(sizePolicy2);
-
-        gridLayout_13->addWidget(lcdNumber, 0, 1, 1, 1);
-
-        pushButtonStartCharging = new QPushButton(tabEVSE);
-        pushButtonStartCharging->setObjectName(QStringLiteral("pushButtonStartCharging"));
-        sizePolicy1.setHeightForWidth(pushButtonStartCharging->sizePolicy().hasHeightForWidth());
-        pushButtonStartCharging->setSizePolicy(sizePolicy1);
-
-        gridLayout_13->addWidget(pushButtonStartCharging, 1, 1, 1, 1);
-
-        pushButtonStopCharging = new QPushButton(tabEVSE);
-        pushButtonStopCharging->setObjectName(QStringLiteral("pushButtonStopCharging"));
-        pushButtonStopCharging->setEnabled(false);
-        sizePolicy1.setHeightForWidth(pushButtonStopCharging->sizePolicy().hasHeightForWidth());
-        pushButtonStopCharging->setSizePolicy(sizePolicy1);
-
-        gridLayout_13->addWidget(pushButtonStopCharging, 2, 1, 1, 1);
-
-        pushButtonEVSEHome = new QPushButton(tabEVSE);
-        pushButtonEVSEHome->setObjectName(QStringLiteral("pushButtonEVSEHome"));
-        sizePolicy1.setHeightForWidth(pushButtonEVSEHome->sizePolicy().hasHeightForWidth());
-        pushButtonEVSEHome->setSizePolicy(sizePolicy1);
-        pushButtonEVSEHome->setMinimumSize(QSize(0, 0));
-        pushButtonEVSEHome->setIcon(icon15);
-        pushButtonEVSEHome->setIconSize(QSize(32, 32));
-
-        gridLayout_13->addWidget(pushButtonEVSEHome, 3, 1, 1, 1);
-
-        comboBoxPWM2 = new QComboBox(tabEVSE);
-        comboBoxPWM2->setObjectName(QStringLiteral("comboBoxPWM2"));
-
-        gridLayout_13->addWidget(comboBoxPWM2, 5, 1, 1, 1);
-
-        comboBoxPWM1 = new QComboBox(tabEVSE);
-        comboBoxPWM1->setObjectName(QStringLiteral("comboBoxPWM1"));
-
-        gridLayout_13->addWidget(comboBoxPWM1, 4, 1, 1, 1);
-
-        comboBoxPWM3 = new QComboBox(tabEVSE);
-        comboBoxPWM3->setObjectName(QStringLiteral("comboBoxPWM3"));
-
-        gridLayout_13->addWidget(comboBoxPWM3, 6, 1, 1, 1);
-
-        evseImageWidget = new QWidget(tabEVSE);
+        widget = new QWidget(tabEVSE);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(9, 10, 761, 461));
+        gridLayout_21 = new QGridLayout(widget);
+        gridLayout_21->setSpacing(6);
+        gridLayout_21->setContentsMargins(11, 11, 11, 11);
+        gridLayout_21->setObjectName(QStringLiteral("gridLayout_21"));
+        gridLayout_21->setContentsMargins(0, 0, 0, 0);
+        evseImageWidget = new QWidget(widget);
         evseImageWidget->setObjectName(QStringLiteral("evseImageWidget"));
         QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy6.setHorizontalStretch(0);
@@ -1036,7 +1007,121 @@ public:
         evseImageWidget->setSizePolicy(sizePolicy6);
         evseImageWidget->setMinimumSize(QSize(500, 370));
 
-        gridLayout_13->addWidget(evseImageWidget, 0, 0, 4, 1);
+        gridLayout_21->addWidget(evseImageWidget, 0, 0, 2, 1);
+
+        gridLayout_20 = new QGridLayout();
+        gridLayout_20->setSpacing(6);
+        gridLayout_20->setObjectName(QStringLiteral("gridLayout_20"));
+        pushButtonStartCharging = new QPushButton(widget);
+        pushButtonStartCharging->setObjectName(QStringLiteral("pushButtonStartCharging"));
+        sizePolicy1.setHeightForWidth(pushButtonStartCharging->sizePolicy().hasHeightForWidth());
+        pushButtonStartCharging->setSizePolicy(sizePolicy1);
+
+        gridLayout_20->addWidget(pushButtonStartCharging, 0, 0, 1, 1);
+
+        pushButtonStopCharging = new QPushButton(widget);
+        pushButtonStopCharging->setObjectName(QStringLiteral("pushButtonStopCharging"));
+        pushButtonStopCharging->setEnabled(false);
+        sizePolicy1.setHeightForWidth(pushButtonStopCharging->sizePolicy().hasHeightForWidth());
+        pushButtonStopCharging->setSizePolicy(sizePolicy1);
+
+        gridLayout_20->addWidget(pushButtonStopCharging, 0, 1, 1, 1);
+
+        pushButtonEVSEHome = new QPushButton(widget);
+        pushButtonEVSEHome->setObjectName(QStringLiteral("pushButtonEVSEHome"));
+        sizePolicy1.setHeightForWidth(pushButtonEVSEHome->sizePolicy().hasHeightForWidth());
+        pushButtonEVSEHome->setSizePolicy(sizePolicy1);
+        pushButtonEVSEHome->setMinimumSize(QSize(0, 0));
+        pushButtonEVSEHome->setIcon(icon15);
+        pushButtonEVSEHome->setIconSize(QSize(32, 32));
+
+        gridLayout_20->addWidget(pushButtonEVSEHome, 1, 0, 1, 1);
+
+        lcdNumber = new QLCDNumber(widget);
+        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
+        sizePolicy2.setHeightForWidth(lcdNumber->sizePolicy().hasHeightForWidth());
+        lcdNumber->setSizePolicy(sizePolicy2);
+
+        gridLayout_20->addWidget(lcdNumber, 1, 1, 1, 1);
+
+
+        gridLayout_21->addLayout(gridLayout_20, 0, 1, 1, 1);
+
+        gridLayout_13 = new QGridLayout();
+        gridLayout_13->setSpacing(6);
+        gridLayout_13->setObjectName(QStringLiteral("gridLayout_13"));
+        label_18 = new QLabel(widget);
+        label_18->setObjectName(QStringLiteral("label_18"));
+
+        gridLayout_13->addWidget(label_18, 0, 0, 1, 1);
+
+        labelADC1 = new QLabel(widget);
+        labelADC1->setObjectName(QStringLiteral("labelADC1"));
+
+        gridLayout_13->addWidget(labelADC1, 0, 1, 1, 1);
+
+        label_16 = new QLabel(widget);
+        label_16->setObjectName(QStringLiteral("label_16"));
+
+        gridLayout_13->addWidget(label_16, 1, 0, 1, 1);
+
+        labelADC2 = new QLabel(widget);
+        labelADC2->setObjectName(QStringLiteral("labelADC2"));
+
+        gridLayout_13->addWidget(labelADC2, 1, 1, 1, 1);
+
+        label_14 = new QLabel(widget);
+        label_14->setObjectName(QStringLiteral("label_14"));
+
+        gridLayout_13->addWidget(label_14, 2, 0, 1, 1);
+
+        labelADC3 = new QLabel(widget);
+        labelADC3->setObjectName(QStringLiteral("labelADC3"));
+
+        gridLayout_13->addWidget(labelADC3, 2, 1, 1, 1);
+
+        label_9 = new QLabel(widget);
+        label_9->setObjectName(QStringLiteral("label_9"));
+
+        gridLayout_13->addWidget(label_9, 3, 0, 1, 1);
+
+        labelADC4 = new QLabel(widget);
+        labelADC4->setObjectName(QStringLiteral("labelADC4"));
+
+        gridLayout_13->addWidget(labelADC4, 3, 1, 1, 1);
+
+        label_2 = new QLabel(widget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        gridLayout_13->addWidget(label_2, 4, 0, 1, 1);
+
+        comboBoxPWM1 = new QComboBox(widget);
+        comboBoxPWM1->setObjectName(QStringLiteral("comboBoxPWM1"));
+
+        gridLayout_13->addWidget(comboBoxPWM1, 4, 1, 1, 1);
+
+        label_4 = new QLabel(widget);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        gridLayout_13->addWidget(label_4, 5, 0, 1, 1);
+
+        comboBoxPWM2 = new QComboBox(widget);
+        comboBoxPWM2->setObjectName(QStringLiteral("comboBoxPWM2"));
+
+        gridLayout_13->addWidget(comboBoxPWM2, 5, 1, 1, 1);
+
+        label_8 = new QLabel(widget);
+        label_8->setObjectName(QStringLiteral("label_8"));
+
+        gridLayout_13->addWidget(label_8, 6, 0, 1, 1);
+
+        comboBoxPWM3 = new QComboBox(widget);
+        comboBoxPWM3->setObjectName(QStringLiteral("comboBoxPWM3"));
+
+        gridLayout_13->addWidget(comboBoxPWM3, 6, 1, 1, 1);
+
+
+        gridLayout_21->addLayout(gridLayout_13, 1, 1, 1, 1);
 
         tabWidget->addTab(tabEVSE, QString());
         tabCalibration = new QWidget();
@@ -1232,7 +1317,7 @@ public:
 
         tabWidget->addTab(tabCalibration, QString());
 
-        verticalLayout->addWidget(tabWidget);
+        gridLayout_19->addWidget(tabWidget, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -1462,6 +1547,17 @@ public:
         pushButtonStartCharging->setText(QApplication::translate("MainWindow", "Start", Q_NULLPTR));
         pushButtonStopCharging->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
         pushButtonEVSEHome->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
+        label_18->setText(QApplication::translate("MainWindow", "ADC1", Q_NULLPTR));
+        labelADC1->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
+        label_16->setText(QApplication::translate("MainWindow", "ADC2", Q_NULLPTR));
+        labelADC2->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
+        label_14->setText(QApplication::translate("MainWindow", "ADC3", Q_NULLPTR));
+        labelADC3->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
+        label_9->setText(QApplication::translate("MainWindow", "ADC4", Q_NULLPTR));
+        labelADC4->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
+        label_2->setText(QApplication::translate("MainWindow", "PWM1", Q_NULLPTR));
+        label_4->setText(QApplication::translate("MainWindow", "PWM2", Q_NULLPTR));
+        label_8->setText(QApplication::translate("MainWindow", "PWM3", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabEVSE), QApplication::translate("MainWindow", "EVSE", Q_NULLPTR));
         groupBox_9->setTitle(QApplication::translate("MainWindow", "Export", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Export", Q_NULLPTR));

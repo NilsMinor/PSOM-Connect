@@ -188,6 +188,15 @@ void MainWindow::newPSOMData(void)
     Common->setData("Circ T", testModule->getData().circulationTime, 0);
     Common->setData("Circ F", testModule->getData().circulationFrequency, 0);
 
+    ui->labelADC1->setText(QString::number(testModule->getData().evse.adc1));
+    ui->labelADC2->setText(QString::number(testModule->getData().evse.adc2));
+    ui->labelADC3->setText(QString::number(testModule->getData().evse.adc3));
+    ui->labelADC4->setText(QString::number(testModule->getData().evse.adc4));
+
+    ui->comboBoxPWM1->setCurrentIndex(testModule->getData().evse.pwm_duty1);
+    ui->comboBoxPWM2->setCurrentIndex(testModule->getData().evse.pwm_duty2);
+    ui->comboBoxPWM3->setCurrentIndex(testModule->getData().evse.pwm_duty3);
+
     int hc = 1;
     for (int i=0; i<= HData->getCount(); i++) {
         QString name = "H" + QString::number(hc);

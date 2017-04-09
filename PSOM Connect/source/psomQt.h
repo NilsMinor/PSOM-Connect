@@ -122,12 +122,23 @@ struct PSOM_phases {
     PSOM_Energy energy;
     PSOM_Harmonics harmonic;
 };
+struct EVSE {
+    float adc1;
+    float adc2;
+    float adc3;
+    float adc4;
+
+    int pwm_duty1;
+    int pwm_duty2;
+    int pwm_duty3;
+};
 
 struct PSOM_measurement_data {
     PSOM_phases L1;
     PSOM_phases L2;
     PSOM_phases L3;
     PSOM_phases LT;
+    EVSE evse;
     float frequency;
     float sensor_temperature;
     float processor_temperature;

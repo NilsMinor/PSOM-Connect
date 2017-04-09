@@ -270,6 +270,16 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
             m_data.circulationTime = elapsedTimer.elapsed();
             m_data.circulationFrequency =  1000.0 / m_data.circulationTime;
 
+            // EVSE
+            m_data.evse.adc1 =  toFloat(data[ADC1_VOLTAGE /4]);
+            m_data.evse.adc2 =  toFloat(data[ADC2_VOLTAGE /4]);
+            m_data.evse.adc3 =  toFloat(data[ADC3_VOLTAGE /4]);
+            m_data.evse.adc4 =  toFloat(data[ADC4_VOLTAGE /4]);
+
+            m_data.evse.pwm_duty1 = data[PSOM_PWM1/4];
+            m_data.evse.pwm_duty2 = data[PSOM_PWM2/4];
+            m_data.evse.pwm_duty3 = data[PSOM_PWM3/4];
+
             elapsedTimer.restart();
             emit newPSOMData();
         }
