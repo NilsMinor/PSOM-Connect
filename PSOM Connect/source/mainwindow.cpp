@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     L1Data->add("P1","W");
     L1Data->add("Q1","VAR");
     L1Data->add("S1","VA");
-    L1Data->add("λ1","");
+    L1Data->add("PF1","");
     L1Data->add("EP1","kWh");
     L1Data->add("EQ1","kWh");
     L1Data->add("M1","€");
@@ -78,7 +78,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     L2Data->add("P2","W");
     L2Data->add("Q2","VAR");
     L2Data->add("S2","VA");
-    L2Data->add("λ2","");
+    L2Data->add("PF2","");
     L2Data->add("EP2","kWh");
     L2Data->add("EQ2","kWh");
     L2Data->add("M2","€");
@@ -90,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     L3Data->add("P3","W");
     L3Data->add("Q3","VAR");
     L3Data->add("S3","VA");
-    L3Data->add("λ3","");
+    L3Data->add("PF3","");
     L3Data->add("EP3","kWh");
     L3Data->add("EQ3","kWh");
     L3Data->add("M3","€");
@@ -102,7 +102,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     LTData->add("PT","W");
     LTData->add("QT","VAR");
     LTData->add("ST","VA");
-    LTData->add("λT","");
+    LTData->add("PFT","");
     LTData->add("EPT","kWh");
     LTData->add("EQT","kWh");
     LTData->add("MT","€");
@@ -115,12 +115,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     Common->add("Circ F", "°Hz");
     ui->layoutCommonPanelData->addWidget(Common);
 
+    // leave the logging direction to support the teamproject logging!
     logger.add(L1Data);
     logger.add(L2Data);
     logger.add(L3Data);
     logger.add(LTData);
-    logger.add(Common);
     logger.add(HData);
+    logger.add(Common);
     connect (&logger, SIGNAL(newDataLogged(int,qint64)), this, SLOT(updateLoggingInformation(int, qint64)));
 
     #ifdef Q_OS_WIN
@@ -146,7 +147,7 @@ void MainWindow::newPSOMData(void)
     L1Data->setData("P1", testModule->getData().L1.power.active, 0);
     L1Data->setData("Q1", testModule->getData().L1.power.reactive, 0);
     L1Data->setData("S1", testModule->getData().L1.power.apparent, 0);
-    L1Data->setData("λ1", testModule->getData().L1.power.factor, 0);
+    L1Data->setData("PF1", testModule->getData().L1.power.factor, 0);
     L1Data->setData("EP1", testModule->getData().L1.energy.active, 0);
     L1Data->setData("EQ1", testModule->getData().L1.energy.reactive, 0);
     L1Data->setData("M1", testModule->getData().L1.energy.cost, 0);
@@ -156,7 +157,7 @@ void MainWindow::newPSOMData(void)
     L2Data->setData("P2", testModule->getData().L2.power.active, 0);
     L2Data->setData("Q2", testModule->getData().L2.power.reactive, 0);
     L2Data->setData("S2", testModule->getData().L2.power.apparent, 0);
-    L2Data->setData("λ2", testModule->getData().L2.power.factor, 0);
+    L2Data->setData("PF2", testModule->getData().L2.power.factor, 0);
     L2Data->setData("EP2", testModule->getData().L2.energy.active, 0);
     L2Data->setData("EQ2", testModule->getData().L2.energy.active, 0);
     L2Data->setData("M2", testModule->getData().L2.energy.cost, 0);
@@ -166,7 +167,7 @@ void MainWindow::newPSOMData(void)
     L3Data->setData("P3", testModule->getData().L3.power.active, 0);
     L3Data->setData("Q3", testModule->getData().L3.power.reactive, 0);
     L3Data->setData("S3", testModule->getData().L3.power.apparent, 0);
-    L3Data->setData("λ3", testModule->getData().L3.power.factor, 0);
+    L3Data->setData("PF3", testModule->getData().L3.power.factor, 0);
     L3Data->setData("EP3", testModule->getData().L3.energy.active, 0);
     L3Data->setData("EQ3", testModule->getData().L3.energy.active, 0);
     L3Data->setData("M3", testModule->getData().L3.energy.cost, 0);
@@ -176,7 +177,7 @@ void MainWindow::newPSOMData(void)
     LTData->setData("PT", testModule->getData().LT.power.active, 0);
     LTData->setData("QT", testModule->getData().LT.power.reactive, 0);
     LTData->setData("ST", testModule->getData().LT.power.apparent, 0);
-    LTData->setData("λT", testModule->getData().LT.power.factor, 0);
+    LTData->setData("PFT", testModule->getData().LT.power.factor, 0);
     LTData->setData("ET", testModule->getData().LT.energy.active, 0);
     LTData->setData("MT", testModule->getData().LT.energy.cost, 0);
 
@@ -196,7 +197,7 @@ void MainWindow::newPSOMData(void)
     for (int i=0; i<= HData->getCount(); i++) {
         QString name = "H" + QString::number(hc);
         HData->setData(name,testModule->getData().L1.harmonic.contentL1[ i ]);
-        hc += 2;
+        hc++;
     }
 
     HData->setData("Uthd1", testModule->getData().L1.voltage.thd);

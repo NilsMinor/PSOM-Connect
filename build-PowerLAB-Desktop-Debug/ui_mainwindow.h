@@ -159,23 +159,24 @@ public:
     QWidget *tabEVSE;
     QWidget *layoutWidget;
     QGridLayout *gridLayout_21;
-    QWidget *evseImageWidget;
     QGridLayout *gridLayout_20;
     QPushButton *pushButtonStartCharging;
     QPushButton *pushButtonStopCharging;
     QPushButton *pushButtonEVSEHome;
     QLCDNumber *lcdNumber;
     QGridLayout *gridLayout_13;
-    QLabel *label_18;
-    QLabel *labelADC1;
-    QLabel *label_16;
-    QLabel *labelADC2;
+    QSpacerItem *verticalSpacer_3;
     QLabel *label_14;
     QLabel *labelADC3;
     QLabel *label_9;
     QLabel *labelADC4;
     QLabel *label_2;
     QComboBox *comboBoxPWM1;
+    QLabel *label_18;
+    QLabel *labelADC1;
+    QLabel *label_16;
+    QLabel *labelADC2;
+    QWidget *evseImageWidget;
     QWidget *tabCalibration;
     QGridLayout *gridLayout_8;
     QGroupBox *groupBox_9;
@@ -844,7 +845,6 @@ public:
         gridLayout_22->addWidget(label_5, 2, 4, 1, 1);
 
         pushButtonHarmonicsHome->raise();
-        pushButtonHarmonicsHome->raise();
         checkBoxDisplayL3->raise();
         checkBoxDisplayL2->raise();
         checkBoxDisplayL1->raise();
@@ -1013,30 +1013,19 @@ public:
         tabEVSE->setObjectName(QStringLiteral("tabEVSE"));
         layoutWidget = new QWidget(tabEVSE);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(9, 10, 761, 461));
+        layoutWidget->setGeometry(QRect(9, 10, 761, 574));
         gridLayout_21 = new QGridLayout(layoutWidget);
         gridLayout_21->setSpacing(6);
         gridLayout_21->setContentsMargins(11, 11, 11, 11);
         gridLayout_21->setObjectName(QStringLiteral("gridLayout_21"));
         gridLayout_21->setContentsMargins(0, 0, 0, 0);
-        evseImageWidget = new QWidget(layoutWidget);
-        evseImageWidget->setObjectName(QStringLiteral("evseImageWidget"));
-        QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(evseImageWidget->sizePolicy().hasHeightForWidth());
-        evseImageWidget->setSizePolicy(sizePolicy6);
-        evseImageWidget->setMinimumSize(QSize(500, 370));
-
-        gridLayout_21->addWidget(evseImageWidget, 0, 0, 2, 1);
-
         gridLayout_20 = new QGridLayout();
         gridLayout_20->setSpacing(6);
         gridLayout_20->setObjectName(QStringLiteral("gridLayout_20"));
         pushButtonStartCharging = new QPushButton(layoutWidget);
         pushButtonStartCharging->setObjectName(QStringLiteral("pushButtonStartCharging"));
-        sizePolicy1.setHeightForWidth(pushButtonStartCharging->sizePolicy().hasHeightForWidth());
-        pushButtonStartCharging->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(pushButtonStartCharging->sizePolicy().hasHeightForWidth());
+        pushButtonStartCharging->setSizePolicy(sizePolicy2);
 
         gridLayout_20->addWidget(pushButtonStartCharging, 0, 0, 1, 1);
 
@@ -1071,25 +1060,9 @@ public:
         gridLayout_13 = new QGridLayout();
         gridLayout_13->setSpacing(6);
         gridLayout_13->setObjectName(QStringLiteral("gridLayout_13"));
-        label_18 = new QLabel(layoutWidget);
-        label_18->setObjectName(QStringLiteral("label_18"));
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_13->addWidget(label_18, 0, 0, 1, 1);
-
-        labelADC1 = new QLabel(layoutWidget);
-        labelADC1->setObjectName(QStringLiteral("labelADC1"));
-
-        gridLayout_13->addWidget(labelADC1, 0, 1, 1, 1);
-
-        label_16 = new QLabel(layoutWidget);
-        label_16->setObjectName(QStringLiteral("label_16"));
-
-        gridLayout_13->addWidget(label_16, 1, 0, 1, 1);
-
-        labelADC2 = new QLabel(layoutWidget);
-        labelADC2->setObjectName(QStringLiteral("labelADC2"));
-
-        gridLayout_13->addWidget(labelADC2, 1, 1, 1, 1);
+        gridLayout_13->addItem(verticalSpacer_3, 5, 0, 1, 1);
 
         label_14 = new QLabel(layoutWidget);
         label_14->setObjectName(QStringLiteral("label_14"));
@@ -1121,8 +1094,39 @@ public:
 
         gridLayout_13->addWidget(comboBoxPWM1, 4, 1, 1, 1);
 
+        label_18 = new QLabel(layoutWidget);
+        label_18->setObjectName(QStringLiteral("label_18"));
+
+        gridLayout_13->addWidget(label_18, 0, 0, 1, 1);
+
+        labelADC1 = new QLabel(layoutWidget);
+        labelADC1->setObjectName(QStringLiteral("labelADC1"));
+
+        gridLayout_13->addWidget(labelADC1, 0, 1, 1, 1);
+
+        label_16 = new QLabel(layoutWidget);
+        label_16->setObjectName(QStringLiteral("label_16"));
+
+        gridLayout_13->addWidget(label_16, 1, 0, 1, 1);
+
+        labelADC2 = new QLabel(layoutWidget);
+        labelADC2->setObjectName(QStringLiteral("labelADC2"));
+
+        gridLayout_13->addWidget(labelADC2, 1, 1, 1, 1);
+
 
         gridLayout_21->addLayout(gridLayout_13, 1, 1, 1, 1);
+
+        evseImageWidget = new QWidget(layoutWidget);
+        evseImageWidget->setObjectName(QStringLiteral("evseImageWidget"));
+        QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(evseImageWidget->sizePolicy().hasHeightForWidth());
+        evseImageWidget->setSizePolicy(sizePolicy6);
+        evseImageWidget->setMinimumSize(QSize(500, 370));
+
+        gridLayout_21->addWidget(evseImageWidget, 0, 0, 2, 1);
 
         tabWidget->addTab(tabEVSE, QString());
         tabCalibration = new QWidget();
@@ -1368,7 +1372,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(6);
+        tabWidget->setCurrentIndex(4);
         pushButtonPanel->setDefault(false);
         pushButtonInformation->setDefault(false);
         pushButtonHarmonics->setDefault(false);
@@ -1549,15 +1553,15 @@ public:
         pushButtonStartCharging->setText(QApplication::translate("MainWindow", "Start", Q_NULLPTR));
         pushButtonStopCharging->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
         pushButtonEVSEHome->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
-        label_18->setText(QApplication::translate("MainWindow", "ADC1", Q_NULLPTR));
-        labelADC1->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
-        label_16->setText(QApplication::translate("MainWindow", "ADC2", Q_NULLPTR));
-        labelADC2->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
         label_14->setText(QApplication::translate("MainWindow", "ADC3", Q_NULLPTR));
         labelADC3->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
         label_9->setText(QApplication::translate("MainWindow", "ADC4", Q_NULLPTR));
         labelADC4->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
         label_2->setText(QApplication::translate("MainWindow", "PWM1", Q_NULLPTR));
+        label_18->setText(QApplication::translate("MainWindow", "ADC1", Q_NULLPTR));
+        labelADC1->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
+        label_16->setText(QApplication::translate("MainWindow", "ADC2", Q_NULLPTR));
+        labelADC2->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabEVSE), QApplication::translate("MainWindow", "EVSE", Q_NULLPTR));
         groupBox_9->setTitle(QApplication::translate("MainWindow", "Export", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Export", Q_NULLPTR));

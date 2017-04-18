@@ -59,7 +59,7 @@ void mDataLogger::printHeader(void)
 {
     if (m_file != NULL && m_stream != NULL) {
 
-       if (mDataHandlerList.size() != 5) return;   // L1, L2, L3, LT, Common
+       if (mDataHandlerList.size() != 6) return;   // L1, L2, L3, LT, Common, HData
 
        QDateTime dateTime = dateTime.currentDateTime();
         *m_stream <<  dateTime.toString("yyyy-MM-dd") << ";"  ;
@@ -70,9 +70,14 @@ void mDataLogger::printHeader(void)
                                  << mDataHandlerList[2]->getMDataList().at(i)->getPrettyName() << ";"     // L3
                                  << mDataHandlerList[3]->getMDataList().at(i)->getPrettyName() << ";";    // LT
         }
-        *m_stream << mDataHandlerList[4]->getMDataList().at(0)->getPrettyName() << ";";        // Line Frequency
-        *m_stream << mDataHandlerList[4]->getMDataList().at(1)->getPrettyName() << ";";        // Module Temperature
-        *m_stream << mDataHandlerList[4]->getMDataList().at(2)->getPrettyName() << ";";        // Circulation Time
+        for (int i = 0; i!=  mDataHandlerList[4]->getMDataList().size(); i++)
+        {
+             *m_stream  << mDataHandlerList[4]->getMDataList().at(i)->getPrettyName()<< ";";
+        }
+
+        *m_stream << mDataHandlerList[5]->getMDataList().at(0)->getPrettyName() << ";";        // Line Frequency
+        *m_stream << mDataHandlerList[5]->getMDataList().at(1)->getPrettyName() << ";";        // Module Temperature
+        *m_stream << mDataHandlerList[5]->getMDataList().at(2)->getPrettyName() << ";";        // Circulation Time
 
         *m_stream  << "\r\n";   // linefeed
     }
@@ -85,7 +90,7 @@ void mDataLogger::log(void)
 {
     if (m_file != NULL && m_stream != NULL && logging) {
 
-       if (mDataHandlerList.size() != 5) return;   // L1, L2, L3, LT, Common
+       if (mDataHandlerList.size() != 6) return;   // L1, L2, L3, LT, Common, HData
 
         *m_stream << getTimestamp() << ";"   ;  // log timestamp
         for (int i = 0; i!=  mDataHandlerList[0]->getMDataList().size(); i++)   // all lists must have the same size!
@@ -95,9 +100,15 @@ void mDataLogger::log(void)
                                  << mDataHandlerList[2]->getMDataList().at(i)->getData() << ";"     // L3
                                  << mDataHandlerList[3]->getMDataList().at(i)->getData() << ";";    // LT
         }
-        *m_stream   << mDataHandlerList[4]->getData("F") << ";";                                     // Line Frequency
-        *m_stream  << mDataHandlerList[4]->getData("Temp") << ";";                               // Module Temperature
-        *m_stream  << mDataHandlerList[4]->getData("Circ T") << ";";                              // Circulation Time
+
+        for (int i = 0; i!=  mDataHandlerList[4]->getMDataList().size(); i++)
+        {
+             *m_stream  << mDataHandlerList[4]->getMDataList().at(i)->getData() << ";";
+        }
+
+        *m_stream   << mDataHandlerList[5]->getData("F") << ";";                                     // Line Frequency
+        *m_stream  << mDataHandlerList[5]->getData("Temp") << ";";                               // Module Temperature
+        *m_stream  << mDataHandlerList[5]->getData("Circ T") << ";";                              // Circulation Time
 
         *m_stream  << "\r\n";   // linefeed
         line_counter++;

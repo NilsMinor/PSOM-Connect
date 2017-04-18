@@ -21,10 +21,10 @@ void MainWindow::initHarmonicSettings (void) {
     }
 
     HData->add("Uthd1","%");
-    HData->add("Ithd1","%");
     HData->add("Uthd2","%");
-    HData->add("Ithd2","%");
     HData->add("Uthd3","%");
+    HData->add("Ithd1","%");
+    HData->add("Ithd2","%");
     HData->add("Ithd3","%");
     ui->harmonicsDataLayout->addWidget(HData);
 }
