@@ -71,7 +71,7 @@ typedef union PSOM_BigEndianMemory {
 
 /* ************ PSOM REGISTER SETUP ************* ************** **/
 #define PSOM_REG_START          	0x0000                  // uint32 - start address of the PSOM registers
-#define PSOM_REG_WRITE_BORDER			PSOM_SUB_ID   					// uint32 - start address of the read/write registers of the PSOM register
+#define PSOM_REG_WRITE_BORDER			PSOM_FREE4   						// uint32 - start address of the read/write registers of the PSOM register
 #define PSOM_REG_QUANTITY       	(HARM_L3_H11 + 4)       // uint32 - amount of regitsers used by the PSOM register, equals to the last read only register
 #define PSOM_REGISTER_COUNT       110 										// uint32 -
 
@@ -109,8 +109,8 @@ typedef union PSOM_BigEndianMemory {
 #define PSOM_SCOMMAND             0x0004  		// uint32  - - the command register can setup functionality of the PSOM module
 #define PSOM_SCOMMAND_VALUE       0x0008  		// uint32  - - value to use by the software command
 #define PSOM_FW_VERSION           0x000C  		// uint32  - - PSOM firmeware version
-#define PSOM_ACTIVE_HARM          0x0010  		// uint32  - -
-#define HARMONIC_SELECTION				0x0014  		// uint32  - - Selects the measured harmonic phase
+#define PSOM_ACTIVE_HARM          0x0010  		// uint32  - - Selects/represents the measured harmonic phase
+#define PSOM_FREE1								0x0014  		// uint32  - -
 #define ENERGY_COSTS        			0x0018  		// uint32  - - represents the costs per kWh - default = 0.25€
 #define ENERGY_UNIT              	0x001C  		// uint32  - - selection of the energy unit kWh, Wh, Ws
 #define PSOM_FREE2               	0x0020  		// uint32  - -
@@ -118,8 +118,8 @@ typedef union PSOM_BigEndianMemory {
 #define PSOM_SAMPLES_QUANTITY     0x0028  		// uint32  - - quantitiy of the samples for speacial measurment
 #define PSOM_SUB_ID     					0x002C  		// uint32  - - represents the sub ID of the PSOM module
 #define PSOM_PWM1               	0x0030  		// uint32  - -
-#define PSOM_PWM2   							0x0034  		//
-#define PSOM_PWM3   							0x0038  		//
+#define PSOM_FREE3   							0x0034  		//
+#define PSOM_FREE4   							0x0038  		//
 #define PSOM_UUID_H 							0x003C  		//
 #define PSOM_UUID_MH   						0x0040  		//
 #define PSOM_UUID_ML   						0x0044  		//
@@ -128,38 +128,38 @@ typedef union PSOM_BigEndianMemory {
 #define ADC2_VOLTAGE 							0x0050  		//
 #define ADC3_VOLTAGE   						0x0054  		//
 #define ADC4_VOLTAGE   						0x0058  		//
-//#define ?   0x005C
+#define PSOM_FREE5   							0x005C			//
 /* ************ COMMON  ************ ************ ************** **/
 #define MODULE_TEMPERATURE_F      0x0060   		// float - °C- die temperature of the chip
 #define LINE_FREQUENCY_F          0x0064   		// float - Hz- frequency of all phases
 /* ************ VOLTAGE ************ ************ ************** **/
-#define L1_VOLTAGE_INST           0x0068   		// float - V - instantaneous voltage of phase 1
-#define L2_VOLTAGE_INST           0x006C   		// float - V - instantaneous voltage of phase 2
-#define L3_VOLTAGE_INST           0x0070   		// float - V - instantaneous voltage of phase 3
-#define L1_VOLTAGE_RMS            0x0074   		// float - V - RMS voltage of phase 1
-#define L2_VOLTAGE_RMS            0x0078   		// float - V - RMS voltage of phase 2
-#define L3_VOLTAGE_RMS            0x007C   		// float - V - RMS voltage of phase 3
-#define LT_VOLTAGE_RMS            0x0080   		// float - V - RMS average voltage of all phases
-#define L1_VOLTAGE_FUND           0x0084   		// float - V - fundamental voltage of phase 1
-#define L2_VOLTAGE_FUND           0x0088   		// float - V - fundamental voltage of phase 2
-#define L3_VOLTAGE_FUND           0x008C   		// float - V - fundamental voltage of phase 3
-#define L1_VOLTAGE_THD           	0x0090   		// float - V - harmonic voltage of phase 1
-#define L2_VOLTAGE_THD           	0x0094   		// float - V - harmonic voltage of phase 2
-#define L3_VOLTAGE_THD           	0x0098   		// float - V - harmonic voltage of phase 3
+#define L1_VOLTAGE_RMS					  0x0068   		// float - V - RMS voltage of phase 1
+#define L2_VOLTAGE_RMS           	0x006C   		// float - V - RMS voltage of phase 2
+#define L3_VOLTAGE_RMS				    0x0070   		// float - V - RMS voltage of phase 3
+#define LT_VOLTAGE_RMS            0x0074   		// float - V - RMS voltage of total phase
+#define L1_VOLTAGE_PEAK           0x0078   		// float - V - peak voltage of phase 1
+#define L2_VOLTAGE_PEAK           0x007C   		// float - V - peak voltage of phase 2
+#define L3_VOLTAGE_PEAK           0x0080   		// float - V - peak voltage of phase 3
+#define L1_VOLTAGE_THD           	0x0084   		// float - V - THD of voltage of phase 1
+#define L2_VOLTAGE_THD           	0x0088   		// float - V - THD of voltage of phase 2
+#define L3_VOLTAGE_THD           	0x008C   		// float - V - THD of voltage of phase 3
+#define L1_VOLTAGE_FREE           0x0090   		// float - V -
+#define L2_VOLTAGE_FREE          	0x0094   		// float - V -
+#define L3_VOLTAGE_FREE           0x0098   		// float - V -
 /* ************ CURRENT ************ ************ ************** **/
-#define L1_CURRENT_INST           0x009C   		// float - A - instantaneous current of phase 1
-#define L2_CURRENT_INST           0x00A0   		// float - A - instantaneous current of phase 2
-#define L3_CURRENT_INST           0x00A4   		// float - A - instantaneous current of phase 3
-#define L1_CURRENT_RMS            0x00A8   		// float - A - RMS current of phase 1
-#define L2_CURRENT_RMS            0x00AC   		// float - A - RMS current of phase 2
-#define L3_CURRENT_RMS            0x00B0   		// float - A - RMS current of phase 3
-#define LT_CURRENT_RMS            0x00B4   		// float - A - RMS average current of all phases
-#define L1_CURRENT_FUND           0x00B8   		// float - A - ???
-#define L2_CURRENT_FUND           0x00BC   		// float - A - ???
-#define L3_CURRENT_FUND           0x00C0   		// float - A - ???
-#define L1_CURRENT_HARM           0x00C4   		// float - A - ???
-#define L2_CURRENT_HARM           0x00C8   		// float - A - ???
-#define L3_CURRENT_HARM           0x00CC   		// float - A - ???
+#define L1_CURRENT_RMS            0x009C   		// float - A - RMS current of phase 1
+#define L2_CURRENT_RMS            0x00A0   		// float - A - RMS current of phase 2
+#define L3_CURRENT_RMS            0x00A4   		// float - A - RMS current of phase 3
+#define LT_CURRENT_RMS            0x00A8   		// float - A - RMS current of total phase
+#define L1_CURRENT_PEAK           0x00AC   		// float - A - peak current of phase 1
+#define L2_CURRENT_PEAK           0x00B0   		// float - A - peak current of phase 2
+#define L3_CURRENT_PEAK           0x00B4   		// float - A - peak current of phase 3
+#define L1_CURRENT_THD            0x00B8   		// float - A - THD of current of phase 1
+#define L2_CURRENT_THD            0x00BC   		// float - A - THD of current of phase 1
+#define L3_CURRENT_THD            0x00C0   		// float - A - THD of current of phase 1
+#define L1_CURRENT_FREE           0x00C4   		// float - A -
+#define L2_CURRENT_FREE           0x00C8   		// float - A -
+#define L3_CURRENT_FREE           0x00CC   		// float - A -
 /* ************ POWER   ************ ************ ************** **/
 #define L1_POWER_ACTIVE           0x00D0   		// float - W - active power of phase 1
 #define L2_POWER_ACTIVE           0x00D4   		// float - W - active power of phase 2

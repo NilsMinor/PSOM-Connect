@@ -76,7 +76,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     L2Data->add("U2","V");
     L2Data->add("I2","A");
     L2Data->add("P2","W");
-    L2Data->add("2","VAR");
+    L2Data->add("Q2","VAR");
     L2Data->add("S2","VA");
     L2Data->add("λ2","");
     L2Data->add("EP2","kWh");
@@ -151,7 +151,6 @@ void MainWindow::newPSOMData(void)
     L1Data->setData("EQ1", testModule->getData().L1.energy.reactive, 0);
     L1Data->setData("M1", testModule->getData().L1.energy.cost, 0);
 
-
     L2Data->setData("U2", testModule->getData().L2.voltage.rms, 0);
     L2Data->setData("I2", testModule->getData().L2.current.rms, 0);
     L2Data->setData("P2", testModule->getData().L2.power.active, 0);
@@ -162,7 +161,6 @@ void MainWindow::newPSOMData(void)
     L2Data->setData("EQ2", testModule->getData().L2.energy.active, 0);
     L2Data->setData("M2", testModule->getData().L2.energy.cost, 0);
 
-
     L3Data->setData("U3", testModule->getData().L3.voltage.rms, 0);
     L3Data->setData("I3", testModule->getData().L3.current.rms, 0);
     L3Data->setData("P3", testModule->getData().L3.power.active, 0);
@@ -172,7 +170,6 @@ void MainWindow::newPSOMData(void)
     L3Data->setData("EP3", testModule->getData().L3.energy.active, 0);
     L3Data->setData("EQ3", testModule->getData().L3.energy.active, 0);
     L3Data->setData("M3", testModule->getData().L3.energy.cost, 0);
-
 
     LTData->setData("UT", testModule->getData().LT.voltage.rms, 0);
     LTData->setData("IT", testModule->getData().LT.current.rms, 0);
@@ -194,8 +191,6 @@ void MainWindow::newPSOMData(void)
     ui->labelADC4->setText(QString::number(testModule->getData().evse.adc4));
 
     ui->comboBoxPWM1->setCurrentIndex(testModule->getData().evse.pwm_duty1);
-    ui->comboBoxPWM2->setCurrentIndex(testModule->getData().evse.pwm_duty2);
-    ui->comboBoxPWM3->setCurrentIndex(testModule->getData().evse.pwm_duty3);
 
     int hc = 1;
     for (int i=0; i<= HData->getCount(); i++) {
@@ -203,6 +198,14 @@ void MainWindow::newPSOMData(void)
         HData->setData(name,testModule->getData().L1.harmonic.contentL1[ i ]);
         hc += 2;
     }
+
+    HData->setData("Uthd1", testModule->getData().L1.voltage.thd);
+    HData->setData("Uthd2", testModule->getData().L2.voltage.thd);
+    HData->setData("Uthd3", testModule->getData().L3.voltage.thd);
+
+    HData->setData("Ithd1", testModule->getData().L1.current.thd);
+    HData->setData("Ithd2", testModule->getData().L2.current.thd);
+    HData->setData("Ithd3", testModule->getData().L3.current.thd);
 }
 
 

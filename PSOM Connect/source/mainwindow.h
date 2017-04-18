@@ -121,6 +121,7 @@ private:
     mDataHandler        *HData;
     mDataHandler        *Common;
     mDataLogger         logger;
+    bool                        EVSErecording;
 
 private slots:
     void openSerialPort();
@@ -199,12 +200,6 @@ private slots:
     void on_pushButtonEVSEHome_released();
     void on_pushButtonStartCharging_released();
     void on_pushButtonStopCharging_released();
-
-
-    void on_comboBoxPWM2_currentIndexChanged(int index);
-
-    void on_comboBoxPWM3_currentIndexChanged(int index);
-
     void on_comboBoxPWM1_currentIndexChanged(int index);
 
 signals:

@@ -85,14 +85,14 @@ enum ReadingStates {
 
 struct PSOM_Voltage {
     float rms;
-    float inst;
+    float thd;
     float peak;
     float fundamental;
     float harmonic;
 };
 struct PSOM_Current{
     float rms;
-    float inst;
+    float thd;
     float peak;
     float fundamental;
     float harmonic;
@@ -167,7 +167,7 @@ public:
     void                        sendSCMD (uint32_t scmd);
     void                        writeSCMDValue (float value);
     void                        loadCalibrationData ();
-    void                        pwm_set (int selection, int duty);
+    void                        pwm_set (int duty);
 
     //! FUNCTIONS
     void        startMeasurement (int intervalTime);    //! start the measurment timer

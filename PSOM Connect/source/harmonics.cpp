@@ -11,7 +11,6 @@ void MainWindow::initHarmonicSettings (void) {
              harmonics, SLOT(setHarmonics(float*,float,int,int)));
 
     connect (testModule, SIGNAL(harmonicMeasurmentReady()), this, SLOT(on_autoHarmonicMeasurement()));
-
     connect (testModule, SIGNAL(updateActualHarmonic(int)), harmonics, SLOT(updateActualHarmonic(int)));        // update actual harmonic
 
     HData = new mDataHandler (this);
@@ -20,6 +19,13 @@ void MainWindow::initHarmonicSettings (void) {
         QString name = "H" + QString::number(i);
         HData->add(name, "");
     }
+
+    HData->add("Uthd1","%");
+    HData->add("Ithd1","%");
+    HData->add("Uthd2","%");
+    HData->add("Ithd2","%");
+    HData->add("Uthd3","%");
+    HData->add("Ithd3","%");
     ui->harmonicsDataLayout->addWidget(HData);
 }
 
@@ -36,7 +42,6 @@ void MainWindow::on_pBStartHarmonics_released()
         harmonicsAutoTrigger = false;
 
     }
-
 }
 void MainWindow::on_cBHarmonicsType_currentIndexChanged(const QString &arg1)
 {

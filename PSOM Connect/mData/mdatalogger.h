@@ -17,6 +17,7 @@ public:
     void disableLogging (void);
     void create (QString fileName);
     bool isLogging (void) { return logging; }
+    void logNow (void);
 
 private:
     QList <mDataHandler*> mDataHandlerList;

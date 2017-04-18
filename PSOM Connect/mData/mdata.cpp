@@ -7,7 +7,7 @@ mData::mData(QObject *parent, QString nameStr, QString unitStr, bool err)
     m_errstyle = absolute;
     m_data = 0;
     m_error = 0;
-    m_accuracy = 3;
+    m_accuracy = 4;
     m_supportError = err;
 
     m_labels.append( new QLabel ( m_nameStr));

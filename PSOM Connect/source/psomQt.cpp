@@ -79,16 +79,9 @@ void PSOM::loadCalibrationData( )
    psom_hal->readRegister(HARM_L1_H1, 12, false);
 }
 
-void PSOM::pwm_set(int selection, int duty)
+void PSOM::pwm_set(int duty)
 {
-    switch(selection) {
-        case 1: psom_hal->writeRegister(PSOM_PWM1, duty, false);
-        break;
-        case 2: psom_hal->writeRegister(PSOM_PWM2, duty, false);
-        break;
-        case 3: psom_hal->writeRegister(PSOM_PWM3, duty, false);
-        break;
-    }
+    psom_hal->writeRegister(PSOM_PWM1, duty, false);
 }
 /**
  * \brief   starts the periodic measurment timer with an interval
@@ -196,10 +189,9 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
             m_data.L3.voltage.rms = toFloat(data[L3_VOLTAGE_RMS/4]);
             m_data.LT.voltage.rms = toFloat(data[LT_VOLTAGE_RMS/4]);
 
-            m_data.L1.voltage.inst = toFloat(data[L1_VOLTAGE_INST/4]);
-            m_data.L2.voltage.inst = toFloat(data[L2_VOLTAGE_INST/4]);
-            m_data.L3.voltage.inst = toFloat(data[L3_VOLTAGE_INST/4]);
-            m_data.LT.voltage.inst = 0;
+             m_data.L1.voltage.thd = toFloat(data[L1_VOLTAGE_THD/4]);
+             m_data.L2.voltage.thd = toFloat(data[L2_VOLTAGE_THD/4]);
+             m_data.L3.voltage.thd = toFloat(data[L3_VOLTAGE_THD/4]);
 
             // CURRENT
             m_data.L1.current.rms = toFloat(data[L1_CURRENT_RMS/4]);
@@ -207,10 +199,9 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
             m_data.L3.current.rms = toFloat(data[L3_CURRENT_RMS/4]);
             m_data.LT.current.rms = toFloat(data[LT_CURRENT_RMS/4]);
 
-            m_data.L1.current.inst = toFloat(data[L1_CURRENT_INST/4]);
-            m_data.L2.current.inst = toFloat(data[L2_CURRENT_INST/4]);
-            m_data.L3.current.inst = toFloat(data[L3_CURRENT_INST/4]);
-            m_data.LT.current.inst = 0;
+            m_data.L1.current.thd = toFloat(data[L1_CURRENT_THD/4]);
+            m_data.L2.current.thd = toFloat(data[L2_CURRENT_THD/4]);
+            m_data.L3.current.thd = toFloat(data[L3_CURRENT_THD/4]);
 
             // POWER
             m_data.L1.power.active = toFloat(data[L1_POWER_ACTIVE/4]);
@@ -277,8 +268,6 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
             m_data.evse.adc4 =  toFloat(data[ADC4_VOLTAGE /4]);
 
             m_data.evse.pwm_duty1 = data[PSOM_PWM1/4];
-            m_data.evse.pwm_duty2 = data[PSOM_PWM2/4];
-            m_data.evse.pwm_duty3 = data[PSOM_PWM3/4];
 
             elapsedTimer.restart();
             emit newPSOMData();

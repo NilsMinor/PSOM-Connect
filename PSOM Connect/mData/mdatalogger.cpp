@@ -19,6 +19,7 @@ void mDataLogger::enableLogging(int timeout)
     m_timer.start(timeout * 1000);
     logging = true;
 }
+
 void mDataLogger::disableLogging(void)
 {
     logging = false;
@@ -40,6 +41,12 @@ void mDataLogger::create(QString fileName)
          line_counter = 0;
          this->printHeader();
     }
+}
+
+void mDataLogger::logNow()
+{
+    logging = true;
+    log ( );
 }
 QString mDataLogger::getTimestamp()
 {
