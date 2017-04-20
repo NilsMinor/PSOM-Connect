@@ -7,12 +7,22 @@
     bool linuxOS = false;
 #endif
 
-
+/**
+ * \brief  Default constructor
+ * \param  _subID sub-ID of the module (always 0 in Version 1)
+ * \retval  nothing
+ */
 PSOM_HAL::PSOM_HAL (uint8_t _subID) {
     readRegisterState = false;
     subID = _subID;
     ptr_SerialPortHandler = NULL;
 }
+/**
+ * \brief  Default constructor
+ * \param  _subID sub-ID of the module (always 0 in Version 1)
+ * \param  _ptr_SerialPortHandler  pointer to an initialized QSerialPort object, used for communication
+ * \retval  nothing
+ */
 PSOM_HAL::PSOM_HAL (uint8_t _subID, QSerialPort *_ptr_SerialPortHandler)
 {
     readRegisterState = false;
@@ -20,7 +30,13 @@ PSOM_HAL::PSOM_HAL (uint8_t _subID, QSerialPort *_ptr_SerialPortHandler)
     ptr_SerialPortHandler = _ptr_SerialPortHandler;
 }
 
-//! BASIC COMMUNICTAION
+/**
+ * \brief  Write one data word to a register
+ * \param  _regAddr target register
+ * \param  _data data to write
+ * \param useChecksum true if checksum is used, false else
+ * \retval  nothing
+ */
 void        PSOM_HAL::writeRegister         (uint16_t _regAddr, uint32_t _data, bool useChecksum) {
     uint8_t nReg = 1;   // write to 1 register
 
@@ -53,6 +69,13 @@ void        PSOM_HAL::writeRegister         (uint16_t _regAddr, uint32_t _data, 
         ptr_SerialPortHandler->write(psomMessage);
     }
 }
+/**
+ * \brief  Read X register values from PSOM module
+ * \param  _regAddrStart register start to read
+ * \param  _regCount  quantity of registers to read out
+ * \param useChecksum true if checksum is used, false else
+ * \retval  nothing
+ */
 void        PSOM_HAL::readRegister          (uint16_t _regAddrStart, uint16_t _regCount, bool useChecksum) {
     uint8_t nReg = 1;   // write to 1 register
 
@@ -91,7 +114,7 @@ void        PSOM_HAL::readRegister          (uint16_t _regAddrStart, uint16_t _r
 
 /**
  * \brief  set serial connection hander
- * \param   _ptr_SerialPortHandler  pointer to an initialized QSerialPort object, used for communication
+ * \param  _ptr_SerialPortHandler  pointer to an initialized QSerialPort object, used for communication
  * \retval  nothing
  */
 void        PSOM_HAL::setSerialConnectionHandler (QSerialPort *_ptr_SerialPortHandler)
@@ -103,9 +126,13 @@ void        PSOM_HAL::setSerialConnectionHandler (QSerialPort *_ptr_SerialPortHa
     else
         qDebug() << "serial pointer is NULL";
 }
+
+/**
+ * \brief  Read out all PSOM registers
+ * \retval  nothing
+ */
 void        PSOM_HAL::copyPSOMBuffer()
 {
-    //qDebug() << "Copy PSOM data buffer";
     readRegister (PSOM_REG_START, PSOM_REGISTER_COUNT, true);   // read all registers
 }
 

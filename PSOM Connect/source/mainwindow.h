@@ -122,6 +122,7 @@ private:
     mDataHandler        *Common;
     mDataLogger         logger;
     bool                        EVSErecording;
+    QTimer                  *teamProjectTimer;
 
 private slots:
     void openSerialPort();
@@ -201,6 +202,7 @@ private slots:
     void on_pushButtonStartCharging_released();
     void on_pushButtonStopCharging_released();
     void on_comboBoxPWM1_currentIndexChanged(int index);
+    void showTime (void);
 
 signals:
     void updateOsci (mDataHandler *L1, mDataHandler *L2, mDataHandler *L3, mDataHandler *LT );

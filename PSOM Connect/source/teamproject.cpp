@@ -1,8 +1,19 @@
 #include "mainwindow.h"
 
+QDateTime mStartTime;
+
+static void delay (int sec) {
+    QTime dieTime= QTime::currentTime().addSecs(sec);
+     while (QTime::currentTime() < dieTime)
+         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+
 
 void MainWindow::teamprojectInitSettings (void) {
     ui->evseImageWidget->setStyleSheet("background-image: url(:/images/unplugged.png)");
+
+    teamProjectTimer = new QTimer ();
+    connect(teamProjectTimer, SIGNAL(timeout()), this, SLOT(showTime()));
 
     for (int i=0;i!=100;i++) {
         ui->comboBoxPWM1->addItem(QString::number(i));
@@ -15,8 +26,16 @@ void MainWindow::on_pushButtonStartCharging_released()
     ui->pushButtonStopCharging->setEnabled(true);
     logger.create("EV-record");
     EVSErecording = true;
+    if (teamProjectTimer != NULL)
+         teamProjectTimer->start(1000);
+
+    mStartTime = QDateTime::currentDateTime();
+    delay (1);
     on_cBHarmonicsType_currentIndexChanged("Current");
-    on_pBStartHarmonics_released();
+
+
+    //delay (1);
+    //on_pBStartHarmonics_released();
 }
 void MainWindow::on_pushButtonStopCharging_released()
 {
@@ -61,5 +80,23 @@ void MainWindow::rpiStartup()
 void MainWindow::on_comboBoxPWM1_currentIndexChanged(int index)
 {
     testModule->pwm_set(index);
+}
+
+void MainWindow::showTime()
+{
+    qint64 ms = mStartTime.msecsTo(QDateTime::currentDateTime());
+    int h = ms / 1000 / 60 / 60;
+    int m = (ms / 1000 / 60) - (h * 60);
+    int s = (ms / 1000) - (m * 60);
+    //ms = ms - (s * 1000);
+    const QString diff = QString("%1:%2:%3")
+                                    .arg(h,  2, 10, QChar('0'))
+                                    .arg(m,  2, 10, QChar('0'))
+                                    .arg(s,  2, 10, QChar('0'));
+    ui->lcdNumberTime->display(diff);
+
+    ui->labelEVSEEnergy->setText(QString::number(testModule->getData().L1.energy.active));
+    ui->labelEVSECosts->setText(QString::number(testModule->getData().L1.energy.cost));
+
 }
 

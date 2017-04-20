@@ -138,7 +138,6 @@ MainWindow::~MainWindow() {
     delete settings;
     delete ui;
 }
-
 void MainWindow::newPSOMData(void)
 {
     L1Data->setData("U1", testModule->getData().L1.voltage.rms, 0);

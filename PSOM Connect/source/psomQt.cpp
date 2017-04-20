@@ -3,6 +3,7 @@
 
 int harmOdd [HARM_QUANTITY] = {1,3,5,7,9,11,13,15,17,19};
 bool triggerHarmonics = false;
+int prevHarmonic = 1;
 /**
  * @file    psomQt.cpp
  * @author  Nils Minor
@@ -249,12 +250,14 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
                     m_data.L3.harmonic.contentL3[ i ] = toFloat (data[ (HARM_L3_H1 / 4) + i]);
                 }
 
+                //qDebug() << harmonicsCount <<actualHarmonic;
 
-                if ( harmonicsCount  == actualHarmonic ) {
+                if (  actualHarmonic < prevHarmonic) {
                     emit newHarmonicsData(m_data.L1.harmonic.contentL1, m_data.frequency, harmonicsCount, actualHarmonic);
                     emit harmonicMeasurmentReady ();
                 }
                 else
+                    prevHarmonic = actualHarmonic;
                     emit  updateActualHarmonic ( actualHarmonic);
             }
 

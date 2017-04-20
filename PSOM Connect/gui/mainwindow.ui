@@ -38,7 +38,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>6</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1024,47 +1024,14 @@
            <string/>
           </property>
           <layout class="QGridLayout" name="gridLayout_22">
-           <item row="0" column="5">
-            <widget class="QLabel" name="label_69">
+           <item row="0" column="3">
+            <widget class="QLabel" name="label_5">
              <property name="text">
-              <string>Y-Axis</string>
+              <string>Count:</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="6">
-            <widget class="QComboBox" name="cBHarmonicsAxisStyle">
-             <item>
-              <property name="text">
-               <string>Harmonic</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Frequency</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="1" column="6">
-            <widget class="QComboBox" name="comboBox_5">
-             <item>
-              <property name="text">
-               <string>L1</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>L2</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>L3</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="2" column="6">
+           <item row="1" column="4">
             <widget class="QPushButton" name="pBSetHarmonicsCount">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
@@ -1077,7 +1044,7 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="4">
+           <item row="1" column="2">
             <widget class="QPushButton" name="pBStartHarmonics">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1090,14 +1057,7 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_71">
-             <property name="text">
-              <string>Display:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="4">
+           <item row="0" column="2">
             <widget class="QPushButton" name="pBTriggerHarmonics">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -1110,52 +1070,7 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="3">
-            <widget class="QCheckBox" name="checkBoxDisplayL3">
-             <property name="text">
-              <string>L3</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QComboBox" name="cBHarmonicsType">
-             <item>
-              <property name="text">
-               <string>Voltage</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Current</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Active Power</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Reactive Power</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QCheckBox" name="checkBoxDisplayL1">
-             <property name="text">
-              <string>L1</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QCheckBox" name="checkBoxDisplayL2">
-             <property name="text">
-              <string>L2</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="4">
+           <item row="1" column="0" colspan="2">
             <widget class="QPushButton" name="pushButtonHarmonicsHome">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1172,21 +1087,7 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="5">
-            <widget class="QLabel" name="label_70">
-             <property name="text">
-              <string>Phase:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Type:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="5">
+           <item row="0" column="4">
             <widget class="QComboBox" name="cBHarmonicsCount">
              <item>
               <property name="text">
@@ -1245,30 +1146,13 @@
              </item>
             </widget>
            </item>
-           <item row="2" column="4">
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>Count:</string>
-             </property>
-            </widget>
-           </item>
           </layout>
           <zorder>pushButtonHarmonicsHome</zorder>
-          <zorder>checkBoxDisplayL3</zorder>
-          <zorder>checkBoxDisplayL2</zorder>
-          <zorder>checkBoxDisplayL1</zorder>
-          <zorder>label_71</zorder>
           <zorder>pBTriggerHarmonics</zorder>
           <zorder>pBStartHarmonics</zorder>
-          <zorder>cBHarmonicsAxisStyle</zorder>
-          <zorder>label_69</zorder>
-          <zorder>label_70</zorder>
-          <zorder>comboBox_5</zorder>
-          <zorder>label_3</zorder>
-          <zorder>cBHarmonicsType</zorder>
-          <zorder>pBSetHarmonicsCount</zorder>
-          <zorder>cBHarmonicsCount</zorder>
           <zorder>label_5</zorder>
+          <zorder>cBHarmonicsCount</zorder>
+          <zorder>pBSetHarmonicsCount</zorder>
          </widget>
         </item>
         <item row="0" column="0" rowspan="3">
@@ -1295,6 +1179,63 @@
               <enum>QLayout::SetFixedSize</enum>
              </property>
             </layout>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cBHarmonicsType">
+             <item>
+              <property name="text">
+               <string>Voltage</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Current</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Active Power</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Reactive Power</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cBHarmonicsAxisStyle">
+             <item>
+              <property name="text">
+               <string>Harmonic</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Frequency</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="comboBox_5">
+             <item>
+              <property name="text">
+               <string>L1</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>L2</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>L3</string>
+              </property>
+             </item>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -1465,41 +1406,6 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
-         <layout class="QGridLayout" name="gridLayout_18">
-          <property name="sizeConstraint">
-           <enum>QLayout::SetMaximumSize</enum>
-          </property>
-          <item row="0" column="2">
-           <widget class="QCheckBox" name="checkBox_3">
-            <property name="text">
-             <string>CheckBox</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QCheckBox" name="checkBox_2">
-            <property name="text">
-             <string>CheckBox</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="checkBox">
-            <property name="text">
-             <string>CheckBox</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="checkBox_4">
-            <property name="text">
-             <string>CheckBox</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tabWT500">
@@ -1545,7 +1451,7 @@
           <x>9</x>
           <y>10</y>
           <width>761</width>
-          <height>574</height>
+          <height>630</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_21">
@@ -1580,7 +1486,7 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
+           <item row="1" column="0" colspan="2">
             <widget class="QPushButton" name="pushButtonEVSEHome">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -1609,21 +1515,25 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QLCDNumber" name="lcdNumber">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+          </layout>
+         </item>
+         <item row="2" column="1">
+          <layout class="QGridLayout" name="gridLayout_13">
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Costs</string>
              </property>
             </widget>
            </item>
-          </layout>
-         </item>
-         <item row="1" column="1">
-          <layout class="QGridLayout" name="gridLayout_13">
-           <item row="5" column="0">
+           <item row="1" column="1">
+            <widget class="QLabel" name="labelEVSECosts">
+             <property name="text">
+              <string>0.0000</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
             <spacer name="verticalSpacer_3">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -1636,67 +1546,81 @@
              </property>
             </spacer>
            </item>
-           <item row="2" column="0">
+           <item row="4" column="0">
             <widget class="QLabel" name="label_14">
              <property name="text">
               <string>ADC3</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="4" column="1">
             <widget class="QLabel" name="labelADC3">
              <property name="text">
               <string>0.0000</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
+           <item row="5" column="0">
             <widget class="QLabel" name="label_9">
              <property name="text">
               <string>ADC4</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
+           <item row="5" column="1">
             <widget class="QLabel" name="labelADC4">
              <property name="text">
               <string>0.0000</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="0">
+           <item row="6" column="0">
             <widget class="QLabel" name="label_2">
              <property name="text">
               <string>PWM1</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="6" column="1">
             <widget class="QComboBox" name="comboBoxPWM1"/>
            </item>
-           <item row="0" column="0">
+           <item row="2" column="0">
             <widget class="QLabel" name="label_18">
              <property name="text">
               <string>ADC1</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
+           <item row="2" column="1">
             <widget class="QLabel" name="labelADC1">
              <property name="text">
               <string>0.0000</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
+           <item row="3" column="0">
             <widget class="QLabel" name="label_16">
              <property name="text">
               <string>ADC2</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
+           <item row="3" column="1">
             <widget class="QLabel" name="labelADC2">
+             <property name="text">
+              <string>0.0000</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>Energy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="labelEVSEEnergy">
              <property name="text">
               <string>0.0000</string>
              </property>
@@ -1704,7 +1628,26 @@
            </item>
           </layout>
          </item>
-         <item row="0" column="0" rowspan="2">
+         <item row="1" column="1">
+          <widget class="QLCDNumber" name="lcdNumberTime">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="digitCount">
+            <number>8</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" rowspan="3">
           <widget class="QWidget" name="evseImageWidget" native="true">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">

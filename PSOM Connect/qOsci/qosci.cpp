@@ -115,7 +115,7 @@ void qOsci::updateOsci(mDataHandler *L1,mDataHandler *L2,mDataHandler *L3,mDataH
            customPlot->graph(1)->addData(key, L2->getData("I2"));
            customPlot->graph(2)->addData(key, L3->getData("I3"));
            customPlot->graph(3)->addData(key, LT->getData("IT"));
-}
+      }
       customPlot->graph(0)->rescaleValueAxis(true);
       customPlot->graph(1)->rescaleValueAxis(true);
       customPlot->graph(2)->rescaleValueAxis(true);
@@ -142,7 +142,6 @@ void qOsci::updateOsci(mDataHandler *L1,mDataHandler *L2,mDataHandler *L3,mDataH
       frameCount = 0;
     }
 }
-
 void qOsci::updateActualHarmonic(int actualHarm)
 {
       //qDebug() << "Update!";
