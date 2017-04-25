@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 
-static bool harmonicsAutoTrigger = false;
 
 void MainWindow::initHarmonicSettings (void) {
     // harmonics box

@@ -40,9 +40,6 @@
 
 #include "mainwindow.h"
 
-
-
-
 // Serial Port and window functions
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -120,8 +117,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     logger.add(L2Data);
     logger.add(L3Data);
     logger.add(LTData);
-    logger.add(HData);
     logger.add(Common);
+    logger.add(HData);
     connect (&logger, SIGNAL(newDataLogged(int,qint64)), this, SLOT(updateLoggingInformation(int, qint64)));
 
     #ifdef Q_OS_WIN
@@ -130,7 +127,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         connect (wt500, SIGNAL(newDataMeasured(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)),
                         this, SLOT(updateErrorData(mDataHandler*,mDataHandler*,mDataHandler*,mDataHandler*)));
     #endif
-
 
 }
 
@@ -208,7 +204,6 @@ void MainWindow::newPSOMData(void)
     HData->setData("Ithd3", testModule->getData().L3.current.thd);
 }
 
-
 // menu
 void MainWindow::on_pushButtonPanel_released()
 {
@@ -252,7 +247,6 @@ void MainWindow::on_pushButtonExit_released()
 {
     QCoreApplication::quit();
 }
-
 
 // qwt500
 void MainWindow::on_pushButtonQWT500Home_released()

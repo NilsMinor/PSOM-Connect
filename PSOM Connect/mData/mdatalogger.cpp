@@ -70,15 +70,15 @@ void mDataLogger::printHeader(void)
                                  << mDataHandlerList[2]->getMDataList().at(i)->getPrettyName() << ";"     // L3
                                  << mDataHandlerList[3]->getMDataList().at(i)->getPrettyName() << ";";    // LT
         }
-        for (int i = 0; i!=  mDataHandlerList[4]->getMDataList().size(); i++)
+
+        *m_stream << mDataHandlerList[4]->getMDataList().at(0)->getPrettyName() << ";";        // Line Frequency
+        *m_stream << mDataHandlerList[4]->getMDataList().at(1)->getPrettyName() << ";";        // Module Temperature
+        *m_stream << mDataHandlerList[4]->getMDataList().at(2)->getPrettyName() << ";";        // Circulation Time
+
+        for (int i = 0; i!=  mDataHandlerList[5]->getMDataList().size(); i++)
         {
-             *m_stream  << mDataHandlerList[4]->getMDataList().at(i)->getPrettyName()<< ";";
+             *m_stream  << mDataHandlerList[5]->getMDataList().at(i)->getPrettyName()<< ";";
         }
-
-        *m_stream << mDataHandlerList[5]->getMDataList().at(0)->getPrettyName() << ";";        // Line Frequency
-        *m_stream << mDataHandlerList[5]->getMDataList().at(1)->getPrettyName() << ";";        // Module Temperature
-        *m_stream << mDataHandlerList[5]->getMDataList().at(2)->getPrettyName() << ";";        // Circulation Time
-
         *m_stream  << "\r\n";   // linefeed
     }
     else
@@ -88,7 +88,7 @@ void mDataLogger::printHeader(void)
 }
 void mDataLogger::log(void)
 {
-    if (m_file != NULL && m_stream != NULL && logging) {
+    if (m_file != NULL && m_stream != NULL) {
 
        if (mDataHandlerList.size() != 6) return;   // L1, L2, L3, LT, Common, HData
 
@@ -101,14 +101,14 @@ void mDataLogger::log(void)
                                  << mDataHandlerList[3]->getMDataList().at(i)->getData() << ";";    // LT
         }
 
-        for (int i = 0; i!=  mDataHandlerList[4]->getMDataList().size(); i++)
-        {
-             *m_stream  << mDataHandlerList[4]->getMDataList().at(i)->getData() << ";";
-        }
+        *m_stream   << mDataHandlerList[4]->getData("F") << ";";                                     // Line Frequency
+        *m_stream  << mDataHandlerList[4]->getData("Temp") << ";";                               // Module Temperature
+        *m_stream  << mDataHandlerList[4]->getData("Circ T") << ";";                              // Circulation Time
 
-        *m_stream   << mDataHandlerList[5]->getData("F") << ";";                                     // Line Frequency
-        *m_stream  << mDataHandlerList[5]->getData("Temp") << ";";                               // Module Temperature
-        *m_stream  << mDataHandlerList[5]->getData("Circ T") << ";";                              // Circulation Time
+        for (int i = 0; i!=  mDataHandlerList[5]->getMDataList().size(); i++)
+        {
+             *m_stream  << mDataHandlerList[5]->getMDataList().at(i)->getData() << ";";
+        }
 
         *m_stream  << "\r\n";   // linefeed
         line_counter++;

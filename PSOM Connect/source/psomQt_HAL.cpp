@@ -17,6 +17,7 @@ PSOM_HAL::PSOM_HAL (uint8_t _subID) {
     subID = _subID;
     ptr_SerialPortHandler = NULL;
 }
+
 /**
  * \brief  Default constructor
  * \param  _subID sub-ID of the module (always 0 in Version 1)
@@ -69,6 +70,7 @@ void        PSOM_HAL::writeRegister         (uint16_t _regAddr, uint32_t _data, 
         ptr_SerialPortHandler->write(psomMessage);
     }
 }
+
 /**
  * \brief  Read X register values from PSOM module
  * \param  _regAddrStart register start to read

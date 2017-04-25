@@ -38,7 +38,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>6</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1015,7 +1015,7 @@
         <item row="2" column="1">
          <widget class="QGroupBox" name="groupBoxHarmonicsControl">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -1067,23 +1067,6 @@
              </property>
              <property name="text">
               <string>Trigger</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QPushButton" name="pushButtonHarmonicsHome">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Home</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../PowerLAB.qrc">
-               <normaloff>:/images/home.svg</normaloff>:/images/home.svg</iconset>
              </property>
             </widget>
            </item>
@@ -1146,6 +1129,80 @@
              </item>
             </widget>
            </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBox_5">
+             <item>
+              <property name="text">
+               <string>L1</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>L2</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>L3</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QComboBox" name="cBHarmonicsType">
+             <item>
+              <property name="text">
+               <string>Voltage</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Current</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Active Power</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Reactive Power</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="pushButtonHarmonicsHome">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Home</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../PowerLAB.qrc">
+               <normaloff>:/images/home.svg</normaloff>:/images/home.svg</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="cBHarmonicsAxisStyle">
+             <item>
+              <property name="text">
+               <string>Harmonic</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Frequency</string>
+              </property>
+             </item>
+            </widget>
+           </item>
           </layout>
           <zorder>pushButtonHarmonicsHome</zorder>
           <zorder>pBTriggerHarmonics</zorder>
@@ -1153,6 +1210,9 @@
           <zorder>label_5</zorder>
           <zorder>cBHarmonicsCount</zorder>
           <zorder>pBSetHarmonicsCount</zorder>
+          <zorder>comboBox_5</zorder>
+          <zorder>cBHarmonicsType</zorder>
+          <zorder>cBHarmonicsAxisStyle</zorder>
          </widget>
         </item>
         <item row="0" column="0" rowspan="3">
@@ -1179,63 +1239,6 @@
               <enum>QLayout::SetFixedSize</enum>
              </property>
             </layout>
-           </item>
-           <item>
-            <widget class="QComboBox" name="cBHarmonicsType">
-             <item>
-              <property name="text">
-               <string>Voltage</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Current</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Active Power</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Reactive Power</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="cBHarmonicsAxisStyle">
-             <item>
-              <property name="text">
-               <string>Harmonic</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Frequency</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="comboBox_5">
-             <item>
-              <property name="text">
-               <string>L1</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>L2</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>L3</string>
-              </property>
-             </item>
-            </widget>
            </item>
           </layout>
          </widget>
@@ -1519,21 +1522,49 @@
          </item>
          <item row="2" column="1">
           <layout class="QGridLayout" name="gridLayout_13">
-           <item row="1" column="0">
+           <item row="2" column="0">
             <widget class="QLabel" name="label_3">
              <property name="text">
               <string>Costs</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>Energy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
             <widget class="QLabel" name="labelEVSECosts">
              <property name="text">
               <string>0.0000</string>
              </property>
             </widget>
            </item>
-           <item row="7" column="0">
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Log</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="labelEVSEEnergy">
+             <property name="text">
+              <string>0.0000</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0">
             <spacer name="verticalSpacer_3">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -1546,83 +1577,76 @@
              </property>
             </spacer>
            </item>
-           <item row="4" column="0">
+           <item row="6" column="0">
             <widget class="QLabel" name="label_14">
              <property name="text">
               <string>ADC3</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="6" column="1">
             <widget class="QLabel" name="labelADC3">
              <property name="text">
               <string>0.0000</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="0">
+           <item row="7" column="0">
             <widget class="QLabel" name="label_9">
              <property name="text">
               <string>ADC4</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
+           <item row="7" column="1">
             <widget class="QLabel" name="labelADC4">
              <property name="text">
               <string>0.0000</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="0">
+           <item row="8" column="0">
             <widget class="QLabel" name="label_2">
              <property name="text">
               <string>PWM1</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="1">
+           <item row="8" column="1">
             <widget class="QComboBox" name="comboBoxPWM1"/>
            </item>
-           <item row="2" column="0">
+           <item row="4" column="0">
             <widget class="QLabel" name="label_18">
              <property name="text">
               <string>ADC1</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="4" column="1">
             <widget class="QLabel" name="labelADC1">
              <property name="text">
               <string>0.0000</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
+           <item row="5" column="0">
             <widget class="QLabel" name="label_16">
              <property name="text">
               <string>ADC2</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
+           <item row="5" column="1">
             <widget class="QLabel" name="labelADC2">
              <property name="text">
               <string>0.0000</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_8">
+           <item row="0" column="0" colspan="2">
+            <widget class="QLineEdit" name="lineEditLogEVSE">
              <property name="text">
-              <string>Energy</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLabel" name="labelEVSEEnergy">
-             <property name="text">
-              <string>0.0000</string>
+              <string>C:\Log\evse</string>
              </property>
             </widget>
            </item>

@@ -123,6 +123,7 @@ private:
     mDataLogger         logger;
     bool                        EVSErecording;
     QTimer                  *teamProjectTimer;
+     bool                       harmonicsAutoTrigger ;
 
 private slots:
     void openSerialPort();
@@ -203,6 +204,7 @@ private slots:
     void on_pushButtonStopCharging_released();
     void on_comboBoxPWM1_currentIndexChanged(int index);
     void showTime (void);
+    void harmonicsReady (void);
 
 signals:
     void updateOsci (mDataHandler *L1, mDataHandler *L2, mDataHandler *L3, mDataHandler *LT );

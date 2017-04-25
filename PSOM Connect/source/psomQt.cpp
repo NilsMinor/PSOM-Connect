@@ -60,12 +60,20 @@ void PSOM::setSerialConnectionHandler (QSerialPort *_ptr_SerialPortHandler)
 {
     psom_hal->setSerialConnectionHandler(_ptr_SerialPortHandler);
 }
-
+/**
+ * \brief  Send Softcommand to the module
+ * \param  scmd soft-command code
+ * \retval  nothing
+ */
 void PSOM::sendSCMD(uint32_t scmd)
 {
     psom_hal->writeRegister(PSOM_SCOMMAND, scmd, false);
 }
-
+/**
+ * \brief  Writes data to the soft-command value register
+ * \param  value value to write into the register
+ * \retval  nothing
+ */
 void PSOM::writeSCMDValue(float value)
 {
      psom_hal->writeRegister(PSOM_SCOMMAND_VALUE, value, false);
@@ -79,7 +87,11 @@ void PSOM::loadCalibrationData( )
    readingState = readCalData;
    psom_hal->readRegister(HARM_L1_H1, 12, false);
 }
-
+/**
+ * \brief  Set PWM value
+ * \param  duty value representing the duty cycle must be betwee 0 and 100
+ * \retval  nothing
+ */
 void PSOM::pwm_set(int duty)
 {
     psom_hal->writeRegister(PSOM_PWM1, duty, false);
@@ -160,7 +172,7 @@ void PSOM::stopHarmonicsScan()
  * \param   nothing
  * \retval  nothing
  */
-void        PSOM::m_timerTimeout()
+void  PSOM::m_timerTimeout()
 {
     //qDebug() << "m_timer timeout";
     readingState = readNormal;
@@ -173,7 +185,7 @@ void        PSOM::m_timerTimeout()
  * \param   &dataCount  data count of the data array as reference
  * \retval  nothing
  */
-void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
+void PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
 {
     switch (readingState) {
     case readNormal:
@@ -257,8 +269,8 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
                     emit harmonicMeasurmentReady ();
                 }
                 else
-                    prevHarmonic = actualHarmonic;
                     emit  updateActualHarmonic ( actualHarmonic);
+                prevHarmonic = actualHarmonic;
             }
 
             m_data.circulationTime = elapsedTimer.elapsed();
@@ -291,7 +303,7 @@ void        PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
 
 }
 
-void        PSOM::statusBarInfoHandler(QString information)
+void PSOM::statusBarInfoHandler(QString information)
 {
     emit statusBarInfo   (information);
 }
