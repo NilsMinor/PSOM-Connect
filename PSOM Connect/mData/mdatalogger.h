@@ -18,6 +18,7 @@ public:
     void create (QString fileName);
     bool isLogging (void) { return logging; }
     void logNow (void);
+    int getLoggedLines (void) { return line_counter; }
 
 private:
     QList <mDataHandler*> mDataHandlerList;

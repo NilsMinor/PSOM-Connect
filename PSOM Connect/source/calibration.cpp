@@ -22,6 +22,7 @@ void MainWindow::on_comboBoxCalType_currentIndexChanged(int index)
 void MainWindow::on_pushButtonLoadCalibration_released()
 {
     testModule->loadCalibrationData( );
+    //delay(500);
 }
 void MainWindow::on_pushButtonCalibrationHome_released()
 {
@@ -63,8 +64,8 @@ void MainWindow::on_comboBoxCurrentCalValue_currentIndexChanged(const QString &a
 void MainWindow::updateCalData(uint32_t *cal)
 {
     int datacounter =0;
-    for (int ridx = 0 ; ridx < 6 ; ridx++ ) {
-        for (int cidx = 0 ; cidx < 2 ; cidx++) {
+    for (int cidx = 0 ; cidx < 2 ; cidx++ ) {
+        for (int ridx = 0 ; ridx < 6 ; ridx++) {
           QTableWidgetItem* item = new QTableWidgetItem();
           item->setText(QString::number(cal[datacounter++]));
           ui->tableWidgetCalData->setItem(ridx, cidx, item);

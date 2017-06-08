@@ -38,7 +38,7 @@
 #include <QTimer>
 
 
-#define GUI_STARTUP_TIME    100
+#define GUI_STARTUP_TIME    3000
 
 int main(int argc, char *argv[])
 {

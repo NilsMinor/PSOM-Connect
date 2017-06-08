@@ -83,7 +83,8 @@ void PSOM::loadCalibrationData( )
 {
     this->sendSCMD(PSOM_SCMD_CALLOAD);
 
-   for (long i=0;i!=10000000;i++) { }
+   //for (long i=0;i!=10000000;i++) { }
+    delay(200);
    readingState = readCalData;
    psom_hal->readRegister(HARM_L1_H1, 12, false);
 }
@@ -281,6 +282,11 @@ void PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
             m_data.evse.adc2 =  toFloat(data[ADC2_VOLTAGE /4]);
             m_data.evse.adc3 =  toFloat(data[ADC3_VOLTAGE /4]);
             m_data.evse.adc4 =  toFloat(data[ADC4_VOLTAGE /4]);
+            qDebug() << "ADC1 " << m_data.evse.adc1;
+            qDebug() << "ADC2 " << m_data.evse.adc2;
+            qDebug() << "ADC3 " << m_data.evse.adc3;
+            qDebug() << "ADC4 " << m_data.evse.adc4;
+
 
             m_data.evse.pwm_duty1 = data[PSOM_PWM1/4];
 
@@ -288,19 +294,18 @@ void PSOM::assignEntirePSOMData(uint32_t *data, int &dataCount)
             emit newPSOMData();
         }
         else {
-            for (int i =0; i!= dataCount; i++) {
-                 qDebug() << data [i];
-            }
-        }
 
+        }
         break;
     case readCalData:
         if (dataCount == 12) {
+            for (int i =0; i != dataCount; i++) {
+                 qDebug() << i << " " << data [i];
+            }
             emit updateCalData (data);
         }
         break;
     }
-
 }
 
 void PSOM::statusBarInfoHandler(QString information)

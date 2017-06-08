@@ -262,18 +262,3 @@ void MainWindow::updateErrorData(mDataHandler *L1, mDataHandler *L2, mDataHandle
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

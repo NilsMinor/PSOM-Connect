@@ -1,13 +1,9 @@
 #include "mainwindow.h"
+#include <QProcess>
 
 QDateTime mStartTime;
 
-static void delay (int msec) {
 
-    QTime dieTime= QTime::currentTime().addMSecs(msec);
-     while (QTime::currentTime() < dieTime)
-         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-}
 
 void MainWindow::teamprojectInitSettings (void) {
     ui->evseImageWidget->setStyleSheet("background-image: url(:/images/unplugged.png)");
@@ -30,9 +26,9 @@ void MainWindow::on_pushButtonStartCharging_released()
 
 
     mStartTime = QDateTime::currentDateTime();
-    delay (10);
+    delay (20);
     testModule->setHarmonicsCount(11);
-    delay (10);
+    delay (20);
 
     QMessageBox msgBox; msgBox.setText(tr("Start charging process ?"));
     QAbstractButton* pButtonYes = msgBox.addButton(tr("Yes"),
@@ -43,8 +39,7 @@ void MainWindow::on_pushButtonStartCharging_released()
     if (msgBox.clickedButton()==pButtonYes) {
         harmonicsAutoTrigger = true;
         logger.create(ui->lineEditLogEVSE->text());
-        testModule->startHarmonicsScan(CurrentHarmonics);
-
+        on_pBStartHarmonics_released ();
         if (teamProjectTimer != NULL)
              teamProjectTimer->start(1000);
     }
@@ -57,9 +52,12 @@ void MainWindow::on_pushButtonStopCharging_released()
     ui->pushButtonStartCharging->setEnabled(true);
     ui->pushButtonStopCharging->setEnabled(false);
 
+    QString str = QString("Charged energy: %1\nCosts:: %2\nTime: %3")
+            .arg(testModule->getData().L1.energy.active)
+            .arg(testModule->getData().L1.energy.cost)
+            .arg(chargingTime);
     QMessageBox msgBox;
-    msgBox.setText(tr("Charging process finished"));
-    msgBox.setText("Charged Energy : ");
+    msgBox.setText(str);
     msgBox.exec();
 
     EVSErecording = false;
@@ -111,15 +109,15 @@ void MainWindow::showTime()
     int m = (ms / 1000 / 60) - (h * 60);
     int s = (ms / 1000) - (m * 60);
     //ms = ms - (s * 1000);
-    const QString diff = QString("%1:%2:%3")
+    chargingTime = QString("%1:%2:%3")
                                     .arg(h,  2, 10, QChar('0'))
                                     .arg(m,  2, 10, QChar('0'))
                                     .arg(s,  2, 10, QChar('0'));
-    ui->lcdNumberTime->display(diff);
+    ui->lcdNumberTime->display(chargingTime);
 
     ui->labelEVSEEnergy->setText(QString::number(testModule->getData().L1.energy.active));
     ui->labelEVSECosts->setText(QString::number(testModule->getData().L1.energy.cost));
-
+    ui->labelEVSELoggedLines->setText(QString::number(logger.getLoggedLines()));
 }
 void MainWindow::harmonicsReady()
 {
@@ -127,3 +125,12 @@ void MainWindow::harmonicsReady()
         logger.log();
 }
 
+void MainWindow::on_pushButtonCopyFilesToStick_released()
+{
+    // run the script for the teamproject in order to copy the log folder to an USB stick
+    QString fileName ("/home/pi/backupLogs.sh");
+    if (QProcess::execute(QString("/bin/sh") + fileName) < 0)
+        changeStatusbarInformation("Failed to copy LOG folder");
+    else
+        changeStatusbarInformation("Log folder cloned!");
+}

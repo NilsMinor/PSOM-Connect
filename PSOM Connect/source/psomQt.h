@@ -67,6 +67,18 @@
 #include <QThread>
 #include "psomQt_HAL.h"
 #include <stdint.h>
+#include <QTime>
+#include <QEventLoop>
+#include <QProcess>
+#include <QCoreApplication>
+
+
+static void delay (int msec) {
+
+    QTime dieTime= QTime::currentTime().addMSecs(msec);
+     while (QTime::currentTime() < dieTime)
+         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
 
 
 #define HARM_QUANTITY				11

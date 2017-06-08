@@ -5,14 +5,17 @@ void MainWindow::initHarmonicSettings (void) {
     // harmonics box
     harmonics = new qOsci(NULL, OfTypeHarmonics);
     ui->harmonicsGraphLayout->addWidget(harmonics->getScreenWidget()) ;
-    ui->cBHarmonicsCount->setCurrentIndex(4);
+
     connect (testModule, SIGNAL(newHarmonicsData(float*,float,int,int)),    // connect module with harmonics display
              harmonics, SLOT(setHarmonics(float*,float,int,int)));
 
-    connect (testModule, SIGNAL(harmonicMeasurmentReady()), this, SLOT(on_autoHarmonicMeasurement()));
+    harmonicsTimer = new QTimer();
+    harmonicsTimer->setTimerType(Qt::PreciseTimer);
+    //connect (testModule, SIGNAL(harmonicMeasurmentReady()), this, SLOT(on_autoHarmonicMeasurement()));
     connect (testModule, SIGNAL(updateActualHarmonic(int)), harmonics, SLOT(updateActualHarmonic(int)));        // update actual harmonic
 
     HData = new mDataHandler (this);
+    connect (harmonicsTimer, SIGNAL(timeout()), this, SLOT(on_autoHarmonicMeasurement()));
 
     for (int i=1; i<=11;i++) {
         QString name = "H" + QString::number(i);
@@ -33,10 +36,12 @@ void MainWindow::on_pBStartHarmonics_released()
     if (ui->pBStartHarmonics->text() == "Start") {
         ui->pBStartHarmonics->setText("Stop");
 
+       harmonicsTimer->start(8000);
        harmonicsAutoTrigger = true;
        on_pBTriggerHarmonics_released();
     }
     else {
+        harmonicsTimer->stop();
         ui->pBStartHarmonics->setText("Start");
         harmonicsAutoTrigger = false;
 
@@ -89,6 +94,8 @@ void MainWindow::on_autoHarmonicMeasurement()
         on_pBTriggerHarmonics_released();
     }
 }
+
+
 void MainWindow::on_pushButtonHarmonicsHome_released()
 {
     on_pushButtonPanelHome_released();

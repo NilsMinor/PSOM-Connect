@@ -215,7 +215,8 @@ void        PSOM_HAL::analyseIncomingReadData(QByteArray data)
             emit statusBarInfo("HAL::Received " + QString::number(tempBufferDataCounter) + " Bytes of data");
         }
         else {
-            emit statusBarInfo("HAL::Received wrong data count, less data");
+            if (linuxOS && uartRxBuffer.length() > (regCountToRead * BYTE_COUNT * 3) ) uartRxBuffer.clear();
+            emit statusBarInfo("HAL::Received wrong data count");
         }
     }
 }
@@ -232,12 +233,14 @@ void        PSOM_HAL::recvNewSerialData()
 //! PUBLIC SLOTS
 void        PSOM_HAL::newSerialDataHandler (QByteArray data)
 {
+
     QString str(data.constData());
 
     if (str.contains("ERR")) {
         qDebug() << str;
     }
-    //qDebug() << data;
+
+    //qDebug() << data.toHex();
 
     if ((uint8_t)data[POS_SYNC_HEADER] == 0xAA) {
         if (readRegisterState == true) {
@@ -257,26 +260,38 @@ void        PSOM_HAL::newSerialDataHandler (QByteArray data)
 void        PSOM_HAL::newSerialDataHandlerLinux (QByteArray data)
 {
     QString str(data.constData());
-
     if (str.contains("ERR")) {
         qDebug() << str;
     }
 
     uartRxBuffer.append(data);
+
     if ((uint8_t)  uartRxBuffer[POS_SYNC_HEADER] == 0xAA) {
         if (readRegisterState == true) {
-            analyseIncomingReadData (uartRxBuffer);
-        }
-        else {
-            state = unpackStateFromPacket(data);
-            emit stateChanged();
+             analyseIncomingReadData (uartRxBuffer);
         }
         emit psomAnswered ();
     }
-    else if (data.length() > 100 ) {
-        uartRxBuffer.clear();
-    }
     else {
+        if (uartRxBuffer.contains(0xAA)) {    // search for SYNC
+            QByteArray old (uartRxBuffer);
+            uartRxBuffer.clear();
+
+            bool syncFound = false;
+            for (int i=0;i!=old.length();i++) {
+                if (old.at(i) == 0xAA) {
+                    syncFound = true;
+                }
+
+                if (syncFound) {        // now take old data after sync
+                    uartRxBuffer.append(old.at(i));
+                }
+            }
+            emit statusBarInfo("HAL::Received Serial data resnyced");
+        }
+        else {
+            uartRxBuffer.clear();
+        }
         emit statusBarInfo("HAL::Received Serial data is out of snyc");
     }
 }

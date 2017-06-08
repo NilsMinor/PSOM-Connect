@@ -115,15 +115,15 @@ public:
     QVBoxLayout *harmonicsGraphLayout;
     QGroupBox *groupBoxHarmonicsControl;
     QGridLayout *gridLayout_22;
-    QLabel *label_5;
-    QPushButton *pBSetHarmonicsCount;
-    QPushButton *pBStartHarmonics;
-    QPushButton *pBTriggerHarmonics;
-    QComboBox *cBHarmonicsCount;
-    QComboBox *comboBox_5;
     QComboBox *cBHarmonicsType;
-    QPushButton *pushButtonHarmonicsHome;
+    QLabel *label_5;
+    QPushButton *pBStartHarmonics;
+    QComboBox *cBHarmonicsCount;
+    QPushButton *pBTriggerHarmonics;
     QComboBox *cBHarmonicsAxisStyle;
+    QPushButton *pushButtonHarmonicsHome;
+    QPushButton *pBSetHarmonicsCount;
+    QComboBox *comboBox_5;
     QGroupBox *groupBoxHarmonicsData;
     QVBoxLayout *verticalLayout_2;
     QGridLayout *harmonicsDataLayout;
@@ -151,10 +151,17 @@ public:
     QPushButton *pushButtonStartCharging;
     QPushButton *pushButtonStopCharging;
     QPushButton *pushButtonEVSEHome;
+    QPushButton *pushButtonCopyFilesToStick;
     QGridLayout *gridLayout_13;
+    QComboBox *comboBoxPWM1;
+    QLabel *label_18;
+    QLabel *labelADC1;
+    QLabel *label_16;
+    QLabel *labelADC2;
+    QLineEdit *lineEditLogEVSE;
     QLabel *label_3;
     QLabel *label_8;
-    QLabel *label_11;
+    QLabel *labelEVSELoggedLines;
     QLabel *labelEVSECosts;
     QLabel *label_4;
     QLabel *labelEVSEEnergy;
@@ -164,12 +171,6 @@ public:
     QLabel *label_9;
     QLabel *labelADC4;
     QLabel *label_2;
-    QComboBox *comboBoxPWM1;
-    QLabel *label_18;
-    QLabel *labelADC1;
-    QLabel *label_16;
-    QLabel *labelADC2;
-    QLineEdit *lineEditLogEVSE;
     QLCDNumber *lcdNumberTime;
     QWidget *evseImageWidget;
     QWidget *tabCalibration;
@@ -214,7 +215,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(800, 609);
+        MainWindow->resize(800, 600);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -586,8 +587,8 @@ public:
 
         pushButtonPanelHome = new QPushButton(groupBox);
         pushButtonPanelHome->setObjectName(QStringLiteral("pushButtonPanelHome"));
-        sizePolicy3.setHeightForWidth(pushButtonPanelHome->sizePolicy().hasHeightForWidth());
-        pushButtonPanelHome->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(pushButtonPanelHome->sizePolicy().hasHeightForWidth());
+        pushButtonPanelHome->setSizePolicy(sizePolicy2);
         QIcon icon15;
         icon15.addFile(QStringLiteral(":/images/home.svg"), QSize(), QIcon::Normal, QIcon::Off);
         pushButtonPanelHome->setIcon(icon15);
@@ -650,6 +651,11 @@ public:
 
         pushButtonOsciStart = new QPushButton(groupBox_3);
         pushButtonOsciStart->setObjectName(QStringLiteral("pushButtonOsciStart"));
+        QSizePolicy sizePolicy5(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(pushButtonOsciStart->sizePolicy().hasHeightForWidth());
+        pushButtonOsciStart->setSizePolicy(sizePolicy5);
         pushButtonOsciStart->setFont(font);
 
         gridLayout_9->addWidget(pushButtonOsciStart, 8, 0, 1, 2);
@@ -657,18 +663,24 @@ public:
         pushButtonOsciStop = new QPushButton(groupBox_3);
         pushButtonOsciStop->setObjectName(QStringLiteral("pushButtonOsciStop"));
         pushButtonOsciStop->setEnabled(false);
+        sizePolicy5.setHeightForWidth(pushButtonOsciStop->sizePolicy().hasHeightForWidth());
+        pushButtonOsciStop->setSizePolicy(sizePolicy5);
         pushButtonOsciStop->setFont(font);
 
         gridLayout_9->addWidget(pushButtonOsciStop, 9, 0, 1, 2);
 
         pushButtonOsciReset = new QPushButton(groupBox_3);
         pushButtonOsciReset->setObjectName(QStringLiteral("pushButtonOsciReset"));
+        sizePolicy5.setHeightForWidth(pushButtonOsciReset->sizePolicy().hasHeightForWidth());
+        pushButtonOsciReset->setSizePolicy(sizePolicy5);
         pushButtonOsciReset->setFont(font);
 
         gridLayout_9->addWidget(pushButtonOsciReset, 10, 0, 1, 2);
 
         pushButtonScopeHome = new QPushButton(groupBox_3);
         pushButtonScopeHome->setObjectName(QStringLiteral("pushButtonScopeHome"));
+        sizePolicy5.setHeightForWidth(pushButtonScopeHome->sizePolicy().hasHeightForWidth());
+        pushButtonScopeHome->setSizePolicy(sizePolicy5);
         pushButtonScopeHome->setMinimumSize(QSize(0, 0));
         pushButtonScopeHome->setIcon(icon15);
         pushButtonScopeHome->setIconSize(QSize(32, 32));
@@ -712,6 +724,11 @@ public:
 
         comboBoxOsci = new QComboBox(groupBox_3);
         comboBoxOsci->setObjectName(QStringLiteral("comboBoxOsci"));
+        QSizePolicy sizePolicy6(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(comboBoxOsci->sizePolicy().hasHeightForWidth());
+        comboBoxOsci->setSizePolicy(sizePolicy6);
         comboBoxOsci->setFont(font);
 
         gridLayout_9->addWidget(comboBoxOsci, 2, 0, 1, 2);
@@ -741,29 +758,24 @@ public:
 
         groupBoxHarmonicsControl = new QGroupBox(tabHarmonics);
         groupBoxHarmonicsControl->setObjectName(QStringLiteral("groupBoxHarmonicsControl"));
-        QSizePolicy sizePolicy5(QSizePolicy::Preferred, QSizePolicy::Maximum);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(groupBoxHarmonicsControl->sizePolicy().hasHeightForWidth());
-        groupBoxHarmonicsControl->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy7(QSizePolicy::Preferred, QSizePolicy::Maximum);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(groupBoxHarmonicsControl->sizePolicy().hasHeightForWidth());
+        groupBoxHarmonicsControl->setSizePolicy(sizePolicy7);
         gridLayout_22 = new QGridLayout(groupBoxHarmonicsControl);
         gridLayout_22->setSpacing(6);
         gridLayout_22->setContentsMargins(11, 11, 11, 11);
         gridLayout_22->setObjectName(QStringLiteral("gridLayout_22"));
+        cBHarmonicsType = new QComboBox(groupBoxHarmonicsControl);
+        cBHarmonicsType->setObjectName(QStringLiteral("cBHarmonicsType"));
+
+        gridLayout_22->addWidget(cBHarmonicsType, 0, 0, 1, 1);
+
         label_5 = new QLabel(groupBoxHarmonicsControl);
         label_5->setObjectName(QStringLiteral("label_5"));
 
         gridLayout_22->addWidget(label_5, 0, 3, 1, 1);
-
-        pBSetHarmonicsCount = new QPushButton(groupBoxHarmonicsControl);
-        pBSetHarmonicsCount->setObjectName(QStringLiteral("pBSetHarmonicsCount"));
-        QSizePolicy sizePolicy6(QSizePolicy::Maximum, QSizePolicy::Fixed);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(pBSetHarmonicsCount->sizePolicy().hasHeightForWidth());
-        pBSetHarmonicsCount->setSizePolicy(sizePolicy6);
-
-        gridLayout_22->addWidget(pBSetHarmonicsCount, 1, 4, 1, 1);
 
         pBStartHarmonics = new QPushButton(groupBoxHarmonicsControl);
         pBStartHarmonics->setObjectName(QStringLiteral("pBStartHarmonics"));
@@ -772,6 +784,11 @@ public:
 
         gridLayout_22->addWidget(pBStartHarmonics, 1, 2, 1, 1);
 
+        cBHarmonicsCount = new QComboBox(groupBoxHarmonicsControl);
+        cBHarmonicsCount->setObjectName(QStringLiteral("cBHarmonicsCount"));
+
+        gridLayout_22->addWidget(cBHarmonicsCount, 0, 4, 1, 1);
+
         pBTriggerHarmonics = new QPushButton(groupBoxHarmonicsControl);
         pBTriggerHarmonics->setObjectName(QStringLiteral("pBTriggerHarmonics"));
         sizePolicy2.setHeightForWidth(pBTriggerHarmonics->sizePolicy().hasHeightForWidth());
@@ -779,20 +796,10 @@ public:
 
         gridLayout_22->addWidget(pBTriggerHarmonics, 0, 2, 1, 1);
 
-        cBHarmonicsCount = new QComboBox(groupBoxHarmonicsControl);
-        cBHarmonicsCount->setObjectName(QStringLiteral("cBHarmonicsCount"));
+        cBHarmonicsAxisStyle = new QComboBox(groupBoxHarmonicsControl);
+        cBHarmonicsAxisStyle->setObjectName(QStringLiteral("cBHarmonicsAxisStyle"));
 
-        gridLayout_22->addWidget(cBHarmonicsCount, 0, 4, 1, 1);
-
-        comboBox_5 = new QComboBox(groupBoxHarmonicsControl);
-        comboBox_5->setObjectName(QStringLiteral("comboBox_5"));
-
-        gridLayout_22->addWidget(comboBox_5, 0, 1, 1, 1);
-
-        cBHarmonicsType = new QComboBox(groupBoxHarmonicsControl);
-        cBHarmonicsType->setObjectName(QStringLiteral("cBHarmonicsType"));
-
-        gridLayout_22->addWidget(cBHarmonicsType, 0, 0, 1, 1);
+        gridLayout_22->addWidget(cBHarmonicsAxisStyle, 1, 1, 1, 1);
 
         pushButtonHarmonicsHome = new QPushButton(groupBoxHarmonicsControl);
         pushButtonHarmonicsHome->setObjectName(QStringLiteral("pushButtonHarmonicsHome"));
@@ -802,10 +809,20 @@ public:
 
         gridLayout_22->addWidget(pushButtonHarmonicsHome, 1, 0, 1, 1);
 
-        cBHarmonicsAxisStyle = new QComboBox(groupBoxHarmonicsControl);
-        cBHarmonicsAxisStyle->setObjectName(QStringLiteral("cBHarmonicsAxisStyle"));
+        pBSetHarmonicsCount = new QPushButton(groupBoxHarmonicsControl);
+        pBSetHarmonicsCount->setObjectName(QStringLiteral("pBSetHarmonicsCount"));
+        QSizePolicy sizePolicy8(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy8.setHorizontalStretch(0);
+        sizePolicy8.setVerticalStretch(0);
+        sizePolicy8.setHeightForWidth(pBSetHarmonicsCount->sizePolicy().hasHeightForWidth());
+        pBSetHarmonicsCount->setSizePolicy(sizePolicy8);
 
-        gridLayout_22->addWidget(cBHarmonicsAxisStyle, 1, 1, 1, 1);
+        gridLayout_22->addWidget(pBSetHarmonicsCount, 1, 4, 1, 1);
+
+        comboBox_5 = new QComboBox(groupBoxHarmonicsControl);
+        comboBox_5->setObjectName(QStringLiteral("comboBox_5"));
+
+        gridLayout_22->addWidget(comboBox_5, 0, 1, 1, 1);
 
         pushButtonHarmonicsHome->raise();
         pBTriggerHarmonics->raise();
@@ -942,7 +959,7 @@ public:
         tabEVSE->setObjectName(QStringLiteral("tabEVSE"));
         layoutWidget = new QWidget(tabEVSE);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(9, 10, 761, 630));
+        layoutWidget->setGeometry(QRect(9, 10, 775, 451));
         gridLayout_21 = new QGridLayout(layoutWidget);
         gridLayout_21->setSpacing(6);
         gridLayout_21->setContentsMargins(11, 11, 11, 11);
@@ -953,10 +970,10 @@ public:
         gridLayout_20->setObjectName(QStringLiteral("gridLayout_20"));
         pushButtonStartCharging = new QPushButton(layoutWidget);
         pushButtonStartCharging->setObjectName(QStringLiteral("pushButtonStartCharging"));
-        sizePolicy2.setHeightForWidth(pushButtonStartCharging->sizePolicy().hasHeightForWidth());
-        pushButtonStartCharging->setSizePolicy(sizePolicy2);
+        sizePolicy6.setHeightForWidth(pushButtonStartCharging->sizePolicy().hasHeightForWidth());
+        pushButtonStartCharging->setSizePolicy(sizePolicy6);
 
-        gridLayout_20->addWidget(pushButtonStartCharging, 0, 0, 1, 1);
+        gridLayout_20->addWidget(pushButtonStartCharging, 0, 1, 1, 1);
 
         pushButtonStopCharging = new QPushButton(layoutWidget);
         pushButtonStopCharging->setObjectName(QStringLiteral("pushButtonStopCharging"));
@@ -964,17 +981,24 @@ public:
         sizePolicy1.setHeightForWidth(pushButtonStopCharging->sizePolicy().hasHeightForWidth());
         pushButtonStopCharging->setSizePolicy(sizePolicy1);
 
-        gridLayout_20->addWidget(pushButtonStopCharging, 0, 1, 1, 1);
+        gridLayout_20->addWidget(pushButtonStopCharging, 0, 2, 1, 1);
 
         pushButtonEVSEHome = new QPushButton(layoutWidget);
         pushButtonEVSEHome->setObjectName(QStringLiteral("pushButtonEVSEHome"));
-        sizePolicy1.setHeightForWidth(pushButtonEVSEHome->sizePolicy().hasHeightForWidth());
-        pushButtonEVSEHome->setSizePolicy(sizePolicy1);
+        sizePolicy5.setHeightForWidth(pushButtonEVSEHome->sizePolicy().hasHeightForWidth());
+        pushButtonEVSEHome->setSizePolicy(sizePolicy5);
         pushButtonEVSEHome->setMinimumSize(QSize(0, 0));
         pushButtonEVSEHome->setIcon(icon15);
         pushButtonEVSEHome->setIconSize(QSize(32, 32));
 
-        gridLayout_20->addWidget(pushButtonEVSEHome, 1, 0, 1, 2);
+        gridLayout_20->addWidget(pushButtonEVSEHome, 1, 2, 1, 1);
+
+        pushButtonCopyFilesToStick = new QPushButton(layoutWidget);
+        pushButtonCopyFilesToStick->setObjectName(QStringLiteral("pushButtonCopyFilesToStick"));
+        sizePolicy1.setHeightForWidth(pushButtonCopyFilesToStick->sizePolicy().hasHeightForWidth());
+        pushButtonCopyFilesToStick->setSizePolicy(sizePolicy1);
+
+        gridLayout_20->addWidget(pushButtonCopyFilesToStick, 1, 1, 1, 1);
 
 
         gridLayout_21->addLayout(gridLayout_20, 0, 1, 1, 1);
@@ -982,6 +1006,36 @@ public:
         gridLayout_13 = new QGridLayout();
         gridLayout_13->setSpacing(6);
         gridLayout_13->setObjectName(QStringLiteral("gridLayout_13"));
+        comboBoxPWM1 = new QComboBox(layoutWidget);
+        comboBoxPWM1->setObjectName(QStringLiteral("comboBoxPWM1"));
+
+        gridLayout_13->addWidget(comboBoxPWM1, 8, 1, 1, 1);
+
+        label_18 = new QLabel(layoutWidget);
+        label_18->setObjectName(QStringLiteral("label_18"));
+
+        gridLayout_13->addWidget(label_18, 4, 0, 1, 1);
+
+        labelADC1 = new QLabel(layoutWidget);
+        labelADC1->setObjectName(QStringLiteral("labelADC1"));
+
+        gridLayout_13->addWidget(labelADC1, 4, 1, 1, 1);
+
+        label_16 = new QLabel(layoutWidget);
+        label_16->setObjectName(QStringLiteral("label_16"));
+
+        gridLayout_13->addWidget(label_16, 5, 0, 1, 1);
+
+        labelADC2 = new QLabel(layoutWidget);
+        labelADC2->setObjectName(QStringLiteral("labelADC2"));
+
+        gridLayout_13->addWidget(labelADC2, 5, 1, 1, 1);
+
+        lineEditLogEVSE = new QLineEdit(layoutWidget);
+        lineEditLogEVSE->setObjectName(QStringLiteral("lineEditLogEVSE"));
+
+        gridLayout_13->addWidget(lineEditLogEVSE, 0, 0, 1, 2);
+
         label_3 = new QLabel(layoutWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
 
@@ -992,10 +1046,10 @@ public:
 
         gridLayout_13->addWidget(label_8, 1, 0, 1, 1);
 
-        label_11 = new QLabel(layoutWidget);
-        label_11->setObjectName(QStringLiteral("label_11"));
+        labelEVSELoggedLines = new QLabel(layoutWidget);
+        labelEVSELoggedLines->setObjectName(QStringLiteral("labelEVSELoggedLines"));
 
-        gridLayout_13->addWidget(label_11, 3, 1, 1, 1);
+        gridLayout_13->addWidget(labelEVSELoggedLines, 3, 1, 1, 1);
 
         labelEVSECosts = new QLabel(layoutWidget);
         labelEVSECosts->setObjectName(QStringLiteral("labelEVSECosts"));
@@ -1041,36 +1095,6 @@ public:
 
         gridLayout_13->addWidget(label_2, 8, 0, 1, 1);
 
-        comboBoxPWM1 = new QComboBox(layoutWidget);
-        comboBoxPWM1->setObjectName(QStringLiteral("comboBoxPWM1"));
-
-        gridLayout_13->addWidget(comboBoxPWM1, 8, 1, 1, 1);
-
-        label_18 = new QLabel(layoutWidget);
-        label_18->setObjectName(QStringLiteral("label_18"));
-
-        gridLayout_13->addWidget(label_18, 4, 0, 1, 1);
-
-        labelADC1 = new QLabel(layoutWidget);
-        labelADC1->setObjectName(QStringLiteral("labelADC1"));
-
-        gridLayout_13->addWidget(labelADC1, 4, 1, 1, 1);
-
-        label_16 = new QLabel(layoutWidget);
-        label_16->setObjectName(QStringLiteral("label_16"));
-
-        gridLayout_13->addWidget(label_16, 5, 0, 1, 1);
-
-        labelADC2 = new QLabel(layoutWidget);
-        labelADC2->setObjectName(QStringLiteral("labelADC2"));
-
-        gridLayout_13->addWidget(labelADC2, 5, 1, 1, 1);
-
-        lineEditLogEVSE = new QLineEdit(layoutWidget);
-        lineEditLogEVSE->setObjectName(QStringLiteral("lineEditLogEVSE"));
-
-        gridLayout_13->addWidget(lineEditLogEVSE, 0, 0, 1, 2);
-
 
         gridLayout_21->addLayout(gridLayout_13, 2, 1, 1, 1);
 
@@ -1085,11 +1109,11 @@ public:
 
         evseImageWidget = new QWidget(layoutWidget);
         evseImageWidget->setObjectName(QStringLiteral("evseImageWidget"));
-        QSizePolicy sizePolicy7(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy7.setHorizontalStretch(0);
-        sizePolicy7.setVerticalStretch(0);
-        sizePolicy7.setHeightForWidth(evseImageWidget->sizePolicy().hasHeightForWidth());
-        evseImageWidget->setSizePolicy(sizePolicy7);
+        QSizePolicy sizePolicy9(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy9.setHorizontalStretch(0);
+        sizePolicy9.setVerticalStretch(0);
+        sizePolicy9.setHeightForWidth(evseImageWidget->sizePolicy().hasHeightForWidth());
+        evseImageWidget->setSizePolicy(sizePolicy9);
         evseImageWidget->setMinimumSize(QSize(500, 370));
 
         gridLayout_21->addWidget(evseImageWidget, 0, 0, 3, 1);
@@ -1114,11 +1138,11 @@ public:
 
         lineEdit = new QLineEdit(groupBox_9);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        QSizePolicy sizePolicy8(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy8.setHorizontalStretch(0);
-        sizePolicy8.setVerticalStretch(0);
-        sizePolicy8.setHeightForWidth(lineEdit->sizePolicy().hasHeightForWidth());
-        lineEdit->setSizePolicy(sizePolicy8);
+        QSizePolicy sizePolicy10(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy10.setHorizontalStretch(0);
+        sizePolicy10.setVerticalStretch(0);
+        sizePolicy10.setHeightForWidth(lineEdit->sizePolicy().hasHeightForWidth());
+        lineEdit->setSizePolicy(sizePolicy10);
 
         verticalLayout_5->addWidget(lineEdit);
 
@@ -1157,11 +1181,11 @@ public:
         gridLayout_15->setObjectName(QStringLiteral("gridLayout_15"));
         comboBoxCalPhase = new QComboBox(groupBox_2);
         comboBoxCalPhase->setObjectName(QStringLiteral("comboBoxCalPhase"));
-        QSizePolicy sizePolicy9(QSizePolicy::Preferred, QSizePolicy::Minimum);
-        sizePolicy9.setHorizontalStretch(0);
-        sizePolicy9.setVerticalStretch(0);
-        sizePolicy9.setHeightForWidth(comboBoxCalPhase->sizePolicy().hasHeightForWidth());
-        comboBoxCalPhase->setSizePolicy(sizePolicy9);
+        QSizePolicy sizePolicy11(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy11.setHorizontalStretch(0);
+        sizePolicy11.setVerticalStretch(0);
+        sizePolicy11.setHeightForWidth(comboBoxCalPhase->sizePolicy().hasHeightForWidth());
+        comboBoxCalPhase->setSizePolicy(sizePolicy11);
 
         gridLayout_15->addWidget(comboBoxCalPhase, 0, 1, 1, 1);
 
@@ -1179,8 +1203,8 @@ public:
 
         label_7 = new QLabel(groupBox_2);
         label_7->setObjectName(QStringLiteral("label_7"));
-        sizePolicy9.setHeightForWidth(label_7->sizePolicy().hasHeightForWidth());
-        label_7->setSizePolicy(sizePolicy9);
+        sizePolicy11.setHeightForWidth(label_7->sizePolicy().hasHeightForWidth());
+        label_7->setSizePolicy(sizePolicy11);
 
         gridLayout_15->addWidget(label_7, 0, 2, 1, 1);
 
@@ -1229,16 +1253,16 @@ public:
 
         comboBoxVoltageCalValue = new QComboBox(groupBox_2);
         comboBoxVoltageCalValue->setObjectName(QStringLiteral("comboBoxVoltageCalValue"));
-        sizePolicy9.setHeightForWidth(comboBoxVoltageCalValue->sizePolicy().hasHeightForWidth());
-        comboBoxVoltageCalValue->setSizePolicy(sizePolicy9);
+        sizePolicy11.setHeightForWidth(comboBoxVoltageCalValue->sizePolicy().hasHeightForWidth());
+        comboBoxVoltageCalValue->setSizePolicy(sizePolicy11);
 
         gridLayout_16->addWidget(comboBoxVoltageCalValue, 0, 1, 1, 1);
 
         comboBoxCurrentCalValue = new QComboBox(groupBox_2);
         comboBoxCurrentCalValue->setObjectName(QStringLiteral("comboBoxCurrentCalValue"));
         comboBoxCurrentCalValue->setEnabled(false);
-        sizePolicy9.setHeightForWidth(comboBoxCurrentCalValue->sizePolicy().hasHeightForWidth());
-        comboBoxCurrentCalValue->setSizePolicy(sizePolicy9);
+        sizePolicy11.setHeightForWidth(comboBoxCurrentCalValue->sizePolicy().hasHeightForWidth());
+        comboBoxCurrentCalValue->setSizePolicy(sizePolicy11);
 
         gridLayout_16->addWidget(comboBoxCurrentCalValue, 0, 3, 1, 1);
 
@@ -1338,7 +1362,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(7);
         pushButtonPanel->setDefault(false);
         pushButtonInformation->setDefault(false);
         pushButtonHarmonics->setDefault(false);
@@ -1349,6 +1373,8 @@ public:
         pushButtonScope->setDefault(false);
         pushButtonExit->setDefault(false);
         comboBoxCirculationFreq->setCurrentIndex(1);
+        cBHarmonicsType->setCurrentIndex(1);
+        cBHarmonicsCount->setCurrentIndex(10);
         comboBoxLoggingIntervall->setCurrentIndex(0);
 
 
@@ -1447,10 +1473,15 @@ public:
         );
         tabWidget->setTabText(tabWidget->indexOf(tabScope), QApplication::translate("MainWindow", "Scope", Q_NULLPTR));
         groupBoxHarmonicsControl->setTitle(QString());
+        cBHarmonicsType->clear();
+        cBHarmonicsType->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "Voltage", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "Current", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "Active Power", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "Reactive Power", Q_NULLPTR)
+        );
         label_5->setText(QApplication::translate("MainWindow", "Count:", Q_NULLPTR));
-        pBSetHarmonicsCount->setText(QApplication::translate("MainWindow", "set", Q_NULLPTR));
         pBStartHarmonics->setText(QApplication::translate("MainWindow", "Start", Q_NULLPTR));
-        pBTriggerHarmonics->setText(QApplication::translate("MainWindow", "Trigger", Q_NULLPTR));
         cBHarmonicsCount->clear();
         cBHarmonicsCount->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "1", Q_NULLPTR)
@@ -1465,24 +1496,19 @@ public:
          << QApplication::translate("MainWindow", "10", Q_NULLPTR)
          << QApplication::translate("MainWindow", "11", Q_NULLPTR)
         );
+        pBTriggerHarmonics->setText(QApplication::translate("MainWindow", "Trigger", Q_NULLPTR));
+        cBHarmonicsAxisStyle->clear();
+        cBHarmonicsAxisStyle->insertItems(0, QStringList()
+         << QApplication::translate("MainWindow", "Harmonic", Q_NULLPTR)
+         << QApplication::translate("MainWindow", "Frequency", Q_NULLPTR)
+        );
+        pushButtonHarmonicsHome->setText(QApplication::translate("MainWindow", "Home", Q_NULLPTR));
+        pBSetHarmonicsCount->setText(QApplication::translate("MainWindow", "set", Q_NULLPTR));
         comboBox_5->clear();
         comboBox_5->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "L1", Q_NULLPTR)
          << QApplication::translate("MainWindow", "L2", Q_NULLPTR)
          << QApplication::translate("MainWindow", "L3", Q_NULLPTR)
-        );
-        cBHarmonicsType->clear();
-        cBHarmonicsType->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Voltage", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "Current", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "Active Power", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "Reactive Power", Q_NULLPTR)
-        );
-        pushButtonHarmonicsHome->setText(QApplication::translate("MainWindow", "Home", Q_NULLPTR));
-        cBHarmonicsAxisStyle->clear();
-        cBHarmonicsAxisStyle->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Harmonic", Q_NULLPTR)
-         << QApplication::translate("MainWindow", "Frequency", Q_NULLPTR)
         );
         groupBoxHarmonicsData->setTitle(QApplication::translate("MainWindow", "Harmonics L1", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabHarmonics), QApplication::translate("MainWindow", "Harmonics", Q_NULLPTR));
@@ -1508,9 +1534,15 @@ public:
         pushButtonStartCharging->setText(QApplication::translate("MainWindow", "Start", Q_NULLPTR));
         pushButtonStopCharging->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
         pushButtonEVSEHome->setText(QApplication::translate("MainWindow", "    Home", Q_NULLPTR));
+        pushButtonCopyFilesToStick->setText(QApplication::translate("MainWindow", "Copy files to USB", Q_NULLPTR));
+        label_18->setText(QApplication::translate("MainWindow", "ADC1", Q_NULLPTR));
+        labelADC1->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
+        label_16->setText(QApplication::translate("MainWindow", "ADC2", Q_NULLPTR));
+        labelADC2->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
+        lineEditLogEVSE->setText(QApplication::translate("MainWindow", "C:\\Log\\evse", Q_NULLPTR));
         label_3->setText(QApplication::translate("MainWindow", "Costs", Q_NULLPTR));
         label_8->setText(QApplication::translate("MainWindow", "Energy", Q_NULLPTR));
-        label_11->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
+        labelEVSELoggedLines->setText(QApplication::translate("MainWindow", "0", Q_NULLPTR));
         labelEVSECosts->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
         label_4->setText(QApplication::translate("MainWindow", "Log", Q_NULLPTR));
         labelEVSEEnergy->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
@@ -1519,11 +1551,6 @@ public:
         label_9->setText(QApplication::translate("MainWindow", "ADC4", Q_NULLPTR));
         labelADC4->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
         label_2->setText(QApplication::translate("MainWindow", "PWM1", Q_NULLPTR));
-        label_18->setText(QApplication::translate("MainWindow", "ADC1", Q_NULLPTR));
-        labelADC1->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
-        label_16->setText(QApplication::translate("MainWindow", "ADC2", Q_NULLPTR));
-        labelADC2->setText(QApplication::translate("MainWindow", "0.0000", Q_NULLPTR));
-        lineEditLogEVSE->setText(QApplication::translate("MainWindow", "C:\\Log\\evse", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabEVSE), QApplication::translate("MainWindow", "EVSE", Q_NULLPTR));
         groupBox_9->setTitle(QApplication::translate("MainWindow", "Export", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Export", Q_NULLPTR));
